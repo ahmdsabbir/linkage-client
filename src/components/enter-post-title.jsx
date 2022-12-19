@@ -45,7 +45,10 @@ const EnterPostTitle = () => {
                   {...register("postTitle", { required: true, maxLength: 20 })}
                 />
                 <div className="form-control inline-block">
-                  <button type="submit" className="btn btn-primary">
+                  <button
+                    type="submit"
+                    className="btn btn-primary border-gray-600"
+                  >
                     submit
                   </button>
                 </div>

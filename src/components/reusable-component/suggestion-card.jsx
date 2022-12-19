@@ -9,7 +9,7 @@ const SuggestionsCard = () => {
         <p>URL: https://google.com/python-was-created</p>
         <p>Category: wristwatch, handgloves</p>
         <div className="card-actions">
-          <button className="btn btn-primary">choose </button>
+          <button className="btn btn-primary border-gray-600">choose </button>
         </div>
       </div>
     </div>

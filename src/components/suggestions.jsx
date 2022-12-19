@@ -53,7 +53,7 @@ const Suggestions = () => {
                     })}
                   />
                   <div className="form-control inline-block">
-                    <button className="btn btn-primary">
+                    <button className="btn btn-primary border-gray-600">
                       Generate Suggestion Again
                     </button>
                   </div>
@@ -66,35 +66,59 @@ const Suggestions = () => {
         <div className="grid grid-cols-2">
           <div>
             {/* generate heading */}
-            <form>
-              <div className="flex flex-1 items-center gap-5 mb-5">
-                <label htmlFor="chosen title">Chosen Title</label>
-                <input
-                  type="text"
-                  placeholder="Type here"
-                  className="input input-bordered max-w-xs"
-                />
-              </div>
-              <div className="flex flex-1  gap-5">
-                <label htmlFor="chosen title self-start ">Chosen Url</label>
-                <div className="flex flex-col ">
+            <form className="w-full max-w-sm">
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+                    for="inline-full-name"
+                  >
+                    chosen Title
+                  </label>
+                </div>
+                <div className="md:w-2/3">
                   <input
+                    className="input input-bordered w-full"
                     type="text"
-                    placeholder="Type here"
-                    className="input input-bordered max-w-xs mb-4"
+                    value="Jane Doe"
                   />
-                  <div className="form-control inline-block">
-                    <button className=" btn btn-primary">
-                      Generate Suggestion Again
-                    </button>
-                  </div>
+                </div>
+              </div>
+              <div className="md:flex md:items-center mb-6">
+                <div className="md:w-1/3">
+                  <label
+                    className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
+                    for="inline-password"
+                  >
+                    Url
+                  </label>
+                </div>
+                <div className="md:w-2/3">
+                  <input
+                    className="input input-bordered w-full"
+                    id="url"
+                    type="text"
+                    placeholder="url"
+                  />
+                </div>
+              </div>
+
+              <div className="md:flex md:items-center">
+                <div className="md:w-1/3"></div>
+                <div className="md:w-2/3">
+                  <button
+                    className=" btn btn-primary border-gray-600"
+                    type="button"
+                  >
+                    Generate Heading
+                  </button>
                 </div>
               </div>
             </form>
           </div>
 
+          {/* suggestions generated from api call */}
           <div>
-            {/* suggestions */}
             <SuggestionsCard />
             <SuggestionsCard />
           </div>
