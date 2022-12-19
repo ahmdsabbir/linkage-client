@@ -3,8 +3,11 @@ const contextData = createContext();
 
 const Provider = ({ children }) => {
   const [userData, setUserData] = useState("");
+  const [termData, setTermData] = useState("");
   return (
-    <contextData.Provider value={{ userData, setUserData }}>
+    <contextData.Provider
+      value={{ userData, setUserData, termData, setTermData }}
+    >
       {children}
     </contextData.Provider>
   );

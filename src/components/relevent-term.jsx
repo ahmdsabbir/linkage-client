@@ -1,21 +1,50 @@
 import React from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import API from "../api/api-config";
 import { globalData } from "./context/Provider";
-import InputField from "./reusable-component/input-fields";
-import ProjectDetails from "./reusable-component/project-details";
 
 const ReleventTerm = () => {
-  const { userData } = globalData();
-  console.log(userData);
+  const { register, handleSubmit } = useForm();
+  const { termData, userData } = globalData();
+  const navigate = useNavigate();
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    const newdata = { ...data, ...userData };
+    const response = await API.post("/posts", newdata);
+    if (response?.status === 201) {
+      navigate("/suggestions");
+    }
+    console.log(response);
+  };
 
   return (
     <div>
-      <ProjectDetails postTitle={userData.data?.postTitle} id={userData.id} />
-      <InputField
-        title={"Relevant Term"}
-        action={"Generate Suggenstion"}
-        placeholder={"relevent term..."}
-        btnStyle={"bg-accent-light"}
-      />
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="card flex-shrink-0 w-full max-w-5xl shadow-2xl bg-base-100">
+          <div className="card-body flex-row">
+            <label className="label self-start">
+              <span className="label-text text-2xl font-bold">
+                Enter Relevent Term
+              </span>
+            </label>
+            <div className="form-control gap-4 flex-1">
+              <input
+                type="text"
+                placeholder="relevent term"
+                className="input input-bordered "
+                {...register("releventTerm", { required: true, maxLength: 20 })}
+              />
+              <div className="form-control inline-block">
+                <button type="submit" className="btn btn-primary">
+                  submit
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   );
 };

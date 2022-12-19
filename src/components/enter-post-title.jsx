@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import API from "../api/api-config";
 import { globalData } from "./context/Provider";
+import ProjectDetails from "./reusable-component/project-details";
 
 const EnterPostTitle = () => {
   const { register, handleSubmit } = useForm();
@@ -12,27 +13,18 @@ const EnterPostTitle = () => {
   // post request
 
   const onSubmit = async (data) => {
+    const newdata = { ...data, term: "term" };
     const response = await API.post("/posts", {
-      data,
+      newdata,
     });
-    if (response.status === 201) {
-      await setUserData(response?.data);
-      navigate("/relevent");
-    }
-    console.log(response);
+    await setUserData(response?.data);
+    navigate("/relevent");
   };
 
   return (
     <div className="">
       <h1 className="text-5xl font-bold">Enter Post Dashboard</h1>
-      <div className="card flex-shrink-0 w-full max-w-5xl">
-        <div className="card-body gap-4 text-center md:text-left ">
-          <div className="flex items-center gap-4 font-medium">
-            <h1 className="text-xl">Project Domain:</h1>
-            <p className="py-6 text-lg">google.com</p>
-          </div>
-        </div>
-      </div>
+      <ProjectDetails />
       <div className="hero-content flex-col">
         <div className="divider"></div>
 

@@ -8,14 +8,19 @@ const ProjectDetails = ({ postTitle, id }) => {
           <h1 className="text-xl">Project Domain:</h1>
           <p className="py-6 text-lg">google.com</p>
         </div>
-        <div className="flex items-center gap-4 font-medium">
-          <h1 className="text-xl">Post Title:</h1>
-          {postTitle && <p className="py-6 text-lg">{postTitle}</p>}
-        </div>
-        <div className="flex items-center gap-4 font-medium">
-          <h1 className="text-xl">Id:</h1>
-          {id && <p className="py-6 text-lg">{id}</p>}
-        </div>
+
+        {postTitle && (
+          <div className="flex items-center gap-4 font-medium">
+            <h1 className="text-xl">Post Title:</h1>
+            <p className="py-6 text-lg">{postTitle}</p>
+          </div>
+        )}
+        {id && (
+          <div className="flex items-center gap-4 font-medium">
+            <h1 className="text-xl">Id:</h1>
+            <p className="py-6 text-lg">{id}</p>
+          </div>
+        )}
       </div>
     </div>
   );
