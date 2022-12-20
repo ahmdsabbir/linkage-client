@@ -5,6 +5,7 @@ import Register from "./components/authrizaton-authentication/register";
 import Navbar from "./components/navbar";
 import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
+import Dashboard from "./components/Pages/Dashboard";
 import Home from "./components/Pages/home";
 import ReleventTerm from "./components/relevent-term";
 import TestForm from "./components/reusable-component/form/test-form";
@@ -25,7 +26,8 @@ function App() {
           <Route path="about" element={<AboutUs />} />
           <Route path="contact" element={<Contact />} />\{/* user routes */}
           <Route path="relevent" element={<ReleventTerm />} />
-          <Route path="suggestions" element={<Suggestions />} />
+          <Route path="suggestions" element={<Suggestions />} />Z
+          <Route path="dashboard" element={<Dashboard />} />Z
           {/* user authentication */}
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />

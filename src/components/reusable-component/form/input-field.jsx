@@ -6,9 +6,16 @@ export const Input = forwardRef(function Input(
   ref
 ) {
   return (
-    <div className="flex gap-3 mb-2">
-      <label>{label}</label>
-      <input type={type} ref={ref} {...props} />
+    <div className="form-control gap-3 mb-2">
+      <label className="label">
+        <span className="label-text">{label}</span>
+      </label>
+      <input
+        type={type}
+        ref={ref}
+        {...props}
+        className="input input-bordered"
+      />
       <FieldError name={props.name} />
     </div>
   );
