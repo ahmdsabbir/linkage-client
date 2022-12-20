@@ -8,6 +8,7 @@ import Contact from "./components/Pages/contact";
 import Home from "./components/Pages/home";
 import ReleventTerm from "./components/relevent-term";
 import TestForm from "./components/reusable-component/form/test-form";
+import TestLogin from "./components/reusable-component/form/test-login";
 import Suggestions from "./components/suggestions";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
       <div className="container mx-auto">
         <Navbar />
         <TestForm />
+        <TestLogin />
 
         {/* route path */}
         <Routes>
