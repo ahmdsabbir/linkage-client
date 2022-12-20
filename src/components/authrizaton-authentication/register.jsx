@@ -9,6 +9,18 @@ const Register = () => {
         </div>
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
           <div className="card-body">
+            {/* username */}
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">Username</span>
+              </label>
+              <input
+                type="text"
+                placeholder="username"
+                className="input input-bordered"
+              />
+            </div>
+            {/* Email */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Email</span>
@@ -19,6 +31,7 @@ const Register = () => {
                 className="input input-bordered"
               />
             </div>
+            {/* passowrd */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Password</span>

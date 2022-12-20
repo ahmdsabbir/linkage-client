@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Login from "./components/Login";
+import Login from "./components/authrizaton-authentication/Login";
+import Register from "./components/authrizaton-authentication/register";
 import Navbar from "./components/navbar";
 import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
 import Home from "./components/Pages/home";
-import Register from "./components/register";
 import ReleventTerm from "./components/relevent-term";
+import TestForm from "./components/reusable-component/form/test-form";
 import Suggestions from "./components/suggestions";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <>
       <div className="container mx-auto">
         <Navbar />
+        <TestForm />
 
         {/* route path */}
         <Routes>
