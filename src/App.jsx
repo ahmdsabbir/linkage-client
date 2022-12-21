@@ -6,11 +6,11 @@ import EnterPostTitle from "./components/enter-post-title";
 
 import Navbar from "./components/navbar";
 import AboutUs from "./components/Pages/about-us";
+import AllProjects from "./components/Pages/all-projects";
 import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/Dashboard";
 import Home from "./components/Pages/home";
 import ReleventTerm from "./components/relevent-term";
-import SingleProjectCard from "./components/reusable-component/single-project-card";
 import Suggestions from "./components/suggestions";
 
 function App() {
@@ -29,7 +29,7 @@ function App() {
           <Route path="relevent" element={<ReleventTerm />} />
           <Route path="suggestions" element={<Suggestions />} />
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="/dashboard" element={<SingleProjectCard />} />
+            <Route path="/dashboard" element={<AllProjects />} />
             <Route path="enterPosttitle" element={<EnterPostTitle />} />
           </Route>
           {/* user authentication */}
