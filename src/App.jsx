@@ -2,6 +2,7 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Login from "./components/authrizaton-authentication/Login";
 import Register from "./components/authrizaton-authentication/register";
+
 import Navbar from "./components/navbar";
 import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
