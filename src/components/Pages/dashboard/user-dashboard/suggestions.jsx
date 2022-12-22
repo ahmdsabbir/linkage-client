@@ -1,10 +1,10 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../api/api-config";
-import { globalData } from "./context/Provider";
-import ProjectDetails from "./reusable-component/project-details";
-import SuggestionsCard from "./reusable-component/suggestion-card";
+import API from "../../../../api/api-config";
+import { globalData } from "../../../context/Provider";
+import ProjectDetails from "../../../reusable-component/project-details";
+import SuggestionsCard from "../../../reusable-component/suggestion-card";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();

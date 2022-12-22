@@ -1,6 +1,6 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import { globalData } from "../context/Provider";
+import { globalData } from "../../context/Provider";
 
 const Dashboard = () => {
   const { userData } = globalData();

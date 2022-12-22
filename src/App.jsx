@@ -7,16 +7,16 @@ import {
 import "./App.css";
 import Login from "./components/authrizaton-authentication/Login";
 import Register from "./components/authrizaton-authentication/register";
-import EnterPostTitle from "./components/enter-post-title";
+import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 
 import AboutUs from "./components/Pages/about-us";
-import AllProjects from "./components/Pages/all-projects";
 import Contact from "./components/Pages/contact";
-import Dashboard from "./components/Pages/Dashboard";
+import Dashboard from "./components/Pages/dashboard/Dashboard";
+import AllProjects from "./components/Pages/dashboard/user-dashboard/all-projects";
+import ReleventTerm from "./components/Pages/dashboard/user-dashboard/relevent-term";
+import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
 import Home from "./components/Pages/home";
-import ReleventTerm from "./components/relevent-term";
 import RootLayout from "./components/root-layout/root-layout";
-import Suggestions from "./components/suggestions";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

@@ -1,12 +1,12 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import API from "../api/api-config";
-import { globalData } from "./context/Provider";
-import useForm from "./hook/useForm";
-import Form from "./reusable-component/form/form";
-import { Input } from "./reusable-component/form/input-field";
-import ProjectDetails from "./reusable-component/project-details";
+import API from "../../../../api/api-config";
+import { globalData } from "../../../context/Provider";
+import useForm from "../../../hook/useForm";
+import Form from "../../../reusable-component/form/form";
+import { Input } from "../../../reusable-component/form/input-field";
+import ProjectDetails from "../../../reusable-component/project-details";
 
 const postTitleSchema = z.object({
   postTitle: z

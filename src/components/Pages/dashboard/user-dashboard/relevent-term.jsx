@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../api/api-config";
-import { globalData } from "./context/Provider";
+import API from "../../../../api/api-config";
+import { globalData } from "../../../context/Provider";
 
 const ReleventTerm = () => {
   const { register, handleSubmit } = useForm();
