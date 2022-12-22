@@ -9,10 +9,10 @@ const menus = [
 const Sidebar = ({ sideBarRef, isSidebar, setIsSidebar }) => {
   return (
     <>
-      <div className="flex flex-col">
+      <div className=" drawer flex flex-col relative">
         {isSidebar ? (
           <>
-            <div className="flex flex-col p-3 bg-slate-900 shadow w-60">
+            <div className="drawer absolute flex flex-col p-3 bg-slate-900 shadow w-60">
               <button
                 className="text-left mb-5"
                 onClick={() => setIsSidebar(!isSidebar)}
@@ -21,14 +21,15 @@ const Sidebar = ({ sideBarRef, isSidebar, setIsSidebar }) => {
                 Close Sidebar
               </button>
 
-              <div className="space-y-3">
+              <div className="max-h-screen space-y-3 w-60">
                 <div className="flex items-center">
                   <h2 className="text-xl font-bold">Dashboard</h2>
                 </div>
-                <div className="flex-1">
+                <div className=" flex-1">
                   <ul className="pt-2 pb-4 space-y-1 text-sm">
                     <li className="rounded-sm">
                       <a
+                        onClick={console.log("data")}
                         href="#"
                         className="flex items-center p-2 space-x-3 rounded-md"
                       >
