@@ -2,8 +2,8 @@ import React from "react";
 
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-5xl">step1: Enter Post Title</h1>
+    <div className="flex items-center justify-center h-screen">
+      <h1 className="text-5xl font-bold text-center">Home page</h1>
     </div>
   );
 };

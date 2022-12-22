@@ -15,18 +15,19 @@ import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/Dashboard";
 import Home from "./components/Pages/home";
 import ReleventTerm from "./components/relevent-term";
+import RootLayout from "./components/root-layout/root-layout";
 import Suggestions from "./components/suggestions";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route>
-      <Route path="/" element={<Home />} />
+    <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
       <Route path="about" element={<AboutUs />} />
       <Route path="contact" element={<Contact />} />\{/* user routes */}
       <Route path="relevent" element={<ReleventTerm />} />
       <Route path="suggestions" element={<Suggestions />} />
       <Route path="/dashboard" element={<Dashboard />}>
-        <Route path="/dashboard" element={<AllProjects />} />
+        <Route index element={<AllProjects />} />
         <Route path="enterPosttitle" element={<EnterPostTitle />} />
       </Route>
       {/* user authentication */}
@@ -41,11 +42,6 @@ function App() {
     <>
       <div className="container mx-auto">
         <RouterProvider router={router} />
-        {/* <Navbar /> */}
-        {/*   <TestForm />
-        <TestLogin />
- */}
-        {/* route path */}
       </div>
     </>
   );
