@@ -26,9 +26,10 @@ const router = createBrowserRouter(
       <Route path="contact" element={<Contact />} />\{/* user routes */}
       <Route path="relevent" element={<ReleventTerm />} />
       <Route path="suggestions" element={<Suggestions />} />
-      <Route path="/dashboard" element={<Dashboard />}>
+      <Route path="dashboard" element={<Dashboard />}>
         <Route index element={<AllProjects />} />
-        <Route path="enterPosttitle" element={<EnterPostTitle />} />
+        <Route path="/dashboard/allprojects" element={<AllProjects />} />
+        <Route path="/dashboard/enterposttitle" element={<EnterPostTitle />} />
       </Route>
       {/* user authentication */}
       <Route path="login" element={<Login />} />

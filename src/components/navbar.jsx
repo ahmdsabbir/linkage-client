@@ -22,17 +22,20 @@ const Navbar = () => {
                 <Link to={"/"}>Home</Link>
               </li>
               <li>
-                <Link to={"/about"}>About us</Link>
+                <Link to={"about"}>About us</Link>
+              </li>
+              <li>
+                <Link to={"dashboard"}>Dashboard</Link>
               </li>
 
               <li>
-                <Link to={"/contact"}>Contact</Link>
+                <Link to={"contact"}>Contact</Link>
               </li>
               <li>
-                <Link to={"/login"}>Login </Link>
+                <Link to={"login"}>Login </Link>
               </li>
               <li>
-                <Link to={"/register"}>Register </Link>
+                <Link to={"register"}>Register </Link>
               </li>
             </ul>
           </div>

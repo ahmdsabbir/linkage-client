@@ -1,22 +1,33 @@
-import React from "react";
-import { Outlet } from "react-router-dom";
+import React, { useEffect, useRef, useState } from "react";
 import { globalData } from "../../context/Provider";
+import Sidebar from "./sidebar";
 
 const Dashboard = () => {
+  const [isSidebar, setIsSidebar] = useState(true);
+  const sideBarRef = useRef(null);
   const { userData } = globalData();
-  return (
-    <div>
-      <Outlet />
-      {/* <ProjectDetails postTitle={userData.data?.postTitle} id={userData.id} /> */}
 
-      {/* <EnterPostTitle />
-      <h1 className="text-5xl mt-5">step2: Enter Relevent Term</h1>
-      <ReleventTerm />
-      <h1 className="text-5xl mt-5">
-        Get All suggestios && reset suggestions page
-      </h1>
-      <Suggestions /> */}
-    </div>
+  const handleClickOutside = (e) => {
+    if (!sideBarRef.current.contains(e.target)) {
+      setIsSidebar(false);
+    }
+  };
+
+  //  click outSide any where and side bar will close
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  });
+
+  return (
+    <>
+      <Sidebar
+        userData={userData}
+        isSidebar={isSidebar}
+        setIsSidebar={setIsSidebar}
+        sideBarRef={sideBarRef}
+      />
+    </>
   );
 };
 
