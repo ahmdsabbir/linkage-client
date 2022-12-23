@@ -1,4 +1,5 @@
 import React, { useRef, useState } from "react";
+import { Outlet } from "react-router-dom";
 import { globalData } from "../../context/Provider";
 import Card from "./card";
 import SidebarSample from "./sidebar-sample";
@@ -11,8 +12,8 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="relative flex flex-col">
-        <div className="p-4 h-screen z-10">
+      <div className="relative flex gap-4 ">
+        <div className="bg-white p-4 h-screen z-10 col-span-1">
           <button className="btn btn-accent" onClick={() => setIsSidebar(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -34,8 +35,13 @@ const Dashboard = () => {
             <Card />
           </SidebarSample>
         </div>
+        {/* side content */}
+        <div className="bg-black flex-1 ">
+          {/* Dashboard content will be here */}
+          <Outlet />
+        </div>
       </div>
-      */
+
       {/* sidebar style 2
       <Sidebar2 />
 

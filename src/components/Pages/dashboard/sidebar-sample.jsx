@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SidebarSample = ({ children, isSidebar, setIsSidebar }) => {
   return (
@@ -16,13 +17,38 @@ ${
   `}
       >
         <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
-          <header className="flex justify-between p-4 font-bold text-lg">
-            <p>Header</p>
+          <header className="flex items-center justify-between p-4 font-bold text-lg">
+            <p className="text-slate-900">Dashboard</p>
             <button className="btn" onClick={() => setIsSidebar(!isSidebar)}>
               close
             </button>
           </header>
-          {children}
+          <div>{children}</div>
+          <div>
+            <nav
+              className="text-black font-bold"
+              data-dev-hint="second-main-navigation or footer navigation"
+            >
+              <Link
+                to="/dashboard/allprojects"
+                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+              >
+                All Project Lists
+              </Link>
+              <Link
+                to="/dashboard/enterposttitle"
+                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+              >
+                Enter Post Title
+              </Link>
+              <Link
+                href="#"
+                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+              >
+                Tokens
+              </Link>
+            </nav>
+          </div>
         </article>
       </section>
       <section
