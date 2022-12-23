@@ -31,19 +31,19 @@ ${
             >
               <Link
                 to="/dashboard/allprojects"
-                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
                 All Project Lists
               </Link>
               <Link
                 to="/dashboard/enterposttitle"
-                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
                 Enter Post Title
               </Link>
               <Link
                 href="#"
-                class="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
                 Tokens
               </Link>
