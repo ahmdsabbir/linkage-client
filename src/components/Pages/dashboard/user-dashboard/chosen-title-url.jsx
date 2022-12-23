@@ -26,7 +26,7 @@ const ChosenTitleUrl = () => {
   };
   return (
     <>
-      <div>
+      <div className="">
         <h2 className="text-5xl font-semibold text-center mb-5">
           Chosen Title & URL
         </h2>

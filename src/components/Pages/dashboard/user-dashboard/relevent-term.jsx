@@ -6,15 +6,15 @@ import { globalData } from "../../../context/Provider";
 
 const ReleventTerm = () => {
   const { register, handleSubmit } = useForm();
-  const { termData, userData } = globalData();
+  const { setTermData, termData, userData: postTitle } = globalData();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {
-    console.log(data);
-    const newdata = { ...data, ...userData };
+    const newdata = { ...data, postTitle };
+    console.table(newdata);
     const response = await API.post("/posts", newdata);
     if (response?.status === 201) {
-      navigate("/suggestions");
+      navigate("/dashboard/suggestions");
     }
     console.log(response);
   };

@@ -5,6 +5,7 @@ import API from "../../../../api/api-config";
 import { globalData } from "../../../context/Provider";
 import ProjectDetails from "../../../reusable-component/project-details";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
+import ChosenTitleUrl from "./chosen-title-url";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
@@ -30,7 +31,7 @@ const Suggestions = () => {
         <div className="divider"></div>
 
         {/* serach for more new term form form */}
-        <div>
+        <div className="mb-10">
           <p className="text-4xl text-center px-6 mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
@@ -65,57 +66,9 @@ const Suggestions = () => {
         </div>
 
         <div className="grid grid-cols-2 gap-6">
-          <div>
+          <div className="card bg-base-100 shadow-xl">
             {/* generate heading */}
-            <form className="w-full max-w-sm">
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-full-name"
-                  >
-                    chosen Title
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="input input-bordered w-full"
-                    type="text"
-                    // value="Jane Doe"
-                  />
-                </div>
-              </div>
-              <div className="md:flex md:items-center mb-6">
-                <div className="md:w-1/3">
-                  <label
-                    className="block text-gray-500 font-bold md:text-left mb-1 md:mb-0 pr-4"
-                    htmlFor="inline-password"
-                  >
-                    Url
-                  </label>
-                </div>
-                <div className="md:w-2/3">
-                  <input
-                    className="input input-bordered w-full"
-                    id="url"
-                    type="text"
-                    placeholder="url"
-                  />
-                </div>
-              </div>
-
-              <div className="md:flex md:items-center">
-                <div className="md:w-1/3"></div>
-                <div className="md:w-2/3">
-                  <button
-                    className="btn btn-primary border-gray-600"
-                    type="button"
-                  >
-                    Generate Heading
-                  </button>
-                </div>
-              </div>
-            </form>
+            <ChosenTitleUrl />
           </div>
 
           {/* suggestions generated from api call */}

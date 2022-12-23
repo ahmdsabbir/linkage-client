@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import API from "../../../../api/api-config";
 import { globalData } from "../../../context/Provider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
@@ -23,14 +22,9 @@ const EnterPostTitle = () => {
   // post request
 
   const handleSubmit = async (data) => {
-    const newdata = { ...data, term: "term" };
     console.log(data);
-    const response = await API.post("/posts", {
-      newdata,
-    });
-    console.log(response);
-    await setUserData(response?.data);
-    navigate("/relevent");
+    await setUserData(data);
+    navigate("/dashboard/relevent");
   };
 
   return (

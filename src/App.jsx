@@ -24,12 +24,12 @@ const router = createBrowserRouter(
       <Route index element={<Home />} />
       <Route path="about" element={<AboutUs />} />
       <Route path="contact" element={<Contact />} />\{/* user routes */}
-      <Route path="relevent" element={<ReleventTerm />} />
-      <Route path="suggestions" element={<Suggestions />} />
       <Route path="dashboard" element={<Dashboard />}>
         <Route index element={<AllProjects />} />
         <Route path="/dashboard/allprojects" element={<AllProjects />} />
         <Route path="/dashboard/enterposttitle" element={<EnterPostTitle />} />
+        <Route path="/dashboard/relevent" element={<ReleventTerm />} />
+        <Route path="/dashboard/suggestions" element={<Suggestions />} />
       </Route>
       {/* user authentication */}
       <Route path="login" element={<Login />} />

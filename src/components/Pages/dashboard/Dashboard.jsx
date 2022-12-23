@@ -13,7 +13,7 @@ const Dashboard = () => {
   return (
     <>
       <div className="relative flex gap-4 ">
-        <div className="bg-white p-4 h-screen z-10 col-span-1">
+        <div className="flex flex-col h-screen bg-white p-4  z-10 col-span-1">
           <button className="btn btn-accent" onClick={() => setIsSidebar(true)}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
