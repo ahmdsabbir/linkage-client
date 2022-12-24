@@ -32,15 +32,13 @@ const router = createBrowserRouter(
         <Route index element={<AllProjects />} />
 
         {/* project starter layout nested route starts */}
-        <Route
-          path="project-starter/:id"
-          element={<ProjectStarterLayout />}
-        ></Route>
-        <Route
-          index
-          // path="all-projects/project-starter-layout/"
-          element={<EnterPostTitle />}
-        />
+        <Route path="project-starter/:id" element={<ProjectStarterLayout />}>
+          <Route
+            index
+            // path="all-projects/project-starter-layout/"
+            element={<EnterPostTitle />}
+          />
+        </Route>
         <Route path="project-starter/relevant" element={<RelevantTerm />} />
         <Route path="project-starter/suggestions" element={<Suggestions />} />
         {/* project starter layout nested route ends */}
