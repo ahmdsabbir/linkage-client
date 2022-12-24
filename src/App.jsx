@@ -26,6 +26,7 @@ const router = createBrowserRouter(
 
       {/* user routes */}
       <Route path="dashboard" element={<Dashboard />}>
+        <Route index element={<AllProjects />} />
         <Route path="allprojects" element={<AllProjects />} />
         <Route
           path="allprojects/projectquerylayout"
