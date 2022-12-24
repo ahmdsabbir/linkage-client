@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 const SingleProjectCard = () => {
   const navigate = useNavigate();
   const handleStartProject = () => {
-    navigate("enterPosttitle");
+    navigate("/dashboard/allprojects/projectquerylayout");
   };
   return (
     <div className="flex flex-col gap-5 card shadow-xl p-10 mb-4">

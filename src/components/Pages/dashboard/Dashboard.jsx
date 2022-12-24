@@ -38,7 +38,6 @@ const Dashboard = () => {
             <Card />
           </SidebarSample>
         </div>
-        {/* side content */}
         <div className="flex-1">
           {/* Dashboard content will be here */}
           <Outlet />

@@ -36,13 +36,13 @@ ${
                 to="/dashboard/allprojects"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
-                All Project Lists
+                All Projects
               </Link>
               <Link
-                to="/dashboard/enterposttitle"
+                to="/dashboard/userdetails"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
-                Enter Post Title
+                Profile
               </Link>
               <Link
                 href="#"
