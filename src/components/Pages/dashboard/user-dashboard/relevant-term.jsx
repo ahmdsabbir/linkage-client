@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { globalData } from "../../../context/Provider";
 
-const ReleventTerm = () => {
+const RelevantTerm = () => {
   const { register, handleSubmit } = useForm();
   const { setTermData, termData, userData: postTitle } = globalData();
   const navigate = useNavigate();
@@ -52,4 +52,4 @@ const ReleventTerm = () => {
   );
 };
 
-export default ReleventTerm;
+export default RelevantTerm;

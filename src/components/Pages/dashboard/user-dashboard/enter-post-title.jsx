@@ -23,38 +23,32 @@ const EnterPostTitle = () => {
   const handleSubmit = async (data) => {
     console.log(data);
     await setUserData(data);
-    navigate("/dashboard/relevent");
+    navigate("project-starter/relevant");
   };
 
   return (
-    <div className="">
-      <div className="divider"></div>
-      <div className="hero-content flex-col">
-        {/* form */}
-        <Form form={form} onSubmit={handleSubmit}>
-          <div className="form-control gap-4 flex-1">
-            <Input
-              label="Post Title here"
-              type="text"
-              placeholder="post title here"
-              className="input input-bordered "
-              {...form.register("postTitle")}
-            />
-            {/* button */}
-            <div className="flex">
-              <div className="w-1/6"></div>
-              <div className="form-control inline-block w-2/3">
-                <button
-                  type="submit"
-                  className="btn btn-primary border-gray-600"
-                >
-                  submit
-                </button>
-              </div>
+    <div className="hero-content flex-col">
+      {/* form */}
+      <Form form={form} onSubmit={handleSubmit}>
+        <div className="form-control gap-4 flex-1">
+          <Input
+            label="Post Title here"
+            type="text"
+            placeholder="post title here"
+            className="input input-bordered "
+            {...form.register("postTitle")}
+          />
+          {/* button */}
+          <div className="flex">
+            <div className="w-1/6"></div>
+            <div className="form-control inline-block w-2/3">
+              <button type="submit" className="btn btn-primary border-gray-600">
+                submit
+              </button>
             </div>
           </div>
-        </Form>
-      </div>
+        </div>
+      </Form>
     </div>
   );
 };
