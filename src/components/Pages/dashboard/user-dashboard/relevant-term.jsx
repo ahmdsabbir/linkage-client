@@ -12,9 +12,10 @@ const RelevantTerm = () => {
   const onSubmit = async (data) => {
     const newdata = { ...data, postTitle };
     console.table(newdata);
+    navigate("project-starter/suggestions");
     const response = await API.post("/posts", newdata);
     if (response?.status === 201) {
-      navigate("/dashboard/suggestions");
+      // navigate("project-starter/suggestions");
     }
     console.log(response);
   };

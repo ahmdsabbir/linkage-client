@@ -30,7 +30,6 @@ const router = createBrowserRouter(
       {/* user routes */}
       <Route path="dashboard" element={<Dashboard />}>
         <Route index element={<AllProjects />} />
-        <Route path="all-projects" element={<AllProjects />} />
 
         {/* project starter layout nested route starts */}
         <Route path="project-starter" element={<ProjectStarterLayout />}>

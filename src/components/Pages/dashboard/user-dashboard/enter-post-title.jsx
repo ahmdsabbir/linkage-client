@@ -23,7 +23,7 @@ const EnterPostTitle = () => {
   const handleSubmit = async (data) => {
     console.log(data);
     await setUserData(data);
-    navigate("project-starter/relevant");
+    navigate("/dashboard/project-starter/relevant");
   };
 
   return (
