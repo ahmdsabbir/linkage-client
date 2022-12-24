@@ -27,12 +27,12 @@ const router = createBrowserRouter(
       {/* user routes */}
       <Route path="dashboard" element={<Dashboard />}>
         <Route index element={<AllProjects />} />
-        <Route path="allprojects" element={<AllProjects />} />
+        <Route path="all-projects" element={<AllProjects />} />
         <Route
-          path="allprojects/projectquerylayout"
+          path="all-projects/project-query-layout"
           element={<ProjectQueryLayout />}
         />
-        <Route path="userdetails" element={<UserDetails />} />
+        <Route path="user-details" element={<UserDetails />} />
       </Route>
 
       {/* user authentication */}

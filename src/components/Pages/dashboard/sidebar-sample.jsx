@@ -33,13 +33,13 @@ ${
               data-dev-hint="second-main-navigation or footer navigation"
             >
               <Link
-                to="/dashboard/allprojects"
+                to="/dashboard/all-projects"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
                 All Projects
               </Link>
               <Link
-                to="/dashboard/userdetails"
+                to="/dashboard/user-details"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
               >
                 Profile
