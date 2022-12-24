@@ -24,7 +24,6 @@ const Suggestions = () => {
   };
   return (
     <div className="">
-      <h1 className="text-5xl font-bold">Enter Post Dashboard</h1>
       <ProjectDetails />
       <div className="hero-content flex-col">
         {/* divider */}

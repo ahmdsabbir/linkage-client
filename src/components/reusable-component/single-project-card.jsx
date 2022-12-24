@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 const SingleProjectCard = () => {
   const navigate = useNavigate();
   const handleStartProject = () => {
-    console.log("hello");
     navigate("enterPosttitle");
   };
   return (

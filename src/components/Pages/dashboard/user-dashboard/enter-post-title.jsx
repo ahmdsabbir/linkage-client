@@ -5,7 +5,6 @@ import { globalData } from "../../../context/Provider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
-import ProjectDetails from "../../../reusable-component/project-details";
 
 const postTitleSchema = z.object({
   postTitle: z
@@ -29,13 +28,9 @@ const EnterPostTitle = () => {
 
   return (
     <div className="">
-      <h1 className="text-5xl font-bold">Enter Post Dashboard</h1>
-      <ProjectDetails />
+      <div className="divider"></div>
       <div className="hero-content flex-col">
-        <div className="divider"></div>
-
         {/* form */}
-
         <Form form={form} onSubmit={handleSubmit}>
           <div className="form-control gap-4 flex-1">
             <Input

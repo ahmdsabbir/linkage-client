@@ -5,7 +5,7 @@ import Card from "./card";
 import SidebarSample from "./sidebar-sample";
 
 const Dashboard = () => {
-  const [isSidebar, setIsSidebar] = useState(true);
+  const [isSidebar, setIsSidebar] = useState(false);
 
   const sideBarRef = useRef(null);
   const { userData } = globalData();
@@ -13,8 +13,11 @@ const Dashboard = () => {
   return (
     <>
       <div className="relative flex gap-4 ">
-        <div className="flex flex-col h-screen bg-white p-4  z-10 col-span-1">
-          <button className="btn btn-accent" onClick={() => setIsSidebar(true)}>
+        <div className="flex flex-col h-screen bg-base-300 p-4  z-10 col-span-1">
+          <button
+            className="btn btn-ghost"
+            onClick={() => setIsSidebar(!isSidebar)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 flex-0"
@@ -36,7 +39,7 @@ const Dashboard = () => {
           </SidebarSample>
         </div>
         {/* side content */}
-        <div className="bg-black flex-1 ">
+        <div className="flex-1">
           {/* Dashboard content will be here */}
           <Outlet />
         </div>

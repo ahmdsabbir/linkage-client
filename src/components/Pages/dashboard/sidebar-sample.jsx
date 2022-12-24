@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SidebarSample = ({ children, isSidebar, setIsSidebar }) => {
   return (
     <main
-      className={`absolute overflow-hidden z-10 bg-gray-900 bg-opacity-25 inset-0 transform ease-in-out 
+      className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
 ${
   isSidebar
     ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
@@ -12,21 +12,24 @@ ${
 }`}
     >
       <section
-        className={`w-screen max-w-lg left-0 absolute bg-white h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
+        className={`w-screen max-w-lg left-0 absolute bg-slate-800 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
   ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
   `}
       >
         <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
           <header className="flex items-center justify-between p-4 font-bold text-lg">
-            <p className="text-slate-900">Dashboard</p>
-            <button className="btn" onClick={() => setIsSidebar(!isSidebar)}>
+            <p className="text-slate-100">Dashboard</p>
+            <button
+              className="btn font-bold"
+              onClick={() => setIsSidebar(!isSidebar)}
+            >
               close
             </button>
           </header>
           <div>{children}</div>
           <div>
             <nav
-              className="text-black font-bold"
+              className="text-slate-100 font-bold"
               data-dev-hint="second-main-navigation or footer navigation"
             >
               <Link
