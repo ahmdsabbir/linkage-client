@@ -21,8 +21,9 @@ const EnterPostTitle = () => {
   // post request
 
   const handleSubmit = async (data) => {
-    await setUserData(data);
-    navigate(`/dashboard/project-starter/${id}relevant`);
+    await context.setUserData(data);
+    // await setUserData(data);
+    navigate(`/dashboard/project-starter/relevant`);
   };
 
   return (

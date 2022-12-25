@@ -20,4 +20,5 @@ export const useAppState = () => {
   if (!context) {
     throw new Error("useAppState must be used within the AppProvider");
   }
+  return context;
 };
