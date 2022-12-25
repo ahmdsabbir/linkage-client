@@ -5,18 +5,24 @@ import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
 
-const signupFormSchema = z.object({
-  username: z
-    .string()
-    .min(6, "Please enter your username")
-    .max(25, "Consider using a short username"),
-  email: z.string().email("Please enter a valid email address."),
-  password: z
-    .string()
-    .nonempty("Field is required")
-    .min(6, "Please choose a longer password")
-    .max(256, "Consider using a short password"),
-});
+const signupFormSchema = z
+  .object({
+    username: z
+      .string()
+      .min(5, "Username must be more than 6 characters")
+      .max(25, "Consider using a short username"),
+    email: z.string().email("Please enter a valid email address."),
+    password: z
+      .string()
+      .nonempty("Field is required")
+      .min(6, "Please choose a longer password")
+      .max(256, "Consider using a short password"),
+    confirm: z.string(),
+  })
+  .refine((data) => data.password === data.confirm, {
+    path: ["confirm"],
+    message: "password did not match",
+  });
 
 const Register = () => {
   const location = useLocation();
@@ -36,7 +42,7 @@ const Register = () => {
             label="Username"
             type="text"
             placeholder="username"
-            {...form.register("email")}
+            {...form.register("username")}
           />
           <Input
             label="Email"
@@ -45,10 +51,16 @@ const Register = () => {
             {...form.register("email")}
           />
           <Input
-            label="password"
+            label="Password"
             type="password"
             placeholder="password"
             {...form.register("password")}
+          />
+          <Input
+            label="Confirm Password"
+            type="password"
+            placeholder="confirm password"
+            {...form.register("confirm")}
           />
           <div className="form-control mt-6">
             <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">

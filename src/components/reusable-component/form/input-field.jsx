@@ -7,7 +7,7 @@ export const Input = forwardRef(function Input(
 ) {
   return (
     <div className="form-control gap-3 mb-2">
-      <label className="label">
+      <label className="label pb-0">
         <span className="label-text">{label}</span>
       </label>
       <input
