@@ -2,14 +2,14 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
-import { globalData } from "../../../context/Provider";
+import { useAppState } from "../../../context/AppProvider";
 import ProjectDetails from "../../../reusable-component/project-details";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
-  const { setUserData } = globalData();
+  const { setUserData } = useAppState();
   const navigate = useNavigate();
 
   // post request

@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import { globalData } from "../../../context/Provider";
+import { useAppState } from "../../../context/AppProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
@@ -15,7 +15,7 @@ const postTitleSchema = z.object({
 
 const EnterPostTitle = () => {
   const form = useForm({ schema: postTitleSchema });
-  const { setUserData } = globalData();
+  const context = useAppState();
   const navigate = useNavigate();
 
   // post request

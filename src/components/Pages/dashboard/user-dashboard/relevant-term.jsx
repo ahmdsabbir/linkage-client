@@ -2,11 +2,11 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
-import { globalData } from "../../../context/Provider";
+import { useAppState } from "../../../context/AppProvider";
 
 const RelevantTerm = () => {
   const { register, handleSubmit } = useForm();
-  const { setTermData, termData, userData: postTitle } = globalData();
+  const { setTermData, termData, userData: postTitle } = useAppState();
   const navigate = useNavigate();
 
   const onSubmit = async (data) => {

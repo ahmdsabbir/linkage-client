@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { globalData } from "../../context/Provider";
+import { useAppState } from "../../context/AppProvider";
 import Card from "./card";
 import SidebarSample from "./sidebar-sample";
 
@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(false);
 
   const sideBarRef = useRef(null);
-  const { userData } = globalData();
+  const context = useAppState();
 
   return (
     <>

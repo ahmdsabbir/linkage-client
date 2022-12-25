@@ -1,6 +1,6 @@
 import React from "react";
 import { z } from "zod";
-import { globalData } from "../../../context/Provider";
+import { useAppState } from "../../../context/AppProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
@@ -17,7 +17,7 @@ const titleUrlSchema = z.object({
 });
 
 const ChosenTitleUrl = () => {
-  const { userData } = globalData();
+  const { userData } = useAppState();
   const form = useForm({ schema: titleUrlSchema });
   //   console.log(userData);
 
