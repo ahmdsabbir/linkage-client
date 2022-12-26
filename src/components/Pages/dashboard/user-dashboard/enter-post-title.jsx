@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import { useAppState } from "../../../context/AppProvider";
 import useForm from "../../../hook/useForm";
@@ -14,6 +14,8 @@ const postTitleSchema = z.object({
 });
 
 const EnterPostTitle = () => {
+  const { id } = useParams();
+
   const form = useForm({ schema: postTitleSchema });
   const context = useAppState();
   const navigate = useNavigate();
@@ -21,9 +23,9 @@ const EnterPostTitle = () => {
   // post request
 
   const handleSubmit = async (data) => {
-    await context.setUserData(data);
+    // await context.setUserData(data);
     // await setUserData(data);
-    navigate(`/dashboard/project-starter/relevant`);
+    navigate(`/dashboard/project-starter/${id}/relevant`);
   };
 
   return (

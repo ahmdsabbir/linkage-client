@@ -14,7 +14,7 @@ const SingleProjectCard = ({ title, body, id, userId }) => {
       <div className="flex flew-row gap-2">
         <Link
           className="btn bg-contrast text-base-300 hover:bg-contrast-dark focus:bg-slate-600"
-          to={`project-starter/${id}`}
+          to={`/dashboard/project-starter/${id}`}
         >
           Start Project
         </Link>

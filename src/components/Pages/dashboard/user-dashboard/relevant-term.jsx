@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 
@@ -8,15 +8,16 @@ const RelevantTerm = () => {
   const { register, handleSubmit } = useForm();
   const { setTermData, termData, userData: postTitle } = useAppState();
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const onSubmit = async (data) => {
     const newdata = { ...data, postTitle };
-    console.table(newdata);
-    navigate("project-starter/suggestions");
+    // console.table(newdata);
+    navigate(`/dashboard/project-starter/${id}/suggestions`);
     const response = await API.post("/posts", newdata);
-    if (response?.status === 201) {
-      // navigate("project-starter/suggestions");
-    }
+    /* if (response?.status === 201) {
+      return
+    } */
     console.log(response);
   };
 
