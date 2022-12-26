@@ -7,7 +7,9 @@ const RootLayout = () => {
     <>
       <Navbar />
 
-      <Outlet />
+      <div className="grid place-self-center">
+        <Outlet />
+      </div>
     </>
   );
 };

@@ -25,9 +25,9 @@ const Login = () => {
   };
 
   return (
-    <>
-      <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
-      <div className="flex items-center justify-center mb-5">
+    <div className="grid place-self-center h-screen">
+      <div className="flex flex-col items-center justify-center mb-5">
+        <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
         <Form form={form} onSubmit={handleSubmit}>
           <Input
             label="Email"
@@ -55,13 +55,13 @@ const Login = () => {
             </button>
           </div>
         </Form>
+        <NavigateLoginRegister
+          text="Have no account?"
+          btnLabel="Register"
+          to={"/register"}
+        />
       </div>
-      <NavigateLoginRegister
-        text="Have no account?"
-        btnLabel="Register"
-        to={"/register"}
-      />
-    </>
+    </div>
   );
 };
 

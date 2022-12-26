@@ -16,7 +16,7 @@ const ForgotPassword = () => {
     /*  navigate("/dashboard"); */
   };
   return (
-    <div className="grid place-self-center">
+    <div className="grid place-self-center h-screen">
       <h2 className="text-5xl font-semibold text-center mb-5">
         Enter Your Email
       </h2>
