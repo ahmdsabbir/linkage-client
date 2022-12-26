@@ -6,6 +6,10 @@ import SidebarSample from "./sidebar-sample";
 
 const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(false);
+  // close sidebar function
+  const handleCloseSidebar = () => {
+    setIsSidebar(!isSidebar);
+  };
 
   const sideBarRef = useRef(null);
   const context = useAppState();
@@ -14,10 +18,7 @@ const Dashboard = () => {
     <>
       <div className="relative flex gap-4 ">
         <div className="flex flex-col h-screen bg-base-300 p-4  z-10 col-span-1">
-          <button
-            className="btn btn-ghost"
-            onClick={() => setIsSidebar(!isSidebar)}
-          >
+          <button className="btn btn-ghost" onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="h-6 w-6 flex-0"
@@ -34,7 +35,10 @@ const Dashboard = () => {
             </svg>
           </button>
           {/* sidebar style 1 */}
-          <SidebarSample isSidebar={isSidebar} setIsSidebar={setIsSidebar}>
+          <SidebarSample
+            isSidebar={isSidebar}
+            handleCloseSidebar={handleCloseSidebar}
+          >
             <Card />
           </SidebarSample>
         </div>

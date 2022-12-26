@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
-import ProjectDetails from "../../../reusable-component/project-details";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
 
@@ -24,7 +23,6 @@ const Suggestions = () => {
   };
   return (
     <div className="">
-      <ProjectDetails />
       <div className="hero-content flex-col">
         {/* divider */}
         <div className="divider"></div>
