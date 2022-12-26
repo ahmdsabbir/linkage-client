@@ -4,6 +4,7 @@ import { z } from "zod";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
+import NavigateLoginRegister from "../reusable-component/navigate-login-register";
 
 const signupFormSchema = z
   .object({
@@ -36,7 +37,7 @@ const Register = () => {
   return (
     <>
       <h2 className="text-5xl font-semibold text-center mb-5">Register</h2>
-      <div className="flex items-center justify-center">
+      <div className="flex items-center justify-center mb-4">
         <Form form={form} onSubmit={handleSubmit}>
           <Input
             label="Username"
@@ -69,6 +70,12 @@ const Register = () => {
           </div>
         </Form>
       </div>
+
+      <NavigateLoginRegister
+        text="Already a user?"
+        btnLabel="Login"
+        to={"/login"}
+      />
     </>
   );
 };
