@@ -17,6 +17,7 @@ import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/dashboard/Dashboard";
 import AllProjects from "./components/Pages/dashboard/user-dashboard/all-projects";
+import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit-project-details";
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
 import RelevantTerm from "./components/Pages/dashboard/user-dashboard/relevant-term";
@@ -58,6 +59,7 @@ const router = createBrowserRouter(
         <Route path="new-password" element={<NewPasword />} />
         <Route path="confirmation" element={<ResetPasswordConfirmation />} />
       </Route>
+      <Route path="edit-project-details" element={<EditProjectDetails />} />
     </Route>
   )
 );
