@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const SingleProjectCard = ({ title, body, id, userId }) => {
   return (
@@ -12,15 +12,18 @@ const SingleProjectCard = ({ title, body, id, userId }) => {
         <p>Project Created At:{userId}</p>
       </div>
       <div className="flex flew-row gap-2">
-        <Link
+        <NavLink
           className="btn bg-contrast text-base-300 hover:bg-contrast-dark focus:bg-slate-600"
           to={`/dashboard/project-starter/${id}`}
         >
           Start Project
-        </Link>
-        <button className="btn bg-accent-light text-slate-300 hover:bg-warning hover:text-base-300  focus:bg-slate-600">
+        </NavLink>
+        <NavLink
+          className="btn bg-accent-light text-slate-300 hover:bg-warning hover:text-base-300  focus:bg-slate-600"
+          to={`/dashboard/project-starter/${id}/edit-project-details`}
+        >
           Edit
-        </button>
+        </NavLink>
         <button className="btn bg-accent-light text-slate-300 hover:bg-error hover:text-base-300 focus:bg-slate-600">
           Delete
         </button>

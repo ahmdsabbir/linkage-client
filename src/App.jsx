@@ -42,6 +42,7 @@ const router = createBrowserRouter(
           <Route index element={<EnterPostTitle />} />
           <Route path="relevant" element={<RelevantTerm />} />
           <Route path="suggestions" element={<Suggestions />} />
+          <Route path="edit-project-details" element={<EditProjectDetails />} />
         </Route>
         {/* project starter layout nested route ends */}
 
@@ -59,7 +60,6 @@ const router = createBrowserRouter(
         <Route path="new-password" element={<NewPasword />} />
         <Route path="confirmation" element={<ResetPasswordConfirmation />} />
       </Route>
-      <Route path="edit-project-details" element={<EditProjectDetails />} />
     </Route>
   )
 );

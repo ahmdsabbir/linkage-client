@@ -46,7 +46,7 @@ const EditProjectDetails = () => {
         />
         <div className="form-control mt-6">
           <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
-            Login
+            Submit
           </button>
         </div>
       </Form>
