@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
@@ -10,10 +11,10 @@ const emailValidationSchema = z.object({
 
 const ResetPassword = () => {
   const form = useForm({ schema: emailValidationSchema });
-
-  const handleSubmitEmail = (data) => {
+  const navigate = useNavigate();
+  const handleSubmitResetPassword = (data) => {
     console.log(data);
-    /*  navigate("/dashboard"); */
+    navigate("/reset-password/new-password");
   };
   return (
     <div className="grid place-self-center h-screen">
@@ -21,7 +22,7 @@ const ResetPassword = () => {
         <h2 className="text-5xl font-semibold text-center mb-5">
           Enter Your Email
         </h2>
-        <Form form={form} onSubmit={handleSubmitEmail}>
+        <Form form={form} onSubmit={handleSubmitResetPassword}>
           <Input
             label="Email"
             type="text"

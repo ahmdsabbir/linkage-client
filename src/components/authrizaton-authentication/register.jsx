@@ -29,7 +29,7 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const form = useForm({ schema: signupFormSchema });
-  const handleSubmit = (data) => {
+  const handleSubmitRegister = (data) => {
     console.log(data);
     navigate("/dashboard");
   };
@@ -38,7 +38,7 @@ const Register = () => {
     <div className="grid place-self-center h-screen">
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl  font-semibold text-center mb-5">Register</h2>
-        <Form form={form} onSubmit={handleSubmit}>
+        <Form form={form} onSubmit={handleSubmitRegister}>
           <Input
             label="Username"
             type="text"

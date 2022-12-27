@@ -19,7 +19,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const form = useForm({ schema: loginFormSchema });
-  const handleSubmit = (data) => {
+  const handleSubmitLogin = (data) => {
     console.log(data);
     navigate("/dashboard");
   };
@@ -28,7 +28,7 @@ const Login = () => {
     <div className="grid place-self-center h-screen">
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
-        <Form form={form} onSubmit={handleSubmit}>
+        <Form form={form} onSubmit={handleSubmitLogin}>
           <Input
             label="Email"
             type="text"
