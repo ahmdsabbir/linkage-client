@@ -8,6 +8,7 @@ const projectDetailsSchema = z.object({
   projectName: z.string().min(5, "please input more than 5 characters"),
   url: z.string().min(5, "please input more than 5 characters"),
   wpAppPassword: z.string().min(5, "please input more than 5 characters"),
+  projectStarted: z.string().min(5, "please input more than 5 characters"),
 });
 
 const EditProjectDetails = () => {
@@ -36,6 +37,12 @@ const EditProjectDetails = () => {
           type="password"
           placeholder="WP App. Password"
           {...form.register("wpAppPassword")}
+        />
+        <Input
+          label="Project Started at"
+          type="text"
+          placeholder="projectStarted"
+          {...form.register("projectStarted")}
         />
         <div className="form-control mt-6">
           <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
