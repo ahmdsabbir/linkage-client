@@ -5,10 +5,12 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./App.css";
+
 import Login from "./components/authrizaton-authentication/Login";
-import NewPasword from "./components/authrizaton-authentication/new-password";
 import Register from "./components/authrizaton-authentication/register";
-import ResetPassword from "./components/authrizaton-authentication/reset-password";
+import NewPasword from "./components/authrizaton-authentication/reset-password/new-password";
+import ResetPassword from "./components/authrizaton-authentication/reset-password/reset-password";
+import ResetPasswordConfirmation from "./components/authrizaton-authentication/reset-password/reset-password-confirmation";
 import ResetPasswordLayout from "./components/authrizaton-authentication/reset-password/reset-password-layout";
 
 import AboutUs from "./components/Pages/about-us";
@@ -54,6 +56,7 @@ const router = createBrowserRouter(
       <Route path="reset-password" element={<ResetPasswordLayout />}>
         <Route index element={<ResetPassword />} />
         <Route path="new-password" element={<NewPasword />} />
+        <Route path="confirmation" element={<ResetPasswordConfirmation />} />
       </Route>
     </Route>
   )

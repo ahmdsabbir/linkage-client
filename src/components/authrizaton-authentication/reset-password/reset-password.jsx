@@ -1,9 +1,9 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import useForm from "../hook/useForm";
-import Form from "../reusable-component/form/form";
-import { Input } from "../reusable-component/form/input-field";
+import useForm from "../../hook/useForm";
+import Form from "../../reusable-component/form/form";
+import { Input } from "../../reusable-component/form/input-field";
 
 const emailValidationSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
