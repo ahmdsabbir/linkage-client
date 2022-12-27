@@ -8,7 +8,7 @@ const emailValidationSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
 });
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const form = useForm({ schema: emailValidationSchema });
 
   const handleSubmitEmail = (data) => {
@@ -17,10 +17,10 @@ const ForgotPassword = () => {
   };
   return (
     <div className="grid place-self-center h-screen">
-      <h2 className="text-5xl font-semibold text-center mb-5">
-        Enter Your Email
-      </h2>
-      <div className="flex items-center justify-center mb-5">
+      <div className="flex flex-col items-center justify-center">
+        <h2 className="text-5xl font-semibold text-center mb-5">
+          Enter Your Email
+        </h2>
         <Form form={form} onSubmit={handleSubmitEmail}>
           <Input
             label="Email"
@@ -40,4 +40,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

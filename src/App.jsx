@@ -5,9 +5,9 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./App.css";
-import ForgotPassword from "./components/authrizaton-authentication/forgot-password";
 import Login from "./components/authrizaton-authentication/Login";
 import Register from "./components/authrizaton-authentication/register";
+import ResetPassword from "./components/authrizaton-authentication/reset-password";
 
 import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
@@ -46,7 +46,7 @@ const router = createBrowserRouter(
       {/* user authentication */}
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
-      <Route path="reset-password" element={<ForgotPassword />} />
+      <Route path="reset-password" element={<ResetPassword />} />
     </Route>
   )
 );

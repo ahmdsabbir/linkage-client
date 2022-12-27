@@ -26,7 +26,7 @@ const Login = () => {
 
   return (
     <div className="grid place-self-center h-screen">
-      <div className="flex flex-col items-center justify-center mb-5">
+      <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
         <Form form={form} onSubmit={handleSubmit}>
           <Input
