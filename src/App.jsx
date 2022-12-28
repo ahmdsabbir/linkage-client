@@ -42,6 +42,8 @@ const router = createBrowserRouter(
           <Route index element={<EnterPostTitle />} />
           <Route path="relevant" element={<RelevantTerm />} />
           <Route path="suggestions" element={<Suggestions />} />
+
+          {/* edit project details */}
           <Route path="edit-project-details" element={<EditProjectDetails />} />
         </Route>
         {/* project starter layout nested route ends */}
