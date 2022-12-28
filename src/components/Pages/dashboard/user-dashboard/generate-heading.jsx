@@ -10,7 +10,7 @@ const anchorTextSchema = z.object({
     .min(4, "plese write more than 4 characters")
     .max(255, "please do not write more than 255 characters"),
 });
-const GeneratedSEction = () => {
+const GeneratedSection = () => {
   const form = useForm({ schema: anchorTextSchema });
 
   const handleAchorTextSubmit = (data) => {
@@ -57,4 +57,4 @@ const GeneratedSEction = () => {
   );
 };
 
-export default GeneratedSEction;
+export default GeneratedSection;

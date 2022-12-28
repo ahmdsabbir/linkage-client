@@ -19,6 +19,7 @@ import Dashboard from "./components/Pages/dashboard/Dashboard";
 import AllProjects from "./components/Pages/dashboard/user-dashboard/all-projects";
 import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit-project-details";
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
+import GeneratedSection from "./components/Pages/dashboard/user-dashboard/generate-heading";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
 import RelevantTerm from "./components/Pages/dashboard/user-dashboard/relevant-term";
 import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
@@ -42,6 +43,7 @@ const router = createBrowserRouter(
           <Route index element={<EnterPostTitle />} />
           <Route path="relevant" element={<RelevantTerm />} />
           <Route path="suggestions" element={<Suggestions />} />
+          <Route path="generated-heading" element={<GeneratedSection />} />
 
           {/* edit project details */}
           <Route path="edit-project-details" element={<EditProjectDetails />} />

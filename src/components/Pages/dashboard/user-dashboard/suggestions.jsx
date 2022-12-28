@@ -5,7 +5,6 @@ import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
-import GeneratedSEction from "./generate-heading";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
@@ -61,7 +60,8 @@ const Suggestions = () => {
               </div>
             </div>
           </form> */}
-          <GeneratedSEction />
+
+          {/* relevant term here */}
         </div>
 
         <div className="grid grid-cols-2 gap-6">

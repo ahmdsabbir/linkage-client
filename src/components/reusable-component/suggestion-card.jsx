@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const SuggestionsCard = () => {
   return (
@@ -9,7 +10,12 @@ const SuggestionsCard = () => {
         <p>URL: https://google.com/python-was-created</p>
         <p>Category: wristwatch, handgloves</p>
         <div className="card-actions ">
-          <button className="btn btn-primary border-gray-600">choose</button>
+          <Link
+            className="btn btn-primary border-gray-600"
+            to={"/dashboard/project-starter/1/generated-heading"}
+          >
+            choose
+          </Link>
         </div>
       </div>
     </div>
