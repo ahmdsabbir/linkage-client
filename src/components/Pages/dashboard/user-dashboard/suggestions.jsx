@@ -35,8 +35,9 @@ const Suggestions = () => {
 
           {/* relevant term here */}
           <RelevantTerm />
-          <div className="divider"></div>
         </div>
+
+        <div className="divider"></div>
 
         <div className="grid grid-cols-2 gap-6">
           <div className="card bg-base-100 shadow-xl">
