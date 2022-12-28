@@ -20,7 +20,7 @@ const NoName = () => {
           Above This
         </button>
       </div>
-      <div className="rounded-md bg-slate-700 mb-4 p-4 ">
+      <div className="rounded-md bg-slate-800 mb-4 p-4 ">
         <h2 className="text-2xl mb-4">
           A quick brown fish swims faster than a chicken.
         </h2>

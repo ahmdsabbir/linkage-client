@@ -1,7 +1,8 @@
 import React from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 
 const GeneratedSectionLayout = () => {
+  const location = useLocation();
   return (
     <div className="grid grid-cols-2  gap-4">
       {/* anchor input field */}
@@ -27,12 +28,16 @@ const GeneratedSectionLayout = () => {
             info is often referred to as{" "}
           </p>
         </div>
-        <Link
-          to={"/dashboard/project-starter/1/generated-heading/no-name"}
-          className="btn bg-accent"
-        >
-          Yup..Looks Good!
-        </Link>
+
+        {location.pathname ===
+          "/dashboard/project-starter/1/generated-heading" && (
+          <Link
+            to={"/dashboard/project-starter/1/generated-heading/no-name"}
+            className="btn bg-accent"
+          >
+            Yup..Looks Good!
+          </Link>
+        )}
       </div>
     </div>
   );
