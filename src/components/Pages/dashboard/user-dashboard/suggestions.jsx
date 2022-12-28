@@ -5,6 +5,7 @@ import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
+import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
@@ -25,7 +26,6 @@ const Suggestions = () => {
     <div className="">
       <div className="hero-content flex-col">
         {/* divider */}
-        <div className="divider"></div>
 
         {/* serach for more new term form form */}
         <div className="mb-10">
@@ -33,35 +33,9 @@ const Suggestions = () => {
             Not Happy with the suggestions? Try with different Term
           </p>
 
-          {/*  <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="card flex-shrink-0 w-full max-w-5xl shadow-2xl bg-base-100">
-              <div className="card-body flex-row">
-                <label className="label self-start">
-                  <span className="label-text text-2xl font-bold">
-                    Search For More Suggestions
-                  </span>
-                </label>
-                <div className="form-control gap-4 flex-1">
-                  <input
-                    type="text"
-                    placeholder="post title here"
-                    className="input input-bordered "
-                    {...register("newTerm", {
-                      required: true,
-                      maxLength: 20,
-                    })}
-                  />
-                  <div className="form-control inline-block">
-                    <button className="btn btn-primary border-gray-600">
-                      Generate Suggestion Again
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </form> */}
-
           {/* relevant term here */}
+          <RelevantTerm />
+          <div className="divider"></div>
         </div>
 
         <div className="grid grid-cols-2 gap-6">
