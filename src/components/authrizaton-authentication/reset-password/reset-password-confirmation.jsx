@@ -1,4 +1,5 @@
 import React from "react";
+import NewPasword from "./new-password";
 
 const ResetPasswordConfirmation = () => {
   return (
@@ -12,6 +13,7 @@ const ResetPasswordConfirmation = () => {
           you will be redirect to the login page.
         </p>
       </div>
+      <NewPasword />
     </div>
   );
 };

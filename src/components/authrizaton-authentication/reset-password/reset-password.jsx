@@ -14,7 +14,7 @@ const ResetPassword = () => {
   const navigate = useNavigate();
   const handleSubmitResetPassword = (data) => {
     console.log(data);
-    navigate("/reset-password/new-password");
+    navigate("/reset-password/confirmation");
   };
   return (
     <div className="grid place-self-center h-screen">

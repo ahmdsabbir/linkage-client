@@ -1,13 +1,12 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
-import Navbar from "../navbar";
 
 const RootLayout = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
 
-      <div className="grid place-self-center">
+      <div className="grid place-self-center relative border">
         <Outlet />
       </div>
     </>

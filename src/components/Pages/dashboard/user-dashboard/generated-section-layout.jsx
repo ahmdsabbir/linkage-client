@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 
 const GeneratedSectionLayout = () => {
+  const [copy, setCopy] = useState("");
+
   const location = useLocation();
+  console.log({ copy });
   return (
     <div className="grid grid-cols-2  gap-4">
       {/* anchor input field */}
@@ -17,6 +20,13 @@ const GeneratedSectionLayout = () => {
             Following Section was Generated. Insert It Wherever You’d like on
             Your Post
           </p>
+          <button
+            onClick={async () =>
+              setCopy(await navigator.clipboard.readText("whats up bro"))
+            }
+          >
+            COPY
+          </button>
         </div>
         <div className="rounded-md bg-slate-700 mb-4 p-4 ">
           <h2 className="text-2xl mb-4">AI Generated Relevant Heading</h2>

@@ -1,8 +1,7 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import { useAppState } from "../../context/AppProvider";
 import Card from "./card";
-import SidebarSample from "./sidebar-sample";
+import SidebarSample from "./sidebar";
 
 const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(false);
@@ -11,26 +10,24 @@ const Dashboard = () => {
     setIsSidebar(!isSidebar);
   };
 
-  const sideBarRef = useRef(null);
-  const context = useAppState();
-
   return (
     <>
       <div className="relative flex gap-4 ">
-        <div className="flex flex-col h-screen bg-base-300 p-4  z-10 col-span-1">
+        {/* sidebar container */}
+        <div className="flex flex-col h-screen bg-base-300 p-4  z-10 col-span-1 w-64 max-w-lg">
           <button className="btn btn-ghost" onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-6 w-6 flex-0"
               fill="none"
               viewBox="0 0 24 24"
+              stroke-width="1.5"
               stroke="currentColor"
+              class="w-6 h-6"
             >
               <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M3.75 9h16.5m-16.5 6.75h16.5"
               />
             </svg>
           </button>
