@@ -6,19 +6,36 @@ import { useAppState } from "../../../context/AppProvider";
 
 const RelevantTerm = () => {
   const { register, handleSubmit } = useForm();
-  const { setTermData, termData, userData: postTitle } = useAppState();
+  // getting data from global state context provider
+  const {
+    userPostTitle: { postTitle: target_title },
+    setTermData,
+    setAiSugetions,
+    // termData: { relevantTerm: source_title },
+  } = useAppState();
+
+  // react @{navigate , id} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
   const { id } = useParams();
 
   const onSubmit = async (data) => {
-    const newdata = { ...data, postTitle };
-    // console.table(newdata);
-    navigate(`/dashboard/project-starter/${id}/suggestions`);
-    const response = await API.post("/posts", newdata);
-    /* if (response?.status === 201) {
-      return
-    } */
-    console.log(response);
+    await setTermData(data);
+    const postData = {
+      target_title,
+      relevant_term: data.relevantTerm,
+    };
+
+    try {
+      const response = await API.post("core/suggestions", postData);
+      if (response?.status === 200) {
+        await setAiSugetions(response?.data?.suggestions);
+        navigate(`/dashboard/project-starter/${id}/suggestions`);
+        return;
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
@@ -36,7 +53,7 @@ const RelevantTerm = () => {
                 type="text"
                 placeholder="relevent term"
                 className="input input-bordered "
-                {...register("releventTerm", { required: true, maxLength: 20 })}
+                {...register("relevantTerm", { required: true, maxLength: 20 })}
               />
               <div className="form-control inline-block">
                 <button

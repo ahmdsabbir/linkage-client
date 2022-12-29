@@ -4,6 +4,7 @@ import { useAppState } from "../../../context/AppProvider";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 
 const AllProjects = () => {
+  // global state context provider
   const context = useAppState();
   console.log(context);
 

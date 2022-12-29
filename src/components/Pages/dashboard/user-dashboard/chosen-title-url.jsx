@@ -36,7 +36,6 @@ const ChosenTitleUrl = () => {
               label="Title"
               type="text"
               placeholder="Post title"
-              defaultValue={userData.newdata?.postTitle}
               {...form.register("title")}
             />
             <Input
@@ -44,7 +43,7 @@ const ChosenTitleUrl = () => {
               type="text"
               placeholder="url"
               //   disabled
-              defaultValue={userData.newdata?.term}
+
               {...form.register("url")}
             />
             <div className="form-control mt-6">

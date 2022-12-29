@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import { useAppState } from "../../../context/AppProvider";
@@ -17,15 +17,24 @@ const EnterPostTitle = () => {
   const { id } = useParams();
 
   const form = useForm({ schema: postTitleSchema });
+  // getting data from global state context provider
   const context = useAppState();
+  // react router hook for redirecting desired link
   const navigate = useNavigate();
 
-  // post request
+  useEffect(() => {
+    console.log("updated");
+  }, [context.userPostTitle]);
 
+  // post request
+  // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
-    // await context.setUserData(data);
-    // await setUserData(data);
-    navigate(`/dashboard/project-starter/${id}/relevant`);
+    await context.setUserPostTitle(data);
+    if (context.userPostTitle) {
+      navigate(`/dashboard/project-starter/${id}/relevant`);
+    } else {
+      console.log("post title did not set");
+    }
   };
 
   return (

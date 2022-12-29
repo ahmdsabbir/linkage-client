@@ -1,7 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
@@ -9,16 +8,15 @@ import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
-  const { setUserData } = useAppState();
+  const { aiSuggestions } = useAppState();
   const navigate = useNavigate();
 
   // post request
-
+  console.log(aiSuggestions);
   const onSubmit = async (data) => {
-    const newdata = { ...data, term: "term" };
-    const response = await API.post("/posts", {
+    /*  const response = await API.post("/posts", {
       newdata,
-    });
+    }); */
     await setUserData(response?.data);
     console.log(response);
   };
@@ -47,8 +45,13 @@ const Suggestions = () => {
 
           {/* suggestions generated from api call */}
           <div>
-            <SuggestionsCard />
-            <SuggestionsCard />
+            {aiSuggestions.map((suggestion, i) => (
+              <SuggestionsCard
+                key={suggestion.url + i}
+                title={suggestion.title}
+                url={suggestion.url}
+              />
+            ))}
           </div>
         </div>
       </div>

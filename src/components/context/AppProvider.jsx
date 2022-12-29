@@ -2,18 +2,21 @@ import React, { createContext, useContext, useState } from "react";
 export const AppStateContext = createContext();
 
 const AppProvider = ({ children }) => {
-  const [userData, setUserData] = useState("");
+  const [userPostTitle, setUserPostTitle] = useState("");
   const [termData, setTermData] = useState("");
   const [projects, setProjects] = useState([]);
+  const [aiSuggestions, setAiSugetions] = useState([]);
   return (
     <AppStateContext.Provider
       value={{
-        userData,
-        setUserData,
+        userPostTitle,
+        setUserPostTitle,
         termData,
         setTermData,
         projects,
         setProjects,
+        aiSuggestions,
+        setAiSugetions,
       }}
     >
       {children}
