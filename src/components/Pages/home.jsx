@@ -8,7 +8,9 @@ const Home = () => {
     <>
       <div className="flex flex-col items-center justify-center h-screen">
         <h1 className="text-5xl font-bold text-center mb-5">Home page</h1>
-        <NavLink to={"/login"}>Login</NavLink>
+        <NavLink className={"btn btn-accent"} to={"/login"}>
+          Login
+        </NavLink>
         <Spinner />
         <ChosenTitleUrl />
       </div>
