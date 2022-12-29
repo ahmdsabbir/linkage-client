@@ -14,18 +14,16 @@ const AllProjects = () => {
   }, []);
 
   return (
-    <div className="p-5 bg-slate-600 border-slate-50	">
-      <div className="grid gap-5 grid-cols-1 lg:grid-cols-2  shadow-xl p-10 mb-4">
-        {posts.map((post) => (
-          <SingleProjectCard
-            key={post.id}
-            title={post.title}
-            body={post.body}
-            id={post.id}
-            userId={post.userId}
-          />
-        ))}
-      </div>
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      {posts.map((post) => (
+        <SingleProjectCard
+          key={post.id}
+          title={post.title}
+          body={post.body}
+          id={post.id}
+          userId={post.userId}
+        />
+      ))}
     </div>
   );
 };
