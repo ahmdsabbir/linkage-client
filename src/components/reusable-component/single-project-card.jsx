@@ -1,15 +1,15 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SingleProjectCard = ({ title, body, id, userId }) => {
+const SingleProjectCard = ({ name, domain, dateAdded, id, wpPassword }) => {
   return (
     <div className="flex gap-4 card shadow-xl p-4 bg-slate-800">
       <div className="flex flex-col gap-3">
-        <p> Project Name: {title}</p>
-        <p>URL: {body.slice(150)} </p>
+        <p> Project Name: {name}</p>
+        <p>URL: {domain} </p>
         <p>WP Username: Admin</p>
-        <p>WP App. Password: {id}</p>
-        <p>Project Created At:{userId}</p>
+        <p>WP App. Password: {wpPassword}</p>
+        <p>Project Created At: {dateAdded}</p>
       </div>
       <div className="flex flex-col lg:flex-row gap-2">
         <NavLink

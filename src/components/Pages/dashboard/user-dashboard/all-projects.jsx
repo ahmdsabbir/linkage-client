@@ -1,27 +1,31 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import API from "../../../../api/api-config";
+import { useAppState } from "../../../context/AppProvider";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 
 const AllProjects = () => {
-  const [posts, setPosts] = useState([]);
+  const context = useAppState();
+  console.log(context);
 
   useEffect(() => {
     const getData = async () => {
-      const response = await API.get("/posts");
-      setPosts(response?.data);
+      const response = await API.get("/core/project");
+      console.log(response?.data?.projects);
+      context.setProjects(response?.data?.projects);
     };
     getData();
   }, []);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-      {posts.map((post) => (
+      {context?.projects.map((project) => (
         <SingleProjectCard
-          key={post.id}
-          title={post.title}
-          body={post.body}
-          id={post.id}
-          userId={post.userId}
+          key={project.id}
+          name={project.name}
+          domain={project.domain}
+          id={project.id}
+          dateAdded={project.date_added}
+          wpPassword={project.wp_password}
         />
       ))}
     </div>

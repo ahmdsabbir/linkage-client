@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
-import Card from "./card";
 import SidebarSample from "./sidebar";
 
 const Dashboard = () => {
@@ -37,7 +36,7 @@ const Dashboard = () => {
             isSidebar={isSidebar}
             handleCloseSidebar={handleCloseSidebar}
           >
-            <Card />
+            {/* <Card /> */}
           </SidebarSample>
         </div>
 

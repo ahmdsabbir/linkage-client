@@ -4,9 +4,17 @@ export const AppStateContext = createContext();
 const AppProvider = ({ children }) => {
   const [userData, setUserData] = useState("");
   const [termData, setTermData] = useState("");
+  const [projects, setProjects] = useState([]);
   return (
     <AppStateContext.Provider
-      value={{ userData, setUserData, termData, setTermData }}
+      value={{
+        userData,
+        setUserData,
+        termData,
+        setTermData,
+        projects,
+        setProjects,
+      }}
     >
       {children}
     </AppStateContext.Provider>
