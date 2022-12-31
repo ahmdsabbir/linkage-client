@@ -1,9 +1,15 @@
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 
 const ChosenTitleUrl = () => {
-  const { chooseTitleUrl } = useAppState();
+  const {
+    userPostTitle: { postTitle: target_title },
+    chooseTitleUrl,
+    setGeneratedHeading,
+  } = useAppState();
+
   // setValue func imported as default value
   const { register, reset, handleSubmit } = useForm();
 
@@ -14,8 +20,23 @@ const ChosenTitleUrl = () => {
     reset({ ...defaultValues });
   }, [chooseTitleUrl]);
 
-  const handleChosenTitleURl = (data) => {
-    console.log(data);
+  const handleChosenTitleURl = async (data) => {
+    data;
+
+    const postData = {
+      target_title,
+      source_title: data.title,
+    };
+
+    try {
+      const response = await API.post("core/heading", postData);
+      if (response?.status === 200) {
+        await setGeneratedHeading(response?.data?.heading);
+      }
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
@@ -25,29 +46,36 @@ const ChosenTitleUrl = () => {
         </h2>
         <div className="flex items-center justify-center">
           <form
-            className="form-control"
+            className="form-control gap-3 mb-2"
             onSubmit={handleSubmit(handleChosenTitleURl)}
           >
-            <div>
-              <label htmlFor="title">Title</label>
-              <input
+            <div className="form-control">
+              <label htmlFor="title" className="label label-text">
+                Title
+              </label>
+              <textarea
                 type="text"
+                required
                 placeholder="Post title"
                 {...register("title")}
+                className="textarea"
               />
             </div>
-            <label htmlFor="url">URl</label>
-            <input
-              type="text"
-              disabled
-              placeholder="url"
-              {...register("url")}
-            />
+            <div className="form-control">
+              <label htmlFor="url" className="label label-text">
+                URl
+              </label>
+              <textarea
+                type="text"
+                disabled
+                placeholder="url"
+                {...register("url")}
+                className="textarea"
+              />
+            </div>
+
             <div className="form-control mt-6">
-              <button
-                className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600"
-                // to={"/dashboard/project-starter/1/generated-heading"}
-              >
+              <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
                 Generate Heading
               </button>
             </div>

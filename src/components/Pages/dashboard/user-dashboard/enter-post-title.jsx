@@ -34,7 +34,7 @@ const EnterPostTitle = () => {
     <div className="hero-content flex-col">
       {/* form */}
       <Form form={form} onSubmit={handleSubmit}>
-        <div className="form-control gap-4 flex-1">
+        <div className="form-control gap-4  lex-1">
           <Input
             label="Post Title here"
             type="text"

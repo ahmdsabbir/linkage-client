@@ -7,6 +7,7 @@ const AppProvider = ({ children }) => {
   const [projects, setProjects] = useState([]);
   const [aiSuggestions, setAiSugetions] = useState([]);
   const [chooseTitleUrl, setChooseTitleUrl] = useState([]);
+  const [generatedHeading, setGeneratedHeading] = useState("");
   return (
     <AppStateContext.Provider
       value={{
@@ -20,6 +21,8 @@ const AppProvider = ({ children }) => {
         setAiSugetions,
         chooseTitleUrl,
         setChooseTitleUrl,
+        generatedHeading,
+        setGeneratedHeading,
       }}
     >
       {children}

@@ -29,6 +29,7 @@ const RelevantTerm = () => {
       const response = await API.post("core/suggestions", postData);
       if (response?.status === 200) {
         await setAiSugetions(response?.data?.suggestions);
+
         navigate(`/dashboard/project-starter/${id}/suggestions`);
         return;
       }

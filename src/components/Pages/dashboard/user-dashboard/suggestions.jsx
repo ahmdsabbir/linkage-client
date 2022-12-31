@@ -1,25 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
+import GenerateHeading from "./generate-heading";
 import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
-  const { aiSuggestions } = useAppState();
+  const { aiSuggestions, generatedHeading } = useAppState();
   const navigate = useNavigate();
+  useEffect(() => {
+    console.log("generatedHeading", generatedHeading);
+  }, [generatedHeading]);
 
-  // post request
-  console.log(aiSuggestions);
-  const onSubmit = async (data) => {
-    /*  const response = await API.post("/posts", {
-      newdata,
-    }); */
-    await setUserData(response?.data);
-    console.log(response);
-  };
   return (
     <div className="">
       <div className="hero-content flex-col">
@@ -42,6 +37,8 @@ const Suggestions = () => {
             <div className="card bg-base-100 shadow-xl">
               {/* generate heading */}
               <ChosenTitleUrl />
+
+              <GenerateHeading title={generatedHeading} />
             </div>
           </div>
 
