@@ -38,9 +38,11 @@ const Suggestions = () => {
         <div className="divider"></div>
 
         <div className="grid grid-cols-2 gap-6">
-          <div className="card bg-base-100 shadow-xl">
-            {/* generate heading */}
-            <ChosenTitleUrl />
+          <div>
+            <div className="card bg-base-100 shadow-xl">
+              {/* generate heading */}
+              <ChosenTitleUrl />
+            </div>
           </div>
 
           {/* suggestions generated from api call */}

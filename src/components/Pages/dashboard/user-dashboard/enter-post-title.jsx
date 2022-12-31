@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import { useAppState } from "../../../context/AppProvider";
@@ -21,10 +21,6 @@ const EnterPostTitle = () => {
   const context = useAppState();
   // react router hook for redirecting desired link
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log("updated");
-  }, [context.userPostTitle]);
 
   // post request
   // if funciton cold be more percise. remember to edit the @{if else} funciton

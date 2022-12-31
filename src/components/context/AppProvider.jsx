@@ -6,6 +6,7 @@ const AppProvider = ({ children }) => {
   const [termData, setTermData] = useState("");
   const [projects, setProjects] = useState([]);
   const [aiSuggestions, setAiSugetions] = useState([]);
+  const [chooseTitleUrl, setChooseTitleUrl] = useState([]);
   return (
     <AppStateContext.Provider
       value={{
@@ -17,6 +18,8 @@ const AppProvider = ({ children }) => {
         setProjects,
         aiSuggestions,
         setAiSugetions,
+        chooseTitleUrl,
+        setChooseTitleUrl,
       }}
     >
       {children}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { z } from "zod";
 import { useAppState } from "../../../context/AppProvider";
 import useForm from "../../../hook/useForm";
@@ -9,17 +9,21 @@ const titleUrlSchema = z.object({
   title: z
     .string()
     .min(6, "Please enter more characters")
-    .max(500, "Consider using a more like paragraphs"),
+    .max(5000, "Consider using a more like paragraphs"),
   url: z
     .string()
     .min(1, "Please enter more characters")
-    .max(500, "Consider using a more like paragraphs"),
+    .max(5000, "Consider using a more like paragraphs"),
 });
 
 const ChosenTitleUrl = () => {
   const { userData } = useAppState();
   const form = useForm({ schema: titleUrlSchema });
+  const { chooseTitleUrl } = useAppState();
   //   console.log(userData);
+  useEffect(() => {
+    console.log(chooseTitleUrl);
+  }, [chooseTitleUrl]);
 
   const handleSubmit = (data) => {
     console.log(data);
@@ -36,18 +40,22 @@ const ChosenTitleUrl = () => {
               label="Title"
               type="text"
               placeholder="Post title"
+              defaultValue={chooseTitleUrl ? chooseTitleUrl.title : ""}
               {...form.register("title")}
             />
             <Input
               label="URL"
               type="text"
               placeholder="url"
-              //   disabled
-
+              // disabled
+              defaultValue={chooseTitleUrl ? chooseTitleUrl.url : ""}
               {...form.register("url")}
             />
             <div className="form-control mt-6">
-              <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
+              <button
+                className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600"
+                // to={"/dashboard/project-starter/1/generated-heading"}
+              >
                 Generate Heading
               </button>
             </div>

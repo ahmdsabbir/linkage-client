@@ -1,7 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useAppState } from "../context/AppProvider";
 
 const SuggestionsCard = ({ title, url }) => {
+  const { setChooseTitleUrl } = useAppState();
+
+  const handleChosenTitleUrl = () => {
+    setChooseTitleUrl({ title, url });
+  };
+
   return (
     <div className="card bg-base-100 shadow-xl mb-4">
       <div className="card-body">
@@ -9,13 +15,8 @@ const SuggestionsCard = ({ title, url }) => {
         {title && <p>{title}</p>}
         {url && <p>{url}</p>}
         <p>Category: wristwatch, handgloves</p>
-        <div className="card-actions ">
-          <Link
-            className="btn btn-primary border-gray-600"
-            to={"/dashboard/project-starter/1/generated-heading"}
-          >
-            choose
-          </Link>
+        <div className="card-actions" onClick={handleChosenTitleUrl}>
+          <button className="btn btn-primary border-gray-600">choose</button>
         </div>
       </div>
     </div>
