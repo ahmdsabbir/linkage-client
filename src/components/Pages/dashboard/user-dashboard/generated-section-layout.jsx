@@ -1,11 +1,12 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
+import { useAppState } from "../../../context/AppProvider";
 
 const GeneratedSectionLayout = () => {
-  const [copy, setCopy] = useState("");
+  const { generatedHeading } = useAppState();
 
   const location = useLocation();
-  console.log({ copy });
+
   return (
     <div className="grid grid-cols-2  gap-4">
       {/* anchor input field */}
@@ -20,22 +21,15 @@ const GeneratedSectionLayout = () => {
             Following Section was Generated. Insert It Wherever You’d like on
             Your Post
           </p>
-          <button
-            onClick={async () =>
-              setCopy(await navigator.clipboard.readText("whats up bro"))
-            }
-          >
-            COPY
-          </button>
         </div>
         <div className="rounded-md bg-slate-700 mb-4 p-4 ">
-          <h2 className="text-2xl mb-4">AI Generated Relevant Heading</h2>
+          <h2 className="text-2xl mb-4">{generatedHeading}</h2>
           <p>
             AI Generated Relevant Paragraph. So, given a user id, this method
             creates and returns a token from the payload and the secret key set
             in the config.py file. <a>given anchor text</a>The payload is where
             we add metadata about the token and information about the user. This
-            info is often referred to as{" "}
+            info is often referred to as.
           </p>
         </div>
 
