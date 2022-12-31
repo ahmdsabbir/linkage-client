@@ -1,31 +1,20 @@
 import React, { useEffect } from "react";
-import { z } from "zod";
+import { useForm } from "react-hook-form";
 import { useAppState } from "../../../context/AppProvider";
-import useForm from "../../../hook/useForm";
-import Form from "../../../reusable-component/form/form";
-import { Input } from "../../../reusable-component/form/input-field";
-
-const titleUrlSchema = z.object({
-  title: z
-    .string()
-    .min(6, "Please enter more characters")
-    .max(5000, "Consider using a more like paragraphs"),
-  url: z
-    .string()
-    .min(1, "Please enter more characters")
-    .max(5000, "Consider using a more like paragraphs"),
-});
 
 const ChosenTitleUrl = () => {
-  const { userData } = useAppState();
-  const form = useForm({ schema: titleUrlSchema });
   const { chooseTitleUrl } = useAppState();
-  //   console.log(userData);
+  // setValue func imported as default value
+  const { register, reset, handleSubmit } = useForm();
+
   useEffect(() => {
-    console.log(chooseTitleUrl);
+    let defaultValues = {};
+    defaultValues.title = chooseTitleUrl.title;
+    defaultValues.url = chooseTitleUrl.url;
+    reset({ ...defaultValues });
   }, [chooseTitleUrl]);
 
-  const handleSubmit = (data) => {
+  const handleChosenTitleURl = (data) => {
     console.log(data);
   };
   return (
@@ -35,21 +24,24 @@ const ChosenTitleUrl = () => {
           Chosen Title & URL
         </h2>
         <div className="flex items-center justify-center">
-          <Form form={form} onSubmit={handleSubmit}>
-            <Input
-              label="Title"
+          <form
+            className="form-control"
+            onSubmit={handleSubmit(handleChosenTitleURl)}
+          >
+            <div>
+              <label htmlFor="title">Title</label>
+              <input
+                type="text"
+                placeholder="Post title"
+                {...register("title")}
+              />
+            </div>
+            <label htmlFor="url">URl</label>
+            <input
               type="text"
-              placeholder="Post title"
-              defaultValue={chooseTitleUrl ? chooseTitleUrl.title : ""}
-              {...form.register("title")}
-            />
-            <Input
-              label="URL"
-              type="text"
+              disabled
               placeholder="url"
-              // disabled
-              defaultValue={chooseTitleUrl ? chooseTitleUrl.url : ""}
-              {...form.register("url")}
+              {...register("url")}
             />
             <div className="form-control mt-6">
               <button
@@ -59,7 +51,7 @@ const ChosenTitleUrl = () => {
                 Generate Heading
               </button>
             </div>
-          </Form>
+          </form>
         </div>
       </div>
     </>

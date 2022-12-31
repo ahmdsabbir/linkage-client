@@ -26,11 +26,8 @@ const EnterPostTitle = () => {
   // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
     await context.setUserPostTitle(data);
-    if (context.userPostTitle) {
-      navigate(`/dashboard/project-starter/${id}/relevant`);
-    } else {
-      console.log("post title did not set");
-    }
+    navigate(`/dashboard/project-starter/${id}/relevant`);
+    console.log("post title did not set");
   };
 
   return (
