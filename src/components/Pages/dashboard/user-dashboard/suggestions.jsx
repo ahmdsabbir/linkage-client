@@ -17,12 +17,12 @@ const Suggestions = () => {
 
   return (
     <div className="">
-      <div className="hero-content flex-col">
+      <div className="">
         {/* divider */}
 
         {/* serach for more new term form form */}
         <div className="mb-10">
-          <p className="text-4xl text-center px-6 mb-4">
+          <p className="text-xl font-semibold text-center  mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
 
@@ -33,11 +33,12 @@ const Suggestions = () => {
         <div className="divider"></div>
 
         <div className="grid grid-cols-2 gap-6">
-          <div>
-            <div className="card bg-base-100 shadow-xl">
+          <div className="flex flex-col gap-4">
+            <div className="card bg-base-100 drop-shadow">
               {/* generate heading */}
               <ChosenTitleUrl />
-
+            </div>
+            <div className="car bg-base-100 drop-shadow">
               <GenerateHeading title={generatedHeading} />
             </div>
           </div>

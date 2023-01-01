@@ -41,10 +41,10 @@ const ChosenTitleUrl = () => {
   return (
     <>
       <div className="">
-        <h2 className="text-5xl font-semibold text-center mb-5">
+        <h2 className="text-xl font-semibold text-center mb-5">
           Chosen Title & URL
         </h2>
-        <div className="flex items-center justify-center">
+        <div className="p-4">
           <form
             className="form-control gap-3 mb-2"
             onSubmit={handleSubmit(handleChosenTitleURl)}
@@ -74,8 +74,8 @@ const ChosenTitleUrl = () => {
               />
             </div>
 
-            <div className="form-control mt-6">
-              <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
+            <div className="card-actions justify-center mt-6">
+              <button className="btn bg-accent-dark border-none">
                 Generate Heading
               </button>
             </div>

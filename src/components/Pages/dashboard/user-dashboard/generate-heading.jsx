@@ -5,22 +5,24 @@ const GenerateHeading = ({ title }) => {
   const navigate = useNavigate();
   const { id } = useParams();
   return (
-    <div className="flex flex-col text-center items-center">
+    <div className="card-body rounded flex flex-col text-center items-center">
       {title ? (
-        <h2 className="text-2xl">{title} </h2>
+        <h2 className="card-title">{title} </h2>
       ) : (
         "generated heading will be here"
       )}
 
       {title && (
-        <button
-          className="btn btn-accent mt-4"
-          onClick={() =>
-            navigate(`/dashboard/project-starter/${id}/generated-heading`)
-          }
-        >
-          Next Setp
-        </button>
+        <div className="card-actions">
+          <button
+            className="btn btn-accent border-none mt-4"
+            onClick={() =>
+              navigate(`/dashboard/project-starter/${id}/generated-heading`)
+            }
+          >
+            Next Setp
+          </button>
+        </div>
       )}
     </div>
   );

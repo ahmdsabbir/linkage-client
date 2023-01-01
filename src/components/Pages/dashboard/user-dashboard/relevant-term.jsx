@@ -42,12 +42,10 @@ const RelevantTerm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card flex-shrink-0 w-full max-w-5xl shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 w-full max-w-5xl drop-shadow bg-base-100">
           <div className="card-body flex-row">
             <label className="label self-start">
-              <span className="label-text text-2xl font-bold">
-                Enter Relevent Term
-              </span>
+              <span className="label-text text-xl ">Enter Relevent Term</span>
             </label>
             <div className="form-control gap-4 flex-1">
               <input

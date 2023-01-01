@@ -7,10 +7,10 @@ import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
 
 const postTitleSchema = z.object({
-  postTitle: z
-    .string()
-    .min(5, "post title must be more than 4 characters!")
-    .max(500, "post title must be less than 500 characters."),
+  postTitle: z.string().min(5, "post title must be more than 4 characters!"),
+  // .max(500, "post title must be less than 500 characters."),
+  postURL: z.string().url(),
+  // .max(500, "post title must be less than 500 characters."),
 });
 
 const EnterPostTitle = () => {
@@ -27,23 +27,30 @@ const EnterPostTitle = () => {
   const handleSubmit = async (data) => {
     await context.setUserPostTitle(data);
     navigate(`/dashboard/project-starter/${id}/relevant`);
-    console.log("post title did not set");
+    console.log(data);
   };
 
   return (
-    <div className="hero-content flex-col">
+    <div className="card rounded drop-shadow p-4">
       {/* form */}
       <Form form={form} onSubmit={handleSubmit}>
-        <div className="form-control gap-4  lex-1">
+        <div className="">
           <Input
             label="Post Title here"
             type="text"
-            placeholder="post title here"
-            className="input input-bordered "
+            placeholder="post title here..."
+            className="grid grid-cols-6"
             {...form.register("postTitle")}
           />
+          <Input
+            label="Post URL"
+            type="text"
+            placeholder="post url here..."
+            className="grid grid-cols-6 "
+            {...form.register("postURL")}
+          />
           {/* button */}
-          <div className="flex">
+          <div className="flex pt-2">
             <div className="w-1/6"></div>
             <div className="form-control inline-block w-2/3">
               <button type="submit" className="btn btn-primary border-gray-600">
