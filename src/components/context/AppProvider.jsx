@@ -9,6 +9,8 @@ const AppProvider = ({ children }) => {
   const [chooseTitleUrl, setChooseTitleUrl] = useState([]);
   const [generatedHeading, setGeneratedHeading] = useState("");
   const [generatedParagraph, setGeneratedParagraph] = useState("");
+  const [defaultHeading, setDefaultHeading] = useState([]);
+  const [updateAbove, setUpdateAbove] = useState([]);
   return (
     <AppStateContext.Provider
       value={{
@@ -26,6 +28,10 @@ const AppProvider = ({ children }) => {
         setGeneratedHeading,
         generatedParagraph,
         setGeneratedParagraph,
+        defaultHeading,
+        setDefaultHeading,
+        updateAbove,
+        setUpdateAbove,
       }}
     >
       {children}
