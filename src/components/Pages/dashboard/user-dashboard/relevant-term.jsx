@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 
-const RelevantTerm = () => {
+const RelevantTerm = ({ className }) => {
   const { register, handleSubmit } = useForm();
   // getting data from global state context provider
   const {
@@ -29,7 +29,6 @@ const RelevantTerm = () => {
       const response = await API.post("core/suggestions", postData);
       if (response?.status === 200) {
         await setAiSugetions(response?.data?.suggestions);
-
         navigate(`/dashboard/project-starter/${id}/suggestions`);
         return;
       }
@@ -42,7 +41,7 @@ const RelevantTerm = () => {
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card flex-shrink-0 w-full max-w-5xl drop-shadow bg-base-100">
+        <div className="card rounded flex-shrink-0 w-full max-w-5xl drop-shadow bg-base-100">
           <div className="card-body flex-row">
             <label className="label self-start">
               <span className="label-text text-xl ">Enter Relevent Term</span>
@@ -51,7 +50,7 @@ const RelevantTerm = () => {
               <input
                 type="text"
                 placeholder="relevent term"
-                className="input input-bordered "
+                className={`input input-bordered ${className}`}
                 {...register("relevantTerm", { required: true, maxLength: 20 })}
               />
               <div className="form-control inline-block">

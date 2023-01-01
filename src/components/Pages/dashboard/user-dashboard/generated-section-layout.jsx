@@ -9,7 +9,7 @@ const GeneratedSectionLayout = () => {
   const { id } = useParams();
 
   return (
-    <div className="grid grid-cols-2  gap-4">
+    <div className="grid grid-cols-2 gap-4">
       {/* anchor input field */}
 
       <Outlet />
@@ -23,9 +23,9 @@ const GeneratedSectionLayout = () => {
             Your Post
           </p>
         </div>
-        <div className="rounded-md bg-slate-700 mb-4 p-4 ">
+        <div className="rounded bg-slate-700 mb-4 p-4 ">
           <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-          {generatedParagraph && generatedParagraph.trim()}
+          {generatedParagraph && generatedParagraph}
         </div>
 
         {location.pathname ===

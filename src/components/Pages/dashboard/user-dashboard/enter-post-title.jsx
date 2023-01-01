@@ -31,32 +31,30 @@ const EnterPostTitle = () => {
   };
 
   return (
-    <div className="card rounded drop-shadow p-4">
+    <div className="rounded drop-shadow p-4 bg-base-100">
       {/* form */}
       <Form form={form} onSubmit={handleSubmit}>
-        <div className="">
-          <Input
-            label="Post Title here"
-            type="text"
-            placeholder="post title here..."
-            className="grid grid-cols-6"
-            {...form.register("postTitle")}
-          />
-          <Input
-            label="Post URL"
-            type="text"
-            placeholder="post url here..."
-            className="grid grid-cols-6 "
-            {...form.register("postURL")}
-          />
-          {/* button */}
-          <div className="flex pt-2">
-            <div className="w-1/6"></div>
-            <div className="form-control inline-block w-2/3">
-              <button type="submit" className="btn btn-primary border-gray-600">
-                submit
-              </button>
-            </div>
+        <Input
+          label="Post Title here"
+          type="text"
+          placeholder="post title here..."
+          className="grid grid-cols-6"
+          {...form.register("postTitle")}
+        />
+        <Input
+          label="Post URL"
+          type="text"
+          placeholder="post url here..."
+          className="grid grid-cols-6 "
+          {...form.register("postURL")}
+        />
+        {/* button */}
+        <div className="flex pt-2">
+          <div className="w-1/6"></div>
+          <div className="form-control inline-block w-2/3">
+            <button type="submit" className="btn btn-primary border-gray-600">
+              submit
+            </button>
           </div>
         </div>
       </Form>

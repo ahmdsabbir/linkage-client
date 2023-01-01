@@ -9,13 +9,12 @@ const SuggestionsCard = ({ title, url }) => {
   };
 
   return (
-    <div className="card bg-base-100 drop-shadow mb-4">
+    <div className="card rounded bg-base-100 drop-shadow mb-4">
       <div className="card-body">
-        <h2 className="card-title">Card title!</h2>
-        {title && <p>{title}</p>}
-        {url && <p>{url}</p>}
+        {title && <p>Title: {title}</p>}
+        {url && <p>URL: {url}</p>}
         <p>Category: wristwatch, handgloves</p>
-        <div className="card-actions" onClick={handleChosenTitleUrl}>
+        <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
           <button className="btn bg-accent-dark border-none">choose</button>
         </div>
       </div>
