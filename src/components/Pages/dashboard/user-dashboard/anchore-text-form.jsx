@@ -1,5 +1,7 @@
 import React from "react";
 import { z } from "zod";
+import API from "../../../../api/api-config";
+import { useAppState } from "../../../context/AppProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
@@ -8,14 +10,28 @@ const anchorTextSchema = z.object({
   anchorText: z
     .string()
     .min(4, "plese write more than 4 characters")
-    .max(255, "please do not write more than 255 characters"),
+    .max(5000, "please do not write more than 255 characters"),
 });
 
 const AnchorTextForm = () => {
   const form = useForm({ schema: anchorTextSchema });
+  const { generatedHeading, setGeneratedParagraph } = useAppState();
 
-  const handleAchorTextSubmit = (data) => {
-    console.log("anchor text", data);
+  const handleAchorTextSubmit = async (data) => {
+    const postData = {
+      combined_heading: generatedHeading,
+      anchor_text: data.anchorText,
+    };
+
+    try {
+      const response = await API.post("core/paragraph", postData);
+      if (response?.status === 200) {
+        await setGeneratedParagraph(response?.data?.paragraph);
+      }
+      // console.log(response);
+    } catch (err) {
+      console.log("anchor text", err);
+    }
   };
   return (
     <Form

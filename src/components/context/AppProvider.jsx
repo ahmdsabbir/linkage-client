@@ -8,6 +8,7 @@ const AppProvider = ({ children }) => {
   const [aiSuggestions, setAiSugetions] = useState([]);
   const [chooseTitleUrl, setChooseTitleUrl] = useState([]);
   const [generatedHeading, setGeneratedHeading] = useState("");
+  const [generatedParagraph, setGeneratedParagraph] = useState("");
   return (
     <AppStateContext.Provider
       value={{
@@ -23,6 +24,8 @@ const AppProvider = ({ children }) => {
         setChooseTitleUrl,
         generatedHeading,
         setGeneratedHeading,
+        generatedParagraph,
+        setGeneratedParagraph,
       }}
     >
       {children}
