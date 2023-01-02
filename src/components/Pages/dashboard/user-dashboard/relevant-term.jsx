@@ -57,7 +57,7 @@ const RelevantTerm = ({
 
   return (
     <div className="px-6">
-      <div className="card-body rounded drop-shadow bg-base-100">
+      <div className="card-body rounded p-0 bg-base-100">
         <Form form={form} onSubmit={handleSubmit}>
           <Input
             label="Enter Relevent Term"

@@ -56,9 +56,10 @@ const ChosenTitleUrl = () => {
               <textarea
                 type="text"
                 required
+                autoFocus
                 placeholder="Post title"
                 {...register("title")}
-                className="textarea"
+                className="textarea focus:outline-none  input-bordered"
               />
             </div>
             <div className="form-control">
@@ -70,7 +71,7 @@ const ChosenTitleUrl = () => {
                 disabled
                 placeholder="url"
                 {...register("url")}
-                className="textarea"
+                className="textarea focus:outline-none input-bordered align-middle"
               />
             </div>
 

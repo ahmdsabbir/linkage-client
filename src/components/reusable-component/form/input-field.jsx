@@ -11,7 +11,9 @@ export const Input = forwardRef(function Input(
     >
       <label className="self-start flex flex-col label text-base min-w-[117px] max-w-[217px] md:pb-6">
         <span className="font-medium self-start">{label}</span>
-        {hintText && <span className="self-start">{hintText}</span>}
+        {hintText && (
+          <span className="self-start text-black/60 text-sm">{hintText}</span>
+        )}
       </label>
 
       <input

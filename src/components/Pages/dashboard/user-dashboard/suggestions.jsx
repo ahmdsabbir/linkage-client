@@ -21,7 +21,7 @@ const Suggestions = () => {
         {/* divider */}
 
         {/* serach for more new term form form */}
-        <div className="mb-10">
+        <div className="">
           <p className="text-xl font-semibold text-center mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
@@ -32,16 +32,17 @@ const Suggestions = () => {
             btnText="generate suggestion again"
           />
         </div>
+        <div className="px-6">
+          <hr className=" my-6 box-content text-sm h-[0.0625em] bg-gradient-to-r from-transparent via-[#aaaaaa]/20 via-[#aaaaaa]/80 to-transparent"></hr>
+        </div>
 
-        <div className="divider"></div>
-
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid grid-cols-2 gap-6 px-6">
           <div className="flex flex-col gap-4">
-            <div className="card rounded bg-base-100 drop-shadow">
+            <div className="card rounded bg-base-100 ">
               {/* generate heading */}
               <ChosenTitleUrl />
             </div>
-            <div className="car bg-base-100 drop-shadow">
+            <div className="car bg-base-100 ">
               <GenerateHeading title={generatedHeading} />
             </div>
           </div>
