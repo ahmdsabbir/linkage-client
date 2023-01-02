@@ -1,15 +1,23 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
+import useForm from "../../../hook/useForm";
+import Form from "../../../reusable-component/form/form";
+import { Input } from "../../../reusable-component/form/input-field";
+
+const relevantTerm = z.object({
+  postTitle: z.string().min(4, "relevant term must be more than 4 characters!"),
+});
 
 const RelevantTerm = ({
   className = "",
   btnText = "generate suggestion",
   btnBg = "bg-accent-dark hover:bg-[#1A3353]",
 }) => {
-  const { register, handleSubmit } = useForm();
+  const form = useForm({ schema: relevantTerm });
   // getting data from global state context provider
   const {
     userPostTitle: { postTitle: target_title },
@@ -21,7 +29,11 @@ const RelevantTerm = ({
   const navigate = useNavigate();
   const { id } = useParams();
   const location = useLocation();
-  const onSubmit = async (data) => {
+
+  // handle action
+  const handleSubmit = async (data) => {
+    console.log(data);
+
     try {
       await setTermData(data);
       const postData = {
@@ -42,21 +54,23 @@ const RelevantTerm = ({
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="card rounded flex-shrink-0 w-full max-w-5xl drop-shadow bg-base-100">
-          <div className="card-body flex-row">
-            <label className="label self-start">
-              <span className="label-text text-xl ">Enter Relevent Term</span>
-            </label>
-            <div className="form-control gap-4 flex-1">
-              <input
-                type="text"
-                placeholder="relevent term"
-                className={`input input-bordered rounded ${className}`}
-                {...register("relevantTerm", { required: true, maxLength: 20 })}
-              />
-              <div className="form-control inline-block">
+    <div className="px-6">
+      <div className="card-body rounded drop-shadow bg-base-100">
+        <Form form={form} onSubmit={handleSubmit}>
+          <Input
+            label="Enter Relevent Term"
+            hintText=" We’ll make suggestion based on the term you give us."
+            type="text"
+            placeholder="relevant term..."
+            className="flex flex-col md:flex-row "
+            autoFocus={true}
+            {...form.register("relevantTerm")}
+          />
+
+          <div className="flex gap-2 sm:gap-6 ">
+            <div className="hidden sm:block flex-1  min-w-[117px] max-w-[217px] order-2 md:order-1"></div>
+            <div className="form-control flex-1  morder-1 md:order-1">
+              <div>
                 <button
                   type="submit"
                   className={`btn btn-primary text-white rounded border-none capitalize ${className} ${btnBg}`}
@@ -66,8 +80,8 @@ const RelevantTerm = ({
               </div>
             </div>
           </div>
-        </div>
-      </form>
+        </Form>
+      </div>
     </div>
   );
 };

@@ -2,13 +2,14 @@ import { forwardRef } from "react";
 import FieldError from "./field-error";
 
 export const Input = forwardRef(function Input(
-  { label, type = "text", autoFocus = false, className, ...props },
+  { label, type = "text", hintText, autoFocus = false, className, ...props },
   ref
 ) {
   return (
-    <div className={`${className} gap-3 mb-2  `}>
-      <label className=" label text-base pb-6 min-w-[117px]">
-        <span className="font-medium">{label}</span>
+    <div className={`${className} gap-2 sm:gap-6 md:items-center mb-2  `}>
+      <label className="self-start flex flex-col label text-base min-w-[117px] max-w-[217px] md:pb-6">
+        <span className="font-medium self-start">{label}</span>
+        {hintText && <span className="self-start">{hintText}</span>}
       </label>
 
       <input
@@ -16,7 +17,7 @@ export const Input = forwardRef(function Input(
         ref={ref}
         autoFocus={autoFocus}
         {...props}
-        className="  flex-auto input input-bordered "
+        className="   flex-auto input input-bordered focus:outline-0"
       />
       <FieldError name={props.name} />
     </div>

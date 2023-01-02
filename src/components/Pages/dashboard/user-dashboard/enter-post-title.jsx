@@ -38,6 +38,7 @@ const EnterPostTitle = () => {
           <Input
             label="Enter Post Title"
             type="text"
+            hintText="aka, Target Post"
             placeholder="post title here..."
             className="flex flex-col sm:flex-row"
             autoFocus={true}
@@ -51,8 +52,8 @@ const EnterPostTitle = () => {
             {...form.register("postURL")}
           />
           {/* button */}
-          <div className="flex gap-2 pt-2">
-            <div className="min-w-[117px] order-2 sm:order-1"></div>
+          <div className="flex gap-2 sm:gap-6 pt-2">
+            <div className="hidden sm:block min-w-[117px] order-2 sm:order-1"></div>
             <div className="form-control inline-block w-2/3 order-1 sm:order-1">
               <button
                 type="submit"
