@@ -9,7 +9,9 @@ import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
 
 const relevantTerm = z.object({
-  postTitle: z.string().min(4, "relevant term must be more than 4 characters!"),
+  relevantTerm: z
+    .string()
+    .min(4, "relevant term must be more than 4 characters!"),
 });
 
 const RelevantTerm = ({
