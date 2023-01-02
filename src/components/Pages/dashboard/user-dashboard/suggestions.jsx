@@ -27,7 +27,10 @@ const Suggestions = () => {
           </p>
 
           {/* relevant term here */}
-          <RelevantTerm className="rounded-full" />
+          <RelevantTerm
+            className="rounded-full"
+            btnText="generate suggestion again"
+          />
         </div>
 
         <div className="divider"></div>

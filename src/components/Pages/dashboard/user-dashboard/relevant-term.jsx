@@ -1,36 +1,39 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 
-const RelevantTerm = ({ className }) => {
+const RelevantTerm = ({
+  className = "",
+  btnText = "generate suggestion",
+  btnBg = "bg-accent-dark hover:bg-[#1A3353]",
+}) => {
   const { register, handleSubmit } = useForm();
   // getting data from global state context provider
   const {
     userPostTitle: { postTitle: target_title },
     setTermData,
     setAiSugetions,
-    // termData: { relevantTerm: source_title },
   } = useAppState();
 
   // react @{navigate , id} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
   const { id } = useParams();
-
+  const location = useLocation();
   const onSubmit = async (data) => {
-    await setTermData(data);
-    const postData = {
-      target_title,
-      relevant_term: data.relevantTerm,
-    };
-
     try {
+      await setTermData(data);
+      const postData = {
+        target_title,
+        relevant_term: data.relevantTerm,
+      };
       const response = await API.post("core/suggestions", postData);
       if (response?.status === 200) {
         await setAiSugetions(response?.data?.suggestions);
-        navigate(`/dashboard/project-starter/${id}/suggestions`);
-        return;
+        if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
+          navigate(`/dashboard/project-starter/${id}/suggestions`);
+        }
       }
       console.log(response);
     } catch (err) {
@@ -56,9 +59,9 @@ const RelevantTerm = ({ className }) => {
               <div className="form-control inline-block">
                 <button
                   type="submit"
-                  className="btn btn-primary border-gray-600"
+                  className={`btn btn-primary border-none capitalize ${className} ${btnBg}`}
                 >
-                  submit
+                  {btnText}
                 </button>
               </div>
             </div>
