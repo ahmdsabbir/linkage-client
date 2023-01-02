@@ -6,7 +6,7 @@ const ProjectStarterLayout = () => {
   return (
     <div className="flex flex-col gap-4">
       <ProjectDetails />
-      <div className="divider"></div>
+
       <Outlet />
     </div>
   );

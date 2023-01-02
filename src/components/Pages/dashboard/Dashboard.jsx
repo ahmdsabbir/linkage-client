@@ -11,7 +11,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <div className="relative grid grid-cols-12 gap-2 sm:gap-4 md:gap-6 ">
+      <div className="relative grid grid-cols-12">
         {/* sidebar container */}
 
         <div className="col-span-3 flex flex-col bg-base-300 p-4">
@@ -41,7 +41,7 @@ const Dashboard = () => {
         </div>
 
         {/* Dashboard content will be here */}
-        <div className="col-span-9 p-6">
+        <div className="col-span-9">
           <Outlet />
         </div>
       </div>

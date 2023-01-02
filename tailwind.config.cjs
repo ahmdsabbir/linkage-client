@@ -4,28 +4,8 @@ module.exports = {
   daisyui: {
     themes: [
       {
-        dark: {
-          // primary: "#6419E6",
-
-          secondary: "#D926A9",
-
-          accent: "#1FB2A6",
-
-          neutral: "#191D24",
-
-          "base-100": "#2A303C",
-
-          info: "#3ABFF8",
-
-          success: "#36D399",
-
-          warning: "#FBBD23",
-
-          error: "#F87272",
-        },
-
         light: {
-          primary: "#a7ff9e",
+          // primary: "#a7ff9e",
 
           secondary: "#c8ce1c",
 

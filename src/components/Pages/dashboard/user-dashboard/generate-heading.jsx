@@ -15,7 +15,7 @@ const GenerateHeading = ({ title }) => {
       {title && (
         <div className="card-actions">
           <button
-            className=" mt-4 btn btn-accent border-none rounded"
+            className=" mt-4 btn bg-contrast text-white hover:bg-contrast-dark border-none rounded"
             onClick={() =>
               navigate(`/dashboard/project-starter/${id}/generated-heading`)
             }

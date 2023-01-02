@@ -32,6 +32,7 @@ const Login = () => {
           <Input
             label="Email"
             type="text"
+            autoFocus={true}
             placeholder="email@mail.com"
             {...form.register("email")}
           />
@@ -39,6 +40,7 @@ const Login = () => {
             label="password"
             type="password"
             placeholder="password"
+            autoFocus={false}
             {...form.register("password")}
           />
           <label className="label">
@@ -50,7 +52,7 @@ const Login = () => {
             </Link>
           </label>
           <div className="form-control mt-6">
-            <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
+            <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
               Login
             </button>
           </div>

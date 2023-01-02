@@ -75,7 +75,7 @@ const ChosenTitleUrl = () => {
             </div>
 
             <div className="card-actions justify-center mt-6">
-              <button className="btn bg-accent-dark hover:bg-[#1A3353] border-none rounded">
+              <button className="btn bg-accent-dark hover:bg-[#1A3353] text-white border-none rounded">
                 Generate Heading
               </button>
             </div>

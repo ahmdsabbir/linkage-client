@@ -10,7 +10,7 @@ const ProjectDetails = ({ postTitle }) => {
   const projectDetails = context?.projects.find((item) => item.id === id);
 
   return (
-    <div className="card flex-shrink-0 w-full max-w-5xl">
+    <div className="card rounded-none flex-shrink-0 w-full bg-[#f0f0f0] px-6 mb-10">
       <div className="card-body gap-4  md:text-left ">
         <div className="flex flex-col justi-center gap-4 font-medium">
           {projectDetails?.name && (

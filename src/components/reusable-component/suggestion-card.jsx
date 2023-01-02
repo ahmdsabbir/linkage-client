@@ -15,7 +15,7 @@ const SuggestionsCard = ({ title, url }) => {
         {url && <p>URL: {url}</p>}
         <p>Category: wristwatch, handgloves</p>
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
-          <button className="btn bg-accent-dark border-none rounded">
+          <button className="btn bg-accent-dark text-white border-none rounded">
             choose
           </button>
         </div>

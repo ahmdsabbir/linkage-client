@@ -53,13 +53,13 @@ const RelevantTerm = ({
               <input
                 type="text"
                 placeholder="relevent term"
-                className={`input input-bordered ${className}`}
+                className={`input input-bordered rounded ${className}`}
                 {...register("relevantTerm", { required: true, maxLength: 20 })}
               />
               <div className="form-control inline-block">
                 <button
                   type="submit"
-                  className={`btn btn-primary border-none capitalize ${className} ${btnBg}`}
+                  className={`btn btn-primary text-white rounded border-none capitalize ${className} ${btnBg}`}
                 >
                   {btnText}
                 </button>

@@ -13,9 +13,9 @@ const DarkLightMode = () => {
         type="checkbox"
         className="dn"
         id="dn"
-        data-toggle-theme="light,dark"
+        data-toggle-theme="dark,light"
       />
-      <label htmlfor="dn" className="toggle">
+      <label htmlFor="dn" className="toggle">
         <span className="toggle__handler">
           <span className="crater crater--1"></span>
           <span className="crater crater--2"></span>

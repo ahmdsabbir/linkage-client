@@ -31,33 +31,39 @@ const EnterPostTitle = () => {
   };
 
   return (
-    <div className="rounded drop-shadow p-4 bg-base-100">
-      {/* form */}
-      <Form form={form} onSubmit={handleSubmit}>
-        <Input
-          label="Post Title here"
-          type="text"
-          placeholder="post title here..."
-          className="grid grid-cols-6"
-          {...form.register("postTitle")}
-        />
-        <Input
-          label="Post URL"
-          type="text"
-          placeholder="post url here..."
-          className="grid grid-cols-6 "
-          {...form.register("postURL")}
-        />
-        {/* button */}
-        <div className="flex pt-2">
-          <div className="w-1/6"></div>
-          <div className="form-control inline-block w-2/3">
-            <button type="submit" className="btn btn-primary border-gray-600">
-              submit
-            </button>
+    <div className="px-6">
+      <div className="card-body rounded drop-shadow bg-base-100">
+        {/* form */}
+        <Form form={form} onSubmit={handleSubmit}>
+          <Input
+            label="Enter Post Title"
+            type="text"
+            placeholder="post title here..."
+            className="flex flex-col sm:flex-row"
+            autoFocus={true}
+            {...form.register("postTitle")}
+          />
+          <Input
+            label="Post URL"
+            type="text"
+            placeholder="post url here..."
+            className="flex flex-col sm:flex-row"
+            {...form.register("postURL")}
+          />
+          {/* button */}
+          <div className="flex gap-2 pt-2">
+            <div className="min-w-[117px] order-2 sm:order-1"></div>
+            <div className="form-control inline-block w-2/3 order-1 sm:order-1">
+              <button
+                type="submit"
+                className="btn bg-accent-dark text-white rounded px-6  border-none"
+              >
+                submit
+              </button>
+            </div>
           </div>
-        </div>
-      </Form>
+        </Form>
+      </div>
     </div>
   );
 };
