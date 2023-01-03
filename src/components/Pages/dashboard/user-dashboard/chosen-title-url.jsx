@@ -1,7 +1,13 @@
+import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
+
+const chosenTitleUrl = z.object({
+  title: z.string().min(5, "post title must be more than 5 characters!"),
+});
 
 const ChosenTitleUrl = () => {
   const {
@@ -11,7 +17,14 @@ const ChosenTitleUrl = () => {
   } = useAppState();
 
   // setValue func imported as default value
-  const { register, reset, handleSubmit } = useForm();
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(chosenTitleUrl),
+  });
 
   useEffect(() => {
     let defaultValues = {};
@@ -57,10 +70,15 @@ const ChosenTitleUrl = () => {
               required
               autoFocus
               placeholder="Post title"
-              {...register("title")}
+              {...register("title", { required: true })}
               className="textarea focus:outline-none input-bordered w-full"
             />
           </div>
+          {errors.title && (
+            <span className="alert alert-error shadow-lg w-auto p-2 mb-2">
+              {errors.title?.message}
+            </span>
+          )}
           <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6">
             <label
               htmlFor="url"
