@@ -13,8 +13,7 @@ const Dashboard = () => {
     <>
       <div className="relative grid grid-cols-12">
         {/* sidebar container */}
-
-        <div className="col-span-3 flex flex-col bg-base-300 p-4">
+        <div className="col-span-3 flex flex-col bg-base-300 p-4 min-h-screen">
           <button className="btn btn-ghost" onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"

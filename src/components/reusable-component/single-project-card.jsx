@@ -26,7 +26,7 @@ const SingleProjectCard = ({
           <p>dateAdded found</p>
         )}
       </div>
-      <div className="flex flex-col lg:flex-row gap-2 ">
+      <div className="flex flex-col sm:flex-row gap-2 ">
         <NavLink
           className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 "
           to={`/dashboard/project-starter/${id}`}

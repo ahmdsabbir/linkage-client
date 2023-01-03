@@ -5,20 +5,20 @@ import SingleProjectCard from "../../../reusable-component/single-project-card";
 
 const AllProjects = () => {
   // global state context provider
-  const context = useAppState();
+  const { projects, setProjects } = useAppState();
 
   useEffect(() => {
     const getData = async () => {
       const response = await API.get("/core/project");
       console.log(response?.data?.projects);
-      context.setProjects(response?.data?.projects);
+      setProjects(response?.data?.projects);
     };
     getData();
-  }, []);
+  }, [setProjects]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-      {context?.projects.map((project) => (
+    <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
+      {projects.map((project) => (
         <SingleProjectCard
           key={project.id}
           name={project.name}
