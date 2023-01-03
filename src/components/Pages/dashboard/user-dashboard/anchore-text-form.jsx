@@ -39,14 +39,14 @@ const AnchorTextForm = () => {
         label="Anchor Text"
         type="text"
         placeholder="anchor text"
-        autFocus={true}
+        autoFocus={true}
         className="flex flex-col md:flex-row"
         {...form.register("anchorText")}
       />
-      <div class="flex flex-col md:flex-row gap-2 sm:gap-6 mt-4">
-        <div class=" whitespace-nowrap order-2 md:order-1 md:min-w-[117px]"></div>
-        <div class="order-1 md:order-2">
-          <button class="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded">
+      <div className="flex flex-col md:flex-row gap-2 sm:gap-6 mt-4">
+        <div className=" whitespace-nowrap order-2 md:order-1 md:min-w-[117px]"></div>
+        <div className="order-1 md:order-2">
+          <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded">
             Generate Section
           </button>
         </div>
