@@ -18,6 +18,8 @@ const RelevantTerm = ({
   className = "",
   btnText = "generate suggestion",
   btnBg = "bg-accent-dark hover:bg-[#1A3353]",
+  hintText,
+  label,
 }) => {
   const form = useForm({ schema: relevantTerm });
   // getting data from global state context provider
@@ -60,8 +62,8 @@ const RelevantTerm = ({
       <div className="card-body rounded p-0 bg-base-100">
         <Form form={form} onSubmit={handleSubmit}>
           <Input
-            label="Enter Relevent Term"
-            hintText=" We’ll make suggestion based on the term you give us."
+            label={label}
+            hintText={hintText}
             type="text"
             placeholder="relevant term..."
             className="flex flex-col md:flex-row "

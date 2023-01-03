@@ -30,6 +30,8 @@ const Suggestions = () => {
           <RelevantTerm
             className="rounded-full"
             btnText="generate suggestion again"
+            hintText={"Tip: Try to choose relevant terms."}
+            label="Search More Suggestions"
           />
         </div>
         <div className="px-6">
@@ -42,7 +44,7 @@ const Suggestions = () => {
               {/* generate heading */}
               <ChosenTitleUrl />
             </div>
-            <div className="car bg-base-100 ">
+            <div className="card bg-base-100 ">
               <GenerateHeading title={generatedHeading} />
             </div>
           </div>

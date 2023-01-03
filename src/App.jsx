@@ -43,7 +43,19 @@ const router = createBrowserRouter(
         {/* project starter layout nested route starts */}
         <Route path="project-starter/:id" element={<ProjectStarterLayout />}>
           <Route index element={<EnterPostTitle />} />
-          <Route path="relevant" element={<RelevantTerm />} />
+          <Route
+            path="relevant"
+            element={
+              <RelevantTerm
+                className="rounded-full"
+                btnText="Generate Suggestion"
+                hintText="We’ll make suggestion 
+            based on the term you 
+            give us."
+                label="Relevant Term"
+              />
+            }
+          />
           <Route path="suggestions" element={<Suggestions />} />
           <Route path="generated-heading" element={<GeneratedSectionLayout />}>
             <Route index element={<AnchorTextForm />} />

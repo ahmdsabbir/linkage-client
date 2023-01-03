@@ -71,13 +71,13 @@ const NoName = () => {
       {updateAbove.map((heading, i) => (
         <div key={i}>
           {heading?.generatedHeading && heading?.generatedParagraph && (
-            <div className="rounded-md bg-slate-800 mb-4 p-4 ">
+            <div className="rounded-md bg-slate-500 mb-4 p-4 text-base-100 ">
               <h2 className="text-2xl mb-4">{heading?.generatedHeading}</h2>
               {heading?.generatedParagraph}
             </div>
           )}
 
-          <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex gap-4 items-center justify-between">
+          <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
             <p className="flex-inital">{heading.title}</p>
             <button
               className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"

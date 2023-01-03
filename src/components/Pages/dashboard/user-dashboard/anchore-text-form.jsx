@@ -34,18 +34,23 @@ const AnchorTextForm = () => {
     }
   };
   return (
-    <Form
-      form={form}
-      onSubmit={handleAchorTextSubmit}
-      className="pr-4 border-r-2 border-slate-700"
-    >
+    <Form form={form} onSubmit={handleAchorTextSubmit}>
       <Input
         label="Anchor Text"
         type="text"
         placeholder="anchor text"
+        autFocus={true}
+        className="flex flex-col md:flex-row"
         {...form.register("anchorText")}
       />
-      <button className="btn bg-accent-light">Generate Section</button>
+      <div class="flex flex-col md:flex-row gap-2 sm:gap-6 mt-4">
+        <div class=" whitespace-nowrap order-2 md:order-1 md:min-w-[117px]"></div>
+        <div class="order-1 md:order-2">
+          <button class="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded">
+            Generate Section
+          </button>
+        </div>
+      </div>
     </Form>
   );
 };
