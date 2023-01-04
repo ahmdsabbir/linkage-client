@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer, useState } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 export const AppStateContext = createContext();
 
 const initialState = {
@@ -12,6 +12,7 @@ const initialState = {
   aiSuggestions: [],
   choosenTitleUrl: {},
   generatedHeading: "",
+  updateAbove: [],
 
   currentUser: {},
 };
@@ -55,6 +56,16 @@ const projectsReducer = (state, action) => {
         ...state,
         generatedHeading: action.payload,
       };
+    case "generatedParagraph":
+      return {
+        ...state,
+        generatedParagraph: action.payload,
+      };
+    case "updateAbove":
+      return {
+        ...state,
+        updateAbove: [...action.payload],
+      };
 
     default:
       return state;
@@ -65,20 +76,10 @@ const AppProvider = ({ children }) => {
   // final state management with useReducer hook
   const [state, dispatch] = useReducer(projectsReducer, initialState);
 
-  // regular state management
-  const [generatedParagraph, setGeneratedParagraph] = useState("");
-  const [defaultHeading, setDefaultHeading] = useState([]);
-  const [updateAbove, setUpdateAbove] = useState([]);
+  // regular st
   return (
     <AppStateContext.Provider
       value={{
-        generatedParagraph,
-        setGeneratedParagraph,
-        defaultHeading,
-        setDefaultHeading,
-        updateAbove,
-        setUpdateAbove,
-
         // useReducer function
         state,
         dispatch,

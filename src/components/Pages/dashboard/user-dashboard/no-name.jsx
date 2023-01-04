@@ -4,12 +4,13 @@ import { useAppState } from "../../../context/AppProvider";
 
 const NoName = () => {
   const {
-    defaultHeading,
-    setDefaultHeading,
-    state: { postTitleUrlTerm, generatedHeading },
-    generatedParagraph,
-    updateAbove,
-    setUpdateAbove,
+    state: {
+      postTitleUrlTerm,
+      generatedParagraph,
+      generatedHeading,
+      updateAbove,
+    },
+    dispatch,
   } = useAppState();
 
   useEffect(() => {
@@ -17,15 +18,14 @@ const NoName = () => {
       const target_url = postTitleUrlTerm.target_url;
       try {
         const response = await API.post("/core/update-content", { target_url });
-
-        await setDefaultHeading(response?.data?.headings);
-        await setUpdateAbove(response?.data?.headings);
+        dispatch({ type: "updateAbove", payload: response?.data?.headings });
       } catch (err) {
         console.log(err);
       }
     };
     getData();
-  }, [setDefaultHeading]);
+  }, []);
+  console.log(updateAbove);
 
   // post data to the server
   /*  const onSubmit = async (data) => {
@@ -52,13 +52,13 @@ const NoName = () => {
   // udpate the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
-      const data = defaultHeading.map((item) =>
+      const data = updateAbove.map((item) =>
         item.title === heading
           ? { ...item, generatedHeading, generatedParagraph }
           : item
       );
 
-      await setUpdateAbove([...data]);
+      dispatch({ type: "updateAbove", payload: data });
       console.log(updateAbove);
     } catch (err) {
       console.log(err);

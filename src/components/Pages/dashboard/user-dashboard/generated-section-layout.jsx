@@ -4,8 +4,7 @@ import { useAppState } from "../../../context/AppProvider";
 
 const GeneratedSectionLayout = () => {
   const {
-    state: { generatedHeading },
-    generatedParagraph,
+    state: { generatedHeading, generatedParagraph },
   } = useAppState();
 
   const location = useLocation();

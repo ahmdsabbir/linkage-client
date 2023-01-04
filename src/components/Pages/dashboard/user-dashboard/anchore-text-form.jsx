@@ -17,7 +17,7 @@ const AnchorTextForm = () => {
   const form = useForm({ schema: anchorTextSchema });
   const {
     state: { generatedHeading },
-    setGeneratedParagraph,
+    dispatch,
   } = useAppState();
 
   const handleAchorTextSubmit = async (data) => {
@@ -29,7 +29,10 @@ const AnchorTextForm = () => {
     try {
       const response = await API.post("core/paragraph", postData);
       if (response?.status === 200) {
-        await setGeneratedParagraph(response?.data?.paragraph);
+        await dispatch({
+          type: "generatedParagraph",
+          payload: response?.data?.paragraph,
+        });
       }
       // console.log(response);
     } catch (err) {
