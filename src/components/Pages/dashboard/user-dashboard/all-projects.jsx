@@ -5,15 +5,22 @@ import SingleProjectCard from "../../../reusable-component/single-project-card";
 
 const AllProjects = () => {
   // global state context provider
-  const { projects, setProjects } = useAppState();
+  const {
+    setProjects,
+    state: { projects },
+    dispatch,
+  } = useAppState();
 
   useEffect(() => {
     const getData = async () => {
       const response = await API.get("/core/project");
-      console.log(response?.data?.projects);
+      // console.log(response?.data?.projects);
+      dispatch({ type: "PROJECT", payload: response?.data?.projects });
       setProjects(response?.data?.projects);
     };
     getData();
+
+    console.log(projects);
   }, [setProjects]);
 
   return (

@@ -2,12 +2,15 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { useAppState } from "../context/AppProvider";
 
-const ProjectDetails = ({ postTitle }) => {
+const ProjectDetails = () => {
   // global state context provider
-  const context = useAppState();
+  const {
+    state: { projects },
+  } = useAppState();
   // react router hook for gettinig the dynamic link id
   const { id } = useParams();
-  const projectDetails = context?.projects.find((item) => item.id === id);
+  const projectDetails = projects.find((item) => item.id === id);
+  console.log(projectDetails);
 
   return (
     <div className="card rounded-none flex-shrink-0 w-full bg-[#f0f0f0] px-6 ">

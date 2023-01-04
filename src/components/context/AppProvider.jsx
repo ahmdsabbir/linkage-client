@@ -1,7 +1,55 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useReducer, useState } from "react";
 export const AppStateContext = createContext();
 
+const initialState = {
+  projects: [
+    {
+      id: "1",
+      name: "Google",
+      domain: "google.com",
+      wp_username: "admin",
+      wp_password: "KJFLYTKJ8asldfkjd89",
+      date_added: "1 Jan 2034",
+    },
+    {
+      id: "2",
+      name: "HP",
+      domain: "hp.com",
+      wp_username: "admin",
+      wp_password: "KJFLYTKJ8asldfkjd89",
+      date_added: "2 Jan 2034",
+    },
+    {
+      id: "3",
+      name: "sujle",
+      domain: "sujle.com",
+      wp_username: "admin",
+      wp_password: "KJFLYTKJ8asldfkjd89",
+      date_added: "3 Jan 2034",
+    },
+  ],
+
+  currentUser: {},
+};
+
+const projectsReducer = (state, action) => {
+  switch (action.type) {
+    case "PROJECT":
+      return {
+        ...state,
+        projects: [...action.payload],
+      };
+
+    default:
+      return state;
+  }
+};
+
 const AppProvider = ({ children }) => {
+  // final state management with useReducer hook
+  const [state, dispatch] = useReducer(projectsReducer, initialState);
+
+  // regular state management
   const [userPostTitle, setUserPostTitle] = useState("");
   const [termData, setTermData] = useState("");
   const [projects, setProjects] = useState([]);
@@ -32,6 +80,10 @@ const AppProvider = ({ children }) => {
         setDefaultHeading,
         updateAbove,
         setUpdateAbove,
+
+        // useReducer function
+        state,
+        dispatch,
       }}
     >
       {children}
