@@ -26,12 +26,13 @@ import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/pr
 import RelevantTerm from "./components/Pages/dashboard/user-dashboard/relevant-term";
 import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
+import ErrorPage from "./components/Pages/error-page";
 import Home from "./components/Pages/home";
 import RootLayout from "./components/root-layout/root-layout";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<RootLayout />}>
+    <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
       <Route index element={<Home />} />
       <Route path="about" element={<AboutUs />} />
       <Route path="contact" element={<Contact />} />
