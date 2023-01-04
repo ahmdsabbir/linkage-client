@@ -2,10 +2,10 @@ import React from "react";
 import { useAppState } from "../context/AppProvider";
 
 const SuggestionsCard = ({ title, url }) => {
-  const { setChooseTitleUrl } = useAppState();
+  const { dispatch } = useAppState();
 
   const handleChosenTitleUrl = () => {
-    setChooseTitleUrl({ title, url });
+    dispatch({ type: "choosenTitleUrl", payload: { title, url } });
   };
 
   return (

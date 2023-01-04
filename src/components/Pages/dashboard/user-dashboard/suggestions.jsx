@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
@@ -9,11 +8,9 @@ import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
   const { register, handleSubmit } = useForm();
-  const { aiSuggestions, generatedHeading } = useAppState();
-  const navigate = useNavigate();
-  useEffect(() => {
-    console.log("generatedHeading", generatedHeading);
-  }, [generatedHeading, aiSuggestions]);
+  const {
+    state: { aiSuggestions, generatedHeading },
+  } = useAppState();
 
   return (
     <div className="">

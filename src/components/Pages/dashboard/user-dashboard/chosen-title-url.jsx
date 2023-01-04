@@ -11,9 +11,8 @@ const chosenTitleUrl = z.object({
 
 const ChosenTitleUrl = () => {
   const {
-    userPostTitle: { postTitle: target_title },
-    chooseTitleUrl,
-    setGeneratedHeading,
+    state: { choosenTitleUrl, postTitleUrlTerm },
+    dispatch,
   } = useAppState();
 
   // setValue func imported as default value
@@ -28,23 +27,24 @@ const ChosenTitleUrl = () => {
 
   useEffect(() => {
     let defaultValues = {};
-    defaultValues.title = chooseTitleUrl.title;
-    defaultValues.url = chooseTitleUrl.url;
+    defaultValues.title = choosenTitleUrl.title;
+    defaultValues.url = choosenTitleUrl.url;
     reset({ ...defaultValues });
-  }, [chooseTitleUrl]);
+  }, [choosenTitleUrl]);
 
   const handleChosenTitleURl = async (data) => {
-    data;
-
     const postData = {
-      target_title,
+      target_title: postTitleUrlTerm.target_title,
       source_title: data.title,
     };
 
     try {
       const response = await API.post("core/heading", postData);
       if (response?.status === 200) {
-        await setGeneratedHeading(response?.data?.heading);
+        await dispatch({
+          type: "generatedHeading",
+          payload: response?.data?.heading,
+        });
       }
       console.log(response);
     } catch (err) {

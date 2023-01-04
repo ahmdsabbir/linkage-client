@@ -24,9 +24,6 @@ const RelevantTerm = ({
   const form = useForm({ schema: relevantTerm });
   // getting data from global state context provider
   const {
-    userPostTitle: { postTitle: target_title },
-    setTermData,
-    setAiSugetions,
     state: { postTitleUrlTerm },
     dispatch,
   } = useAppState();
@@ -39,15 +36,18 @@ const RelevantTerm = ({
   // handle action
   const handleSubmit = async (data) => {
     try {
-      await setTermData(data);
       await dispatch({ type: "relevantTerm", payload: data });
       const postData = {
-        target_title,
+        target_title: postTitleUrlTerm.target_title,
         relevant_term: data.relevantTerm,
       };
       const response = await API.post("core/suggestions", postData);
       if (response?.status === 200) {
-        await setAiSugetions(response?.data?.suggestions);
+        await dispatch({
+          type: "aiSuggestions",
+          payload: [...response?.data?.suggestions],
+        });
+
         if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
           navigate(`/dashboard/project-starter/${id}/suggestions`);
         } else {
@@ -58,7 +58,6 @@ const RelevantTerm = ({
       console.log(err);
     }
   };
-  console.log(postTitleUrlTerm);
 
   return (
     <div className="px-6">

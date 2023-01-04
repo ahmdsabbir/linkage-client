@@ -17,7 +17,6 @@ const EnterPostTitle = () => {
   const { id } = useParams();
   // getting data from global state context provider
   const {
-    setUserPostTitle,
     state: { postTitleUrlTerm },
     dispatch,
   } = useAppState();
@@ -28,7 +27,6 @@ const EnterPostTitle = () => {
   // post request
   // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
-    await setUserPostTitle(data);
     await dispatch({ type: "postTitleUrl", payload: data });
     navigate(`/dashboard/project-starter/${id}/relevant`);
     console.log(postTitleUrlTerm);

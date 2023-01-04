@@ -9,6 +9,9 @@ const initialState = {
     relevant_term: "",
     target_url: "",
   },
+  aiSuggestions: [],
+  choosenTitleUrl: {},
+  generatedHeading: "",
 
   currentUser: {},
 };
@@ -37,6 +40,21 @@ const projectsReducer = (state, action) => {
           relevant_term: action.payload.relevantTerm,
         },
       };
+    case "aiSuggestions":
+      return {
+        ...state,
+        aiSuggestions: [...action.payload],
+      };
+    case "choosenTitleUrl":
+      return {
+        ...state,
+        choosenTitleUrl: { ...action.payload },
+      };
+    case "generatedHeading":
+      return {
+        ...state,
+        generatedHeading: action.payload,
+      };
 
     default:
       return state;
@@ -48,27 +66,12 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(projectsReducer, initialState);
 
   // regular state management
-  const [userPostTitle, setUserPostTitle] = useState("");
-  const [termData, setTermData] = useState("");
-  const [aiSuggestions, setAiSugetions] = useState([]);
-  const [chooseTitleUrl, setChooseTitleUrl] = useState("");
-  const [generatedHeading, setGeneratedHeading] = useState("");
   const [generatedParagraph, setGeneratedParagraph] = useState("");
   const [defaultHeading, setDefaultHeading] = useState([]);
   const [updateAbove, setUpdateAbove] = useState([]);
   return (
     <AppStateContext.Provider
       value={{
-        userPostTitle,
-        setUserPostTitle,
-        termData,
-        setTermData,
-        aiSuggestions,
-        setAiSugetions,
-        chooseTitleUrl,
-        setChooseTitleUrl,
-        generatedHeading,
-        setGeneratedHeading,
         generatedParagraph,
         setGeneratedParagraph,
         defaultHeading,
