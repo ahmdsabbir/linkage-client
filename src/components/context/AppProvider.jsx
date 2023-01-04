@@ -10,9 +10,15 @@ const initialState = {
     target_url: "",
   },
   aiSuggestions: [],
+
   choosenTitleUrl: {},
+
   generatedHeading: "",
-  updateAbove: [],
+
+  updateAbove: {
+    oldData: [],
+    newData: [],
+  },
 
   currentUser: {},
 };
@@ -64,7 +70,12 @@ const projectsReducer = (state, action) => {
     case "updateAbove":
       return {
         ...state,
-        updateAbove: [...action.payload],
+        updateAbove: { ...state.updateAbove, oldData: [...action.payload] },
+      };
+    case "newUpdateAbove":
+      return {
+        ...state,
+        updateAbove: { ...state.updateAbove, newData: [...action.payload] },
       };
 
     default:

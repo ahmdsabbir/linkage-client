@@ -8,7 +8,7 @@ const NoName = () => {
       postTitleUrlTerm,
       generatedParagraph,
       generatedHeading,
-      updateAbove,
+      updateAbove: { oldData, newData },
     },
     dispatch,
   } = useAppState();
@@ -18,14 +18,20 @@ const NoName = () => {
       const target_url = postTitleUrlTerm.target_url;
       try {
         const response = await API.post("/core/update-content", { target_url });
-        dispatch({ type: "updateAbove", payload: response?.data?.headings });
+        await dispatch({
+          type: "updateAbove",
+          payload: response?.data?.headings,
+        });
+        await dispatch({
+          type: "newUpdateAbove",
+          payload: response?.data?.headings,
+        });
       } catch (err) {
         console.log(err);
       }
     };
     getData();
   }, []);
-  console.log(updateAbove);
 
   // post data to the server
   /*  const onSubmit = async (data) => {
@@ -52,22 +58,22 @@ const NoName = () => {
   // udpate the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
-      const data = updateAbove.map((item) =>
+      const newUpdateAbove = oldData.map((item) =>
         item.title === heading
           ? { ...item, generatedHeading, generatedParagraph }
           : item
       );
 
-      dispatch({ type: "updateAbove", payload: data });
-      console.log(updateAbove);
+      dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
+      console.log(newData);
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div className="">
-      {updateAbove.map((heading, i) => (
+    <>
+      {newData.map((heading, i) => (
         <div key={i}>
           {heading?.generatedHeading && heading?.generatedParagraph && (
             <div className="rounded-md bg-slate-500 mb-4 p-4 text-base-100 ">
@@ -87,7 +93,7 @@ const NoName = () => {
           </div>
         </div>
       ))}
-    </div>
+    </>
   );
 };
 
