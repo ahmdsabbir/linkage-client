@@ -1,5 +1,4 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import { useAppState } from "../../../context/AppProvider";
 import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import ChosenTitleUrl from "./chosen-title-url";
@@ -7,7 +6,6 @@ import GenerateHeading from "./generate-heading";
 import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
-  const { register, handleSubmit } = useForm();
   const {
     state: { aiSuggestions, generatedHeading },
   } = useAppState();

@@ -6,7 +6,7 @@ const NoName = () => {
   const {
     defaultHeading,
     setDefaultHeading,
-    generatedHeading,
+    state: { postTitleUrlTerm, generatedHeading },
     generatedParagraph,
     updateAbove,
     setUpdateAbove,
@@ -14,8 +14,7 @@ const NoName = () => {
 
   useEffect(() => {
     const getData = async () => {
-      const target_url =
-        "http://localhost:5173/dashboard/project-starter/1/suggestions";
+      const target_url = postTitleUrlTerm.target_url;
       try {
         const response = await API.post("/core/update-content", { target_url });
 

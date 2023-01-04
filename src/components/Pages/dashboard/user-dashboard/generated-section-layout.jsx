@@ -3,7 +3,10 @@ import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { useAppState } from "../../../context/AppProvider";
 
 const GeneratedSectionLayout = () => {
-  const { generatedHeading, generatedParagraph } = useAppState();
+  const {
+    state: { generatedHeading },
+    generatedParagraph,
+  } = useAppState();
 
   const location = useLocation();
   const { id } = useParams();

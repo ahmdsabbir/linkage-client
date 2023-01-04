@@ -15,7 +15,10 @@ const anchorTextSchema = z.object({
 
 const AnchorTextForm = () => {
   const form = useForm({ schema: anchorTextSchema });
-  const { generatedHeading, setGeneratedParagraph } = useAppState();
+  const {
+    state: { generatedHeading },
+    setGeneratedParagraph,
+  } = useAppState();
 
   const handleAchorTextSubmit = async (data) => {
     const postData = {
