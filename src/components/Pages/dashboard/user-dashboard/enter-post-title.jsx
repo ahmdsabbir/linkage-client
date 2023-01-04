@@ -15,19 +15,24 @@ const postTitleSchema = z.object({
 
 const EnterPostTitle = () => {
   const { id } = useParams();
-
-  const form = useForm({ schema: postTitleSchema });
   // getting data from global state context provider
-  const context = useAppState();
+  const {
+    setUserPostTitle,
+    state: { postTitleUrlTerm },
+    dispatch,
+  } = useAppState();
+  const form = useForm({ schema: postTitleSchema });
   // react router hook for redirecting desired link
   const navigate = useNavigate();
 
   // post request
   // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
-    await context.setUserPostTitle(data);
+    await setUserPostTitle(data);
+    await dispatch({ type: "postTitleUrl", payload: data });
     navigate(`/dashboard/project-starter/${id}/relevant`);
-    console.log(data);
+    console.log(postTitleUrlTerm);
+    // console.log(data);
   };
 
   return (

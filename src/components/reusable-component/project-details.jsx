@@ -10,7 +10,6 @@ const ProjectDetails = () => {
   // react router hook for gettinig the dynamic link id
   const { id } = useParams();
   const projectDetails = projects.find((item) => item.id === id);
-  console.log(projectDetails);
 
   return (
     <div className="card rounded-none flex-shrink-0 w-full bg-[#f0f0f0] px-6 ">

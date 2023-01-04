@@ -27,6 +27,8 @@ const RelevantTerm = ({
     userPostTitle: { postTitle: target_title },
     setTermData,
     setAiSugetions,
+    state: { postTitleUrlTerm },
+    dispatch,
   } = useAppState();
 
   // react @{navigate , id} router hook for redirecting desired link and dynamic link id
@@ -36,10 +38,9 @@ const RelevantTerm = ({
 
   // handle action
   const handleSubmit = async (data) => {
-    console.log(data);
-
     try {
       await setTermData(data);
+      await dispatch({ type: "relevantTerm", payload: data });
       const postData = {
         target_title,
         relevant_term: data.relevantTerm,
@@ -49,13 +50,15 @@ const RelevantTerm = ({
         await setAiSugetions(response?.data?.suggestions);
         if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
           navigate(`/dashboard/project-starter/${id}/suggestions`);
+        } else {
+          return;
         }
       }
-      console.log(response);
     } catch (err) {
       console.log(err);
     }
   };
+  console.log(postTitleUrlTerm);
 
   return (
     <div className="px-6">

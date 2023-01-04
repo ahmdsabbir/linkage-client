@@ -6,7 +6,6 @@ import SingleProjectCard from "../../../reusable-component/single-project-card";
 const AllProjects = () => {
   // global state context provider
   const {
-    setProjects,
     state: { projects },
     dispatch,
   } = useAppState();
@@ -15,13 +14,10 @@ const AllProjects = () => {
     const getData = async () => {
       const response = await API.get("/core/project");
       // console.log(response?.data?.projects);
-      dispatch({ type: "PROJECT", payload: response?.data?.projects });
-      setProjects(response?.data?.projects);
+      dispatch({ type: "projects", payload: response?.data?.projects });
     };
     getData();
-
-    console.log(projects);
-  }, [setProjects]);
+  }, []);
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">

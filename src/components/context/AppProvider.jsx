@@ -2,42 +2,40 @@ import React, { createContext, useContext, useReducer, useState } from "react";
 export const AppStateContext = createContext();
 
 const initialState = {
-  projects: [
-    {
-      id: "1",
-      name: "Google",
-      domain: "google.com",
-      wp_username: "admin",
-      wp_password: "KJFLYTKJ8asldfkjd89",
-      date_added: "1 Jan 2034",
-    },
-    {
-      id: "2",
-      name: "HP",
-      domain: "hp.com",
-      wp_username: "admin",
-      wp_password: "KJFLYTKJ8asldfkjd89",
-      date_added: "2 Jan 2034",
-    },
-    {
-      id: "3",
-      name: "sujle",
-      domain: "sujle.com",
-      wp_username: "admin",
-      wp_password: "KJFLYTKJ8asldfkjd89",
-      date_added: "3 Jan 2034",
-    },
-  ],
+  projects: [],
+
+  postTitleUrlTerm: {
+    target_title: "",
+    relevant_term: "",
+    target_url: "",
+  },
 
   currentUser: {},
 };
 
 const projectsReducer = (state, action) => {
   switch (action.type) {
-    case "PROJECT":
+    case "projects":
       return {
         ...state,
         projects: [...action.payload],
+      };
+    case "postTitleUrl":
+      return {
+        ...state,
+        postTitleUrlTerm: {
+          ...state.postTitleUrlTerm,
+          target_title: action.payload.postTitle,
+          target_url: action.payload.postURL,
+        },
+      };
+    case "relevantTerm":
+      return {
+        ...state,
+        postTitleUrlTerm: {
+          ...state.postTitleUrlTerm,
+          relevant_term: action.payload.relevantTerm,
+        },
       };
 
     default:
@@ -52,9 +50,8 @@ const AppProvider = ({ children }) => {
   // regular state management
   const [userPostTitle, setUserPostTitle] = useState("");
   const [termData, setTermData] = useState("");
-  const [projects, setProjects] = useState([]);
   const [aiSuggestions, setAiSugetions] = useState([]);
-  const [chooseTitleUrl, setChooseTitleUrl] = useState([]);
+  const [chooseTitleUrl, setChooseTitleUrl] = useState("");
   const [generatedHeading, setGeneratedHeading] = useState("");
   const [generatedParagraph, setGeneratedParagraph] = useState("");
   const [defaultHeading, setDefaultHeading] = useState([]);
@@ -66,8 +63,6 @@ const AppProvider = ({ children }) => {
         setUserPostTitle,
         termData,
         setTermData,
-        projects,
-        setProjects,
         aiSuggestions,
         setAiSugetions,
         chooseTitleUrl,
