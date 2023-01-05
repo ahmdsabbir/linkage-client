@@ -1,5 +1,5 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import API from "../../../../api/api-config";
@@ -14,6 +14,7 @@ const ChosenTitleUrl = () => {
     state: { choosenTitleUrl, postTitleUrlTerm },
     dispatch,
   } = useAppState();
+  const [headingLoader, setHeadingLoader] = useState(false);
 
   // setValue func imported as default value
   const {
@@ -39,8 +40,12 @@ const ChosenTitleUrl = () => {
     };
 
     try {
+      // loader only for button
+      setHeadingLoader(true);
+      // getting post request
       const response = await API.post("core/heading", postData);
       if (response?.status === 200) {
+        setHeadingLoader(false);
         await dispatch({
           type: "generatedHeading",
           payload: response?.data?.heading,
@@ -98,8 +103,11 @@ const ChosenTitleUrl = () => {
           <div className="flex flex-col md:flex-row gap-2 sm:gap-4 md:gap-6 ">
             <div className=" whitespace-nowrap order-2 md:order-1 sm:min-w-[85px]"></div>
             <div className="order-1 md:order-2">
-              <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded">
-                Generate Heading
+              <button
+                className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded"
+                disabled={headingLoader ? true : false}
+              >
+                {headingLoader ? "Generating..." : "Generate Heading"}
               </button>
               <p className="text-black/60 text-sm">
                 Remember, You can always regenerate!

@@ -48,6 +48,7 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         aiSuggestions: [...action.payload],
+        loading: false,
       };
     case "choosenTitleUrl":
       return {
