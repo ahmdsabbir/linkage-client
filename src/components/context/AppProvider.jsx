@@ -78,24 +78,22 @@ const projectsReducer = (state, action) => {
   }
 };
 
-const getStorageValue = (key, defaultValue) => {
+/* const getStorageValue = (key, defaultValue = initialState) => {
   // getting stored value
   const saved = localStorage.getItem(key);
   const initial = JSON.parse(saved);
   console.log(initial);
   return initial || defaultValue;
-};
+}; */
 
 const AppProvider = ({ children }) => {
   // final state management with useReducer hook
-  const [state, dispatch] = useReducer(projectsReducer, () =>
-    getStorageValue(projectData, initialState)
-  );
+  const [state, dispatch] = useReducer(projectsReducer, initialState);
 
   useEffect(() => {
     // storing input name
-    localStorage.setItem("projectData", JSON.stringify(initialState));
-  }, [initialState]);
+    localStorage.setItem("projectData", JSON.stringify(state));
+  }, [state]);
 
   // regular st
   return (
