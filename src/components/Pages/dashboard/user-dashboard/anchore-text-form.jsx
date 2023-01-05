@@ -18,7 +18,6 @@ const AnchorTextForm = () => {
   const {
     state: { generatedHeading },
     dispatch,
-    loading,
   } = useAppState();
 
   const handleAchorTextSubmit = async (data) => {

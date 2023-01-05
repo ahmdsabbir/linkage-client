@@ -8,7 +8,6 @@ const GeneratedSectionLayout = () => {
     state: { generatedHeading, generatedParagraph, loading },
   } = useAppState();
 
-  console.log(loading);
   const location = useLocation();
   const { id } = useParams();
 
