@@ -64,6 +64,7 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         generatedParagraph: action.payload,
+        loading: false,
       };
     case "updateAbove":
       return {

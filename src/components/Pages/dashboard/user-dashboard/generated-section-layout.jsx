@@ -1,12 +1,14 @@
 import React from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { useAppState } from "../../../context/AppProvider";
+import Spinner from "../../../spinner";
 
 const GeneratedSectionLayout = () => {
   const {
-    state: { generatedHeading, generatedParagraph },
+    state: { generatedHeading, generatedParagraph, loading },
   } = useAppState();
 
+  console.log(loading);
   const location = useLocation();
   const { id } = useParams();
 
@@ -29,7 +31,11 @@ const GeneratedSectionLayout = () => {
         </div>
         <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
           <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-          {generatedParagraph && generatedParagraph}
+          {loading ? (
+            <Spinner className="h-full w-full" />
+          ) : (
+            generatedParagraph && generatedParagraph
+          )}
         </div>
 
         {/* <div className="hidden sm:block flex-1  min-w-[117px] max-w-[217px] order-2 md:order-1"></div> */}

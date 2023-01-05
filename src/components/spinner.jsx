@@ -1,9 +1,9 @@
 import React from "react";
 import "./spinner.css";
 
-const Spinner = () => {
+const Spinner = ({ className = "h-screen w-full grid place-items-center" }) => {
   return (
-    <div className="h-screen w-full grid place-items-center">
+    <div className={className}>
       <div className="jelly-triangle">
         <div className="jelly-triangle__dot"></div>
         <div className="jelly-triangle__traveler"></div>

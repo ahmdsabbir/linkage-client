@@ -18,6 +18,7 @@ const AnchorTextForm = () => {
   const {
     state: { generatedHeading },
     dispatch,
+    loading,
   } = useAppState();
 
   const handleAchorTextSubmit = async (data) => {
@@ -27,6 +28,7 @@ const AnchorTextForm = () => {
     };
 
     try {
+      dispatch({ type: "loading" });
       const response = await API.post("core/paragraph", postData);
       if (response?.status === 200) {
         await dispatch({

@@ -9,6 +9,7 @@ const NoName = () => {
       generatedParagraph,
       generatedHeading,
       updateAbove: { oldData, newData },
+      loader,
     },
     dispatch,
   } = useAppState();
