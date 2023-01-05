@@ -15,6 +15,7 @@ const initialState = {
     oldData: [],
     newData: [],
   },
+  loading: false,
   currentUser: {},
 };
 
@@ -24,6 +25,7 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         projects: [...action.payload],
+        loading: false,
       };
     case "postTitleUrl":
       return {
@@ -72,6 +74,10 @@ const projectsReducer = (state, action) => {
         ...state,
         updateAbove: { ...state.updateAbove, newData: [...action.payload] },
       };
+
+    case "loading": {
+      return { ...state, loading: true };
+    }
 
     default:
       return state;

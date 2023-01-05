@@ -3,7 +3,7 @@ import "./spinner.css";
 
 const Spinner = () => {
   return (
-    <>
+    <div className="h-screen w-full grid place-items-center">
       <div className="jelly-triangle">
         <div className="jelly-triangle__dot"></div>
         <div className="jelly-triangle__traveler"></div>
@@ -27,7 +27,7 @@ const Spinner = () => {
           </filter>
         </defs>
       </svg>
-    </>
+    </div>
   );
 };
 
