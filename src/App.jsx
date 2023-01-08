@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import "./App.css";
+import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
 
 import Login from "./components/authrizaton-authentication/Login";
 import Register from "./components/authrizaton-authentication/register";
@@ -74,6 +75,7 @@ const router = createBrowserRouter(
       {/* user authentication */}
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="verify" element={<EmailConfirmationModal />} />
 
       {/* reset password */}
 

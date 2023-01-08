@@ -17,8 +17,11 @@ const NoName = () => {
   useEffect(() => {
     const getData = async () => {
       const target_url = postTitleUrlTerm.target_url;
+
       try {
-        const response = await API.post("/core/update-content", { target_url });
+        const response = await API.post("/core/tareget-headings", {
+          target_url,
+        });
         await dispatch({
           type: "updateAbove",
           payload: response?.data?.headings,

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import API from "../../api/api-config";
+import { useAppState } from "../context/AppProvider";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
@@ -15,7 +17,6 @@ const signupFormSchema = z
     email: z.string().email("Please enter a valid email address."),
     password: z
       .string()
-      .nonempty("Field is required")
       .min(6, "Please choose a longer password")
       .max(256, "Consider using a short password"),
     confirm: z.string(),
@@ -29,9 +30,47 @@ const Register = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const form = useForm({ schema: signupFormSchema });
-  const handleSubmitRegister = (data) => {
-    console.log(data);
-    navigate("/dashboard");
+  const {
+    dispatch,
+    state: { loading },
+  } = useAppState();
+
+  // success state
+  const [success, setSuccess] = useState(false);
+  const [err, setErr] = useState("");
+
+  // singup handle function
+  const handleSubmitRegister = async (data) => {
+    const postJsonData = {
+      username: data.username,
+      email: data.email,
+      password: data.password,
+    };
+    try {
+      const response = await API.post(
+        "http://192.168.101.4:5000/auth/register",
+        postJsonData
+      );
+      if (response.status === 201 || response.status === 200) {
+        if (
+          response?.data?.msg === "username already taken" ||
+          response?.data?.msg === "email already taken"
+        ) {
+          setErr(response.data.msg);
+        } else {
+          console.log(response);
+          navigate("/verify");
+        }
+      }
+    } catch (error) {
+      dispatch({ type: "loading", loading: false });
+      // throw new Response(`${error.message}`, { status: 404 });
+      if (!error.respnose) {
+        setErr("No server response");
+      } else {
+        setErr("Registration failed");
+      }
+    }
   };
 
   return (
@@ -43,6 +82,7 @@ const Register = () => {
             label="Username"
             type="text"
             placeholder="username"
+            className="flex flex-col"
             {...form.register("username")}
           />
           <Input
@@ -63,8 +103,10 @@ const Register = () => {
             placeholder="confirm password"
             {...form.register("confirm")}
           />
+          {/* err message */}
+          {err && <p className="text-error mt-2">{err}</p>}
           <div className="form-control mt-6">
-            <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
+            <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600">
               Register
             </button>
           </div>

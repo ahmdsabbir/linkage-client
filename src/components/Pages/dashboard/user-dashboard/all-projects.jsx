@@ -16,7 +16,7 @@ const AllProjects = () => {
       // loading
       dispatch({ type: "loading" });
       // get response
-      const response = await API.get("/core/project");
+      const response = await API.get("/project");
       // console.log(response?.data?.projects);
       await dispatch({ type: "projects", payload: response?.data?.projects });
     };

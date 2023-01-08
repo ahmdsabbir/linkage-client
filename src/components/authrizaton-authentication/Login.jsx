@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import API from "../../api/api-config";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
@@ -10,8 +11,7 @@ const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   password: z
     .string()
-    .nonempty("Field is required")
-    .min(6, "Please choose a longer password")
+    .min(4, "Please choose a longer password")
     .max(256, "Consider using a short password"),
 });
 
@@ -19,9 +19,18 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const form = useForm({ schema: loginFormSchema });
-  const handleSubmitLogin = (data) => {
+  const handleSubmitLogin = async (data) => {
     console.log(data);
-    navigate("/dashboard");
+    // navigate("/dashboard");
+    try {
+      const response = await API.post("/auth/login", {
+        email: data.email,
+        password: data.password,
+      });
+      console.log(response);
+    } catch (error) {
+      console.log("login", error);
+    }
   };
 
   return (
