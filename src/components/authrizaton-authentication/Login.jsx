@@ -35,13 +35,13 @@ const Login = () => {
           email: data.email,
           password: data.password,
         },
-        /* {
+        {
           headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        } */
+          // withCredentials: true,
+        }
       );
+      console.log(response)
       const accessToken = response?.data.accesstoken;
-      const refreshToken = response?.data.refresh; //use the refresh token later after exipiraton on  accessToken
       await setAuth(accessToken)
       // navigate("/dashboard");')
     } catch (error) {
