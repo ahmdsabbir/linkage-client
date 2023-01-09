@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
 import "./App.css";
 import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
@@ -29,6 +29,7 @@ import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
 import ErrorPage from "./components/Pages/error-page";
 import Home from "./components/Pages/home";
+import RequireAuth from "./components/require-auth";
 import RootLayout from "./components/root-layout/root-layout";
 
 const router = createBrowserRouter(
@@ -38,7 +39,8 @@ const router = createBrowserRouter(
       <Route path="about" element={<AboutUs />} />
       <Route path="contact" element={<Contact />} />
 
-      {/* user routes */}
+      {/* user protected routes */}
+      <Route element={<RequireAuth />}>
       <Route path="dashboard" element={<Dashboard />}>
         <Route index element={<AllProjects />} />
 
@@ -71,7 +73,8 @@ const router = createBrowserRouter(
 
         <Route path="user-details" element={<UserDetails />} />
       </Route>
-
+      </Route>
+      
       {/* user authentication */}
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
