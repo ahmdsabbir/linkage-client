@@ -5,7 +5,6 @@ import { useAuthState } from './context/AuthProvider';
 const RequireAuth = () => {
     const {auth} = useAuthState();
     const location = useLocation();
-    console.log(auth)
 
     return (
         auth.accessToken
@@ -14,4 +13,4 @@ const RequireAuth = () => {
     );
 };
 
-export default RequireAuth;
+export default RequireAuth; 

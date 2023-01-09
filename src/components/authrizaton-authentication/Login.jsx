@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
@@ -18,10 +18,16 @@ const loginFormSchema = z.object({
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
+  // const from = location?.state.from?.pathname || "/"
+
   const form = useForm({ schema: loginFormSchema });
+
+  // err state
+  const [err, setErr] = useState('')
+
+
   const handleSubmitLogin = async (data) => {
-    
-    // navigate("/dashboard");
+
     try {
       const response = await API.post(
         "/auth/login",
@@ -29,15 +35,25 @@ const Login = () => {
           email: data.email,
           password: data.password,
         },
-        {
+        /* {
           headers: { "Content-Type": "application/json" },
-        }
+          withCredentials: true,
+        } */
       );
       const accessToken = response?.data.accesstoken;
       const refreshToken = response?.data.refresh; //use the refresh token later after exipiraton on  accessToken
       await setAuth(accessToken)
+      // navigate("/dashboard");')
     } catch (error) {
-      console.log("login", error);
+      if(!error.respone) {
+        setErr('No Server Response')
+      }else if(error.response.status === 400){
+          setErr('Missing username or password')
+      }else if(error.response.status === 401) {
+        setErr('Unauthorized')
+      }else {
+        setErr('Login failed')
+      }
     }
   };
 
@@ -68,6 +84,9 @@ const Login = () => {
               Forgot password?
             </Link>
           </label>
+          {
+            err && <p className="text-danger">{err}</p>
+          }
           <div className="form-control mt-6">
             <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
               Login

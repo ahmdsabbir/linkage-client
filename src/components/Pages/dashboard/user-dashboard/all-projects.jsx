@@ -12,15 +12,37 @@ const AllProjects = () => {
   } = useAppState();
 
   useEffect(() => {
+
+    let isMounted = true;
+    const controller = new AbortController();
+
     const getData = async () => {
+
+      try {
       // loading
       dispatch({ type: "loading" });
       // get response
-      const response = await API.get("/project");
+      const response = await API.get("/project", {
+        singnal: controller.signal
+      });
       // console.log(response?.data?.projects);
-      await dispatch({ type: "projects", payload: response?.data?.projects });
+      isMounted &&  await dispatch({ type: "projects", payload: response?.data?.projects });
+      } catch (error) {
+        dispatch({ type: "loading" , type: !loading});
+        console.log(error)
+      }
+      
     };
     getData();
+
+
+
+
+    // stop the request afte the data is mounted
+    return () => {
+      isMounted = false,
+      controller.abort();
+    }
   }, []);
 
   return (

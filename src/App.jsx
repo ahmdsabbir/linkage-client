@@ -29,6 +29,7 @@ import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
 import ErrorPage from "./components/Pages/error-page";
 import Home from "./components/Pages/home";
+import Unauthorized from "./components/Pages/unauthorized";
 import RequireAuth from "./components/require-auth";
 import RootLayout from "./components/root-layout/root-layout";
 
@@ -78,6 +79,7 @@ const router = createBrowserRouter(
       {/* user authentication */}
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />
+      <Route path="unauthorized" element={<Unauthorized />} />
       <Route path="verify" element={<EmailConfirmationModal />} />
 
       {/* reset password */}
