@@ -107,7 +107,7 @@ const AppProvider = ({ children }) => {
     localStorage.setItem("projectData", JSON.stringify(state));
   }, [state]);
 
-  // regular st
+  // regular state
   return (
     <AppStateContext.Provider
       value={{

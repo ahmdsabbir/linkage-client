@@ -20,14 +20,22 @@ const Login = () => {
   const navigate = useNavigate();
   const form = useForm({ schema: loginFormSchema });
   const handleSubmitLogin = async (data) => {
-    console.log(data);
+    
     // navigate("/dashboard");
     try {
-      const response = await API.post("/auth/login", {
-        email: data.email,
-        password: data.password,
-      });
-      console.log(response);
+      const response = await API.post(
+        "/auth/login",
+        {
+          email: data.email,
+          password: data.password,
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      const accessToken = response?.data.accesstoken;
+      const refreshToken = response?.data.refresh; //use the refresh token later after exipiraton on  accessToken
+      await setAuth(accessToken)
     } catch (error) {
       console.log("login", error);
     }
