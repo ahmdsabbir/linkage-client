@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
+import { useAuthState } from "../context/AuthProvider";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
@@ -18,16 +19,15 @@ const loginFormSchema = z.object({
 const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  // const from = location?.state.from?.pathname || "/"
+  const from = location?.state.from?.pathname || "/";
+  const { auth, setAuth } = useAuthState();
 
   const form = useForm({ schema: loginFormSchema });
 
   // err state
-  const [err, setErr] = useState('')
-
+  const [err, setErr] = useState("");
 
   const handleSubmitLogin = async (data) => {
-
     try {
       const response = await API.post(
         "/auth/login",
@@ -40,19 +40,22 @@ const Login = () => {
           // withCredentials: true,
         }
       );
-      console.log(response)
-      const accessToken = response?.data.accesstoken;
-      await setAuth(accessToken)
-      // navigate("/dashboard");')
+
+      if (response.status === 200) {
+        // console.log(response?.data);
+        await setAuth(response?.data);
+        navigate(from, { replace: true });
+        console.log(auth);
+      }
     } catch (error) {
-      if(!error.respone) {
-        setErr('No Server Response')
-      }else if(error.response.status === 400){
-          setErr('Missing username or password')
-      }else if(error.response.status === 401) {
-        setErr('Unauthorized')
-      }else {
-        setErr('Login failed')
+      if (!error.respone) {
+        setErr("No Server Response");
+      } else if (error.response.status === 400) {
+        setErr("Missing username or password");
+      } else if (error.response.status === 401) {
+        setErr("Unauthorized");
+      } else {
+        setErr("Login failed");
       }
     }
   };
@@ -84,9 +87,7 @@ const Login = () => {
               Forgot password?
             </Link>
           </label>
-          {
-            err && <p className="text-danger">{err}</p>
-          }
+          {err && <p className="text-danger">{err}</p>}
           <div className="form-control mt-6">
             <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
               Login

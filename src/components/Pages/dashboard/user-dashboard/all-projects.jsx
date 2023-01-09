@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
+import useRefreshToken from "../../../hook/useRefreshToken";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 import Spinner from "../../../spinner";
 
@@ -10,39 +12,45 @@ const AllProjects = () => {
     state: { projects, loading },
     dispatch,
   } = useAppState();
+  const { auth } = useAuthState();
+  const refresh = useRefreshToken();
 
   useEffect(() => {
-
     let isMounted = true;
     const controller = new AbortController();
 
     const getData = async () => {
-
       try {
-      // loading
-      dispatch({ type: "loading" });
-      // get response
-      const response = await API.get("/project", {
-        singnal: controller.signal
-      });
-      // console.log(response?.data?.projects);
-      isMounted &&  await dispatch({ type: "projects", payload: response?.data?.projects });
+        // loading
+        dispatch({ type: "loading" });
+        // get response
+        const response = await API.get(
+          "/project",
+          {
+            singnal: controller.signal,
+          },
+          {
+            header: { "Content-Type": "applicaton/json" },
+            Authorization: `Bearer ${auth.accesstoken}`,
+          }
+        );
+        // console.log(response?.data?.projects);
+        isMounted &&
+          (await dispatch({
+            type: "projects",
+            payload: response?.data?.projects,
+          }));
       } catch (error) {
-        dispatch({ type: "loading" , type: !loading});
-        console.log(error)
+        dispatch({ type: "loading", type: !loading });
+        console.log(error);
       }
-      
     };
     getData();
 
-
-
-
     // stop the request afte the data is mounted
     return () => {
-      isMounted = false,
-      controller.abort();
-    }
+      (isMounted = false), controller.abort();
+    };
   }, []);
 
   return (
@@ -63,6 +71,10 @@ const AllProjects = () => {
           ))}
         </div>
       )}
+
+      <button className="btn" onClick={() => refresh()}>
+        refresh
+      </button>
     </>
   );
 };
