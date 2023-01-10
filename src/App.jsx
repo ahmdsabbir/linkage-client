@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
 import "./App.css";
 import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
@@ -42,40 +42,46 @@ const router = createBrowserRouter(
 
       {/* user protected routes */}
       <Route element={<RequireAuth />}>
-      <Route path="dashboard" element={<Dashboard />}>
-        <Route index element={<AllProjects />} />
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<AllProjects />} />
 
-        {/* project starter layout nested route starts */}
-        <Route path="project-starter/:id" element={<ProjectStarterLayout />}>
-          <Route index element={<EnterPostTitle />} />
-          <Route
-            path="relevant"
-            element={
-              <RelevantTerm
-                className="rounded-full"
-                btnText="Generate Suggestion"
-                hintText="We’ll make suggestion 
+          {/* project starter layout nested route starts */}
+          <Route path="project-starter/:id" element={<ProjectStarterLayout />}>
+            <Route index element={<EnterPostTitle />} />
+            <Route
+              path="relevant"
+              element={
+                <RelevantTerm
+                  className="rounded-full"
+                  btnText="Generate Suggestion"
+                  hintText="We’ll make suggestion 
             based on the term you 
             give us."
-                label="Relevant Term"
-              />
-            }
-          />
-          <Route path="suggestions" element={<Suggestions />} />
-          <Route path="generated-heading" element={<GeneratedSectionLayout />}>
-            <Route index element={<AnchorTextForm />} />
-            <Route path="no-name" element={<NoName />} />
+                  label="Relevant Term"
+                />
+              }
+            />
+            <Route path="suggestions" element={<Suggestions />} />
+            <Route
+              path="generated-heading"
+              element={<GeneratedSectionLayout />}
+            >
+              <Route index element={<AnchorTextForm />} />
+              <Route path="no-name" element={<NoName />} />
+            </Route>
+
+            {/* edit project details */}
+            <Route
+              path="edit-project-details"
+              element={<EditProjectDetails />}
+            />
           </Route>
+          {/* project starter layout nested route ends */}
 
-          {/* edit project details */}
-          <Route path="edit-project-details" element={<EditProjectDetails />} />
+          <Route path="user-details" element={<UserDetails />} />
         </Route>
-        {/* project starter layout nested route ends */}
+      </Route>
 
-        <Route path="user-details" element={<UserDetails />} />
-      </Route>
-      </Route>
-      
       {/* user authentication */}
       <Route path="login" element={<Login />} />
       <Route path="register" element={<Register />} />

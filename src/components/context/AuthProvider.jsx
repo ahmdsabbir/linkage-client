@@ -1,9 +1,36 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({})
+
+  const [auth, setAuth] = useState('')
+
+  useEffect(() => {
+
+  }, [auth])
+
+    
+/* 
+//  localStorage handle
+  () => {
+    let currentValue
+  
+    try {
+      currentValue = JSON.parse(localStorage.getItem("accestoken") ||{})
+    } catch (error) {
+      currentValue = {}
+    }
+  
+    return currentValue
+  } */
+   // set app state in local storage
+/* 
+   useEffect(() => {
+    // storing input name
+    localStorage.setItem("accestoken", JSON.stringify(auth));
+  }, [auth]); */
+
   return <AuthContext.Provider value={{auth, setAuth}}>{children}</AuthContext.Provider>;
 };
 

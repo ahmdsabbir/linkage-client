@@ -1,15 +1,16 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthState } from "./context/AuthProvider";
 
 const RequireAuth = () => {
-  const { auth } = useAuthState();
+  const { auth, setAuth } = useAuthState();
   const location = useLocation();
-  useEffect(() => {
-    console.log(auth.accesstoken);
-  }, [auth]);
+   let access = true;
+ /*   useEffect(() => {
+    console.log(auth["x-access-token"]);
+  }, [auth, setAuth]);  */
 
-  return auth.accesstoken ? (
+  return access ? (
     <Outlet />
   ) : (
     <Navigate to={"/login"} state={{ from: location }} replace />
