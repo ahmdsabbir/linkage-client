@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
+import API from "../../api/api-config";
 import { useAuthState } from "../context/AuthProvider";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
@@ -19,7 +20,7 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   // const from = location?.state.from?.pathname || "/";
-  const {auth, setAuth } = useAuthState();
+  const { setAuth } = useAuthState();
 
   const form = useForm({ schema: loginFormSchema });
 
@@ -30,53 +31,20 @@ const Login = () => {
     const userData = {
       email: data.email,
       password: data.password,
-    }
+    };
     try {
-      const getData = await fetch('http://192.168.101.4:5000/auth/login',{
-        method: 'POST',
-        body: JSON.stringify(userData), 
-        headers: { "Content-Type": "application/json" },
-      })
-      const data = await getData.json()
-      
-      await setAuth(data["x-access-token"])
-      console.log(data["x-access-token"])
-      if(data["x-access-token"]) {
-        navigate("/dashboard");
-      }
-      
-      /* const response = await API.post(
-        "/auth/login",
-        {
-          email: data.email,
-          password: data.password,
+      const response = await API.post("/auth/login", JSON.stringify(userData), {
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: true,
         },
-        {
-          headers: { "Content-Type": "application/json" },
-          // withCredentials: true,
-        }
-      ); */
+      });
 
-     /*  if (response.status === 200 || response.status === 201) {
-        console.log(response.data);
-        await setAuth(response?.data);
-        console.log(auth)
-
-        navigate("/dashboard");
-      } */
-      
-
+      await setAuth(response?.data?.access_token);
+      navigate("/dashboard");
     } catch (error) {
-     /*  if (!error.respone) {
-        setErr("No Server Response");
-      } else if (error.response.status === 400) {
-        setErr("Missing username or password");
-      } else if (error.response.status === 401) {
-        setErr("Unauthorized");
-      } else {
-        setErr("Login failed");
-      } */
-      console.log(error)
+      setErr(error);
+      console.log(error);
     }
   };
 

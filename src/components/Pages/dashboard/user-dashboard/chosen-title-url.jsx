@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
 
 const chosenTitleUrl = z.object({
   title: z.string().min(5, "post title must be more than 5 characters!"),
@@ -14,6 +15,7 @@ const ChosenTitleUrl = () => {
     state: { choosenTitleUrl, postTitleUrlTerm },
     dispatch,
   } = useAppState();
+  const { auth } = useAuthState();
   const [headingLoader, setHeadingLoader] = useState(false);
 
   // setValue func imported as default value
@@ -39,11 +41,30 @@ const ChosenTitleUrl = () => {
       source_title: data.title,
     };
 
+    /*  fetch("http://192.168.101.4:5000/core/heading", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth ? `Bearer ${auth}` : "",
+      },
+      body: JSON.stringify({
+        source_title: data.,
+        target_title: postTitleUrlTerm.target_title,
+      }),
+    }) */
+
     try {
       // loader only for button
       setHeadingLoader(true);
       // getting post request
-      const response = await API.post("core/heading", postData);
+      const response = await API.post("core/heading", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth ? `Bearer ${auth}` : "",
+        },
+        withCredentials: true,
+      });
       if (response?.status === 200) {
         setHeadingLoader(false);
         await dispatch({
@@ -51,7 +72,6 @@ const ChosenTitleUrl = () => {
           payload: response?.data?.heading,
         });
       }
-      console.log(response);
     } catch (err) {
       console.log(err);
     }

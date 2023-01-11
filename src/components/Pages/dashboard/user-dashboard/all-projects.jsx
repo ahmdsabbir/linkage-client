@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import useAxiosPrivate from "../../../hook/useAxiosPrivate";
@@ -18,45 +19,31 @@ const AllProjects = () => {
   const axiosPrivate = useAxiosPrivate();
   const navigate = useNavigate();
   const location = useLocation();
-  /* let token = ''
-  useEffect(() => {
-     token = auth
-  }, [auth, setAuth, token]); */
-
 
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
-    if(auth["x-access-token"]) {
-    const getData = async () => {
-      
-      try {
-      console.log(auth["x-access-token"])  
-        const fetchdData = await fetch('http://192.168.101.4:5000/project', {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${auth["x-access-token"]}`,
-          }
-        });
-        // const data = await fetchdData.json()
-  
-          console.log(fetchdData)
+    if (auth) {
+      const getAllProjects = async () => {
+        try {
+          const response = await API("/project", {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: auth ? `Bearer ${auth}` : "",
+            },
+          });
           isMounted &&
-            (await dispatch({
+            dispatch({
               type: "projects",
-              payload: fetchdData,
-            }));
-          // dispatch({ type: "loading", loading: !loading });
+              payload: response?.data?.projects,
+            });
         } catch (error) {
-          console.log(error);
-          // dispatch({ type: "loading", loading: !loading });
-          navigate("/login", { state: { from: location }, replace: true });
+          console.log("AllProjects", error);
         }
-   
-    };
-    getData();
+      };
 
-  }
+      getAllProjects();
+    }
 
     // stop the request afte the data is mounted
     return () => {
@@ -74,7 +61,7 @@ const AllProjects = () => {
             ? "No Projects Yet"
             : projects?.map((project, i) => (
                 <SingleProjectCard
-                  key={project.name}
+                  key={project.id}
                   name={project.name}
                   domain={project.domain}
                   id={project.id}

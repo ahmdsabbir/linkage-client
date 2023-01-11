@@ -1,75 +1,58 @@
 import React, { useEffect } from "react";
-import API from "../../../../api/api-config";
+import { useParams } from "react-router-dom";
 import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
 
 const NoName = () => {
   const {
     state: {
-      postTitleUrlTerm,
+      postTitleUrlTerm: { target_title },
       generatedParagraph,
       generatedHeading,
+      projects,
       updateAbove: { oldData, newData },
       loader,
     },
     dispatch,
   } = useAppState();
+  const { id } = useParams();
+  const { auth } = useAuthState();
 
   useEffect(() => {
-    const getData = async () => {
-      const target_url = postTitleUrlTerm.target_url;
-
-      try {
-        const response = await API.post("/core/tareget-headings", {
-          target_url,
-        });
-        await dispatch({
-          type: "updateAbove",
-          payload: response?.data?.headings,
-        });
-        await dispatch({
-          type: "newUpdateAbove",
-          payload: response?.data?.headings,
-        });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getData();
-  }, []);
-
-  // post data to the server
-  /*  const onSubmit = async (data) => {
-    await setTermData(data);
+    const projectdomain = projects.find((item) =>
+      item.id === id ? item?.domain : "not found"
+    );
     const postData = {
       target_title,
-      relevant_term: data.relevantTerm,
+      domain: projectdomain.domain,
     };
-
-    try {
-      const response = await API.post("core/suggestions", postData);
-      if (response?.status === 200) {
-        await setAiSugetions(response?.data?.suggestions);
-
-        navigate(`/dashboard/project-starter/${id}/suggestions`);
-        return;
-      }
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-  }; */
+    fetch("http://192.168.101.4:5000/core/target-headings", {
+      method: "POST",
+      credentials: "include",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth ? `Bearer ${auth}` : "",
+      },
+      body: JSON.stringify(postData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        dispatch({ type: "updateAbove", payload: [...data.headings] });
+        dispatch({ type: "newUpdateAbove", payload: [...data.headings] });
+      });
+  }, []);
 
   // udpate the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
       const newUpdateAbove = oldData.map((item) =>
-        item.title === heading
+        item.text === heading
           ? { ...item, generatedHeading, generatedParagraph }
           : item
       );
-
       dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
-      console.log(newData);
+      // console.log(newData);
     } catch (err) {
       console.log(err);
     }
@@ -87,10 +70,10 @@ const NoName = () => {
           )}
 
           <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-            <p className="flex-inital">{heading.title}</p>
+            <p className="flex-inital">{heading.tag}</p>
             <button
               className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
-              onClick={() => handleAbovePost(heading.title)}
+              onClick={() => handleAbovePost(heading.text)}
             >
               Above This
             </button>

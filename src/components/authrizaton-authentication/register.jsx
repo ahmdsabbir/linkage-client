@@ -48,7 +48,7 @@ const Register = () => {
     };
     try {
       const response = await API.post(
-        "http://192.168.101.4:5000/auth/register",
+        "http://192.168.101.15:5000/auth/register",
         postJsonData
       );
       if (response.status === 201 || response.status === 200) {

@@ -2,19 +2,24 @@ import API from "../../api/api-config";
 import { useAuthState } from "../context/AuthProvider";
 
 const useRefreshToken = () => {
-  const { setAuth } = useAuthState();
+  const { auth, setAuth } = useAuthState();
 
   const refresh = async () => {
     const response = await API.post("/auth/refresh", {
       withCredentials: true,
+      /*  headers: {
+        'Content-Type': 'application/json',
+        Authorization : auth ? `Bearer ${auth}` : "",
+      }, */
     });
-    setAuth((prev) => {
+    console.log(response);
+    await setAuth((prev) => {
       console.log(prev);
       console.log(response);
       console.log(response.data);
-      return { ...prev, accessToken: response?.data["x-access-token"] };
+      return response?.data.access_token;
     });
-    return response?.data["x-access-token"];
+    return response?.data.access_token;
   };
 
   return refresh;

@@ -2,6 +2,7 @@ import React from "react";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
@@ -15,6 +16,7 @@ const anchorTextSchema = z.object({
 
 const AnchorTextForm = () => {
   const form = useForm({ schema: anchorTextSchema });
+  const { auth } = useAuthState();
   const {
     state: { generatedHeading },
     dispatch,
@@ -28,7 +30,14 @@ const AnchorTextForm = () => {
 
     try {
       dispatch({ type: "loading" });
-      const response = await API.post("core/paragraph", postData);
+      const response = await API.post("core/paragraph", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth ? `Bearer ${auth}` : "",
+        },
+        withCredentials: true,
+      });
+      console.log(response);
       if (response?.status === 200) {
         await dispatch({
           type: "generatedParagraph",

@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider,
+  RouterProvider
 } from "react-router-dom";
 import "./App.css";
 import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
@@ -41,7 +41,7 @@ const router = createBrowserRouter(
       <Route path="contact" element={<Contact />} />
 
       {/* user protected routes */}
-      <Route element={<RequireAuth />}>
+      <Route element={<RequireAuth />}>    
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<AllProjects />} />
 
@@ -80,7 +80,8 @@ const router = createBrowserRouter(
 
           <Route path="user-details" element={<UserDetails />} />
         </Route>
-      </Route>
+        </Route>
+ 
 
       {/* user authentication */}
       <Route path="login" element={<Login />} />

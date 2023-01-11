@@ -16,10 +16,7 @@ const postTitleSchema = z.object({
 const EnterPostTitle = () => {
   const { id } = useParams();
   // getting data from global state context provider
-  const {
-    state: { postTitleUrlTerm },
-    dispatch,
-  } = useAppState();
+  const { dispatch } = useAppState();
   const form = useForm({ schema: postTitleSchema });
   // react router hook for redirecting desired link
   const navigate = useNavigate();
@@ -27,10 +24,13 @@ const EnterPostTitle = () => {
   // post request
   // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
-    await dispatch({ type: "postTitleUrl", payload: data });
-    navigate(`/dashboard/project-starter/${id}/relevant`);
-    console.log(postTitleUrlTerm);
-    // console.log(data);
+    if (id) {
+      await dispatch({ type: "postTitleUrl", payload: data });
+      navigate(`/dashboard/project-starter/${id}/relevant`);
+    } else {
+      console.log("no id found");
+      navigate("/unauthorized");
+    }
   };
 
   return (

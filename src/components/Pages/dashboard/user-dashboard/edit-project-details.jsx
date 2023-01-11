@@ -1,5 +1,7 @@
 import React from "react";
 import { z } from "zod";
+import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
@@ -13,6 +15,10 @@ const projectDetailsSchema = z.object({
 
 const EditProjectDetails = () => {
   const form = useForm({ schema: projectDetailsSchema });
+  const { auth } = useAuthState();
+  const {
+    state: { postTitleUrlTerm },
+  } = useAppState();
 
   const handleSubmitProjectDetails = (data) => {
     console.log(data);
