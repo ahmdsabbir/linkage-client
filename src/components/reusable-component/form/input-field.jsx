@@ -15,7 +15,7 @@ export const Input = forwardRef(function Input(
   return (
     <>
       <div
-        className={`${className} gap-2 sm:gap-4 md:items-center mb-2 md:mb-0  `}
+        className={`${className} gap-2 sm:gap-4 md:items-center mb-2 md:mb-2  `}
       >
         <label className="self-start flex flex-col label text-base min-w-[117px] max-w-[217px] md:pb-2">
           <span className="font-medium self-start">{label}</span>

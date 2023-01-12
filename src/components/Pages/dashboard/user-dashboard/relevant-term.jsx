@@ -41,6 +41,12 @@ const RelevantTerm = ({
       item.id === id ? item?.domain : "not found"
     );
 
+    const postData = {
+      domain: projectdomain.domain,
+      relevant_term: data.relevantTerm,
+      target_title: postTitleUrlTerm.target_title,
+    };
+
     fetch("http://192.168.101.4:5000/core/suggestions", {
       method: "POST",
       credentials: "include",
@@ -48,11 +54,7 @@ const RelevantTerm = ({
         "Content-Type": "application/json",
         Authorization: auth ? `Bearer ${auth}` : "",
       },
-      body: JSON.stringify({
-        domain: "https://anikyusuf.com",
-        relevant_term: "lulu leggins",
-        target_title: "Why Doesn’T Super Glue Work",
-      }),
+      body: JSON.stringify(postData),
     })
       .then((res) => res.json())
       .then((suggestionData) => {
@@ -66,62 +68,6 @@ const RelevantTerm = ({
           return;
         }
       });
-    /*  try {
-      await dispatch({ type: "relevantTerm", payload: data });
-      // start loading
-      // dispatch({ type: "loading" });
-      // add post title and relevant term to one Object
-      const postData = JSON.stringify({
-        domain: "https://anikyusuf.com",
-        relevant_term: "lulu leggins",
-        target_title: "Why Doesn’T Super Glue Work",
-      });
-
-      // post data to the server
-      // const response = await API.post("core/suggestions", postData, {
-      //   headers: {
-      //     "Content-Type": "application/json",
-      //     Authorization: auth ? `Bearer ${auth}` : "",
-      //   },
-      // }); 
-
-      const response = await fetch(
-        "http://192.168.101.4:5000/core/suggestions",
-        {
-          method: "POST",
-          credentials: "include",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth ? `Bearer ${auth}` : "",
-          },
-          body: JSON.stringify({
-            domain: "https://anikyusuf.com",
-            relevant_term: "lulu leggins",
-            target_title: "Why Doesn’T Super Glue Work",
-          }),
-        }
-      );
-
-      const responseData = await response.json();
-
-      console.log(responseData);
-      // spinner off
-      // dispatch({ type: "loading", loading: !loading });
-      //set data to state
-      await dispatch({
-        type: "aiSuggestions",
-        payload: [...response?.data?.suggestions],
-      });
-
-      if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
-        navigate(`/dashboard/project-starter/${id}/suggestions`);
-      } else {
-        return;
-      }
-    } catch (err) {
-      // dispatch({ type: "loading", loading: false });
-      console.log(err.message);
-    }  */
   };
 
   return (

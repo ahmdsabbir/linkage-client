@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "../../context/AuthProvider";
 
 const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
+  const { handleLogout } = useAuthState();
   return (
     <main
       className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
@@ -56,15 +58,19 @@ ${
               >
                 Profile
               </Link>
+
               <Link
-                href="#"
+                to="/dashboard/new-project"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
                 onClick={handleCloseSidebar}
               >
-                Tokens
+                Start A New Porject
               </Link>
             </nav>
           </div>
+          <button className="btn" onClick={() => handleLogout}>
+            Logout
+          </button>
         </article>
       </section>
       <section

@@ -2,7 +2,7 @@ import {
   createBrowserRouter,
   createRoutesFromElements,
   Route,
-  RouterProvider
+  RouterProvider,
 } from "react-router-dom";
 import "./App.css";
 import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
@@ -22,6 +22,7 @@ import AnchorTextForm from "./components/Pages/dashboard/user-dashboard/anchore-
 import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit-project-details";
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 import GeneratedSectionLayout from "./components/Pages/dashboard/user-dashboard/generated-section-layout";
+import NewProject from "./components/Pages/dashboard/user-dashboard/new-project";
 import NoName from "./components/Pages/dashboard/user-dashboard/no-name";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
 import RelevantTerm from "./components/Pages/dashboard/user-dashboard/relevant-term";
@@ -36,12 +37,25 @@ import RootLayout from "./components/root-layout/root-layout";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />} errorElement={<ErrorPage />}>
+      {/* user authentication */}
+      <Route path="login" element={<Login />} />
+      <Route path="register" element={<Register />} />
+      <Route path="unauthorized" element={<Unauthorized />} />
+      <Route path="verify" element={<EmailConfirmationModal />} />
+
+      {/* reset password */}
+      <Route path="reset-password" element={<ResetPasswordLayout />}>
+        <Route index element={<ResetPassword />} />
+        <Route path="new-password" element={<NewPasword />} />
+        <Route path="confirmation" element={<ResetPasswordConfirmation />} />
+      </Route>
+
       <Route index element={<Home />} />
       <Route path="about" element={<AboutUs />} />
       <Route path="contact" element={<Contact />} />
 
       {/* user protected routes */}
-      <Route element={<RequireAuth />}>    
+      <Route element={<RequireAuth />}>
         <Route path="dashboard" element={<Dashboard />}>
           <Route index element={<AllProjects />} />
 
@@ -79,22 +93,9 @@ const router = createBrowserRouter(
           {/* project starter layout nested route ends */}
 
           <Route path="user-details" element={<UserDetails />} />
+          {/* start a new project */}
+          <Route path="new-project" element={<NewProject />} />
         </Route>
-        </Route>
- 
-
-      {/* user authentication */}
-      <Route path="login" element={<Login />} />
-      <Route path="register" element={<Register />} />
-      <Route path="unauthorized" element={<Unauthorized />} />
-      <Route path="verify" element={<EmailConfirmationModal />} />
-
-      {/* reset password */}
-
-      <Route path="reset-password" element={<ResetPasswordLayout />}>
-        <Route index element={<ResetPassword />} />
-        <Route path="new-password" element={<NewPasword />} />
-        <Route path="confirmation" element={<ResetPasswordConfirmation />} />
       </Route>
     </Route>
   )

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
+import { useAppState } from "../context/AppProvider";
 import { useAuthState } from "../context/AuthProvider";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
@@ -20,19 +21,23 @@ const Login = () => {
   const location = useLocation();
   const navigate = useNavigate();
   // const from = location?.state.from?.pathname || "/";
-  const { setAuth } = useAuthState();
+  const { auth, setAuth } = useAuthState();
+  const { state, dispatch } = useAppState();
+  const from = location.state?.from?.pathname || "/";
 
   const form = useForm({ schema: loginFormSchema });
 
   // err state
   const [err, setErr] = useState("");
 
-  const handleSubmitLogin = async (data) => {
+  const handleLogin = async (data) => {
     const userData = {
       email: data.email,
       password: data.password,
     };
+
     try {
+      dispatch({ type: "loading" });
       const response = await API.post("/auth/login", JSON.stringify(userData), {
         headers: {
           "Content-Type": "application/json",
@@ -40,8 +45,11 @@ const Login = () => {
         },
       });
 
-      await setAuth(response?.data?.access_token);
-      navigate("/dashboard");
+      if (response.status === 200) {
+        const token = response?.data?.access_token;
+        await setAuth({ token });
+        navigate(from, { replace: true });
+      }
     } catch (error) {
       setErr(error);
       console.log(error);
@@ -52,7 +60,7 @@ const Login = () => {
     <div className="grid place-self-center h-screen">
       <div className="flex flex-col items-center justify-center">
         <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
-        <Form form={form} onSubmit={handleSubmitLogin}>
+        <Form form={form} onSubmit={handleLogin}>
           <Input
             label="Email"
             type="text"
