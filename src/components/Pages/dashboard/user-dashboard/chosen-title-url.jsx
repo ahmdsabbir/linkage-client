@@ -36,34 +36,19 @@ const ChosenTitleUrl = () => {
   }, [choosenTitleUrl]);
 
   const handleChosenTitleURl = async (data) => {
-    const postData = {
+    const postData = JSON.stringify({
       target_title: postTitleUrlTerm.target_title,
       source_title: data.title,
-    };
-
-    /*  fetch("http://192.168.101.4:5000/core/heading", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth ? `Bearer ${auth}` : "",
-      },
-      body: JSON.stringify({
-        source_title: data.,
-        target_title: postTitleUrlTerm.target_title,
-      }),
-    }) */
+    });
 
     try {
-      // loader only for button
       setHeadingLoader(true);
-      // getting post request
-      const response = await API.post("core/heading", postData, {
+      const response = await API.post("/core/heading", postData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: auth ? `Bearer ${auth}` : "",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: true,
+        withCredentials: "true",
       });
       if (response?.status === 200) {
         setHeadingLoader(false);
@@ -72,8 +57,8 @@ const ChosenTitleUrl = () => {
           payload: response?.data?.heading,
         });
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
   return (

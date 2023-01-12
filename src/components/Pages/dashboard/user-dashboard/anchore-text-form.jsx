@@ -23,22 +23,24 @@ const AnchorTextForm = () => {
   } = useAppState();
 
   const handleAchorTextSubmit = async (data) => {
-    const postData = {
+    const postData = JSON.stringify({
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
-    };
+    });
+    console.log(generatedHeading);
 
     try {
       dispatch({ type: "loading" });
       const response = await API.post("core/paragraph", postData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: auth ? `Bearer ${auth}` : "",
+          Authorization: auth?.token ? `Bearer ${auth?.token}` : "",
         },
         withCredentials: true,
       });
       console.log(response);
       if (response?.status === 200) {
+        dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "generatedParagraph",
           payload: response?.data?.paragraph,

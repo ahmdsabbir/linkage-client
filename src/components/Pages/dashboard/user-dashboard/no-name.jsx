@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 
@@ -22,25 +23,41 @@ const NoName = () => {
     const projectdomain = projects.find((item) =>
       item.id === id ? item?.domain : "not found"
     );
-    const postData = {
+
+    console.table({ target_title, domain: projectdomain.domain });
+
+    const postData = JSON.stringify({
       target_title,
       domain: projectdomain.domain,
+    });
+
+    const getData = async () => {
+      try {
+        const response = await API.post("/core/target-headings", postData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          },
+          withCredentials: "true",
+        });
+        console.log(response.data);
+        if (response?.status === 200) {
+          dispatch({
+            type: "updateAbove",
+            payload: [...response?.data?.headings],
+          });
+          dispatch({
+            type: "newUpdateAbove",
+            payload: [...response?.data?.headings],
+          });
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
-    fetch("http://192.168.101.4:5000/core/target-headings", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth ? `Bearer ${auth}` : "",
-      },
-      body: JSON.stringify(postData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log(data);
-        dispatch({ type: "updateAbove", payload: [...data.headings] });
-        dispatch({ type: "newUpdateAbove", payload: [...data.headings] });
-      });
+
+    //  calling the function
+    getData();
   }, []);
 
   // udpate the data above the heading on @{}

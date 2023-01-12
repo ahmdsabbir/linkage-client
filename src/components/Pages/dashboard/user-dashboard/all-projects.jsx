@@ -78,9 +78,6 @@ const AllProjects = () => {
               />
             ))
           )}
-          <button className="btn" onClick={handleNewPorject}>
-            Start A New Porject
-          </button>
         </div>
       )}
     </>

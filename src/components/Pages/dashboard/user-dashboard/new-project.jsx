@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { z } from "zod";
-import { useAppState } from "../../../context/AppProvider";
+import API from "../../../../api/api-config";
 import { useAuthState } from "../../../context/AuthProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
@@ -15,14 +15,31 @@ const newProjectStartSchema = z.object({
 
 const NewProject = () => {
   const form = useForm({ schema: newProjectStartSchema });
+  // const { reset } = useForm();
   const { auth } = useAuthState();
-  const {
-    state: { postTitleUrlTerm },
-  } = useAppState();
+  const [success, setSuccess] = useState("");
 
-  const handleNewProjectDetails = (data) => {
-    console.log(data);
+  const handleNewProjectDetails = async (data) => {
+    const postData = JSON.stringify({
+      name: data.projectName,
+      domain: data.domain,
+      wp_username: data.wpUsername,
+      wp_password: data.wpAppPassword,
+    });
+    try {
+      const response = await API.post("/project", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: true,
+      });
+      if (response?.status === 201) {
+        setSuccess(response?.data?.msg);
+      }
+    } catch (error) {}
   };
+
   return (
     <div className="px-6">
       <Form form={form} onSubmit={handleNewProjectDetails}>
@@ -54,6 +71,7 @@ const NewProject = () => {
           {...form.register("wpAppPassword")}
           className="flex flex-col md:flex-row "
         />
+        {success && <p className="text-red-700">{success}</p>}
 
         <div className="form-control md:flex-row mt-6">
           <button className="btn bg-contrast text-accent-dark border-0 text-white hover:bg-contrast-dark focus:bg-slate-600">

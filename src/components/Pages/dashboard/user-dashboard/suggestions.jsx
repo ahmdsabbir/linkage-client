@@ -8,7 +8,7 @@ import RelevantTerm from "./relevant-term";
 
 const Suggestions = () => {
   const {
-    state: { aiSuggestions, generatedHeading, loading: suggestionsLoading },
+    state: { aiSuggestions, generatedHeading, loading },
   } = useAppState();
 
   return (
@@ -46,7 +46,7 @@ const Suggestions = () => {
 
           {/* suggestions generated from api call */}
           <div>
-            {suggestionsLoading ? (
+            {loading ? (
               <Spinner />
             ) : (
               aiSuggestions.map((suggestion, i) => (

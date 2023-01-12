@@ -22,7 +22,7 @@ const SuggestionsCard = ({ title, url }) => {
           </p>
         )}
         <p>
-          <span className="font-medium">Category:</span> wristwatch, handgloves
+          <span className="font-medium">Category:</span> not generted
         </p>
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
           <button className="btn bg-accent-dark text-white capitalize border-none rounded">

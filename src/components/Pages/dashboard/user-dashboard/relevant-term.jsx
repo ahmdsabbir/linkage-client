@@ -2,6 +2,7 @@ import React from "react";
 
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
+import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import useForm from "../../../hook/useForm";
@@ -36,38 +37,38 @@ const RelevantTerm = ({
   const location = useLocation();
 
   // handle action
-  const handleSubmit = (data) => {
+  const handleSubmit = async (data) => {
     const projectdomain = projects.find((item) =>
       item.id === id ? item?.domain : "not found"
     );
 
-    const postData = {
+    const postData = JSON.stringify({
       domain: projectdomain.domain,
       relevant_term: data.relevantTerm,
       target_title: postTitleUrlTerm.target_title,
-    };
-
-    fetch("http://192.168.101.4:5000/core/suggestions", {
-      method: "POST",
-      credentials: "include",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth ? `Bearer ${auth}` : "",
-      },
-      body: JSON.stringify(postData),
-    })
-      .then((res) => res.json())
-      .then((suggestionData) => {
+    });
+    try {
+      const response = await API.post("/core/suggestions", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: "true",
+      });
+      if (response?.status === 200) {
         if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
-          dispatch({
+          await dispatch({
             type: "aiSuggestions",
-            payload: [...suggestionData?.suggestions],
+            payload: [...response?.data?.suggestions],
           });
           navigate(`/dashboard/project-starter/${id}/suggestions`);
-        } else {
-          return;
         }
-      });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+    // the relevant term has been saved for future use
+    dispatch({ type: "relevantTerm", payload: data.relevantTerm });
   };
 
   return (
