@@ -49,7 +49,6 @@ const AllProjects = () => {
 
   // start a new projecct handler
   const handleNewPorject = () => {
-    console.log("handleNewPorject");
     navigate("new-project");
   };
 

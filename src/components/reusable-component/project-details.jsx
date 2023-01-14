@@ -8,11 +8,9 @@ const ProjectDetails = () => {
     state: { projects },
   } = useAppState();
   // react router hook for gettinig the dynamic link id
-  const { id } = useParams();
-  const projectDetails = projects.find((item) =>
-    item.id === id ? item : "not found id"
-  );
-  // console.log(projectDetails);
+  const { id: projectId } = useParams();
+
+  const projectDetails = projects.find((item) => item.id == projectId);
 
   return (
     <div className="card rounded-none flex-shrink-0 w-full bg-[#f0f0f0] px-6 ">
@@ -34,7 +32,7 @@ const ProjectDetails = () => {
           {projectDetails?.id && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Id:</h1>
-              <p className="text-lg">{id}</p>
+              <p className="text-lg">{projectId}</p>
             </div>
           )}
         </div>

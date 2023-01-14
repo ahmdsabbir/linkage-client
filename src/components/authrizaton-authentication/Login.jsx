@@ -48,7 +48,8 @@ const Login = () => {
       if (response.status === 200) {
         const token = response?.data?.access_token;
         await setAuth({ token });
-        navigate(from, { replace: true });
+        navigate("/dashboard");
+        // navigate(from, { replace: true });
       }
     } catch (error) {
       setErr(error);

@@ -38,15 +38,15 @@ const RelevantTerm = ({
 
   // handle action
   const handleSubmit = async (data) => {
-    const projectdomain = projects.find((item) =>
-      item.id === id ? item?.domain : "not found"
-    );
-
+    const projectDomain = projects.find((item) => item.id == id);
     const postData = JSON.stringify({
-      domain: projectdomain.domain,
+      domain: projectDomain.domain,
       relevant_term: data.relevantTerm,
       target_title: postTitleUrlTerm.target_title,
     });
+    /* console.log(projectDomain, postData);
+    if (projectDomain) return; */
+    // 7 Best Fabric Pots With Buying Guide
     try {
       const response = await API.post("/core/suggestions", postData, {
         headers: {
@@ -55,6 +55,7 @@ const RelevantTerm = ({
         },
         withCredentials: "true",
       });
+      console.log(response?.data);
       if (response?.status === 200) {
         if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
           await dispatch({

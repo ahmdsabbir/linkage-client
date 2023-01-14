@@ -13,7 +13,7 @@ const SingleProjectCard = ({
     <div className="flex gap-4 card rounded shadow p-4">
       <div className="flex flex-col gap-3">
         {name ? <p> Project Name: {name}</p> : <p>project name not found</p>}
-        {domain ? <p>URL: {domain} </p> : <p>domain name not found</p>}
+        {domain ? <p>Domain: {domain} </p> : <p>domain name not found</p>}
         {admin ? <p>WP Username: Admin</p> : <p>admin not found</p>}
         {wpPassword ? (
           <p>WP App. Password: {wpPassword}</p>
@@ -23,7 +23,7 @@ const SingleProjectCard = ({
         {dateAdded ? (
           <p>Project Created At: {dateAdded}</p>
         ) : (
-          <p>dateAdded found</p>
+          <p>date not found</p>
         )}
       </div>
       <div className="flex flex-col sm:flex-row gap-2 ">
