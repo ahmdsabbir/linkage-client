@@ -53,7 +53,6 @@ const Login = () => {
       }
     } catch (error) {
       setErr(error);
-      console.log(error);
     }
   };
 

@@ -1,11 +1,10 @@
-import React from "react";
-
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
-import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
 import Spinner from "../../../spinner";
@@ -16,25 +15,28 @@ const relevantTerm = z.object({
     .min(4, "relevant term must be more than 4 characters!"),
 });
 
-const RelevantTerm = ({
+const RelevantTermLayout = ({
   className = "",
   btnText = "generate suggestion",
-  btnBg = "bg-accent-dark hover:bg-[#1A3353]",
   hintText,
   label,
 }) => {
+  // custom hook for form
   const form = useForm({ schema: relevantTerm });
+  const [err, setErr] = useState("");
+
   // getting data from global state context provider
   const {
     state: { projects, loading, postTitleUrlTerm },
     dispatch,
   } = useAppState();
+
+  //   auth provider state
   const { auth } = useAuthState();
 
-  // react @{navigate , id} router hook for redirecting desired link and dynamic link id
+  // react @{navigate , id, location} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
   const { id } = useParams();
-  const location = useLocation();
 
   // handle action
   const handleSubmit = async (data) => {
@@ -44,10 +46,13 @@ const RelevantTerm = ({
       relevant_term: data.relevantTerm,
       target_title: postTitleUrlTerm.target_title,
     });
-    /* console.log(projectDomain, postData);
-    if (projectDomain) return; */
-    // 7 Best Fabric Pots With Buying Guide
+    // the relevant term has been saved for future use
+    dispatch({ type: "relevantTerm", payload: data.relevantTerm });
+    // start loading process
+    // post data to the api
     try {
+      dispatch({ type: "loading" });
+      setErr("");
       const response = await API.post("/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -55,29 +60,33 @@ const RelevantTerm = ({
         },
         withCredentials: "true",
       });
-      console.log(response?.data);
       if (response?.status === 200) {
-        if (location.pathname === `/dashboard/project-starter/${id}/relevant`) {
-          await dispatch({
-            type: "aiSuggestions",
-            payload: [...response?.data?.suggestions],
-          });
-          navigate(`/dashboard/project-starter/${id}/suggestions`);
-        }
+        await dispatch({
+          type: "aiSuggestions",
+          payload: [...response?.data?.suggestions],
+        });
+        await dispatch({ type: "loading", payload: false });
+        // navigate(`/dashboard/project-starter/${id}/suggestions`);
+      } else {
+        console.log(response);
+        throw new Error("maybe cors Network Error");
       }
     } catch (error) {
-      console.log(error);
+      await dispatch({ type: "loading", payload: false });
+      console.log(loading, error.message);
+      setErr(error.message);
+      console.log(err);
     }
-    // the relevant term has been saved for future use
-    dispatch({ type: "relevantTerm", payload: data.relevantTerm });
   };
 
-  return (
-    <div className="px-6">
-      {location.pathname === `/dashboard/project-starter/${id}/relevant` &&
-      loading ? (
-        <Spinner />
-      ) : (
+  if (loading && !err) {
+    return <Spinner />;
+  } else if (!loading && err) {
+    console.log(err);
+    <p className="text-5xl text-black">{err?.message}</p>;
+  } else {
+    return (
+      <div className="px-6">
         <div className="card-body rounded p-0 bg-base-100">
           <Form form={form} onSubmit={handleSubmit}>
             <Input
@@ -89,14 +98,13 @@ const RelevantTerm = ({
               autoFocus={true}
               {...form.register("relevantTerm")}
             />
-
             <div className="flex gap-2 sm:gap-6 ">
               <div className="hidden sm:block flex-1 min-w-[117px] max-w-[217px] order-2 md:order-1"></div>
               <div className="form-control flex-1  morder-1 md:order-1">
                 <div>
                   <button
                     type="submit"
-                    className={`btn btn-primary text-white rounded border-none capitalize ${className} ${btnBg}`}
+                    className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] ${className}`}
                   >
                     {btnText}
                   </button>
@@ -105,9 +113,9 @@ const RelevantTerm = ({
             </div>
           </Form>
         </div>
-      )}
-    </div>
-  );
+      </div>
+    );
+  }
 };
 
-export default RelevantTerm;
+export default RelevantTermLayout;

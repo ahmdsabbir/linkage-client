@@ -58,7 +58,6 @@ const Register = () => {
         ) {
           setErr(response.data.msg);
         } else {
-          console.log(response);
           navigate("/verify");
         }
       }

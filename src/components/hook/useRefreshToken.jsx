@@ -12,7 +12,7 @@ const useRefreshToken = () => {
         Authorization : auth ? `Bearer ${auth}` : "",
       }, */
     });
-    console.log(response);
+
     await setAuth((prev) => {
       console.log(prev);
       console.log(response);

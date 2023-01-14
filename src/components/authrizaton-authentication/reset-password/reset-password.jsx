@@ -13,7 +13,6 @@ const ResetPassword = () => {
   const form = useForm({ schema: emailValidationSchema });
   const navigate = useNavigate();
   const handleSubmitResetPassword = (data) => {
-    console.log(data);
     navigate("/reset-password/confirmation");
   };
   return (

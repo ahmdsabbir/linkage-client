@@ -5,7 +5,7 @@ import { useAppState } from "../context/AppProvider";
 const ProjectDetails = () => {
   // global state context provider
   const {
-    state: { projects },
+    state: { projects, postTitleUrlTerm },
   } = useAppState();
   // react router hook for gettinig the dynamic link id
   const { id: projectId } = useParams();
@@ -33,6 +33,18 @@ const ProjectDetails = () => {
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Id:</h1>
               <p className="text-lg">{projectId}</p>
+            </div>
+          )}
+          {postTitleUrlTerm?.target_title && (
+            <div className="flex items-center gap-4 font-medium">
+              <h1 className="text-xl">Post Title:</h1>
+              <p className="text-lg">{postTitleUrlTerm?.target_title}</p>
+            </div>
+          )}
+          {postTitleUrlTerm?.target_url && (
+            <div className="flex items-center gap-4 font-medium">
+              <h1 className="text-xl">Post URL:</h1>
+              <p className="text-lg">{postTitleUrlTerm?.target_url}</p>
             </div>
           )}
         </div>

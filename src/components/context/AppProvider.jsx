@@ -101,12 +101,6 @@ const AppProvider = ({ children }) => {
     getStorageValue
   );
 
-  // set app state in local storage
-  /*  useEffect(() => {
-    // storing input name
-    localStorage.setItem("projectData", JSON.stringify(state));
-  }, [state]); */
-
   // regular state
   return (
     <AppStateContext.Provider

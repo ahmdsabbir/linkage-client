@@ -27,7 +27,6 @@ const AnchorTextForm = () => {
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
     });
-    console.log(generatedHeading);
 
     try {
       dispatch({ type: "loading" });

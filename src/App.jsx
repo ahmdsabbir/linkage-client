@@ -25,7 +25,7 @@ import GeneratedSectionLayout from "./components/Pages/dashboard/user-dashboard/
 import NewProject from "./components/Pages/dashboard/user-dashboard/new-project";
 import NoName from "./components/Pages/dashboard/user-dashboard/no-name";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
-import RelevantTerm from "./components/Pages/dashboard/user-dashboard/relevant-term";
+import RelevantTermLayout from "./components/Pages/dashboard/user-dashboard/relevant-term-layout";
 import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
 import ErrorPage from "./components/Pages/error-page";
@@ -62,19 +62,7 @@ const router = createBrowserRouter(
           {/* project starter layout nested route starts */}
           <Route path="project-starter/:id" element={<ProjectStarterLayout />}>
             <Route index element={<EnterPostTitle />} />
-            <Route
-              path="relevant"
-              element={
-                <RelevantTerm
-                  className="rounded-full"
-                  btnText="Generate Suggestion"
-                  hintText="We’ll make suggestion 
-            based on the term you 
-            give us."
-                  label="Relevant Term"
-                />
-              }
-            />
+            <Route path="relevant" element={<RelevantTermLayout />} />
             <Route path="suggestions" element={<Suggestions />} />
             <Route
               path="generated-heading"
