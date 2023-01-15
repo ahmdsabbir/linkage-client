@@ -46,6 +46,7 @@ const RelevantTermLayout = () => {
         // start loading process & empty error state
         dispatch({ type: "error", payload: "" });
         dispatch({ type: "loading" });
+
         // post data to the api
         const response = await API.post("/core/suggestions", postData, {
           headers: {
@@ -82,7 +83,7 @@ const RelevantTermLayout = () => {
   if (loading && !error) {
     return <Spinner />;
   } else if (!loading && error) {
-    <p className="text-5xl text-black">{err?.message}</p>;
+    <p className="text-5xl text-black">{error}</p>;
   } else {
     return (
       <div className="px-6">

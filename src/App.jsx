@@ -18,7 +18,6 @@ import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/dashboard/Dashboard";
 import AllProjects from "./components/Pages/dashboard/user-dashboard/all-projects";
-import AnchorTextForm from "./components/Pages/dashboard/user-dashboard/anchore-text-form";
 import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit-project-details";
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 import GeneratedSectionLayout from "./components/Pages/dashboard/user-dashboard/generated-section-layout";
@@ -67,10 +66,9 @@ const router = createBrowserRouter(
             <Route
               path="generated-heading"
               element={<GeneratedSectionLayout />}
-            >
-              <Route index element={<AnchorTextForm />} />
-              <Route path="no-name" element={<NoName />} />
-            </Route>
+            />
+
+            <Route path="no-name" element={<NoName />} />
 
             {/* edit project details */}
             <Route
