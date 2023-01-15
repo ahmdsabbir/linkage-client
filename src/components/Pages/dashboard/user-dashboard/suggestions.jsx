@@ -78,7 +78,7 @@ const Suggestions = () => {
           <p className="text-xl font-semibold text-center mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
-          <div className="card-body rounded p-0 bg-base-100">
+          <div className="card-body rounded p-0 bg-base-100 px-6">
             <Form form={form} onSubmit={handleSubmit}>
               <Input
                 label={"Search More Suggestions"}

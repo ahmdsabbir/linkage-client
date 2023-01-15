@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
@@ -15,19 +14,13 @@ const relevantTerm = z.object({
     .min(4, "relevant term must be more than 4 characters!"),
 });
 
-const RelevantTermLayout = ({
-  className = "",
-  btnText = "generate suggestion",
-  hintText,
-  label,
-}) => {
+const RelevantTermLayout = () => {
   // custom hook for form
   const form = useForm({ schema: relevantTerm });
-  const [err, setErr] = useState("");
 
   // getting data from global state context provider
   const {
-    state: { projects, loading, postTitleUrlTerm },
+    state: { projects, loading, error, postTitleUrlTerm },
     dispatch,
   } = useAppState();
 
@@ -51,8 +44,8 @@ const RelevantTermLayout = ({
     // start loading process
     // post data to the api
     try {
+      dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading" });
-      setErr("");
       const response = await API.post("/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -60,29 +53,31 @@ const RelevantTermLayout = ({
         },
         withCredentials: "true",
       });
+      console.log(response);
       if (response?.status === 200) {
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
-        await dispatch({ type: "loading", payload: false });
-        // navigate(`/dashboard/project-starter/${id}/suggestions`);
-      } else {
-        console.log(response);
-        throw new Error("maybe cors Network Error");
+        navigate(`/dashboard/project-starter/${id}/suggestions`);
       }
     } catch (error) {
-      await dispatch({ type: "loading", payload: false });
-      console.log(loading, error.message);
-      setErr(error.message);
-      console.log(err);
+      dispatch({ type: "loading", payload: !loading });
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.status === 400) {
+        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.message === "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else {
+        dispatch({ type: "error", payload: "server error" });
+      }
     }
   };
 
-  if (loading && !err) {
+  if (loading && !error) {
     return <Spinner />;
-  } else if (!loading && err) {
-    console.log(err);
+  } else if (!loading && error) {
     <p className="text-5xl text-black">{err?.message}</p>;
   } else {
     return (
@@ -90,8 +85,8 @@ const RelevantTermLayout = ({
         <div className="card-body rounded p-0 bg-base-100">
           <Form form={form} onSubmit={handleSubmit}>
             <Input
-              label={label}
-              hintText={hintText}
+              label={"Relevant Term"}
+              hintText={"We’ll make suggestion based on the term you give us."}
               type="text"
               placeholder="relevant term..."
               className="flex flex-col md:flex-row "
@@ -104,15 +99,16 @@ const RelevantTermLayout = ({
                 <div>
                   <button
                     type="submit"
-                    className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] ${className}`}
+                    className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] `}
                   >
-                    {btnText}
+                    Submit
                   </button>
                 </div>
               </div>
             </div>
           </Form>
         </div>
+        {error && <p className="text-red-800">{error}</p>}
       </div>
     );
   }

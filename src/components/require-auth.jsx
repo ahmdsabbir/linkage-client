@@ -5,9 +5,6 @@ import { useAuthState } from "./context/AuthProvider";
 const RequireAuth = () => {
   const {
     auth: { token },
-    setAuth,
-    authLoading,
-    setAuthLoading,
   } = useAuthState();
   const location = useLocation();
 
