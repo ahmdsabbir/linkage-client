@@ -47,8 +47,11 @@ const Login = () => {
 
       if (response.status === 200) {
         const token = response?.data?.access_token;
-        await setAuth({ token });
-        navigate("/dashboard");
+        if (token) {
+          await setAuth({ token });
+          localStorage.setItem("linkage_token", token);
+          navigate("/dashboard");
+        }
         // navigate(from, { replace: true });
       }
     } catch (error) {
