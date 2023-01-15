@@ -41,7 +41,7 @@ const RelevantTermLayout = () => {
     });
     // the relevant term has been saved for future use
     try {
-      if (id == projectDomain.ied) {
+      if (id == projectDomain.id) {
         await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
         // start loading process & empty error state
         dispatch({ type: "error", payload: "" });

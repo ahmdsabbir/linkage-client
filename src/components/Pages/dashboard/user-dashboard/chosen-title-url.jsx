@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -12,13 +13,16 @@ const chosenTitleUrl = z.object({
 
 const ChosenTitleUrl = () => {
   const {
-    state: { choosenTitleUrl, postTitleUrlTerm },
+    state: { projects, choosenTitleUrl, postTitleUrlTerm, error: globalError },
     dispatch,
   } = useAppState();
   const { auth } = useAuthState();
+  // react router dom hooks
+  const navigate = useNavigate();
+  const { id } = useParams();
+  // react state
   const [headingLoader, setHeadingLoader] = useState(false);
 
-  // setValue func imported as default value
   const {
     register,
     reset,
@@ -29,11 +33,14 @@ const ChosenTitleUrl = () => {
   });
 
   useEffect(() => {
+    // setValue func imported as default value
     let defaultValues = {};
     defaultValues.title = choosenTitleUrl.title;
     defaultValues.url = choosenTitleUrl.url;
     reset({ ...defaultValues });
   }, [choosenTitleUrl]);
+
+  const projectDomain = projects.find((item) => item.id == id);
 
   const handleChosenTitleURl = async (data) => {
     const postData = JSON.stringify({
@@ -42,24 +49,41 @@ const ChosenTitleUrl = () => {
     });
 
     try {
-      setHeadingLoader(true);
-      const response = await API.post("/core/heading", postData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-        withCredentials: "true",
-      });
-
-      if (response?.status === 200) {
-        setHeadingLoader(false);
-        await dispatch({
-          type: "generatedHeading",
-          payload: response?.data?.heading,
+      if (projectDomain.id == id) {
+        // empty error state
+        dispatch({ type: "error", payload: "" });
+        // set loading state
+        setHeadingLoader(true);
+        // post data to the api
+        const response = await API.post("/core/heading", postData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          },
+          withCredentials: "true",
         });
+
+        if (response?.status === 200) {
+          setHeadingLoader(false);
+          await dispatch({
+            type: "generatedHeading",
+            payload: response?.data?.heading,
+          });
+        }
+      } else {
+        navigate("dashboard");
       }
     } catch (error) {
-      console.log(error);
+      setHeadingLoader(false);
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.status == 400 || error?.status == 401) {
+        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.message == "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else {
+        dispatch({ type: "error", payload: "server error" });
+      }
     }
   };
   return (
@@ -106,19 +130,19 @@ const ChosenTitleUrl = () => {
             />
           </div>
 
-          <div className="flex flex-col md:flex-row gap-2 sm:gap-4 md:gap-6 ">
-            <div className=" whitespace-nowrap order-2 md:order-1 sm:min-w-[85px]"></div>
-            <div className="order-1 md:order-2">
-              <button
-                className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded"
-                disabled={headingLoader ? true : false}
-              >
-                {headingLoader ? "Generating..." : "Generate Heading"}
-              </button>
-              <p className="text-black/60 text-sm">
-                Remember, You can always regenerate!
-              </p>
-            </div>
+          <div className="md:ml-[110px]">
+            <button
+              className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded"
+              disabled={headingLoader ? true : false}
+            >
+              {headingLoader ? "Generating..." : "Generate Heading"}
+            </button>
+            <p className="text-black/60 text-sm">
+              Remember, You can always regenerate!
+            </p>
+            {!headingLoader && globalError && (
+              <p className="text-red-800">{globalError}</p>
+            )}
           </div>
         </form>
       </div>
