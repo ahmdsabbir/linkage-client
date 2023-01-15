@@ -41,11 +41,11 @@ const RelevantTermLayout = () => {
     });
     // the relevant term has been saved for future use
     dispatch({ type: "relevantTerm", payload: data.relevantTerm });
-    // start loading process
-    // post data to the api
     try {
+      // start loading process & empty error state
       dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading" });
+      // post data to the api
       const response = await API.post("/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const RelevantTermLayout = () => {
         withCredentials: "true",
       });
 
-      if (response?.status === 200) {
+      if (response?.status == 200) {
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
@@ -65,9 +65,9 @@ const RelevantTermLayout = () => {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status === 400) {
+      } else if (error?.status == 400 || error?.status == 401) {
         dispatch({ type: "error", payload: "missing username or password" });
-      } else if (error?.message === "Network Error") {
+      } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else {
         dispatch({ type: "error", payload: "server error" });

@@ -38,7 +38,7 @@ const Suggestions = () => {
 
   const [err, setErr] = useState("");
 
-  const handleSubmit = async (data) => {
+  const handleSubmitNewSuggestion = async (data) => {
     const projectDomain = projects.find((item) => item.id == id);
     const postData = JSON.stringify({
       domain: projectDomain.domain,
@@ -79,7 +79,7 @@ const Suggestions = () => {
             Not Happy with the suggestions? Try with different Term
           </p>
           <div className="card-body rounded p-0 bg-base-100 px-6">
-            <Form form={form} onSubmit={handleSubmit}>
+            <Form form={form} onSubmit={handleSubmitNewSuggestion}>
               <Input
                 label={"Search More Suggestions"}
                 hintText={"Tip: Try to choose relevant terms."}
