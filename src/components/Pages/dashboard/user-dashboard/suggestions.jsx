@@ -90,19 +90,12 @@ const Suggestions = () => {
                 {...form.register("relevantTerm")}
               />
 
-              <div className="flex gap-2 sm:gap-6 ">
-                <div className="hidden sm:block flex-1 min-w-[117px] max-w-[217px] order-2 md:order-1"></div>
-                <div className="form-control flex-1  morder-1 md:order-1">
-                  <div>
-                    <button
-                      type="submit"
-                      className={`btn btn-primary text-white rounded border-none capitalize `}
-                    >
-                      {"generate suggestion again"}
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <button
+                type="submit"
+                className={`btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[228px]`}
+              >
+                Generate suggestion again
+              </button>
             </Form>
           </div>
         </div>

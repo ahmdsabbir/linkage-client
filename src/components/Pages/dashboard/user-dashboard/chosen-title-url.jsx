@@ -42,10 +42,6 @@ const ChosenTitleUrl = () => {
     });
 
     try {
-      await dispatch({
-        type: "generatedHeading",
-        payload: "",
-      });
       setHeadingLoader(true);
       const response = await API.post("/core/heading", postData, {
         headers: {

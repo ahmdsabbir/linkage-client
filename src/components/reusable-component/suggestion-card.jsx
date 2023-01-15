@@ -4,8 +4,12 @@ import { useAppState } from "../context/AppProvider";
 const SuggestionsCard = ({ title, url }) => {
   const { dispatch } = useAppState();
 
-  const handleChosenTitleUrl = () => {
-    dispatch({ type: "choosenTitleUrl", payload: { title, url } });
+  const handleChosenTitleUrl = async () => {
+    await dispatch({ type: "choosenTitleUrl", payload: { title, url } });
+    await dispatch({
+      type: "generatedHeading",
+      payload: "",
+    });
   };
 
   return (
