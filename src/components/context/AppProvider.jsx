@@ -16,6 +16,7 @@ const initialState = {
     newData: [],
   },
   loading: false,
+  error: "",
   currentUser: {},
 };
 
@@ -80,6 +81,9 @@ const projectsReducer = (state, action) => {
     case "loading": {
       return { ...state, loading: true };
     }
+    case "error": {
+      return { ...state, error: action.payload };
+    }
 
     default:
       return state;
@@ -105,7 +109,6 @@ const AppProvider = ({ children }) => {
   return (
     <AppStateContext.Provider
       value={{
-        // useReducer function
         state,
         dispatch,
       }}

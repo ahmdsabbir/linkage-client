@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [authLoading, setAuthLoading] = useState(false);
+
   const handleLogout = () => {
     localStorage.removeItem("token");
   };
