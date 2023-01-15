@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -127,6 +127,9 @@ const GeneratedSectionLayout = () => {
             "somethign went wrong, you cant go forward"
           )}
         </div>
+        <Link to={`/dashboard/project-starter/${id}/no-name`}>
+          got to no name
+        </Link>
       </div>
     </div>
   );
