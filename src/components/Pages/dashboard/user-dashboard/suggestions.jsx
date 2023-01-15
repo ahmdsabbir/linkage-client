@@ -64,10 +64,17 @@ const Suggestions = () => {
         });
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
-      setErr(error);
+      dispatch({ type: "loading", payload: !loading });
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.status == 400 || error?.status == 401) {
+        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.message == "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else {
+        dispatch({ type: "error", payload: "server error" });
+      }
     }
-    // the relevant term has been saved for future use
   };
 
   return (

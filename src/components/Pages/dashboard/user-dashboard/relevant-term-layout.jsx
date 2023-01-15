@@ -40,26 +40,30 @@ const RelevantTermLayout = () => {
       target_title: postTitleUrlTerm.target_title,
     });
     // the relevant term has been saved for future use
-    dispatch({ type: "relevantTerm", payload: data.relevantTerm });
     try {
-      // start loading process & empty error state
-      dispatch({ type: "error", payload: "" });
-      dispatch({ type: "loading" });
-      // post data to the api
-      const response = await API.post("/core/suggestions", postData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-        withCredentials: "true",
-      });
-
-      if (response?.status == 200) {
-        await dispatch({
-          type: "aiSuggestions",
-          payload: [...response?.data?.suggestions],
+      if (id == projectDomain.ied) {
+        await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
+        // start loading process & empty error state
+        dispatch({ type: "error", payload: "" });
+        dispatch({ type: "loading" });
+        // post data to the api
+        const response = await API.post("/core/suggestions", postData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          },
+          withCredentials: "true",
         });
-        navigate(`/dashboard/project-starter/${id}/suggestions`);
+
+        if (response?.status == 200) {
+          await dispatch({
+            type: "aiSuggestions",
+            payload: [...response?.data?.suggestions],
+          });
+          navigate(`/dashboard/project-starter/${id}/suggestions`);
+        }
+      } else {
+        navigate("/dashboard");
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
