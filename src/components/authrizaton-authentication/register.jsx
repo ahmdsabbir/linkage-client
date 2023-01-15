@@ -41,16 +41,13 @@ const Register = () => {
 
   // singup handle function
   const handleSubmitRegister = async (data) => {
-    const postJsonData = {
+    const postJsonData = JSON.stringify({
       username: data.username,
       email: data.email,
       password: data.password,
-    };
+    });
     try {
-      const response = await API.post(
-        "http://192.168.101.15:5000/auth/register",
-        postJsonData
-      );
+      const response = await API.post("/auth/register", postJsonData);
       if (response.status === 201 || response.status === 200) {
         if (
           response?.data?.msg === "username already taken" ||

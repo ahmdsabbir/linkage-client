@@ -1,9 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuthState } from "../../context/AuthProvider";
 
 const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
-  const { handleLogout } = useAuthState();
+  const { auth, setAuth } = useAuthState();
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    localStorage.removeItem("linkage_token");
+    await setAuth({});
+    navigate("/login");
+    console.log(auth);
+  };
   return (
     <main
       className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
@@ -68,7 +75,7 @@ ${
               </Link>
             </nav>
           </div>
-          <button className="btn" onClick={() => handleLogout}>
+          <button className="btn" onClick={handleLogout}>
             Logout
           </button>
         </article>

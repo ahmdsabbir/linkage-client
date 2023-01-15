@@ -6,13 +6,9 @@ const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [authLoading, setAuthLoading] = useState(false);
 
-  const handleLogout = () => {
-    localStorage.removeItem("token");
-  };
-
   return (
     <AuthContext.Provider
-      value={{ auth, setAuth, authLoading, setAuthLoading, handleLogout }}
+      value={{ auth, setAuth, authLoading, setAuthLoading }}
     >
       {children}
     </AuthContext.Provider>
