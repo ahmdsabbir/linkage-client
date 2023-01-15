@@ -22,7 +22,7 @@ const GenerateHeading = ({ title }) => {
               navigate(`/dashboard/project-starter/${id}/generated-heading`)
             }
           >
-            Next Step(this button must be secured with logic)
+            Next Step
           </button>
         </div>
       )}
