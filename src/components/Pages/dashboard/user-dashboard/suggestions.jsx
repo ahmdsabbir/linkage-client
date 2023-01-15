@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
@@ -32,12 +32,12 @@ const Suggestions = () => {
       aiSuggestions,
       generatedHeading,
       loading,
+      error,
     },
     dispatch,
   } = useAppState();
 
-  const [err, setErr] = useState("");
-
+  // event handler for new relevant term
   const handleSubmitNewSuggestion = async (data) => {
     const projectDomain = projects.find((item) => item.id == id);
     const postData = JSON.stringify({
@@ -125,10 +125,10 @@ const Suggestions = () => {
 
           {/* suggestions generated from api call */}
           <div>
-            {loading ? (
+            {loading && !error ? (
               <Spinner />
-            ) : err ? (
-              <h2 className="text-5xl text-black">{err.message}</h2>
+            ) : !loading && error ? (
+              error && <p className="text-red-800">{error}</p>
             ) : (
               aiSuggestions?.map((suggestion, i) => (
                 <SuggestionsCard
