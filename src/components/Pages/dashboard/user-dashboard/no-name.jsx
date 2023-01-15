@@ -20,9 +20,7 @@ const NoName = () => {
   const { auth } = useAuthState();
 
   useEffect(() => {
-    const projectdomain = projects.find((item) =>
-      item.id === id ? item?.domain : "not found"
-    );
+    const projectdomain = projects.find((item) => item.id == id);
 
     console.table({ target_url, domain: projectdomain.domain });
 
@@ -42,6 +40,14 @@ const NoName = () => {
         });
         console.log(response.data);
         if (response?.status === 200) {
+          dispatch({
+            type: "updateAbove",
+            payload: [],
+          });
+          dispatch({
+            type: "newUpdateAbove",
+            payload: [],
+          });
           dispatch({
             type: "updateAbove",
             payload: [...response?.data?.headings],

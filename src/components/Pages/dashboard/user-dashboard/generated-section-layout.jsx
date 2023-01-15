@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -26,6 +26,7 @@ const GeneratedSectionLayout = () => {
 
   const location = useLocation();
   const { id } = useParams();
+  const navigate = useNavigate();
   // find the id is correct
   const projectDomain = projects.find((item) => item.id == id);
 
@@ -74,6 +75,15 @@ const GeneratedSectionLayout = () => {
     }
   };
 
+  const handleUpdateSectionRoute = () => {
+    if (
+      projectDomain.id == id &&
+      location.pathname === `/dashboard/project-starter/${id}/generated-heading`
+    ) {
+      navigate(`/dashboard/project-starter/${id}/no-name`);
+    }
+  };
+
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-6">
       {/* anchor input field */}
@@ -114,22 +124,13 @@ const GeneratedSectionLayout = () => {
           )}
         </div>
         <div className=" self-start flex-1 order-1 md:order-1">
-          {projectDomain.id == id &&
-          location.pathname ===
-            `/dashboard/project-starter/${id}/generated-heading` ? (
-            <button
-              to={`/dashboard/project-starter/${id}/generated-heading/no-name`}
-              className="btn bg-contrast border-none rounded text-white"
-            >
-              Yup..Looks Good!
-            </button>
-          ) : (
-            "somethign went wrong, you cant go forward"
-          )}
+          <button
+            className="btn bg-contrast border-none rounded text-white"
+            onClick={handleUpdateSectionRoute}
+          >
+            Yup..Looks Good!
+          </button>
         </div>
-        <Link to={`/dashboard/project-starter/${id}/no-name`}>
-          got to no name
-        </Link>
       </div>
     </div>
   );
