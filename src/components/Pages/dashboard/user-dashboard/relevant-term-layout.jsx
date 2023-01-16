@@ -107,7 +107,7 @@ const RelevantTermLayout = () => {
             </button>
           </Form>
         </div>
-        {error && <p className="text-red-800">{error}</p>}
+        {error && <p className="text-red-800 font-medium">{error}</p>}
       </div>
     );
   }
