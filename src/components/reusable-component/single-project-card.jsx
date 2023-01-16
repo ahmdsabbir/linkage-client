@@ -1,14 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const SingleProjectCard = ({
-  name,
-  domain,
-  dateAdded,
-  id,
-  wpPassword,
-  admin,
-}) => {
+const SingleProjectCard = ({ name, domain, dateAdded, wpPassword, admin }) => {
   return (
     <div className="flex gap-4 card rounded shadow p-4">
       <div className="flex flex-col gap-3">
@@ -29,13 +22,13 @@ const SingleProjectCard = ({
       <div className="flex flex-col sm:flex-row gap-2 ">
         <NavLink
           className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 "
-          to={`/dashboard/project-starter/${id}`}
+          to={`/dashboard/project-starter/${name.toLowerCase()}`}
         >
           Start Project
         </NavLink>
         <NavLink
           className="btn bg-accent-light text-white rounded  border-none hover:bg-warning hover:text-base-300  focus:bg-slate-600"
-          to={`/dashboard/project-starter/${id}/edit-project-details`}
+          to={`/dashboard/project-starter/${name.toLowerCase()}/edit-project-details`}
         >
           Edit
         </NavLink>
