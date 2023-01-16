@@ -23,7 +23,7 @@ const EnterPostTitle = () => {
   const form = useForm({ schema: postTitleSchema });
   // react router hook for redirecting desired link
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { name } = useParams();
 
   const projectDomain = projects.find((item) => item.id == id);
   // post request
@@ -32,7 +32,7 @@ const EnterPostTitle = () => {
     return;
     if (id == projectDomain.id) {
       await dispatch({ type: "postTitleUrl", payload: data });
-      navigate(`/dashboard/project-starter/${id}/relevant`);
+      navigate(`/dashboard/project-starter/${name.toLowerCase()}/relevant`);
     } else {
       navigate("/dashboard");
     }

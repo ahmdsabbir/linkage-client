@@ -3,6 +3,7 @@ export const AppStateContext = createContext();
 
 const initialState = {
   projects: [],
+  selectedPorject: {},
   postTitleUrlTerm: {
     target_title: "",
     relevant_term: "",
@@ -26,6 +27,12 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         projects: [...action.payload],
+        loading: false,
+      };
+    case "selectedProject":
+      return {
+        ...state,
+        projects: { ...action.payload },
         loading: false,
       };
     case "postTitleUrl":

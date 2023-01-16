@@ -47,7 +47,7 @@ const AllProjects = () => {
   }, [auth]);
 
   // start a new projecct handler
-  const handleNewPorject = () => {
+  const handleNewPorject = async () => {
     navigate("new-project");
   };
 
@@ -65,7 +65,7 @@ const AllProjects = () => {
               </button>
             </div>
           ) : (
-            projects?.map((project, i) => (
+            projects?.map((project) => (
               <SingleProjectCard
                 key={project.id}
                 name={project.name}
@@ -73,6 +73,7 @@ const AllProjects = () => {
                 id={project.id}
                 dateAdded={project.date_added}
                 wpPassword={project.wp_password}
+                dispatch={dispatch}
               />
             ))
           )}
