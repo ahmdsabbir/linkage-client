@@ -44,6 +44,7 @@ const Suggestions = () => {
     });
 
     try {
+      dispatch({ type: "error", payload: "" });
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
       dispatch({ type: "loading" });
       const response = await API.post("/core/suggestions", postData, {
@@ -54,11 +55,13 @@ const Suggestions = () => {
         withCredentials: "true",
       });
       console.log(response);
-      if (response?.status === 200) {
+      if (response?.status === 200 && !response?.data?.msg) {
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
+      } else {
+        dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
@@ -122,9 +125,9 @@ const Suggestions = () => {
 
           {/* suggestions generated from api call */}
           <div>
-            {loading && !error ? (
+            {loading ? (
               <Spinner />
-            ) : !loading && error ? (
+            ) : error ? (
               error && <p className="text-red-800">{error}</p>
             ) : (
               aiSuggestions?.map((suggestion, i) => (
