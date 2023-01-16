@@ -22,6 +22,7 @@ const ChosenTitleUrl = () => {
   const { id } = useParams();
   // react state
   const [headingLoader, setHeadingLoader] = useState(false);
+  const [chosenTitleUrlError, setChosenTitleUrlError] = useState("");
 
   const {
     register,
@@ -47,7 +48,6 @@ const ChosenTitleUrl = () => {
       target_title: postTitleUrlTerm.target_title,
       source_title: data.title,
     });
-
     try {
       if (projectDomain.id == id) {
         // empty error state
@@ -69,6 +69,7 @@ const ChosenTitleUrl = () => {
             type: "generatedHeading",
             payload: response?.data?.heading,
           });
+          setChosenTitleUrlError("");
         }
       } else {
         navigate("dashboard");
@@ -76,13 +77,13 @@ const ChosenTitleUrl = () => {
     } catch (error) {
       setHeadingLoader(false);
       if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
+        chosenTitleUrlError(error?.message);
       } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+        chosenTitleUrlError(error?.message);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
+        chosenTitleUrlError(error?.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        chosenTitleUrlError(error?.message);
       }
     }
   };
@@ -140,8 +141,8 @@ const ChosenTitleUrl = () => {
             <p className="text-black/60 text-sm">
               Remember, You can always regenerate!
             </p>
-            {!headingLoader && globalError && (
-              <p className="text-red-800">{globalError}</p>
+            {chosenTitleUrlError && (
+              <p className="text-red-800">{chosenTitleUrlError}</p>
             )}
           </div>
         </form>
