@@ -1,5 +1,4 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -20,14 +19,13 @@ const relevantTerm = z.object({
 
 const Suggestions = () => {
   const form = useForm({ schema: relevantTerm });
-  const { id } = useParams();
-  // getting data from global state context provider
 
   //   auth provider state
   const { auth } = useAuthState();
+  // getting data from global state context provider
   const {
     state: {
-      projects,
+      selectedProject,
       postTitleUrlTerm,
       aiSuggestions,
       generatedHeading,
@@ -39,9 +37,8 @@ const Suggestions = () => {
 
   // event handler for new relevant term
   const handleSubmitNewSuggestion = async (data) => {
-    const projectDomain = projects.find((item) => item.id == id);
     const postData = JSON.stringify({
-      domain: projectDomain.domain,
+      domain: selectedProject.domain,
       relevant_term: data.relevantTerm,
       target_title: postTitleUrlTerm.target_title,
     });
@@ -56,7 +53,6 @@ const Suggestions = () => {
         },
         withCredentials: "true",
       });
-      console.log(response);
 
       if (response?.status === 200) {
         await dispatch({
