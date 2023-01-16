@@ -82,8 +82,6 @@ const RelevantTermLayout = () => {
 
   if (loading && !error) {
     return <Spinner />;
-  } else if (!loading && error) {
-    <p className="text-5xl text-black">{error}</p>;
   } else {
     return (
       <div className="px-6">

@@ -96,7 +96,7 @@ const ChosenTitleUrl = () => {
           <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6">
             <label
               htmlFor="title"
-              className="label label-text font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
+              className=" font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
             >
               Chosen Title
             </label>
@@ -117,7 +117,7 @@ const ChosenTitleUrl = () => {
           <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6">
             <label
               htmlFor="url"
-              className="label label-text font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
+              className=" font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
             >
               Chosen Url
             </label>

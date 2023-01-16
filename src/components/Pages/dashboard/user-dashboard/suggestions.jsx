@@ -56,6 +56,7 @@ const Suggestions = () => {
         },
         withCredentials: "true",
       });
+      console.log(response);
 
       if (response?.status === 200) {
         await dispatch({
