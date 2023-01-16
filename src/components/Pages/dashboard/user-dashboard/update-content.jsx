@@ -11,7 +11,7 @@ const UpdateContent = () => {
       postTitleUrlTerm: { target_url },
       generatedParagraph,
       generatedHeading,
-      projects,
+      selectedProject,
       choosenTitleUrl,
       updateAbove: { oldData, newData },
       loading,
@@ -19,15 +19,14 @@ const UpdateContent = () => {
     },
     dispatch,
   } = useAppState();
-  const { id } = useParams();
+  const { name } = useParams();
   const { auth } = useAuthState();
   const [postId, setPostId] = useState("");
 
-  const projectdomain = projects.find((item) => item.id == id);
   useEffect(() => {
     const postData = JSON.stringify({
       target_url,
-      domain: projectdomain.domain,
+      domain: selectedProject.domain,
     });
 
     const getData = async () => {
@@ -56,6 +55,7 @@ const UpdateContent = () => {
             type: "updateAbove",
             payload: [...response?.data?.headings],
           });
+          await dispatch({ type: "error", payload: "" });
           await dispatch({
             type: "newUpdateAbove",
             payload: [...response?.data?.headings],
@@ -104,7 +104,7 @@ const UpdateContent = () => {
 
   const handleUdpateToTheSite = async () => {
     const postData = JSON.stringify({
-      domain: projectdomain.domain,
+      domain: selectedProject.domain,
       post_id: postId,
       chosen_heading: choosenTitleUrl.title,
       combined_heading: generatedHeading,
@@ -113,17 +113,31 @@ const UpdateContent = () => {
 
     console.log(JSON.parse(postData));
     if (postData) return;
+
     try {
-      const response = await API.post("/update-content", postData, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-        withCredentials: "true",
-      });
-      console.log(response);
+      if (response?.status == 200 && !response?.data?.msg) {
+        const response = await API.post("/update-content", postData, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          },
+          withCredentials: "true",
+        });
+        console.log(response);
+      } else {
+        dispatch({ type: "error", payload: response?.data?.msg });
+      }
     } catch (error) {
-      console.log(error);
+      dispatch({ type: "loading", payload: !loading });
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.status == 400 || error?.status == 401) {
+        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.message == "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else {
+        dispatch({ type: "error", payload: "server error" });
+      }
     }
   };
 
