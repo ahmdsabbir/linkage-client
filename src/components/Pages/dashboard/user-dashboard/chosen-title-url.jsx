@@ -1,7 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -13,13 +12,10 @@ const chosenTitleUrl = z.object({
 
 const ChosenTitleUrl = () => {
   const {
-    state: { projects, choosenTitleUrl, postTitleUrlTerm, error: globalError },
+    state: { selectedProject, choosenTitleUrl, postTitleUrlTerm },
     dispatch,
   } = useAppState();
   const { auth } = useAuthState();
-  // react router dom hooks
-  const navigate = useNavigate();
-  const { id } = useParams();
   // react state
   const [headingLoader, setHeadingLoader] = useState(false);
   const [chosenTitleUrlError, setChosenTitleUrlError] = useState("");
@@ -40,50 +36,44 @@ const ChosenTitleUrl = () => {
     defaultValues.url = choosenTitleUrl.url;
     reset({ ...defaultValues });
   }, [choosenTitleUrl]);
-
-  const projectDomain = projects.find((item) => item.id == id);
-
   const handleChosenTitleURl = async (data) => {
     const postData = JSON.stringify({
       target_title: postTitleUrlTerm.target_title,
       source_title: data.title,
     });
-    try {
-      if (projectDomain.id == id) {
-        // empty error state
-        dispatch({ type: "error", payload: "" });
-        // set loading state
-        setHeadingLoader(true);
-        // post data to the api
-        const response = await API.post("/core/heading", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-          },
-          withCredentials: "true",
-        });
 
-        if (response?.status === 200) {
-          setHeadingLoader(false);
-          await dispatch({
-            type: "generatedHeading",
-            payload: response?.data?.heading,
-          });
-          setChosenTitleUrlError("");
-        }
-      } else {
-        navigate("dashboard");
+    try {
+      // empty error state
+      setChosenTitleUrlError("");
+      // set loading state
+      setHeadingLoader(true);
+      // post data to the api
+      const response = await API.post("/core/heading", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: "true",
+      });
+
+      if (response?.status === 200 && !response?.data?.msg) {
+        setHeadingLoader(false);
+        await dispatch({
+          type: "generatedHeading",
+          payload: response?.data?.heading,
+        });
+        setChosenTitleUrlError("");
       }
     } catch (error) {
       setHeadingLoader(false);
       if (!error?.response) {
-        chosenTitleUrlError(error?.message);
+        setChosenTitleUrlError(error?.message);
       } else if (error?.status == 400 || error?.status == 401) {
-        chosenTitleUrlError(error?.message);
+        setChosenTitleUrlError(error?.message);
       } else if (error?.message == "Network Error") {
-        chosenTitleUrlError(error?.message);
+        setChosenTitleUrlError(error?.message);
       } else {
-        chosenTitleUrlError(error?.message);
+        setChosenTitleUrlError(error?.message);
       }
     }
   };

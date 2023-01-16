@@ -20,15 +20,19 @@ const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
   const { auth } = useAuthState();
   const {
-    state: { projects, generatedHeading, generatedParagraph, loading, error },
+    state: {
+      selectedProject,
+      generatedHeading,
+      generatedParagraph,
+      loading,
+      error,
+    },
     dispatch,
   } = useAppState();
 
   const location = useLocation();
-  const { id } = useParams();
+  const { name } = useParams();
   const navigate = useNavigate();
-  // find the id is correct
-  const projectDomain = projects.find((item) => item.id == id);
 
   // anchortext field handler
   const handleAchorTextSubmit = async (data) => {
@@ -38,7 +42,7 @@ const GeneratedSectionLayout = () => {
     });
 
     try {
-      if (id == projectDomain?.id) {
+      if (name == selectedProject?.name) {
         // start loading process & empty error state
         await dispatch({ type: "error", payload: "" });
         await dispatch({
@@ -46,7 +50,6 @@ const GeneratedSectionLayout = () => {
           payload: "",
         });
         dispatch({ type: "loading" });
-
         const response = await API.post("core/paragraph", postData, {
           headers: {
             "Content-Type": "application/json",
@@ -55,12 +58,15 @@ const GeneratedSectionLayout = () => {
           withCredentials: true,
         });
 
-        if (response?.status === 200) {
+        if (response?.status === 200 && !response?.data?.msg) {
           dispatch({ type: "loading", payload: false });
           await dispatch({
             type: "generatedParagraph",
             payload: response?.data?.paragraph,
           });
+          await dispatch({ type: "error", payload: "" });
+        } else {
+          dispatch({ type: "error", payload: response?.data?.msg });
         }
       } else {
         navigate("/dashboard");
@@ -81,10 +87,13 @@ const GeneratedSectionLayout = () => {
 
   const handleUpdateSectionRoute = () => {
     if (
-      projectDomain.id == id &&
-      location.pathname === `/dashboard/project-starter/${id}/generated-heading`
+      selectedProject.name == name &&
+      location.pathname ===
+        `/dashboard/project-starter/${name.toLocaleLowerCase()}/generated-heading`
     ) {
-      navigate(`/dashboard/project-starter/${id}/update-content`);
+      navigate(
+        `/dashboard/project-starter/${name.toLocaleLowerCase()}/update-content`
+      );
     }
   };
 
