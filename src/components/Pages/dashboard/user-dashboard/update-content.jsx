@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -12,6 +12,7 @@ const UpdateContent = () => {
       generatedParagraph,
       generatedHeading,
       projects,
+      choosenTitleUrl,
       updateAbove: { oldData, newData },
       loading,
       error,
@@ -20,18 +21,15 @@ const UpdateContent = () => {
   } = useAppState();
   const { id } = useParams();
   const { auth } = useAuthState();
+  const [postId, setPostId] = useState("");
 
+  const projectdomain = projects.find((item) => item.id == id);
   useEffect(() => {
-    const projectdomain = projects.find((item) => item.id == id);
-
-    // console.table({ target_url, domain: projectdomain.domain });
-
     const postData = JSON.stringify({
       target_url,
       domain: projectdomain.domain,
     });
 
-    console.table({ target_url, domain: projectdomain.domain });
     const getData = async () => {
       dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading" });
@@ -51,8 +49,9 @@ const UpdateContent = () => {
           },
           withCredentials: "true",
         });
-        console.log(response);
+
         if (response?.status === 200) {
+          setPostId(response?.data?.post_id);
           await dispatch({
             type: "updateAbove",
             payload: [...response?.data?.headings],
@@ -100,6 +99,31 @@ const UpdateContent = () => {
       } else {
         dispatch({ type: "error", payload: "server error" });
       }
+    }
+  };
+
+  const handleUdpateToTheSite = async () => {
+    const postData = JSON.stringify({
+      domain: projectdomain.domain,
+      post_id: postId,
+      chosen_heading: choosenTitleUrl.title,
+      combined_heading: generatedHeading,
+      paragraph_content: generatedParagraph,
+    });
+
+    console.log(JSON.parse(postData));
+    if (postData) return;
+    try {
+      const response = await API.post("/update-content", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: "true",
+      });
+      console.log(response);
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -158,11 +182,15 @@ const UpdateContent = () => {
             {generatedParagraph && generatedParagraph}
           </div>
           <div className=" self-start flex-1 order-1 md:order-1">
-            <button className="btn bg-contrast border-none rounded text-white">
+            <button
+              className="btn bg-contrast border-none rounded text-white"
+              onClick={handleUdpateToTheSite}
+            >
               Update to the site
             </button>
           </div>
         </div>
+        {error && <p className="text-2xl font-medium">{error}</p>}
       </div>
     );
   }
