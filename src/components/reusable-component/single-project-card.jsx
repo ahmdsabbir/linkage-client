@@ -1,6 +1,5 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-import API from "../../api/api-config";
 import { useAppState } from "../context/AppProvider";
 
 const SingleProjectCard = ({
@@ -11,6 +10,7 @@ const SingleProjectCard = ({
   admin,
   id,
   dispatch,
+  deleteProject,
 }) => {
   const {
     state: { projects, selectedProject },
@@ -25,19 +25,6 @@ const SingleProjectCard = ({
       payload: findProject,
     });
     navigate(`/dashboard/project-starter/${name.toLowerCase()}`);
-  };
-
-  // delete projct handler
-  const handleDeleteProject = async (id) => {
-    const findProject = projects.find((project) => project.id == id);
-    console.log(findProject.id);
-    if (findProject) return;
-
-    try {
-      const response = await API.delete(`project/${findProject.id}`);
-    } catch (error) {
-      console.log(`error from all projects delete handler ${error.message}`);
-    }
   };
 
   return (
@@ -70,7 +57,10 @@ const SingleProjectCard = ({
         >
           Edit
         </NavLink>
-        <button className="btn bg-accent-light text-white rounded  border-none hover:bg-error hover:text-base-300 focus:bg-slate-600">
+        <button
+          className="btn bg-accent-light text-white rounded  border-none hover:bg-error hover:text-base-300 focus:bg-slate-600"
+          onClick={() => deleteProject(id)}
+        >
           Delete
         </button>
       </div>

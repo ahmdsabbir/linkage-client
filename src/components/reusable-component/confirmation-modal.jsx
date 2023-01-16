@@ -1,6 +1,6 @@
 import React from "react";
 
-const Modal = ({ findProject }) => {
+const ConfirmationModal = ({ findProject }) => {
   return (
     <main className="antialiased bg-gray-200 text-gray-900 font-sans overflow-x-hidden">
       <div className="relative px-4 min-h-screen md:flex md:items-center md:justify-center">
@@ -51,4 +51,4 @@ const Modal = ({ findProject }) => {
   );
 };
 
-export default Modal;
+export default ConfirmationModal;

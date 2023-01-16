@@ -1,8 +1,9 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
+import ConfirmationModal from "../../../reusable-component/confirmation-modal";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 import Spinner from "../../../spinner";
 
@@ -14,6 +15,14 @@ const AllProjects = () => {
   } = useAppState();
   const { auth } = useAuthState();
   const navigate = useNavigate();
+  // state for delete project
+  // Set up some additional local state
+  const [type, setType] = useState(null);
+  const [id, setId] = useState(null);
+  const [displayConfirmationModal, setDisplayConfirmationModal] =
+    useState(false);
+  const [messgae, setMessage] = useState(null);
+  const [buttonMessage, setButtonDeleteMessage] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -68,33 +77,64 @@ const AllProjects = () => {
     navigate("new-project");
   };
 
+  // Hide the confirmation  modal
+  const hideConfirmationModal = () => {
+    setDisplayConfirmationModal(false);
+  };
+  // delete projct handler
+  const handleDeleteProject = async (id) => {
+    console.log(id);
+
+    return;
+    const findProject = projects.find((project) => project.id == id);
+    console.log(findProject.id);
+    if (findProject) return;
+
+    try {
+      const response = await API.delete(`project/${findProject.id}`);
+    } catch (error) {
+      console.log(`error from all projects delete handler ${error.message}`);
+    }
+  };
+
   return (
     <>
       {loading ? (
         <Spinner />
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
-          {!projects?.length > 0 ? (
-            <div>
-              <p>No Projects Yet</p>
-              <button className="btn" onClick={handleNewPorject}>
-                Start A New Porject
-              </button>
-            </div>
-          ) : (
-            projects?.map((project) => (
-              <SingleProjectCard
-                key={project.id}
-                name={project.name}
-                domain={project.domain}
-                id={project.id}
-                dateAdded={project.date_added}
-                wpPassword={project.wp_password}
-                dispatch={dispatch}
-              />
-            ))
-          )}
-        </div>
+        <>
+          <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
+            {!projects?.length > 0 ? (
+              <div>
+                <p>No Projects Yet</p>
+                <button className="btn" onClick={handleNewPorject}>
+                  Start A New Porject
+                </button>
+              </div>
+            ) : (
+              projects?.map((project) => (
+                <SingleProjectCard
+                  key={project.id}
+                  name={project.name}
+                  domain={project.domain}
+                  id={project.id}
+                  dateAdded={project.date_added}
+                  wpPassword={project.wp_password}
+                  dispatch={dispatch}
+                  deleteProject={handleDeleteProject}
+                />
+              ))
+            )}
+          </div>
+          <ConfirmationModal
+            showModal={displayConfirmationModal}
+            // confirmModal={submitDelete}
+            hideModal={hideConfirmationModal}
+            type={type}
+            id={id}
+            buttonMessage={buttonMessage}
+          />
+        </>
       )}
     </>
   );

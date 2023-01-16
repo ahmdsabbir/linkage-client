@@ -7,7 +7,6 @@ import { useAuthState } from "../context/AuthProvider";
 import useForm from "../hook/useForm";
 import Form from "../reusable-component/form/form";
 import { Input } from "../reusable-component/form/input-field";
-import Modal from "../reusable-component/modal";
 import NavigateLoginRegister from "../reusable-component/navigate-login-register";
 import Spinner from "../spinner";
 
@@ -80,7 +79,6 @@ const Login = () => {
   } else {
     return (
       <div className="grid place-self-center h-screen">
-        <Modal />
         <div className="flex flex-col items-center justify-center">
           <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
           <Form form={form} onSubmit={handleLogin}>
