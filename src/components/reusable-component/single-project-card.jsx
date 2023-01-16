@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, useNavigate } from "react-router-dom";
+import API from "../../api/api-config";
 import { useAppState } from "../context/AppProvider";
 
 const SingleProjectCard = ({
@@ -16,15 +17,29 @@ const SingleProjectCard = ({
   } = useAppState();
   const navigate = useNavigate();
 
+  // delete projct handler
   const handleStarteProject = async (id) => {
     const findProject = projects.find((project) => project.id == id);
-
     await dispatch({
       type: "selectedProject",
       payload: findProject,
     });
     navigate(`/dashboard/project-starter/${name.toLowerCase()}`);
   };
+
+  // delete projct handler
+  const handleDeleteProject = async (id) => {
+    const findProject = projects.find((project) => project.id == id);
+    console.log(findProject.id);
+    if (findProject) return;
+
+    try {
+      const response = await API.delete(`project/${findProject.id}`);
+    } catch (error) {
+      console.log(`error from all projects delete handler ${error.message}`);
+    }
+  };
+
   return (
     <div className="flex gap-4 card rounded shadow p-4">
       <div className="flex flex-col gap-3">
