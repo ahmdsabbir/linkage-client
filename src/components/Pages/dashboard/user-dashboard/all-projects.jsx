@@ -33,8 +33,9 @@ const AllProjects = () => {
               type: "projects",
               payload: response?.data?.projects,
             });
+            await dispatch({ type: "error", payload: "" });
           } else {
-            dispatch({ type: "error", payload: response?.data?.msg });
+            await dispatch({ type: "error", payload: response?.data?.msg });
           }
         } catch (error) {
           dispatch({ type: "loading", payload: !loading });
@@ -48,7 +49,7 @@ const AllProjects = () => {
           } else if (error?.message == "Network Error") {
             dispatch({ type: "error", payload: error?.message });
           } else {
-            dispatch({ type: "error", payload: "server error" });
+            dispatch({ type: "error", payload: error?.message });
           }
         }
       };

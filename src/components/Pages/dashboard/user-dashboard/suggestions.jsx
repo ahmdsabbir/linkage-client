@@ -60,6 +60,7 @@ const Suggestions = () => {
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
+        await dispatch({ type: "error", payload: "" });
       } else {
         dispatch({ type: "error", payload: response?.data?.msg });
       }

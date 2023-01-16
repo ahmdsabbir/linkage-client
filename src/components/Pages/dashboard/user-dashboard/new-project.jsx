@@ -74,7 +74,7 @@ const NewProject = () => {
         {success && <p className="text-red-700">{success}</p>}
 
         <div className="form-control md:flex-row mt-6">
-          <button className="btn bg-contrast text-accent-dark border-0 text-white hover:bg-contrast-dark focus:bg-slate-600">
+          <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600">
             Submit
           </button>
         </div>
