@@ -84,7 +84,7 @@ const GeneratedSectionLayout = () => {
       projectDomain.id == id &&
       location.pathname === `/dashboard/project-starter/${id}/generated-heading`
     ) {
-      navigate(`/dashboard/project-starter/${id}/no-name`);
+      navigate(`/dashboard/project-starter/${id}/update-content`);
     }
   };
 

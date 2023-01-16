@@ -5,7 +5,7 @@ import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import Spinner from "../../../spinner";
 
-const NoName = () => {
+const UpdateContent = () => {
   const {
     state: {
       postTitleUrlTerm: { target_url },
@@ -128,7 +128,7 @@ const NoName = () => {
                   </button>
                 </div>
               ) : (
-                <div className="ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
                   <p className="flex-inital font-semibold">{heading.text}</p>
                   <button
                     className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
@@ -168,4 +168,4 @@ const NoName = () => {
   }
 };
 
-export default NoName;
+export default UpdateContent;

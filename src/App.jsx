@@ -22,10 +22,10 @@ import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 import GeneratedSectionLayout from "./components/Pages/dashboard/user-dashboard/generated-section-layout";
 import NewProject from "./components/Pages/dashboard/user-dashboard/new-project";
-import NoName from "./components/Pages/dashboard/user-dashboard/no-name";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
 import RelevantTermLayout from "./components/Pages/dashboard/user-dashboard/relevant-term-layout";
 import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
+import UpdateContent from "./components/Pages/dashboard/user-dashboard/update-content";
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
 import ErrorPage from "./components/Pages/error-page";
 import Home from "./components/Pages/home";
@@ -68,7 +68,7 @@ const router = createBrowserRouter(
               element={<GeneratedSectionLayout />}
             />
 
-            <Route path="no-name" element={<NoName />} />
+            <Route path="update-content" element={<UpdateContent />} />
 
             {/* edit project details */}
             <Route
