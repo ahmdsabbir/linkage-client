@@ -40,7 +40,11 @@ const GeneratedSectionLayout = () => {
     try {
       if (id == projectDomain?.id) {
         // start loading process & empty error state
-        dispatch({ type: "error", payload: "" });
+        await dispatch({ type: "error", payload: "" });
+        await dispatch({
+          type: "generatedParagraph",
+          payload: "",
+        });
         dispatch({ type: "loading" });
 
         const response = await API.post("core/paragraph", postData, {

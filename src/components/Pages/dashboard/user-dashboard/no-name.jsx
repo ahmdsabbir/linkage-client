@@ -12,7 +12,8 @@ const NoName = () => {
       generatedHeading,
       projects,
       updateAbove: { oldData, newData },
-      loader,
+      loading,
+      error,
     },
     dispatch,
   } = useAppState();
@@ -22,14 +23,25 @@ const NoName = () => {
   useEffect(() => {
     const projectdomain = projects.find((item) => item.id == id);
 
-    console.table({ target_url, domain: projectdomain.domain });
+    // console.table({ target_url, domain: projectdomain.domain });
 
     const postData = JSON.stringify({
       target_url,
       domain: projectdomain.domain,
     });
 
+    console.table({ target_url, domain: projectdomain.domain });
     const getData = async () => {
+      dispatch({ type: "error", payload: "" });
+      dispatch({ type: "loading" });
+      await dispatch({
+        type: "updateAbove",
+        payload: [],
+      });
+      await dispatch({
+        type: "newUpdateAbove",
+        payload: [],
+      });
       try {
         const response = await API.post("core/target-headings", postData, {
           headers: {
@@ -40,25 +52,26 @@ const NoName = () => {
         });
         console.log(response.data);
         if (response?.status === 200) {
-          dispatch({
-            type: "updateAbove",
-            payload: [],
-          });
-          dispatch({
-            type: "newUpdateAbove",
-            payload: [],
-          });
-          dispatch({
+          await dispatch({
             type: "updateAbove",
             payload: [...response?.data?.headings],
           });
-          dispatch({
+          await dispatch({
             type: "newUpdateAbove",
             payload: [...response?.data?.headings],
           });
         }
       } catch (error) {
-        console.log(error);
+        dispatch({ type: "loading", payload: !loading });
+        if (!error?.response) {
+          dispatch({ type: "error", payload: error?.message });
+        } else if (error?.status == 400 || error?.status == 401) {
+          dispatch({ type: "error", payload: "missing username or password" });
+        } else if (error?.message == "Network Error") {
+          dispatch({ type: "error", payload: error?.message });
+        } else {
+          dispatch({ type: "error", payload: "server error" });
+        }
       }
     };
 
@@ -109,6 +122,7 @@ const NoName = () => {
       <div className="lg:col-start-2">
         <div className="mb-4">
           <h2 className="text-3xl">Generated Section</h2>
+          {error && <p className="text-red-800 font-medium">{error}</p>}
           <p className="text-slate-400">
             Following Section was Generated. Insert It Wherever You’d like on
             Your Post

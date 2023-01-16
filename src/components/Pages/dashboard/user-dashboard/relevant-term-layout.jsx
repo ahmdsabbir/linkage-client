@@ -98,19 +98,13 @@ const RelevantTermLayout = () => {
               autoFocus={true}
               {...form.register("relevantTerm")}
             />
-            <div className="flex gap-2 sm:gap-6 ">
-              <div className="hidden sm:block flex-1 min-w-[117px] max-w-[217px] order-2 md:order-1"></div>
-              <div className="form-control flex-1  morder-1 md:order-1">
-                <div>
-                  <button
-                    type="submit"
-                    className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] `}
-                  >
-                    Submit
-                  </button>
-                </div>
-              </div>
-            </div>
+
+            <button
+              type="submit"
+              className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] md:ml-[232px] `}
+            >
+              Submit
+            </button>
           </Form>
         </div>
         {error && <p className="text-red-800">{error}</p>}
