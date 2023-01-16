@@ -42,7 +42,7 @@ const GeneratedSectionLayout = () => {
     });
 
     try {
-      if (name == selectedProject?.name) {
+      if (name == selectedProject?.name.toLowerCase()) {
         // start loading process & empty error state
         await dispatch({ type: "error", payload: "" });
         await dispatch({
@@ -69,7 +69,8 @@ const GeneratedSectionLayout = () => {
           dispatch({ type: "error", payload: response?.data?.msg });
         }
       } else {
-        navigate("/dashboard");
+        // navigate("/dashboard");
+        console.log("error happened in generated section layout");
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
@@ -87,13 +88,13 @@ const GeneratedSectionLayout = () => {
 
   const handleUpdateSectionRoute = () => {
     if (
-      selectedProject.name == name &&
-      location.pathname ===
-        `/dashboard/project-starter/${name.toLocaleLowerCase()}/generated-heading`
+      selectedProject.name.toLowerCase() == name &&
+      location.pathname ==
+        `/dashboard/project-starter/${name}/generated-heading`
     ) {
-      navigate(
-        `/dashboard/project-starter/${name.toLocaleLowerCase()}/update-content`
-      );
+      navigate(`/dashboard/project-starter/${name}/update-content`);
+    } else {
+      dispatch({ type: "error", payload: "something went wrong" });
     }
   };
 

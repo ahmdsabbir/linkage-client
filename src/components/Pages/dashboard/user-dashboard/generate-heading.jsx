@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 
 const GenerateHeading = ({ title }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { name } = useParams();
   return (
     <>
       <div className="card-body rounded flex flex-col text-center items-center bg-accent-dark/5">
@@ -19,7 +19,9 @@ const GenerateHeading = ({ title }) => {
           <button
             className=" mt-4 btn bg-contrast text-white capitalize hover:bg-contrast-dark border-none rounded"
             onClick={() =>
-              navigate(`/dashboard/project-starter/${id}/generated-heading`)
+              navigate(
+                `/dashboard/project-starter/${name.toLowerCase()}/generated-heading`
+              )
             }
           >
             Next Step
