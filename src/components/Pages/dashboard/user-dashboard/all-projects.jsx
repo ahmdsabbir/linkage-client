@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
@@ -14,7 +14,6 @@ const AllProjects = () => {
   } = useAppState();
   const { auth } = useAuthState();
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     let isMounted = true;
