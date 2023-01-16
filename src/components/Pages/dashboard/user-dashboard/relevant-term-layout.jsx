@@ -30,10 +30,10 @@ const RelevantTermLayout = () => {
   // react @{navigate , id, location} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
   const { id } = useParams();
+  const projectDomain = projects.find((item) => item.id == id);
 
   // handle action
   const handleSubmit = async (data) => {
-    const projectDomain = projects.find((item) => item.id == id);
     const postData = JSON.stringify({
       domain: projectDomain.domain,
       relevant_term: data.relevantTerm,
@@ -80,7 +80,7 @@ const RelevantTermLayout = () => {
     }
   };
 
-  if (loading && !error) {
+  if (loading) {
     return <Spinner />;
   } else {
     return (
