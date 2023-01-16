@@ -27,13 +27,29 @@ const AllProjects = () => {
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
             },
           });
-          isMounted &&
-            dispatch({
+
+          if (isMounted && response?.status == 200 && !response?.data?.msg) {
+            await dispatch({
               type: "projects",
               payload: response?.data?.projects,
             });
+          } else {
+            dispatch({ type: "error", payload: response?.data?.msg });
+          }
         } catch (error) {
-          console.log("AllProjects", error);
+          dispatch({ type: "loading", payload: !loading });
+          if (!error?.response) {
+            dispatch({ type: "error", payload: error?.message });
+          } else if (error?.status == 400 || error?.status == 401) {
+            dispatch({
+              type: "error",
+              payload: "missing username or password",
+            });
+          } else if (error?.message == "Network Error") {
+            dispatch({ type: "error", payload: error?.message });
+          } else {
+            dispatch({ type: "error", payload: "server error" });
+          }
         }
       };
 
