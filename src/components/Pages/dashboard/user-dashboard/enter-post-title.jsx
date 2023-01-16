@@ -15,27 +15,18 @@ const postTitleSchema = z.object({
 
 const EnterPostTitle = () => {
   // getting data from global state context provider
-  const {
-    state: { projects },
-    dispatch,
-  } = useAppState();
+  const { dispatch } = useAppState();
   // getting data from global state context provider
   const form = useForm({ schema: postTitleSchema });
   // react router hook for redirecting desired link
   const navigate = useNavigate();
   const { name } = useParams();
 
-  const projectDomain = projects.find((item) => item.id == id);
   // post request
   // if funciton cold be more percise. remember to edit the @{if else} funciton
   const handleSubmit = async (data) => {
-    return;
-    if (id == projectDomain.id) {
-      await dispatch({ type: "postTitleUrl", payload: data });
-      navigate(`/dashboard/project-starter/${name.toLowerCase()}/relevant`);
-    } else {
-      navigate("/dashboard");
-    }
+    await dispatch({ type: "postTitleUrl", payload: data });
+    navigate(`/dashboard/project-starter/${name.toLowerCase()}/relevant`);
   };
 
   return (

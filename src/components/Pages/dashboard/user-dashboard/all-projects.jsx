@@ -47,7 +47,7 @@ const AllProjects = () => {
   }, [auth]);
 
   // start a new projecct handler
-  const handleNewPorject = async () => {
+  const handleNewPorject = () => {
     navigate("new-project");
   };
 

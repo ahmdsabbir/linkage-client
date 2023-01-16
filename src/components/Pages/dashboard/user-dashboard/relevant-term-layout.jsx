@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -20,51 +20,46 @@ const RelevantTermLayout = () => {
 
   // getting data from global state context provider
   const {
-    state: { projects, loading, error, postTitleUrlTerm },
+    state: { selectedProject, loading, error, postTitleUrlTerm },
     dispatch,
   } = useAppState();
 
   //   auth provider state
   const { auth } = useAuthState();
-
-  // react @{navigate , id, location} router hook for redirecting desired link and dynamic link id
+  // react @{navigate , location} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
-  const { id } = useParams();
-  const projectDomain = projects.find((item) => item.id == id);
 
   // handle action
   const handleSubmit = async (data) => {
     const postData = JSON.stringify({
-      domain: projectDomain.domain,
+      domain: selectedProject.domain,
       relevant_term: data.relevantTerm,
       target_title: postTitleUrlTerm.target_title,
     });
     // the relevant term has been saved for future use
     try {
-      if (id == projectDomain.id) {
-        await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
-        // start loading process & empty error state
-        dispatch({ type: "error", payload: "" });
-        dispatch({ type: "loading" });
+      await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
+      // start loading process & empty error state
+      dispatch({ type: "error", payload: "" });
+      dispatch({ type: "loading" });
 
-        // post data to the api
-        const response = await API.post("/core/suggestions", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-          },
-          withCredentials: "true",
+      // post data to the api
+      const response = await API.post("/core/suggestions", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: "true",
+      });
+
+      if (response?.status == 200) {
+        await dispatch({
+          type: "aiSuggestions",
+          payload: [...response?.data?.suggestions],
         });
-
-        if (response?.status == 200) {
-          await dispatch({
-            type: "aiSuggestions",
-            payload: [...response?.data?.suggestions],
-          });
-          navigate(`/dashboard/project-starter/${id}/suggestions`);
-        }
-      } else {
-        navigate("/dashboard");
+        navigate(
+          `/dashboard/project-starter/${selectedProject.name.toLowerCase()}/suggestions`
+        );
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });

@@ -1,38 +1,33 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import { useAppState } from "../context/AppProvider";
 
 const ProjectDetails = () => {
   // global state context provider
   const {
-    state: { projects, postTitleUrlTerm },
+    state: { selectedProject, postTitleUrlTerm },
   } = useAppState();
-  // react router hook for gettinig the dynamic link id
-  const { id: projectId } = useParams();
-
-  const projectDetails = projects.find((item) => item.id == projectId);
 
   return (
     <div className="card rounded-none flex-shrink-0 w-full bg-[#f0f0f0] px-6 ">
       <div className="card-body px-0 gap-4  md:text-left ">
         <div className="flex flex-col justi-center gap-4 font-medium">
-          {projectDetails?.name && (
+          {selectedProject?.name && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Project Title:</h1>
-              <p className="text-lg">{projectDetails.name}</p>
+              <p className="text-lg">{selectedProject.name}</p>
             </div>
           )}
 
-          {projectDetails?.domain && (
+          {selectedProject?.domain && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Project Domain:</h1>
-              <p className="text-lg">{projectDetails.domain}</p>
+              <p className="text-lg">{selectedProject.domain}</p>
             </div>
           )}
-          {projectDetails?.id && (
+          {selectedProject?.id && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Id:</h1>
-              <p className="text-lg">{projectId}</p>
+              <p className="text-lg">{selectedProject.id}</p>
             </div>
           )}
           {postTitleUrlTerm?.target_title && (
