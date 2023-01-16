@@ -117,16 +117,27 @@ const NoName = () => {
                   {heading?.generatedParagraph}
                 </div>
               )}
-
-              <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                <p className="flex-inital">{heading.tag}</p>
-                <button
-                  className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
-                  onClick={() => handleAbovePost(heading.text)}
-                >
-                  Above This
-                </button>
-              </div>
+              {heading.name == "h2" ? (
+                <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                  <p className="flex-inital font-medium">{heading.text}</p>
+                  <button
+                    className="flex-none px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
+                    onClick={() => handleAbovePost(heading.text)}
+                  >
+                    Above This
+                  </button>
+                </div>
+              ) : (
+                <div className="ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                  <p className="flex-inital font-semibold">{heading.text}</p>
+                  <button
+                    className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
+                    onClick={() => handleAbovePost(heading.text)}
+                  >
+                    Above This
+                  </button>
+                </div>
+              )}
             </div>
           ))}
         </div>
