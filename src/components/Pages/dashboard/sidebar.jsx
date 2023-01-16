@@ -1,16 +1,33 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppState } from "../../context/AppProvider";
 import { useAuthState } from "../../context/AuthProvider";
 
 const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
   const { auth, setAuth } = useAuthState();
   const navigate = useNavigate();
+
+  const { dispatch } = useAppState();
+
   const handleLogout = async () => {
     localStorage.removeItem("linkage_token");
     await setAuth({});
     navigate("/login");
     console.log(auth);
   };
+
+  const handleAllProjects = async () => {
+    await dispatch({ type: "selectedProject", payload: {} });
+    await dispatch({ type: "postTitleUrl", payload: {} });
+    await dispatch({ type: "aiSuggestions", payload: [] });
+    await dispatch({ type: "choosenTitleUrl", payload: {} });
+    await dispatch({ type: "generatedHeading", payload: "" });
+    await dispatch({ type: "generatedParagraph", payload: "" });
+    await dispatch({ type: "updateAbove", payload: [] });
+    await dispatch({ type: "newUpdateAbove", payload: [] });
+    navigate("/dashboard");
+  };
+
   return (
     <main
       className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
@@ -51,13 +68,12 @@ ${
               className="text-slate-100 font-bold"
               data-dev-hint="second-main-navigation or footer navigation"
             >
-              <Link
-                to="/dashboard"
+              <button
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                onClick={handleCloseSidebar}
+                onClick={handleAllProjects}
               >
                 All Projects
-              </Link>
+              </button>
               <Link
                 to="/dashboard/user-details"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"

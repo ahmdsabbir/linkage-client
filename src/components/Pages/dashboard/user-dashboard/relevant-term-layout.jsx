@@ -96,7 +96,7 @@ const RelevantTermLayout = () => {
 
             <button
               type="submit"
-              className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] md:ml-[232px] `}
+              className={`btn btn-primary text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] md:ml-[232px] md:mt-[-15px] `}
             >
               Submit
             </button>
