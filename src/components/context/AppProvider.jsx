@@ -71,11 +71,13 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         updateAbove: { ...state.updateAbove, oldData: [...action.payload] },
+        loading: false,
       };
     case "newUpdateAbove":
       return {
         ...state,
         updateAbove: { ...state.updateAbove, newData: [...action.payload] },
+        loading: false,
       };
 
     case "loading": {
