@@ -42,35 +42,30 @@ const GeneratedSectionLayout = () => {
     });
 
     try {
-      if (name == selectedProject?.name.toLowerCase()) {
-        // start loading process & empty error state
-        await dispatch({ type: "error", payload: "" });
+      // start loading process & empty error state
+      await dispatch({ type: "error", payload: "" });
+      await dispatch({
+        type: "generatedParagraph",
+        payload: "",
+      });
+      dispatch({ type: "loading" });
+      const response = await API.post("core/paragraph", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth?.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: true,
+      });
+
+      if (response?.status === 200 && !response?.data?.msg) {
+        dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "generatedParagraph",
-          payload: "",
+          payload: response?.data?.paragraph,
         });
-        dispatch({ type: "loading" });
-        const response = await API.post("core/paragraph", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth?.token ? `Bearer ${auth?.token}` : "",
-          },
-          withCredentials: true,
-        });
-
-        if (response?.status === 200 && !response?.data?.msg) {
-          dispatch({ type: "loading", payload: false });
-          await dispatch({
-            type: "generatedParagraph",
-            payload: response?.data?.paragraph,
-          });
-          await dispatch({ type: "error", payload: "" });
-        } else {
-          dispatch({ type: "error", payload: response?.data?.msg });
-        }
+        await dispatch({ type: "error", payload: "" });
       } else {
-        // navigate("/dashboard");
-        console.log("error happened in generated section layout");
+        dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
@@ -87,15 +82,7 @@ const GeneratedSectionLayout = () => {
   };
 
   const handleUpdateSectionRoute = () => {
-    if (
-      selectedProject.name.toLowerCase() == name &&
-      location.pathname ==
-        `/dashboard/project-starter/${name}/generated-heading`
-    ) {
-      navigate(`/dashboard/project-starter/${name}/update-content`);
-    } else {
-      dispatch({ type: "error", payload: "something went wrong" });
-    }
+    navigate(`/dashboard/project-starter/${name}/update-content`);
   };
 
   return (

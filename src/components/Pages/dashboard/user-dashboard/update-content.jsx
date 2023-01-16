@@ -49,17 +49,19 @@ const UpdateContent = () => {
           withCredentials: "true",
         });
 
-        if (response?.status === 200) {
+        if (response?.status === 200 && !response?.data?.msg) {
           setPostId(response?.data?.post_id);
+          await dispatch({ type: "error", payload: "" });
           await dispatch({
             type: "updateAbove",
             payload: [...response?.data?.headings],
           });
-          await dispatch({ type: "error", payload: "" });
           await dispatch({
             type: "newUpdateAbove",
             payload: [...response?.data?.headings],
           });
+        } else {
+          dispatch({ type: "error", payload: response?.data?.msg });
         }
       } catch (error) {
         dispatch({ type: "loading", payload: !loading });
@@ -82,23 +84,15 @@ const UpdateContent = () => {
   // udpate the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
-      const newUpdateAbove = oldData.map((item) =>
+      const newUpdateAbove = await oldData.map((item) =>
         item.text === heading
           ? { ...item, generatedHeading, generatedParagraph }
           : item
       );
-      dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
+      await dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
-      } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
-      } else {
-        dispatch({ type: "error", payload: "server error" });
-      }
+      await dispatch({ type: "loading", payload: !loading });
+      await dispatch({ type: "error", payload: "server error" });
     }
   };
 
