@@ -38,6 +38,7 @@ const RelevantTermLayout = () => {
     });
     // the relevant term has been saved for future use
     try {
+      console.log("hello");
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
       // start loading process & empty error state
       dispatch({ type: "error", payload: "" });
@@ -51,8 +52,10 @@ const RelevantTermLayout = () => {
         },
         withCredentials: "true",
       });
+      console.log(response);
+      console.log("hello2");
 
-      if (response?.status == 200) {
+      if (response?.status == 200 && !response?.data?.msg) {
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
@@ -60,6 +63,8 @@ const RelevantTermLayout = () => {
         navigate(
           `/dashboard/project-starter/${selectedProject.name.toLowerCase()}/suggestions`
         );
+      } else {
+        dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
