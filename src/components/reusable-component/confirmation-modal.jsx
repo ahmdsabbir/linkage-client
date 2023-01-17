@@ -4,10 +4,7 @@ const ConfirmationModal = ({
   showModal,
   confirmModal,
   projectId,
-  type,
-  message,
   setProjectId,
-  findProject,
 }) => {
   return (
     <main
@@ -38,11 +35,10 @@ const ConfirmationModal = ({
               </svg>
             </div>
             <div className="mt-4 md:mt-0 md:ml-6 text-center md:text-left">
-              <p className="font-bold">Delete your {message}?</p>
+              <p className="font-bold">Delete your project?</p>
               <p className="text-sm text-gray-700 mt-1">
-                You will lose all of your data by deleting your{" "}
-                {findProject?.name ? findProject?.name : "project"}. This action
-                cannot be undone.
+                You will lose all of your data by deleting your project. This
+                action cannot be undone.
               </p>
             </div>
           </div>

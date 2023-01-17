@@ -18,11 +18,9 @@ const AllProjects = () => {
   const navigate = useNavigate();
   // state for delete project
   // Set up some additional local state
-  const [type, setType] = useState(null);
   const [projectId, setProjectId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
     useState(false);
-  const [deleteMessage, setDeleteMessage] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -155,9 +153,7 @@ const AllProjects = () => {
             <ConfirmationModal
               showModal={setDisplayConfirmationModal}
               confirmModal={handleDeleteProject}
-              type={type}
               projectId={projectId}
-              message={deleteMessage}
               setProjectId={setProjectId}
             />
           ) : null}

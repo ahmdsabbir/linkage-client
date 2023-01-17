@@ -11,11 +11,10 @@ const SingleProjectCard = ({
   id,
   showModal,
   dispatch,
-  deleteProject,
   setProjectId,
 }) => {
   const {
-    state: { projects, selectedProject },
+    state: { projects },
   } = useAppState();
   const navigate = useNavigate();
 
