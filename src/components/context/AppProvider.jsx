@@ -32,9 +32,10 @@ const projectsReducer = (state, action) => {
     case "projectDelete":
       return {
         ...state,
-        projects: state.projects.filter(
-          (project) => project.id != action.payload.id
-        ),
+        projects: [
+          ...state.projects.filter((project) => project.id != action.payload),
+        ],
+
         loading: false,
       };
     case "selectedProject":

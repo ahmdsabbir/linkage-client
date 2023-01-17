@@ -98,7 +98,7 @@ const AllProjects = () => {
         await dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "projectDelete",
-          payload: findProject.id,
+          payload: projectId,
         });
         await dispatch({ type: "error", payload: response?.data?.msg });
       } else {
