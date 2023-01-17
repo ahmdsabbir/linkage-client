@@ -38,6 +38,7 @@ const AllProjects = () => {
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
             },
           });
+          console.log(response);
 
           if (isMounted && response?.status == 200 && !response?.data?.msg) {
             await dispatch({
@@ -126,7 +127,7 @@ const AllProjects = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
-            {!projects?.length > 0 ? (
+            {projects?.length == 0 ? (
               <div>
                 <p>No Projects Yet</p>
                 <button className="btn" onClick={handleNewPorject}>
@@ -162,7 +163,9 @@ const AllProjects = () => {
         </>
       )}
 
-      <button onClick={() => refresh}>Refres Token</button>
+      <button className="btn" onClick={() => refresh}>
+        Refres Token
+      </button>
     </>
   );
 };

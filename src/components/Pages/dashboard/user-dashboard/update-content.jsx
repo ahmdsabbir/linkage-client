@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -21,7 +21,6 @@ const UpdateContent = () => {
   } = useAppState();
   const { name } = useParams();
   const { auth } = useAuthState();
-  const [postId, setPostId] = useState("");
 
   useEffect(() => {
     const postData = JSON.stringify({
@@ -50,7 +49,6 @@ const UpdateContent = () => {
         });
 
         if (response?.status === 200 && !response?.data?.msg) {
-          setPostId(response?.data?.post_id);
           await dispatch({ type: "error", payload: "" });
           await dispatch({
             type: "updateAbove",
@@ -97,31 +95,35 @@ const UpdateContent = () => {
   };
 
   const handleUdpateToTheSite = async () => {
+    const tagText = newData.find(
+      (item) => item.generatedParagraph === generatedParagraph
+    );
+
     const postData = JSON.stringify({
       domain: selectedProject.domain,
-      post_id: postId,
-      chosen_heading: choosenTitleUrl.title,
+      post_id: choosenTitleUrl.id,
       combined_heading: generatedHeading,
       paragraph_content: generatedParagraph,
+      chosen_heading_text: tagText.text,
+      chosen_heading_tag: tagText.tag,
     });
 
-    console.log(JSON.parse(postData));
-    if (postData) return;
-
     try {
-      if (response?.status == 200 && !response?.data?.msg) {
-        const response = await API.post("/update-content", postData, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-          },
-          withCredentials: "true",
-        });
-        console.log(response);
-      } else {
-        dispatch({ type: "error", payload: response?.data?.msg });
-      }
+      dispatch({ type: "error", payload: "" });
+
+      const response = await API.post("core/update-content", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        withCredentials: "true",
+      });
+      console.log(response);
+
+      // dispatch({ type: "error", payload: response?.data?.msg });
+      // dispatch({ type: "error", payload: "" });
     } catch (error) {
+      console.log(error);
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
@@ -198,7 +200,7 @@ const UpdateContent = () => {
             </button>
           </div>
         </div>
-        {error && <p className="text-2xl font-medium">{error}</p>}
+        {error && <p className="text-5xl font-medium">{error}</p>}
       </div>
     );
   }
