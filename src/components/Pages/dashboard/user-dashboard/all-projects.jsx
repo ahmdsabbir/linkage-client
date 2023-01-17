@@ -38,7 +38,6 @@ const AllProjects = () => {
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
             },
           });
-          console.log(response);
 
           if (isMounted && response?.status == 200 && !response?.data?.msg) {
             await dispatch({
@@ -163,7 +162,7 @@ const AllProjects = () => {
         </>
       )}
 
-      <button className="btn" onClick={() => refresh}>
+      <button className="btn" onClick={() => refresh()}>
         Refres Token
       </button>
     </>
