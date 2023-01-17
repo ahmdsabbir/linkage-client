@@ -34,7 +34,7 @@ const RelevantTermLayout = () => {
     const postData = JSON.stringify({
       domain: selectedProject.domain,
       relevant_term: data.relevantTerm,
-      target_title: postTitleUrlTerm.target_title,
+      source_title: postTitleUrlTerm.source_title,
     });
     // the relevant term has been saved for future use
     try {

@@ -20,13 +20,7 @@ const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
   const { auth } = useAuthState();
   const {
-    state: {
-      selectedProject,
-      generatedHeading,
-      generatedParagraph,
-      loading,
-      error,
-    },
+    state: { generatedHeading, generatedParagraph, loading, error },
     dispatch,
   } = useAppState();
 

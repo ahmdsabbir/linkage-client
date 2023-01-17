@@ -30,16 +30,16 @@ const ProjectDetails = () => {
               <p className="text-lg">{selectedProject.id}</p>
             </div>
           )}
-          {postTitleUrlTerm?.target_title && (
+          {postTitleUrlTerm?.source_title && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Post Title:</h1>
-              <p className="text-lg">{postTitleUrlTerm?.target_title}</p>
+              <p className="text-lg">{postTitleUrlTerm?.source_title}</p>
             </div>
           )}
-          {postTitleUrlTerm?.target_url && (
+          {postTitleUrlTerm?.source_url && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Post URL:</h1>
-              <p className="text-lg">{postTitleUrlTerm?.target_url}</p>
+              <p className="text-lg">{postTitleUrlTerm?.source_url}</p>
             </div>
           )}
         </div>

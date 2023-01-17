@@ -40,7 +40,7 @@ const Suggestions = () => {
     const postData = JSON.stringify({
       domain: selectedProject.domain,
       relevant_term: data.relevantTerm,
-      target_title: postTitleUrlTerm.target_title,
+      source_title: postTitleUrlTerm.source_title,
     });
 
     try {
@@ -133,9 +133,10 @@ const Suggestions = () => {
             ) : (
               aiSuggestions?.map((suggestion, i) => (
                 <SuggestionsCard
-                  key={suggestion.url + i}
+                  key={suggestion.post_id}
                   title={suggestion.title}
                   url={suggestion.url}
+                  id={suggestion.post_id}
                 />
               ))
             )}

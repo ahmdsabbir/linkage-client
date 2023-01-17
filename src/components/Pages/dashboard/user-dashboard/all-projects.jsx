@@ -3,11 +3,13 @@ import { useNavigate } from "react-router-dom";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
+import useRefreshToken from "../../../hook/useRefreshToken";
 import ConfirmationModal from "../../../reusable-component/confirmation-modal";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 import Spinner from "../../../spinner";
 
 const AllProjects = () => {
+  const refresh = useRefreshToken();
   // global state context provider
   const {
     state: { projects, loading },
@@ -159,6 +161,8 @@ const AllProjects = () => {
           ) : null}
         </>
       )}
+
+      <button onClick={() => refresh}>Refres Token</button>
     </>
   );
 };

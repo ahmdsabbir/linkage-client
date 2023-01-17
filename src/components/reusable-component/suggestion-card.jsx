@@ -1,11 +1,14 @@
 import React from "react";
 import { useAppState } from "../context/AppProvider";
 
-const SuggestionsCard = ({ title, url }) => {
+const SuggestionsCard = ({ title, url, id }) => {
   const { dispatch } = useAppState();
 
   const handleChosenTitleUrl = async () => {
-    await dispatch({ type: "choosenTitleUrl", payload: { title, url } });
+    await dispatch({
+      type: "choosenTitleUrl",
+      payload: { title, url, id },
+    });
     await dispatch({
       type: "generatedHeading",
       payload: "",
@@ -25,9 +28,7 @@ const SuggestionsCard = ({ title, url }) => {
             <span className="font-medium ">Url:</span> {url}
           </p>
         )}
-        <p>
-          <span className="font-medium">Category:</span> not generted
-        </p>
+
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
           <button className="btn bg-accent-dark text-white capitalize border-none rounded">
             choose

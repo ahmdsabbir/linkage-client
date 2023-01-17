@@ -12,7 +12,11 @@ const chosenTitleUrl = z.object({
 
 const ChosenTitleUrl = () => {
   const {
-    state: { selectedProject, choosenTitleUrl, postTitleUrlTerm },
+    state: {
+      selectedProject,
+      choosenTitleUrl,
+      postTitleUrlTerm: { source_title },
+    },
     dispatch,
   } = useAppState();
   const { auth } = useAuthState();
@@ -36,10 +40,11 @@ const ChosenTitleUrl = () => {
     defaultValues.url = choosenTitleUrl.url;
     reset({ ...defaultValues });
   }, [choosenTitleUrl]);
+
   const handleChosenTitleURl = async (data) => {
     const postData = JSON.stringify({
-      target_title: postTitleUrlTerm.target_title,
-      source_title: data.title,
+      target_title: data.title,
+      source_title,
     });
 
     try {

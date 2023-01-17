@@ -8,7 +8,7 @@ import Spinner from "../../../spinner";
 const UpdateContent = () => {
   const {
     state: {
-      postTitleUrlTerm: { target_url },
+      postTitleUrlTerm,
       generatedParagraph,
       generatedHeading,
       selectedProject,
@@ -25,7 +25,7 @@ const UpdateContent = () => {
 
   useEffect(() => {
     const postData = JSON.stringify({
-      target_url,
+      post_id: choosenTitleUrl.id,
       domain: selectedProject.domain,
     });
 
