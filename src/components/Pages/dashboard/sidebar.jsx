@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAppState } from "../../context/AppProvider";
 import { useAuthState } from "../../context/AuthProvider";
 
@@ -68,30 +68,33 @@ ${
               className="text-slate-100 font-bold"
               data-dev-hint="second-main-navigation or footer navigation"
             >
-              <button
+              <NavLink
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
                 onClick={handleAllProjects}
               >
                 All Projects
-              </button>
-              <Link
+              </NavLink>
+              <NavLink
                 to="/dashboard/user-details"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
                 onClick={handleCloseSidebar}
               >
                 Profile
-              </Link>
+              </NavLink>
 
-              <Link
+              <NavLink
                 to="/dashboard/new-project"
                 className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
                 onClick={handleCloseSidebar}
               >
                 Start A New Porject
-              </Link>
+              </NavLink>
             </nav>
           </div>
-          <button className="btn" onClick={handleLogout}>
+          <button
+            className="font-bold py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
+            onClick={handleLogout}
+          >
             Logout
           </button>
         </article>
