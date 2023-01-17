@@ -1,10 +1,17 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
   const [authLoading, setAuthLoading] = useState(false);
+
+  useEffect(() => {
+    const loggedInUser = localStorage.getItem("linkage_token");
+    if (loggedInUser) {
+      setAuth({ token: loggedInUser });
+    }
+  }, []);
 
   return (
     <AuthContext.Provider

@@ -13,7 +13,7 @@ const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
     localStorage.removeItem("linkage_token");
     await setAuth({});
     navigate("/login");
-    console.log(auth);
+    localStorage.clear();
   };
 
   const handleAllProjects = async () => {
