@@ -12,17 +12,17 @@ const AllProjects = () => {
   const {
     state: { projects, loading },
     dispatch,
+    error,
   } = useAppState();
   const { auth } = useAuthState();
   const navigate = useNavigate();
   // state for delete project
   // Set up some additional local state
   const [type, setType] = useState(null);
-  const [id, setId] = useState(null);
+  const [projectId, setProjectId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
     useState(false);
-  const [messgae, setMessage] = useState(null);
-  const [buttonMessage, setButtonDeleteMessage] = useState(null);
+  const [deleteMessage, setDeleteMessage] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -30,6 +30,8 @@ const AllProjects = () => {
     if (auth?.token) {
       const getAllProjects = async () => {
         try {
+          await dispatch({ type: "error", payload: "" });
+          await dispatch({ type: "loading", payload: false });
           const response = await API("/project", {
             headers: {
               "Content-Type": "application/json",
@@ -42,8 +44,10 @@ const AllProjects = () => {
               type: "projects",
               payload: response?.data?.projects,
             });
+            await dispatch({ type: "loading", payload: false });
             await dispatch({ type: "error", payload: "" });
           } else {
+            await dispatch({ type: "loading", payload: false });
             await dispatch({ type: "error", payload: response?.data?.msg });
           }
         } catch (error) {
@@ -77,24 +81,42 @@ const AllProjects = () => {
     navigate("new-project");
   };
 
-  // Hide the confirmation  modal
-  const hideConfirmationModal = () => {
-    setDisplayConfirmationModal(false);
-  };
   // delete projct handler
   const handleDeleteProject = async (id) => {
-    console.log(id);
-
-    return;
     const findProject = projects.find((project) => project.id == id);
-    console.log(findProject.id);
-    if (findProject) return;
 
     try {
-      const response = await API.delete(`project/${findProject.id}`);
+      await dispatch({ type: "error", payload: "" });
+      await dispatch({ type: "loading", payload: true });
+      const response = await API.delete(`project/${findProject.id}`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      });
+      if (response?.status == 200 && response?.data?.msg) {
+        await dispatch({ type: "loading", payload: false });
+        await dispatch({
+          type: "projectDelete",
+          payload: findProject.id,
+        });
+        await dispatch({ type: "error", payload: response?.data?.msg });
+      } else {
+        console.log(response);
+        await dispatch({ type: "loading", payload: false });
+        // await dispatch({ type: "error", payload: response?.data?.msg });
+      }
     } catch (error) {
-      console.log(`error from all projects delete handler ${error.message}`);
+      dispatch({ type: "loading", payload: !loading });
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.message == "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else {
+        dispatch({ type: "error", payload: error?.message });
+      }
     }
+    setDisplayConfirmationModal(false);
   };
 
   return (
@@ -121,19 +143,24 @@ const AllProjects = () => {
                   dateAdded={project.date_added}
                   wpPassword={project.wp_password}
                   dispatch={dispatch}
-                  deleteProject={handleDeleteProject}
+                  showModal={setDisplayConfirmationModal}
+                  setProjectId={setProjectId}
                 />
               ))
             )}
           </div>
-          <ConfirmationModal
-            showModal={displayConfirmationModal}
-            // confirmModal={submitDelete}
-            hideModal={hideConfirmationModal}
-            type={type}
-            id={id}
-            buttonMessage={buttonMessage}
-          />
+          {error && <p className="text-red-700 ">{error}</p>}
+
+          {displayConfirmationModal ? (
+            <ConfirmationModal
+              showModal={setDisplayConfirmationModal}
+              confirmModal={handleDeleteProject}
+              type={type}
+              projectId={projectId}
+              message={deleteMessage}
+              setProjectId={setProjectId}
+            />
+          ) : null}
         </>
       )}
     </>

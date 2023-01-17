@@ -29,6 +29,14 @@ const projectsReducer = (state, action) => {
         projects: [...action.payload],
         loading: false,
       };
+    case "projectDelete":
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (project) => project.id != action.payload.id
+        ),
+        loading: false,
+      };
     case "selectedProject":
       return {
         ...state,

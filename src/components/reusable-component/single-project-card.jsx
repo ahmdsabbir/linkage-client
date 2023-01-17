@@ -9,8 +9,10 @@ const SingleProjectCard = ({
   wpPassword,
   admin,
   id,
+  showModal,
   dispatch,
   deleteProject,
+  setProjectId,
 }) => {
   const {
     state: { projects, selectedProject },
@@ -59,7 +61,10 @@ const SingleProjectCard = ({
         </NavLink>
         <button
           className="btn bg-accent-light text-white rounded  border-none hover:bg-error hover:text-base-300 focus:bg-slate-600"
-          onClick={() => deleteProject(id)}
+          onClick={() => {
+            showModal(true);
+            setProjectId(id);
+          }}
         >
           Delete
         </button>

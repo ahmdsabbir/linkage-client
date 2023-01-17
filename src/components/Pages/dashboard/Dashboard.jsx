@@ -40,7 +40,7 @@ const Dashboard = () => {
         </div>
 
         {/* Dashboard content will be here */}
-        <div className="col-span-10 ">
+        <div className="relative col-span-10 ">
           <Outlet />
         </div>
       </div>
