@@ -31,7 +31,7 @@ const SingleProjectCard = ({
 
   return (
     <div className="flex gap-4 card rounded shadow p-4">
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 break-words">
         {name ? <p> Project Name: {name}</p> : <p>project name not found</p>}
         {domain ? <p>Domain: {domain} </p> : <p>domain name not found</p>}
         {admin ? <p>WP Username: Admin</p> : <p>admin not found</p>}
