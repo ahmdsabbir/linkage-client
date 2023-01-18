@@ -34,62 +34,62 @@ const Dashboard = () => {
           {/* sidebar for desktop */}
           <div className="text-left text-[#8D9DAE]">
             <div className="text-xl mb-6">LOGO</div>
+            <nav
+              className="text-[#123354]"
+              data-dev-hint="main-navigation-for-regular-user"
+            >
+              <ul>
+                <li className="pt-2 my-2 block">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    All Projects
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    Start A New Porject
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    History
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    // onClick={handleAllProjects}
+                  >
+                    Payment
+                  </NavLink>
+                </li>
+              </ul>
+            </nav>
           </div>
-          <nav
-            className="text-[#8D9DAE]"
-            data-dev-hint="main-navigation-for-regular-user"
-          >
-            <ul>
-              <li className="pt-2 my-2 block">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  Dashboard
-                </NavLink>
-              </li>
-              <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  All Projects
-                </NavLink>
-              </li>
-              <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  Profile
-                </NavLink>
-              </li>
-              <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  Start A New Porject
-                </NavLink>
-              </li>
-              <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  History
-                </NavLink>
-              </li>
-              <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                <NavLink
-                  className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                  // onClick={handleAllProjects}
-                >
-                  Payment
-                </NavLink>
-              </li>
-            </ul>
-          </nav>
 
           {/* sidebar style 1 */}
           <SidebarSample
