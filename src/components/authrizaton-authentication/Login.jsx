@@ -56,12 +56,12 @@ const Login = () => {
       });
 
       if (response.status === 200) {
+        dispatch({ type: "loading", payload: !loading });
         const token = response?.data?.access_token;
         if (token) {
           await setAuth({ token });
           localStorage.setItem("linkage_token", token);
         }
-        // navigate(from, { replace: true });
       }
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
