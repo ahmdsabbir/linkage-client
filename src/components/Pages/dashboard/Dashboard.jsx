@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import SidebarSample from "./sidebar";
 
 const Dashboard = () => {
   const [isSidebar, setIsSidebar] = useState(false);
@@ -12,16 +11,15 @@ const Dashboard = () => {
   return (
     <>
       <div className="relative grid grid-cols-12">
-        {/* sidebar container */}
-        <div className="col-span-2 flex flex-col  bg-[#eaedf2] p-4 min-h-screen">
-          <button className="md:hidden" onClick={handleCloseSidebar}>
+        <div className="md:hidden col-span-2 flex flex-col items-center bg-[#eaedf2] p-4 min-h-screen">
+          <button className=" " onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
               strokeWidth={1.5}
-              stroke="white"
-              className="w-8 h-8"
+              stroke="#4EBF9D"
+              className="w-6 h-6"
             >
               <path
                 strokeLinecap="round"
@@ -30,7 +28,16 @@ const Dashboard = () => {
               />
             </svg>
           </button>
+        </div>
 
+        {/* sidebar container */}
+        <div
+          className={`hidden  md:col-span-2  md:flex flex-col bg-[#eaedf2] p-4 min-h-screen ${
+            isSidebar
+              ? " static transition-opacity opacity-100 duration-500 -translate-x-0 z-10 "
+              : "absolute transition-all delay-500 opacity-0 -translate-x-full  "
+          }`}
+        >
           {/* sidebar for desktop */}
           <div className="text-left text-[#8D9DAE]">
             <div className="text-xl mb-6">LOGO</div>
@@ -90,14 +97,6 @@ const Dashboard = () => {
               </ul>
             </nav>
           </div>
-
-          {/* sidebar style 1 */}
-          <SidebarSample
-            isSidebar={isSidebar}
-            handleCloseSidebar={handleCloseSidebar}
-          >
-            {/* <Card /> */}
-          </SidebarSample>
         </div>
 
         {/* Dashboard content will be here */}
