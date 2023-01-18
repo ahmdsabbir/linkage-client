@@ -61,12 +61,11 @@ const Register = () => {
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-      console.log(error);
-      if (error.response.status == 400) {
+
+      if (error.response.data.msg) {
         await dispatch({
           type: "error",
-          payload:
-            "username or email already taken. Try different username or email.",
+          payload: error.response.data.msg,
         });
       } else {
         await dispatch({

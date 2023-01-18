@@ -48,7 +48,7 @@ const Login = () => {
     try {
       await dispatch({ type: "error", payload: "" });
       await dispatch({ type: "loading" });
-      const response = await API.post("/auth/login", JSON.stringify(userData), {
+      const response = await API.post("auth/login", JSON.stringify(userData), {
         headers: {
           "Content-Type": "application/json",
           withCredentials: true,
@@ -64,17 +64,15 @@ const Login = () => {
         }
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
+      await dispatch({ type: "loading", payload: !loading });
       if (!error.response) {
-        dispatch({ type: "error", payload: error.message });
-      } else if (error.status == 400) {
-        dispatch({ type: "error", payload: "missing username or password" });
+        await dispatch({ type: "error", payload: error.message });
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error.message });
+        await dispatch({ type: "error", payload: error.message });
       } else if (error?.response?.data?.msg) {
-        dispatch({ type: "error", payload: error?.response?.data?.msg });
+        await dispatch({ type: "error", payload: error?.response?.data?.msg });
       } else {
-        dispatch({ type: "error", payload: "login failed" });
+        await dispatch({ type: "error", payload: "login failed" });
       }
     }
   };
