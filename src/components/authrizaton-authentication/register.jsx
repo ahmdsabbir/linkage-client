@@ -45,33 +45,36 @@ const Register = () => {
     });
     try {
       await dispatch({ type: "error", payload: "" });
-      // await dispatch({ type: "loading" });
+      await dispatch({ type: "loading" });
       dispatch({ type: "loading", payload: false });
-      const response = await API.post("auth/register", postJsonData);
-      /*   if (response.status == 201 || response.status == 200) {
-        if (
-          response?.data?.msg == "username already taken" ||
-          response?.data?.msg == "email already taken"
-        ) {
-          setErr(response.data.msg);
-        } else {
-          // navigate("/verify");
-          console.log(response.data)
-          
-        }
-      } */
-      if (response) {
+      const response = await API.post("auth/register", postJsonData, {
+        headers: {
+          "Content-Type": "application/json",
+          withCredentials: true,
+        },
+      });
+
+      if (response.status == 201 || response.status == 200) {
+        await dispatch({ type: "error", payload: "" });
+        await dispatch({ type: "loading", payload: false });
         dispatch({ type: "loading", payload: false });
-        console.log(response);
+        navigate("/verify");
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-      console.log(error.response);
-
-      await dispatch({
-        type: "error",
-        payload: error.message,
-      });
+      console.log(error);
+      if (error.response.status == 400) {
+        await dispatch({
+          type: "error",
+          payload:
+            "username or email already taken. Try different username or email.",
+        });
+      } else {
+        await dispatch({
+          type: "error",
+          payload: error.message,
+        });
+      }
     }
   };
 
@@ -109,7 +112,11 @@ const Register = () => {
               {...form.register("confirm")}
             />
             {/* err message */}
-            {error && <p className="text-red-800">{error}</p>}
+            {error && (
+              <div>
+                <p className="text-red-800">{error}</p>
+              </div>
+            )}
 
             <div className="form-control mt-6">
               <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600">

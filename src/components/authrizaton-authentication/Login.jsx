@@ -55,7 +55,7 @@ const Login = () => {
         },
       });
 
-      if (response.status == 200) {
+      if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: !loading });
         const token = response?.data?.access_token;
         if (token) {
@@ -71,6 +71,8 @@ const Login = () => {
         dispatch({ type: "error", payload: "missing username or password" });
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error.message });
+      } else if (error?.response?.data?.msg) {
+        dispatch({ type: "error", payload: error?.response?.data?.msg });
       } else {
         dispatch({ type: "error", payload: "login failed" });
       }
