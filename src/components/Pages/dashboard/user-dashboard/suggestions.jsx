@@ -68,8 +68,8 @@ const Suggestions = () => {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.response?.data.msg) {
+        dispatch({ type: "error", payload: error?.response?.data.msg });
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else {

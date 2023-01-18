@@ -110,6 +110,8 @@ const AllProjects = () => {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
+      } else if (error?.response?.data?.msg) {
+        dispatch({ type: "error", payload: error?.response?.data?.msg });
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else {
@@ -141,6 +143,7 @@ const AllProjects = () => {
                   domain={project.domain}
                   id={project.id}
                   dateAdded={project.date_added}
+                  wpUserName={project.wp_username}
                   wpPassword={project.wp_password}
                   dispatch={dispatch}
                   showModal={setDisplayConfirmationModal}

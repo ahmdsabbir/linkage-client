@@ -6,6 +6,7 @@ const SingleProjectCard = ({
   name,
   domain,
   dateAdded,
+  wpUserName,
   wpPassword,
   admin,
   id,
@@ -31,16 +32,42 @@ const SingleProjectCard = ({
   return (
     <div className="flex gap-4 card rounded shadow p-4">
       <div className="flex flex-col gap-3 break-words">
-        {name ? <p> Project Name: {name}</p> : <p>project name not found</p>}
-        {domain ? <p>Domain: {domain} </p> : <p>domain name not found</p>}
-        {admin ? <p>WP Username: Admin</p> : <p>admin not found</p>}
-        {wpPassword ? (
-          <p>WP App. Password: {wpPassword}</p>
+        {name ? (
+          <p>
+            <span className="font-semibold mr-2">Project Name:</span> {name}
+          </p>
         ) : (
-          <p>wpPassword name not found</p>
+          <p>project name not found</p>
+        )}
+        {domain ? (
+          <p>
+            <span className="font-semibold mr-2">Domain:</span> {domain}{" "}
+          </p>
+        ) : (
+          <p>domain name not found</p>
+        )}
+
+        {wpUserName ? (
+          <p>
+            <span className="font-semibold mr-2">WP App. Password:</span>{" "}
+            {wpUserName}
+          </p>
+        ) : (
+          <p>wpUserName not found</p>
+        )}
+        {wpPassword ? (
+          <p>
+            <span className="font-semibold mr-2">WP App. Password:</span>
+            {wpPassword}
+          </p>
+        ) : (
+          <p>wpPassword not found</p>
         )}
         {dateAdded ? (
-          <p>Project Created At: {dateAdded}</p>
+          <p>
+            <span className="font-semibold mr-2">Project Created At:</span>{" "}
+            {dateAdded}
+          </p>
         ) : (
           <p>date not found</p>
         )}

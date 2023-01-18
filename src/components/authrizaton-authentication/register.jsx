@@ -62,7 +62,9 @@ const Register = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
 
-      if (error.response.data.msg) {
+      if (!error.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error.response.data.msg) {
         await dispatch({
           type: "error",
           payload: error.response.data.msg,

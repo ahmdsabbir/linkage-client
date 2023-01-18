@@ -40,6 +40,8 @@ const UpdateContent = () => {
         payload: [],
       });
       try {
+        await dispatch({ type: "loading", payload: true });
+        await dispatch({ type: "error", payload: "" });
         const response = await API.post("core/target-headings", postData, {
           headers: {
             "Content-Type": "application/json",
@@ -49,6 +51,7 @@ const UpdateContent = () => {
         });
 
         if (response?.status === 200 && !response?.data?.msg) {
+          await dispatch({ type: "loading", payload: false });
           await dispatch({ type: "error", payload: "" });
           await dispatch({
             type: "updateAbove",
@@ -65,8 +68,8 @@ const UpdateContent = () => {
         dispatch({ type: "loading", payload: !loading });
         if (!error?.response) {
           dispatch({ type: "error", payload: error?.message });
-        } else if (error?.status == 400 || error?.status == 401) {
-          dispatch({ type: "error", payload: "missing username or password" });
+        } else if (error?.response?.data.msg) {
+          dispatch({ type: "error", payload: error?.response?.data.msg });
         } else if (error?.message == "Network Error") {
           dispatch({ type: "error", payload: error?.message });
         } else {
@@ -110,7 +113,7 @@ const UpdateContent = () => {
 
     try {
       dispatch({ type: "error", payload: "" });
-
+      dispatch({ type: "loading", payload: true });
       const response = await API.post("core/update-content", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -118,17 +121,17 @@ const UpdateContent = () => {
         },
         withCredentials: "true",
       });
-      console.log(response);
-
-      // dispatch({ type: "error", payload: response?.data?.msg });
-      // dispatch({ type: "error", payload: "" });
+      if (response.status == 200 || response.status == 201) {
+        dispatch({ type: "error", payload: "" });
+        dispatch({ type: "loading", payload: false });
+        console.log(response);
+      }
     } catch (error) {
-      console.log(error);
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.response?.data.msg) {
+        dispatch({ type: "error", payload: error?.response?.data.msg });
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else {

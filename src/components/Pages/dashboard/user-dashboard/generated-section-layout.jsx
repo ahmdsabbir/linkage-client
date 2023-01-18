@@ -43,6 +43,7 @@ const GeneratedSectionLayout = () => {
         payload: "",
       });
       dispatch({ type: "loading" });
+      await dispatch({ type: "error", payload: "" });
       const response = await API.post("core/paragraph", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -53,11 +54,11 @@ const GeneratedSectionLayout = () => {
 
       if (response?.status === 200 && !response?.data?.msg) {
         dispatch({ type: "loading", payload: false });
+        await dispatch({ type: "error", payload: "" });
         await dispatch({
           type: "generatedParagraph",
           payload: response?.data?.paragraph,
         });
-        await dispatch({ type: "error", payload: "" });
       } else {
         dispatch({ type: "error", payload: response?.data?.msg });
       }
@@ -65,8 +66,8 @@ const GeneratedSectionLayout = () => {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+      } else if (error?.response?.data?.msg) {
+        dispatch({ type: "error", payload: error?.response?.data?.msg });
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else {

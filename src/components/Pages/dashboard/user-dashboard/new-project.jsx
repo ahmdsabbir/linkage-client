@@ -27,6 +27,8 @@ const NewProject = () => {
       wp_password: data.wpAppPassword,
     });
     try {
+      await dispatch({ type: "loading", payload: true });
+      await dispatch({ type: "error", payload: "" });
       const response = await API.post("/project", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -34,10 +36,23 @@ const NewProject = () => {
         },
         withCredentials: true,
       });
-      if (response?.status === 201) {
+      if (response?.status === 200 || response?.status === 201) {
+        await dispatch({ type: "loading", payload: false });
+        await dispatch({ type: "error", payload: "" });
         setSuccess(response?.data?.msg);
       }
-    } catch (error) {}
+    } catch (error) {
+      dispatch({ type: "loading", payload: !loading });
+      if (!error?.response) {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.message == "Network Error") {
+        dispatch({ type: "error", payload: error?.message });
+      } else if (error?.response?.data.msg) {
+        dispatch({ type: "error", payload: error?.response?.data.msg });
+      } else {
+        dispatch({ type: "error", payload: "server error" });
+      }
+    }
   };
 
   return (
