@@ -10,7 +10,6 @@ const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
   const { dispatch } = useAppState();
 
   const handleLogout = async () => {
-    localStorage.removeItem("linkage_token");
     await setAuth({});
     navigate("/login");
     localStorage.clear();
@@ -25,6 +24,7 @@ const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
     await dispatch({ type: "generatedParagraph", payload: "" });
     await dispatch({ type: "updateAbove", payload: [] });
     await dispatch({ type: "newUpdateAbove", payload: [] });
+    await dispatch({ type: "error", payload: "" });
     navigate("/dashboard");
   };
 
