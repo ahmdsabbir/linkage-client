@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
@@ -36,11 +36,6 @@ const Register = () => {
     state: { loading, error },
   } = useAppState();
 
-  useEffect(() => {
-    dispatch({ type: "loading", payload: false });
-    console.log(loading);
-  }, [loading]);
-
   // singup handle function
   const handleSubmitRegister = async (data) => {
     const postJsonData = JSON.stringify({
@@ -50,8 +45,9 @@ const Register = () => {
     });
     try {
       await dispatch({ type: "error", payload: "" });
-      await dispatch({ type: "loading" });
-      const response = await API.post("/auth/register", postJsonData);
+      // await dispatch({ type: "loading" });
+      dispatch({ type: "loading", payload: false });
+      const response = await API.post("auth/register", postJsonData);
       /*   if (response.status == 201 || response.status == 200) {
         if (
           response?.data?.msg == "username already taken" ||
@@ -61,19 +57,21 @@ const Register = () => {
         } else {
           // navigate("/verify");
           console.log(response.data)
+          
         }
       } */
-      console.log(response);
+      if (response) {
+        dispatch({ type: "loading", payload: false });
+        console.log(response);
+      }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-      // throw new Response(`${error.message}`, { status: 404 });
-      console.log(error);
-      await dispatch({ type: "error", payload: error.message });
-      /*  if (!error.respnose) {
-        setErr("No server response");
-      } else {
-        setErr("Registration failed");
-      } */
+      console.log(error.response);
+
+      await dispatch({
+        type: "error",
+        payload: error.message,
+      });
     }
   };
 

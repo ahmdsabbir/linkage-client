@@ -97,7 +97,7 @@ const projectsReducer = (state, action) => {
       };
 
     case "loading": {
-      return { ...state, loading: true };
+      return { ...state, loading: action.payload };
     }
     case "error": {
       return { ...state, error: action.payload, loading: false };
