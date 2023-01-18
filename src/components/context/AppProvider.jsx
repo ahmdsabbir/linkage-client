@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 export const AppStateContext = createContext();
 
 const initialState = {
@@ -122,6 +122,11 @@ const AppProvider = ({ children }) => {
     initialState,
     getStorageValue
   );
+
+  // get localstorage items from localstorage
+  useEffect(() => {
+    localStorage.setItem("projectData", JSON.stringify(state));
+  }, [state]);
 
   // regular state
   return (
