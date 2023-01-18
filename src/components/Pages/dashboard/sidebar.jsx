@@ -4,7 +4,7 @@ import { useAppState } from "../../context/AppProvider";
 import { useAuthState } from "../../context/AuthProvider";
 
 const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
-  const { auth, setAuth } = useAuthState();
+  const { setAuth } = useAuthState();
   const navigate = useNavigate();
 
   const { dispatch } = useAppState();

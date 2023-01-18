@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
@@ -36,6 +36,11 @@ const Register = () => {
     state: { loading, error },
   } = useAppState();
 
+  useEffect(() => {
+    dispatch({ type: "loading", payload: false });
+    console.log(loading);
+  }, [loading]);
+
   // singup handle function
   const handleSubmitRegister = async (data) => {
     const postJsonData = JSON.stringify({
@@ -47,29 +52,33 @@ const Register = () => {
       await dispatch({ type: "error", payload: "" });
       await dispatch({ type: "loading" });
       const response = await API.post("/auth/register", postJsonData);
-      if (response.status == 201 || response.status == 200) {
+      /*   if (response.status == 201 || response.status == 200) {
         if (
           response?.data?.msg == "username already taken" ||
           response?.data?.msg == "email already taken"
         ) {
           setErr(response.data.msg);
         } else {
-          navigate("/verify");
+          // navigate("/verify");
+          console.log(response.data)
         }
-      }
+      } */
+      console.log(response);
     } catch (error) {
-      dispatch({ type: "loading", loading: false });
+      dispatch({ type: "loading", payload: false });
       // throw new Response(`${error.message}`, { status: 404 });
-      if (!error.respnose) {
+      console.log(error);
+      await dispatch({ type: "error", payload: error.message });
+      /*  if (!error.respnose) {
         setErr("No server response");
       } else {
         setErr("Registration failed");
-      }
+      } */
     }
   };
 
   if (loading) {
-    <Spinner />;
+    return <Spinner />;
   } else {
     return (
       <div className="grid place-self-center h-screen">

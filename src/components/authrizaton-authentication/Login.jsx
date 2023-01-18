@@ -38,6 +38,7 @@ const Login = () => {
       navigate("/login");
     }
   }, [auth]);
+  console.log(loading);
 
   const handleLogin = async (data) => {
     const userData = {

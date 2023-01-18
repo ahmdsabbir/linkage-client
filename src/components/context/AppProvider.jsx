@@ -126,7 +126,6 @@ const AppProvider = ({ children }) => {
   // get localstorage items from localstorage
   useEffect(() => {
     localStorage.setItem("projectData", JSON.stringify(state));
-    console.log(state);
   }, [state]);
 
   // regular state
