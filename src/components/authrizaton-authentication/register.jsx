@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
 import { useAppState } from "../context/AppProvider";
@@ -28,7 +28,6 @@ const signupFormSchema = z
   });
 
 const Register = () => {
-  const location = useLocation();
   const navigate = useNavigate();
   const form = useForm({ schema: signupFormSchema });
   const {
@@ -128,6 +127,7 @@ const Register = () => {
             text="Already a user?"
             btnLabel="Login"
             to={"/login"}
+            dispatch={dispatch}
           />
         </div>
       </div>

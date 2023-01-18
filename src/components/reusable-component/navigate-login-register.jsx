@@ -1,7 +1,8 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const NavigateLoginRegister = ({ text, btnLabel, to }) => {
+const NavigateLoginRegister = ({ text, btnLabel, to, dispatch }) => {
+  const navigate = useNavigate();
   return (
     <>
       <div className="divider"></div>
@@ -9,9 +10,16 @@ const NavigateLoginRegister = ({ text, btnLabel, to }) => {
         <div className="flex gap-4">
           {text && <p>{text}</p>}
           {btnLabel && to && (
-            <NavLink className="pb-1 border-b-2 border-slate-600" to={to}>
+            <button
+              className="pb-1 border-b-2 border-slate-600"
+              to={to}
+              onClick={() => {
+                dispatch({ type: "error", payload: "" });
+                navigate(to);
+              }}
+            >
               {btnLabel}
-            </NavLink>
+            </button>
           )}
         </div>
       </div>

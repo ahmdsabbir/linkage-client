@@ -120,6 +120,7 @@ const Login = () => {
             text="Have no account?"
             btnLabel="Register"
             to={"/register"}
+            dispatch={dispatch}
           />
         </div>
       </div>
