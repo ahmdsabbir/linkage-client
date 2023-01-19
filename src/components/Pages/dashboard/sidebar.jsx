@@ -11,20 +11,23 @@ const Sidebar = ({
   return (
     <main
       className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
-${
-  isSidebar
-    ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
-    : " transition-all delay-500 opacity-0 -translate-x-full  "
-}`}
+    ${
+      isSidebar
+        ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
+        : " transition-all delay-500 opacity-0 -translate-x-full  "
+    }`}
     >
+      <div>{children}</div>
       <section
         className={`w-screen max-w-xs left-0 absolute bg-[#eaedf2]  h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
   ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
   `}
       >
-        <article className="relative w-screen max-w-xs pb-10 flex flex-col  overflow-y-scroll max-h-screen">
-          <header className="flex items-center justify-between p-4 font-bold text-lg">
-            <p className=" text-[#123354] hover:text-contrast">Dashboard</p>
+        <article className="relative w-screen max-w-xs p-4 flex flex-col  overflow-y-scroll h-screen max-h-screen">
+          <header className="flex items-center justify-between  font-bold text-lg h-auto">
+            <p className=" text-[#123354] hover:text-contrast mb-4">
+              Dashboard
+            </p>
             <button className="" onClick={handleCloseSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -42,8 +45,7 @@ ${
               </svg>
             </button>
           </header>
-          <div>{children}</div>
-          <div className="text-left bg-[#eaedf2] text-[#8D9DAE]  rounded p-4 flex flex-col justify-between max-h-full">
+          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] flex flex-col rounded p-4 flex-grow">
             <nav
               className=" text-[#123354] "
               data-dev-hint="main-navigation-for-regular-user "
@@ -95,7 +97,7 @@ ${
             </nav>
 
             <NavLink
-              className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
+              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
               onClick={handleLogout}
             >
               Logout
