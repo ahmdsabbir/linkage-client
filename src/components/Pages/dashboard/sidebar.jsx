@@ -22,16 +22,16 @@ ${
   ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
   `}
       >
-        <article className="relative w-screen max-w-xs pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
+        <article className="relative w-screen max-w-xs pb-10 flex flex-col  overflow-y-scroll max-h-screen">
           <header className="flex items-center justify-between p-4 font-bold text-lg">
             <p className=" text-[#123354] hover:text-contrast">Dashboard</p>
-            <button className="btn font-bold" onClick={handleCloseSidebar}>
+            <button className="" onClick={handleCloseSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="currentColor"
+                stroke="#4EBF9D"
                 className="w-6 h-6"
               >
                 <path
@@ -43,9 +43,9 @@ ${
             </button>
           </header>
           <div>{children}</div>
-          <div className="text-left bg-[#eaedf2] text-[#8D9DAE]  rounded p-4 flex flex-col">
+          <div className="text-left bg-[#eaedf2] text-[#8D9DAE]  rounded p-4 flex flex-col justify-between max-h-full">
             <nav
-              className="flex flex-col text-[#123354] "
+              className=" text-[#123354] "
               data-dev-hint="main-navigation-for-regular-user "
             >
               <ul>
@@ -95,7 +95,7 @@ ${
             </nav>
 
             <NavLink
-              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
+              className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
               onClick={handleLogout}
             >
               Logout

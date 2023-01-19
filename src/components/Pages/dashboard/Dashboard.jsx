@@ -60,6 +60,7 @@ const Dashboard = () => {
           isSidebar={isSidebar}
           handleCloseSidebar={handleCloseSidebar}
           handleLogout={handleLogout}
+          handleAllProjects={handleAllProjects}
         ></Sidebar>
 
         {/* sidebar container for desktop */}
