@@ -8,7 +8,6 @@ const SingleProjectCard = ({
   dateAdded,
   wpUserName,
   wpPassword,
-  admin,
   id,
   showModal,
   dispatch,
@@ -19,7 +18,7 @@ const SingleProjectCard = ({
   } = useAppState();
   const navigate = useNavigate();
 
-  // delete projct handler
+  // start projct handler
   const handleStarteProject = async (id) => {
     const findProject = projects.find((project) => project.id == id);
     await dispatch({
@@ -29,8 +28,20 @@ const SingleProjectCard = ({
     navigate(`/dashboard/project-starter/${name.toLowerCase()}`);
   };
 
+  const handleEditProject = async (id) => {
+    const findProject = projects.find((project) => project.id == id);
+    await dispatch({
+      type: "selectedProject",
+      payload: findProject,
+    });
+
+    navigate(
+      `/dashboard/project-starter/${name.toLowerCase()}/edit-project-details`
+    );
+  };
+
   return (
-    <div className="flex gap-4 card rounded shadow-sm p-4">
+    <div className="flex gap-4 card rounded shadow p-4">
       <div className="flex flex-col gap-3 break-words">
         {name ? (
           <p>
@@ -65,7 +76,7 @@ const SingleProjectCard = ({
         )}
         {dateAdded ? (
           <p>
-            <span className="font-semibold mr-2">Project Created At:</span>{" "}
+            <span className="font-semibold mr-2">Project Created At:</span>
             {dateAdded}
           </p>
         ) : (
@@ -81,7 +92,9 @@ const SingleProjectCard = ({
         </button>
         <NavLink
           className="btn bg-accent-light text-white rounded  border-none hover:bg-warning hover:text-base-300  focus:bg-slate-600"
-          to={`/dashboard/project-starter/${name.toLowerCase()}/edit-project-details`}
+          onClick={() => {
+            handleEditProject(id);
+          }}
         >
           Edit
         </NavLink>

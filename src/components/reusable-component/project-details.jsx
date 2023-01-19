@@ -24,12 +24,7 @@ const ProjectDetails = () => {
               <p className="text-lg">{selectedProject.domain}</p>
             </div>
           )}
-          {selectedProject?.id && (
-            <div className="flex items-center gap-4 font-medium">
-              <h1 className="text-xl">Id:</h1>
-              <p className="text-lg">{selectedProject.id}</p>
-            </div>
-          )}
+
           {postTitleUrlTerm?.source_title && (
             <div className="flex items-center gap-4 font-medium">
               <h1 className="text-xl">Post Title:</h1>

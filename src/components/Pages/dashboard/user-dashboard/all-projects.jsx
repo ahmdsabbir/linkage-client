@@ -18,6 +18,7 @@ const AllProjects = () => {
   } = useAppState();
   const { auth } = useAuthState();
   const navigate = useNavigate();
+
   // state for delete project
   // Set up some additional local state
   const [projectId, setProjectId] = useState(null);
@@ -128,7 +129,7 @@ const AllProjects = () => {
       ) : (
         <>
           <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
-            {projects?.length == 0 ? (
+            {projects?.length <= 0 ? (
               <div>
                 <p>No Projects Yet</p>
                 <button className="btn" onClick={handleNewPorject}>
@@ -148,6 +149,7 @@ const AllProjects = () => {
                   dispatch={dispatch}
                   showModal={setDisplayConfirmationModal}
                   setProjectId={setProjectId}
+                  navigate={navigate}
                 />
               ))
             )}

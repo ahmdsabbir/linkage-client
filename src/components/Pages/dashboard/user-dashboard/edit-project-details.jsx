@@ -87,7 +87,7 @@ const EditProjectDetails = () => {
             htmlFor="WP Username"
             className=" font-medium whitespace-nowrap flex-1 sm:min-w-[135px]"
           >
-            Domain
+            Wp User Name
           </label>
           <input
             type="text"

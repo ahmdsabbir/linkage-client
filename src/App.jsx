@@ -70,7 +70,6 @@ const router = createBrowserRouter(
               path="generated-heading"
               element={<GeneratedSectionLayout />}
             />
-
             <Route path="update-content" element={<UpdateContent />} />
 
             {/* edit project details */}
