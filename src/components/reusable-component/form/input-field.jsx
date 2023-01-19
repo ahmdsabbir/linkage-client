@@ -8,6 +8,7 @@ export const Input = forwardRef(function Input(
     hintText,
     autoFocus = false,
     className = "flex flex-col",
+    minwidth = "min-w-[117px]",
     ...props
   },
   ref
@@ -15,9 +16,11 @@ export const Input = forwardRef(function Input(
   return (
     <>
       <div
-        className={`${className} gap-2 sm:gap-4 md:items-center mb-2 md:mb-2  `}
+        className={`${className} sm:gap-2 md:gap-4 md:items-center mb-2 md:mb-2  `}
       >
-        <label className="self-start flex flex-col label text-base min-w-[117px] max-w-[217px] md:pb-2">
+        <label
+          className={`self-start flex flex-col label text-base  ${minwidth} max-w-[217px] md:pb-2`}
+        >
           <span className="font-medium self-start">{label}</span>
           {hintText && (
             <span className="self-start text-black/60 text-sm">{hintText}</span>

@@ -56,6 +56,7 @@ const Dashboard = () => {
           </button>
         </div>
 
+        {/* for mobile */}
         <Sidebar
           isSidebar={isSidebar}
           handleCloseSidebar={handleCloseSidebar}

@@ -64,32 +64,36 @@ const NewProject = () => {
           placeholder="Project Name"
           {...form.register("projectName")}
           className="flex flex-col md:flex-row "
+          minwidth={"min-w-[143px]"}
         />
         <Input
           label="Domain"
           type="text"
           placeholder="domain url..."
           {...form.register("domain")}
-          className="flex flex-col md:flex-row "
+          className="flex flex-col md:flex-row"
+          minwidth={"min-w-[143px]"}
         />
         <Input
           label="WP Username"
           type="text"
           placeholder="wpUsername"
           {...form.register("wpUsername")}
-          className="flex flex-col md:flex-row "
+          className="flex flex-col md:flex-row"
+          minwidth={"min-w-[143px]"}
         />
         <Input
           label="WP App. Password"
           type="password"
           placeholder="WP App. Password"
           {...form.register("wpAppPassword")}
-          className="flex flex-col md:flex-row "
+          className="flex flex-col md:flex-row"
+          minwidth={"min-w-[143px]"}
         />
         {success && <p className="text-red-700">{success}</p>}
 
-        <div className="form-control md:flex-row mt-6">
-          <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600">
+        <div className="form-control md:flex-row mt-4 md:ml-[166px]">
+          <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">
             Submit
           </button>
         </div>
