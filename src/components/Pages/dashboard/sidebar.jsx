@@ -96,12 +96,12 @@ const Sidebar = ({
               </ul>
             </nav>
 
-            <NavLink
+            <button
               className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
               onClick={handleLogout}
             >
               Logout
-            </NavLink>
+            </button>
           </div>
         </article>
       </section>

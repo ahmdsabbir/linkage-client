@@ -14,6 +14,7 @@ const Dashboard = () => {
     await setAuth({});
     navigate("/login");
     localStorage.clear();
+    console.log("localStorage");
   };
 
   // close sidebar function

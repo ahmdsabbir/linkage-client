@@ -28,7 +28,6 @@ const useRefreshToken = () => {
       console.log(error);
     }
 
-    return;
     await setAuth((prev) => {
       console.log(prev);
       console.log(response);

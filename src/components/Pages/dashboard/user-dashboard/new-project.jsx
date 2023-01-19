@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { z } from "zod";
 import API from "../../../../api/api-config";
+import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import useForm from "../../../hook/useForm";
 import Form from "../../../reusable-component/form/form";
@@ -18,6 +19,10 @@ const NewProject = () => {
   // const { reset } = useForm();
   const { auth } = useAuthState();
   const [success, setSuccess] = useState("");
+  const {
+    dispatch,
+    state: { loading },
+  } = useAppState();
 
   const handleNewProjectDetails = async (data) => {
     const postData = JSON.stringify({
@@ -36,6 +41,7 @@ const NewProject = () => {
         },
         withCredentials: true,
       });
+      console.log(response);
       if (response?.status === 200 || response?.status === 201) {
         await dispatch({ type: "loading", payload: false });
         await dispatch({ type: "error", payload: "" });
