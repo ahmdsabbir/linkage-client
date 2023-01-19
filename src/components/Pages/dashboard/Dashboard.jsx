@@ -16,18 +16,6 @@ const Dashboard = () => {
     localStorage.clear();
   };
 
-  const handleAllProjects = async () => {
-    await dispatch({ type: "selectedProject", payload: {} });
-    await dispatch({ type: "postTitleUrl", payload: {} });
-    await dispatch({ type: "aiSuggestions", payload: [] });
-    await dispatch({ type: "choosenTitleUrl", payload: {} });
-    await dispatch({ type: "generatedHeading", payload: "" });
-    await dispatch({ type: "generatedParagraph", payload: "" });
-    await dispatch({ type: "updateAbove", payload: [] });
-    await dispatch({ type: "newUpdateAbove", payload: [] });
-    await dispatch({ type: "error", payload: "" });
-    navigate("/dashboard");
-  };
   // close sidebar function
   const handleCloseSidebar = () => {
     setIsSidebar(!isSidebar);
@@ -61,7 +49,7 @@ const Dashboard = () => {
           isSidebar={isSidebar}
           handleCloseSidebar={handleCloseSidebar}
           handleLogout={handleLogout}
-          handleAllProjects={handleAllProjects}
+          // handleAllProjects={handleAllProjects}
         ></Sidebar>
 
         {/* sidebar container for desktop */}
@@ -78,24 +66,36 @@ const Dashboard = () => {
               <ul>
                 <li className="pt-2 my-2 block">
                   <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    onClick={handleAllProjects}
+                    to={"/dashboard"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block bg-black py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
                   >
                     Dashboard
                   </NavLink>
                 </li>
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                {/*  <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    onClick={handleAllProjects}
+                    to={"/dashboard"}
+                    className={(isActive) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
                   >
                     All Projects
                   </NavLink>
-                </li>
+                </li> */}
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to="/dashboard/user-details"
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
                   >
                     Profile
                   </NavLink>
@@ -103,30 +103,49 @@ const Dashboard = () => {
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to="/dashboard/new-project"
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
                   >
                     Start A New Porject
                   </NavLink>
                 </li>
+
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
+                  <NavLink
+                    to={"/dashboard"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                  >
                     History
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
+                  <NavLink
+                    to={"/dashboard"}
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                  >
                     Payment
                   </NavLink>
                 </li>
               </ul>
             </nav>
 
-            <NavLink
+            <button
               className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
               onClick={handleLogout}
             >
               Logout
-            </NavLink>
+            </button>
           </div>
         </div>
 

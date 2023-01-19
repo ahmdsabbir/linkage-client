@@ -25,14 +25,26 @@ const AllProjects = () => {
   const [displayConfirmationModal, setDisplayConfirmationModal] =
     useState(false);
 
+  const clearAppState = async () => {
+    await dispatch({ type: "selectedProject", payload: {} });
+    await dispatch({ type: "postTitleUrl", payload: {} });
+    await dispatch({ type: "aiSuggestions", payload: [] });
+    await dispatch({ type: "choosenTitleUrl", payload: {} });
+    await dispatch({ type: "generatedHeading", payload: "" });
+    await dispatch({ type: "generatedParagraph", payload: "" });
+    await dispatch({ type: "updateAbove", payload: [] });
+    await dispatch({ type: "newUpdateAbove", payload: [] });
+    await dispatch({ type: "error", payload: "" });
+  };
+
   useEffect(() => {
     let isMounted = true;
     const controller = new AbortController();
+    // clearAppState to clear all state of the app
+    clearAppState();
     if (auth?.token) {
       const getAllProjects = async () => {
         try {
-          await dispatch({ type: "error", payload: "" });
-          await dispatch({ type: "loading", payload: false });
           const response = await API("/project", {
             headers: {
               "Content-Type": "application/json",
