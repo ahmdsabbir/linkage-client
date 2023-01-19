@@ -1,8 +1,33 @@
 import React, { useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { useAppState } from "../../context/AppProvider";
+import { useAuthState } from "../../context/AuthProvider";
+import Sidebar from "./sidebar";
 
 const Dashboard = () => {
+  const { setAuth } = useAuthState();
+  const navigate = useNavigate();
+  const { dispatch } = useAppState();
   const [isSidebar, setIsSidebar] = useState(false);
+
+  const handleLogout = async () => {
+    await setAuth({});
+    navigate("/login");
+    localStorage.clear();
+  };
+
+  const handleAllProjects = async () => {
+    await dispatch({ type: "selectedProject", payload: {} });
+    await dispatch({ type: "postTitleUrl", payload: {} });
+    await dispatch({ type: "aiSuggestions", payload: [] });
+    await dispatch({ type: "choosenTitleUrl", payload: {} });
+    await dispatch({ type: "generatedHeading", payload: "" });
+    await dispatch({ type: "generatedParagraph", payload: "" });
+    await dispatch({ type: "updateAbove", payload: [] });
+    await dispatch({ type: "newUpdateAbove", payload: [] });
+    await dispatch({ type: "error", payload: "" });
+    navigate("/dashboard");
+  };
   // close sidebar function
   const handleCloseSidebar = () => {
     setIsSidebar(!isSidebar);
@@ -31,99 +56,28 @@ const Dashboard = () => {
           </button>
         </div>
 
-        {/* mobile sidebar */}
-        <main
-          className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
-${
-  isSidebar
-    ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
-    : " transition-all delay-500 opacity-0 -translate-x-full  "
-}`}
-        >
-          <section
-            className={`w-screen max-w-xs left-0 absolute bg-slate-800 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
-  ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
-  `}
-          >
-            <article className="relative w-screen max-w-xs pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
-              <header className="flex items-center justify-between p-4 font-bold text-lg">
-                <p className="text-slate-100">Dashboard</p>
-                <button className="btn font-bold" onClick={handleCloseSidebar}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="w-6 h-6"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M6 18L18 6M6 6l12 12"
-                    />
-                  </svg>
-                </button>
-              </header>
-              {/* <div>{children}</div> */}
-              <div>
-                <nav
-                  className="text-slate-100 font-bold"
-                  data-dev-hint="second-main-navigation or footer navigation"
-                >
-                  <NavLink
-                    className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                    // onClick={handleAllProjects}
-                  >
-                    All Projects
-                  </NavLink>
-                  <NavLink
-                    to="/dashboard/user-details"
-                    className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                    onClick={handleCloseSidebar}
-                  >
-                    Profile
-                  </NavLink>
-
-                  <NavLink
-                    to="/dashboard/new-project"
-                    className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                    onClick={handleCloseSidebar}
-                  >
-                    Start A New Porject
-                  </NavLink>
-                </nav>
-              </div>
-              <button
-                className="font-bold py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                // onClick={handleLogout}
-              >
-                Logout
-              </button>
-            </article>
-          </section>
-          <section
-            className="w-screen h-full cursor-pointer"
-            onClick={handleCloseSidebar}
-          ></section>
-        </main>
+        <Sidebar
+          isSidebar={isSidebar}
+          handleCloseSidebar={handleCloseSidebar}
+          handleLogout={handleLogout}
+        ></Sidebar>
 
         {/* sidebar container for desktop */}
         <div
-          className={`hidden invisible visibility md:flex md:visible md:col-span-2 flex-col bg-[#eaedf2] p-4 min-h-screen `}
+          className={`hidden invisible visibility md:flex md:visible md:col-span-2 flex-col bg-base  p-4 min-h-screen `}
         >
           {/* sidebar for desktop */}
-          <div className="text-left text-[#8D9DAE]">
-            <div className="text-xl mb-6">LOGO</div>
+          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] min-h-full rounded p-4 flex flex-col">
             <nav
-              className="text-[#123354]"
-              data-dev-hint="main-navigation-for-regular-user"
+              className="flex flex-col text-[#123354] "
+              data-dev-hint="main-navigation-for-regular-user "
             >
+              <div className="text-xl mb-6">LOGO</div>
               <ul>
                 <li className="pt-2 my-2 block">
                   <NavLink
                     className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
+                    onClick={handleAllProjects}
                   >
                     Dashboard
                   </NavLink>
@@ -131,45 +85,46 @@ ${
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
+                    onClick={handleAllProjects}
                   >
                     All Projects
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
+                    to="/dashboard/user-details"
                     className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
                   >
                     Profile
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
+                    to="/dashboard/new-project"
                     className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
                   >
                     Start A New Porject
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
-                  >
+                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
                     History
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    // onClick={handleAllProjects}
-                  >
+                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
                     Payment
                   </NavLink>
                 </li>
               </ul>
             </nav>
+
+            <NavLink
+              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
+              onClick={handleLogout}
+            >
+              Logout
+            </NavLink>
           </div>
         </div>
 
