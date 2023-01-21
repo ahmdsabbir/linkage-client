@@ -41,7 +41,7 @@ const NewProject = () => {
         },
         withCredentials: true,
       });
-      console.log(response);
+
       if (response?.status === 200 || response?.status === 201) {
         await dispatch({ type: "loading", payload: false });
         await dispatch({ type: "error", payload: "" });
@@ -50,7 +50,19 @@ const NewProject = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
+        dispatch({
+          type: "error",
+          payload: "Your session has been expired. Please login again.",
+        });
+      } else if (error.response.status == 401) {
+        await setAuth({});
+        localStorage.clear();
+        // navigate("/login", { state: { from: location }, replace: true });
+        await dispatch({
+          type: "error",
+          payload: "Your session has been expired. Please login again.",
+        });
+        navigate("/login");
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else if (error.response.status == 401) {

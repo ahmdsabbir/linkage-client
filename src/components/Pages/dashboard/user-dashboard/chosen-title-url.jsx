@@ -1,6 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -19,7 +20,8 @@ const ChosenTitleUrl = () => {
     },
     dispatch,
   } = useAppState();
-  const { auth } = useAuthState();
+  const { auth, setAuth } = useAuthState();
+  const navigate = useNavigate();
   // react state
   const [headingLoader, setHeadingLoader] = useState(false);
   const [chosenTitleUrlError, setChosenTitleUrlError] = useState("");
@@ -53,12 +55,12 @@ const ChosenTitleUrl = () => {
       // set loading state
       setHeadingLoader(true);
       // post data to the api
-      const response = await API.post("/core/heading", postData, {
+      const response = await API.post("core/heading", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          // withCredentials: "true",
         },
-        withCredentials: "true",
       });
 
       if (response?.status === 200 && !response?.data?.msg) {
@@ -70,10 +72,24 @@ const ChosenTitleUrl = () => {
         setChosenTitleUrlError("");
       }
     } catch (error) {
-      setHeadingLoader(false);
       if (!error?.response) {
-        setChosenTitleUrlError(error?.message);
-      } else if (error?.status == 400 || error?.status == 401) {
+        setChosenTitleUrlError("some error happened.");
+        /*   await setAuth({});
+        localStorage.clear();
+        // navigate("/login", { state: { from: location }, replace: true });
+
+        navigate("/login");
+        setHeadingLoader(false); */
+      } else if (error.response.status == 401) {
+        await setAuth({});
+        localStorage.clear();
+        // navigate("/login", { state: { from: location }, replace: true });
+        await dispatch({
+          type: "error",
+          payload: "Your session has been expired. Please login again.",
+        });
+        navigate("/login");
+      } else if (error?.status == 400) {
         setChosenTitleUrlError(error?.message);
       } else if (error?.message == "Network Error") {
         setChosenTitleUrlError(error?.message);

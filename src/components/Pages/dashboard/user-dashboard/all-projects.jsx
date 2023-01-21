@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import API from "../../../../api/api-config";
+import {
+  default as API,
+  default as apiConfig,
+} from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import useRefreshToken from "../../../hook/useRefreshToken";
@@ -44,41 +47,47 @@ const AllProjects = () => {
     // getting all projects if token is available
     if (auth?.token) {
       const getAllProjects = async () => {
+        await dispatch({ type: "loading", payload: false });
+        await dispatch({ type: "error", payload: "" });
         try {
-          const response = await API("/project", {
+          const response = await apiConfig("/project", {
             headers: {
               "Content-Type": "application/json",
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+              withCredentials: true,
             },
             signal: controller.signal,
           });
 
-          if (isMounted && response?.status == 200) {
+          if (response?.status == 200) {
             await dispatch({
               type: "projects",
               payload: response?.data?.projects,
             });
             await dispatch({ type: "loading", payload: false });
             await dispatch({ type: "error", payload: "" });
+            console.log(response);
           } else {
             await dispatch({ type: "loading", payload: false });
             await dispatch({ type: "error", payload: response?.data?.msg });
           }
         } catch (error) {
-          dispatch({ type: "loading", payload: !loading });
+          await dispatch({ type: "loading", payload: !loading });
           if (!error?.response) {
-            dispatch({ type: "error", payload: error?.message });
+            await dispatch({
+              type: "error",
+              payload: "Your session has been expired. Please login again.",
+            });
           } else if (error?.status == 400) {
             dispatch({
               type: "error",
               payload: "missing username or password",
             });
           } else if (error.response.status == 401) {
-            await dispatch({ type: "loading", payload: false });
             await setAuth({});
             localStorage.clear();
             // navigate("/login", { state: { from: location }, replace: true });
-            dispatch({
+            await dispatch({
               type: "error",
               payload: "Your session has been expired. Please login again.",
             });
@@ -98,7 +107,7 @@ const AllProjects = () => {
     return () => {
       controller && controller.abort();
     };
-  }, [auth]);
+  }, []);
 
   // start a new projecct handler
   const handleNewPorject = () => {
@@ -191,7 +200,7 @@ const AllProjects = () => {
       )}
 
       <button className="btn" onClick={() => refresh()}>
-        Refres Token
+        Refresh Token
       </button>
     </>
   );

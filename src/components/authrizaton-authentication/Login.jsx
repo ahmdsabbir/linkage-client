@@ -54,9 +54,10 @@ const Login = () => {
           withCredentials: true,
         },
       });
+      console.log(response);
 
       if (response?.status == 200 || response?.status == 201) {
-        dispatch({ type: "loading", payload: !loading });
+        dispatch({ type: "loading", payload: false });
         const token = response?.data?.access_token;
         if (token) {
           await setAuth({ token });

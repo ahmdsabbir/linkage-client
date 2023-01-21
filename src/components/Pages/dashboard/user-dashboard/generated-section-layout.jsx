@@ -65,7 +65,10 @@ const GeneratedSectionLayout = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
+        dispatch({
+          type: "error",
+          payload: "Your session has been expired. Please login again.",
+        });
       } else if (error?.response?.data?.msg) {
         dispatch({ type: "error", payload: error?.response?.data?.msg });
       } else if (error?.message == "Network Error") {
