@@ -16,7 +16,7 @@ const AllProjects = () => {
     dispatch,
     error,
   } = useAppState();
-  const { auth } = useAuthState();
+  const { auth, setAuth } = useAuthState();
   const navigate = useNavigate();
 
   // state for delete project
@@ -52,7 +52,7 @@ const AllProjects = () => {
             },
           });
 
-          if (isMounted && response?.status == 200 && !response?.data?.msg) {
+          if (isMounted && response?.status == 200) {
             await dispatch({
               type: "projects",
               payload: response?.data?.projects,
@@ -67,11 +67,23 @@ const AllProjects = () => {
           dispatch({ type: "loading", payload: !loading });
           if (!error?.response) {
             dispatch({ type: "error", payload: error?.message });
-          } else if (error?.status == 400 || error?.status == 401) {
+          } else if (error?.status == 400) {
             dispatch({
               type: "error",
               payload: "missing username or password",
             });
+          } else if (error.response.status == 401) {
+            await dispatch({ type: "loading", payload: false });
+            console.error(error.response.data.msg);
+            await setAuth({});
+            localStorage.clear();
+            // navigate("/login", { state: { from: location }, replace: true });
+            dispatch({
+              type: "error",
+              payload: "Your session has been expired. Please login again.",
+            });
+            navigate("/login");
+            console.log("working");
           } else if (error?.message == "Network Error") {
             dispatch({ type: "error", payload: error?.message });
           } else {
