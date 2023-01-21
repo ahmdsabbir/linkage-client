@@ -32,7 +32,7 @@ const useRefreshToken = () => {
       console.log(prev);
       console.log(response);
       console.log(response?.data);
-      return { ...prev, token: response?.data.access_token };
+      return { ...prev, token: response?.data?.access_token };
     });
     return response?.data.access_token;
   };

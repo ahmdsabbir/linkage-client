@@ -67,6 +67,16 @@ const RelevantTermLayout = () => {
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
+      } else if (error.response.status == 401) {
+        await dispatch({ type: "loading", payload: false });
+        await setAuth({});
+        localStorage.clear();
+        // navigate("/login", { state: { from: location }, replace: true });
+        dispatch({
+          type: "error",
+          payload: "Your session has been expired. Please login again.",
+        });
+        navigate("/login");
       } else if (error?.message == "Network Error") {
         dispatch({ type: "error", payload: error?.message });
       } else if (error?.response?.data.msg) {

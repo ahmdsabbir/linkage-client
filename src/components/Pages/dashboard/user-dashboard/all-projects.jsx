@@ -38,10 +38,10 @@ const AllProjects = () => {
   };
 
   useEffect(() => {
-    let isMounted = true;
     const controller = new AbortController();
     // clearAppState to clear all state of the app
     clearAppState();
+    // getting all projects if token is available
     if (auth?.token) {
       const getAllProjects = async () => {
         try {
@@ -50,6 +50,7 @@ const AllProjects = () => {
               "Content-Type": "application/json",
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
             },
+            signal: controller.signal,
           });
 
           if (isMounted && response?.status == 200) {
@@ -74,7 +75,6 @@ const AllProjects = () => {
             });
           } else if (error.response.status == 401) {
             await dispatch({ type: "loading", payload: false });
-            console.error(error.response.data.msg);
             await setAuth({});
             localStorage.clear();
             // navigate("/login", { state: { from: location }, replace: true });
@@ -83,7 +83,6 @@ const AllProjects = () => {
               payload: "Your session has been expired. Please login again.",
             });
             navigate("/login");
-            console.log("working");
           } else if (error?.message == "Network Error") {
             dispatch({ type: "error", payload: error?.message });
           } else {
@@ -97,7 +96,7 @@ const AllProjects = () => {
 
     // stop the request afte the data is mounted
     return () => {
-      (isMounted = false), controller.abort();
+      controller && controller.abort();
     };
   }, [auth]);
 
