@@ -1,5 +1,7 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -7,7 +9,6 @@ import { useAuthState } from "../../../context/AuthProvider";
 import Form from "../../../reusable-component/form/form";
 import { Input } from "../../../reusable-component/form/input-field";
 import Spinner from "../../../spinner";
-
 const relevantTerm = z.object({
   relevantTerm: z
     .string()
@@ -65,25 +66,13 @@ const RelevantTermLayout = () => {
         dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: true });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error.response.status == 401) {
-        await dispatch({ type: "loading", payload: false });
-        await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-        dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-        navigate("/login");
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.response?.data.msg) {
-        dispatch({ type: "error", payload: error?.response?.data.msg });
+        toast(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast(error.message);
       }
     }
   };
@@ -111,6 +100,7 @@ const RelevantTermLayout = () => {
             >
               Submit
             </button>
+            <ToastContainer />
           </Form>
         </div>
         {error && <p className="text-red-800 font-medium">{error}</p>}

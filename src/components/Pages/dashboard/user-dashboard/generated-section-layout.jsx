@@ -1,5 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -63,29 +65,13 @@ const GeneratedSectionLayout = () => {
         dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
-      console.log(error);
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({
-          type: "error",
-          payload: error.message,
-        });
-      } else if (error?.response?.data?.msg) {
-        dispatch({ type: "error", payload: error?.response?.data?.msg });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error.response.status == 401) {
-        await dispatch({ type: "loading", payload: false });
-        await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-        dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-        navigate("/login");
+        toast(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast(error.message);
       }
     }
   };
@@ -111,6 +97,7 @@ const GeneratedSectionLayout = () => {
           <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[132px]">
             {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
+          <ToastContainer />
         </Form>
       </div>
 

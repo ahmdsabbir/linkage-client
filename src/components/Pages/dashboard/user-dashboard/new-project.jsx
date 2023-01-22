@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -33,7 +35,7 @@ const NewProject = () => {
     });
     try {
       await dispatch({ type: "loading", payload: true });
-      await dispatch({ type: "error", payload: "" });
+
       const response = await API.post("/project", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -44,41 +46,16 @@ const NewProject = () => {
 
       if (response?.status === 200 || response?.status === 201) {
         await dispatch({ type: "loading", payload: false });
-        await dispatch({ type: "error", payload: "" });
         setSuccess(response?.data?.msg);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-      } else if (error.response.status == 401) {
-        await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-        await dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-        navigate("/login");
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error.response.status == 401) {
-        await dispatch({ type: "loading", payload: false });
-        await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-        dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-        navigate("/login");
-      } else if (error?.response?.data.msg) {
-        dispatch({ type: "error", payload: error?.response?.data.msg });
+        toast(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast(error.message);
       }
     }
   };
@@ -124,6 +101,7 @@ const NewProject = () => {
           <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">
             Submit
           </button>
+          <ToastContainer />
         </div>
       </Form>
     </div>

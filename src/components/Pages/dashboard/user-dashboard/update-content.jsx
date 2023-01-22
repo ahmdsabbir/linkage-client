@@ -1,10 +1,11 @@
 import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
 import Spinner from "../../../spinner";
-
 const UpdateContent = () => {
   const {
     state: {
@@ -65,25 +66,13 @@ const UpdateContent = () => {
           dispatch({ type: "error", payload: response?.data?.msg });
         }
       } catch (error) {
-        dispatch({ type: "loading", payload: !loading });
-        if (!error?.response) {
-          dispatch({ type: "error", payload: error?.message });
-        } /* else if (error.response.status == 401) {
-          await dispatch({ type: "loading", payload: false });
-          await setAuth({});
-          localStorage.clear();
-          // navigate("/login", { state: { from: location }, replace: true });
-          dispatch({
-            type: "error",
-            payload: "Your session has been expired. Please login again.",
-          });
-          navigate("/login");
-        } */ else if (error?.response?.data.msg) {
-          dispatch({ type: "error", payload: error?.response?.data.msg });
+        dispatch({ type: "loading", payload: false });
+        if (error?.response?.data?.msg) {
+          toast(error?.response?.data?.msg);
         } else if (error?.message == "Network Error") {
-          dispatch({ type: "error", payload: error?.message });
+          toast(error.message);
         } else {
-          dispatch({ type: "error", payload: "server error" });
+          toast(error.message);
         }
       }
     };
@@ -102,8 +91,14 @@ const UpdateContent = () => {
       );
       await dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
     } catch (error) {
-      await dispatch({ type: "loading", payload: !loading });
-      await dispatch({ type: "error", payload: "server error" });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast(error?.response?.data?.msg);
+      } else if (error?.message == "Network Error") {
+        toast(error.message);
+      } else {
+        toast(error.message);
+      }
     }
   };
 
@@ -177,6 +172,7 @@ const UpdateContent = () => {
                   >
                     Above This
                   </button>
+                  <ToastContainer />
                 </div>
               ) : (
                 <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
@@ -187,6 +183,7 @@ const UpdateContent = () => {
                   >
                     Above This
                   </button>
+                  <ToastContainer />
                 </div>
               )}
             </div>
@@ -216,10 +213,10 @@ const UpdateContent = () => {
               >
                 Update to the site
               </button>
+              <ToastContainer />
             </div>
           </div>
         </div>
-        {error && <p className="text-5xl font-medium">{error}</p>}
       </div>
     );
   }

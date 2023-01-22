@@ -2,6 +2,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -24,7 +26,6 @@ const ChosenTitleUrl = () => {
   const navigate = useNavigate();
   // react state
   const [headingLoader, setHeadingLoader] = useState(false);
-  const [chosenTitleUrlError, setChosenTitleUrlError] = useState("");
 
   const {
     register,
@@ -50,8 +51,6 @@ const ChosenTitleUrl = () => {
     });
 
     try {
-      // empty error state
-      setChosenTitleUrlError("");
       // set loading state
       setHeadingLoader(true);
       // post data to the api
@@ -69,32 +68,15 @@ const ChosenTitleUrl = () => {
           type: "generatedHeading",
           payload: response?.data?.heading,
         });
-        setChosenTitleUrlError("");
       }
     } catch (error) {
-      if (!error?.response) {
-        setChosenTitleUrlError("some error happened.");
-        /*   await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-
-        navigate("/login");
-        setHeadingLoader(false); */
-      } else if (error.response.status == 401) {
-        await setAuth({});
-        localStorage.clear();
-        // navigate("/login", { state: { from: location }, replace: true });
-        await dispatch({
-          type: "error",
-          payload: "Your session has been expired. Please login again.",
-        });
-        navigate("/login");
-      } else if (error?.status == 400) {
-        setChosenTitleUrlError(error?.message);
+      setHeadingLoader(false);
+      if (error?.response?.data?.msg) {
+        toast(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        setChosenTitleUrlError(error?.message);
+        toast(error.message);
       } else {
-        setChosenTitleUrlError(error?.message);
+        toast(error.message);
       }
     }
   };
@@ -105,7 +87,7 @@ const ChosenTitleUrl = () => {
           className="grid grid-cols-1 gap-3 mb-2"
           onSubmit={handleSubmit(handleChosenTitleURl)}
         >
-          <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6">
+          <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6 items-center">
             <label
               htmlFor="title"
               className=" font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
@@ -126,7 +108,7 @@ const ChosenTitleUrl = () => {
               {errors.title?.message}
             </span>
           )}
-          <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6">
+          <div className="form-control md:flex-row gap-2 sm:gap-4 md:gap-6 items-center">
             <label
               htmlFor="url"
               className=" font-medium whitespace-nowrap flex-1 sm:min-w-[85px]"
@@ -149,12 +131,10 @@ const ChosenTitleUrl = () => {
             >
               {headingLoader ? "Generating..." : "Generate Heading"}
             </button>
+            <ToastContainer />
             <p className="text-black/60 text-sm">
               Remember, You can always regenerate!
             </p>
-            {chosenTitleUrlError && (
-              <p className="text-red-800">{chosenTitleUrlError}</p>
-            )}
           </div>
         </form>
       </div>

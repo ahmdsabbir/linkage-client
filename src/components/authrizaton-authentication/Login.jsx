@@ -10,6 +10,9 @@ import { Input } from "../reusable-component/form/input-field";
 import NavigateLoginRegister from "../reusable-component/navigate-login-register";
 import Spinner from "../spinner";
 
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   password: z
@@ -46,7 +49,6 @@ const Login = () => {
     };
 
     try {
-      await dispatch({ type: "error", payload: "" });
       await dispatch({ type: "loading" });
       const response = await API.post("auth/login", JSON.stringify(userData), {
         headers: {
@@ -54,7 +56,6 @@ const Login = () => {
           withCredentials: true,
         },
       });
-      console.log(response);
 
       if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
@@ -65,15 +66,13 @@ const Login = () => {
         }
       }
     } catch (error) {
-      await dispatch({ type: "loading", payload: !loading });
-      if (!error.response) {
-        await dispatch({ type: "error", payload: error.message });
+      dispatch({ type: "loading", payload: false });
+      if (error.response.status == 401) {
+        toast(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        await dispatch({ type: "error", payload: error.message });
-      } else if (error?.response?.data?.msg) {
-        await dispatch({ type: "error", payload: error?.response?.data?.msg });
+        toast(error.message);
       } else {
-        await dispatch({ type: "error", payload: "login failed" });
+        toast(error.message ? error.message : "login failed");
       }
     }
   };
@@ -113,6 +112,7 @@ const Login = () => {
               <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
                 Login
               </button>
+              <ToastContainer />
             </div>
           </Form>
           <NavigateLoginRegister
