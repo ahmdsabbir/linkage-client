@@ -34,6 +34,7 @@ const Suggestions = () => {
     },
     dispatch,
   } = useAppState();
+  console.log(postTitleUrlTerm);
 
   // event handler for new relevant term
   const handleSubmitNewSuggestion = async (data) => {
@@ -102,6 +103,7 @@ const Suggestions = () => {
                 label={"Search More Suggestions"}
                 hintText={"Tip: Try to choose relevant terms."}
                 type="text"
+                defaultValue={postTitleUrlTerm.relevant_term}
                 placeholder="relevant term..."
                 className="flex flex-col md:flex-row "
                 autoFocus={true}

@@ -38,7 +38,8 @@ const RelevantTermLayout = () => {
     });
     // the relevant term has been saved for future use
     try {
-      await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
+      await dispatch({ type: "relevantTerm", payload: data });
+
       // start loading process & empty error state
       dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading" });
