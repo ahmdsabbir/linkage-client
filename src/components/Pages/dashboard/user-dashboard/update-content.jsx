@@ -47,7 +47,7 @@ const UpdateContent = () => {
             "Content-Type": "application/json",
             Authorization: auth.token ? `Bearer ${auth?.token}` : "",
           },
-          withCredentials: "true",
+          // withCredentials: "true",
         });
 
         if (response?.status === 200 && !response?.data?.msg) {
@@ -96,7 +96,7 @@ const UpdateContent = () => {
   const handleAbovePost = async (heading) => {
     try {
       const newUpdateAbove = await oldData.map((item) =>
-        item.text === heading
+        item.text == heading
           ? { ...item, generatedHeading, generatedParagraph }
           : item
       );
@@ -129,7 +129,7 @@ const UpdateContent = () => {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: "true",
+        // withCredentials: "true",
       });
       if (response.status == 200 || response.status == 201) {
         dispatch({ type: "error", payload: "" });
@@ -159,8 +159,12 @@ const UpdateContent = () => {
           {newData.map((heading, i) => (
             <div key={i}>
               {heading?.generatedHeading && heading?.generatedParagraph && (
-                <div className="rounded-md bg-slate-500 mb-4 p-4 text-base-100 ">
-                  <h2 className="text-2xl mb-4">{heading?.generatedHeading}</h2>
+                <div
+                  className={`${
+                    heading.name == "h3" && "ml-2 sm:ml-4 md:ml-8 p-4 mb-4"
+                  }  p-4 mb-4 border-2 rounded-md flex flex-col gap-4 items-center   bg-slate-500  text-base-100 `}
+                >
+                  <h2 className="text-2xl">{heading?.generatedHeading}</h2>
                   {heading?.generatedParagraph}
                 </div>
               )}

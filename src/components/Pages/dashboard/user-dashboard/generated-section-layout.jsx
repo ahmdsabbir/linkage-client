@@ -49,7 +49,7 @@ const GeneratedSectionLayout = () => {
           "Content-Type": "application/json",
           Authorization: auth?.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
       if (response?.status == 200 || response?.status == 201) {
@@ -63,11 +63,12 @@ const GeneratedSectionLayout = () => {
         dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
+      console.log(error);
       dispatch({ type: "loading", payload: !loading });
       if (!error?.response) {
         dispatch({
           type: "error",
-          payload: "Your session has been expired. Please login again.",
+          payload: error.message,
         });
       } else if (error?.response?.data?.msg) {
         dispatch({ type: "error", payload: error?.response?.data?.msg });

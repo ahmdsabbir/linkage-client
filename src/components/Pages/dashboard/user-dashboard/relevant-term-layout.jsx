@@ -44,12 +44,12 @@ const RelevantTermLayout = () => {
       dispatch({ type: "loading" });
 
       // post data to the api
-      const response = await API.post("/core/suggestions", postData, {
+      const response = await API.post("core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: "true",
+        // withCredentials: "true",
       });
 
       if (response?.status == 200 && !response?.data?.msg) {
@@ -64,7 +64,7 @@ const RelevantTermLayout = () => {
         dispatch({ type: "error", payload: response?.data?.msg });
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
+      dispatch({ type: "loading", payload: true });
       if (!error?.response) {
         dispatch({ type: "error", payload: error?.message });
       } else if (error.response.status == 401) {
