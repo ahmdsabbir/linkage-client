@@ -97,7 +97,7 @@ const RelevantTermLayout = () => {
           <Form form={form} onSubmit={handleSubmit}>
             <Input
               label={"Relevant Term"}
-              hintText={"We’ll make suggestion based on the term you give us."}
+              hintText={`We’ll make suggestion based on the term you give us.`}
               type="text"
               placeholder="relevant term..."
               className="flex flex-col md:flex-row "

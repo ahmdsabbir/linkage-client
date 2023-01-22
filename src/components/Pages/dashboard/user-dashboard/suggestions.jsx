@@ -34,7 +34,6 @@ const Suggestions = () => {
     },
     dispatch,
   } = useAppState();
-  console.log(postTitleUrlTerm);
 
   // event handler for new relevant term
   const handleSubmitNewSuggestion = async (data) => {

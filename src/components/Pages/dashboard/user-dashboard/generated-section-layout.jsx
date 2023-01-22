@@ -109,7 +109,7 @@ const GeneratedSectionLayout = () => {
           />
 
           <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[132px]">
-            Generate Section
+            {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
         </Form>
       </div>
@@ -137,6 +137,7 @@ const GeneratedSectionLayout = () => {
           <button
             className="btn bg-contrast border-none rounded text-white"
             onClick={handleUpdateSectionRoute}
+            disabled={generatedParagraph ? false : true}
           >
             Yup..Looks Good!
           </button>
