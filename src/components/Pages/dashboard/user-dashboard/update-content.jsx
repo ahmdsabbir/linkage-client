@@ -170,7 +170,7 @@ const UpdateContent = () => {
               )}
               {heading.name == "h2" ? (
                 <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  <p className="flex-inital font-medium">{heading.text}</p>
+                  <p className="flex-inital ">{heading.text}</p>
                   <button
                     className="flex-none px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
                     onClick={() => handleAbovePost(heading.text)}
@@ -180,7 +180,7 @@ const UpdateContent = () => {
                 </div>
               ) : (
                 <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  <p className="flex-inital font-semibold">{heading.text}</p>
+                  <p className="flex-inital ">{heading.text}</p>
                   <button
                     className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
                     onClick={() => handleAbovePost(heading.text)}
@@ -194,27 +194,29 @@ const UpdateContent = () => {
         </div>
 
         {/* generated Section */}
-        <div className="lg:col-start-2">
-          <div className="mb-4">
-            <h2 className="text-3xl">Generated Section</h2>
-            {error && <p className="text-red-800 font-medium">{error}</p>}
-            <p className="text-slate-400">
-              Following Section was Generated. Insert It Wherever You’d like on
-              Your Post
-            </p>
-          </div>
-          <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
-            <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-            <hr></hr>
-            {generatedParagraph && generatedParagraph}
-          </div>
-          <div className=" self-start flex-1 order-1 md:order-1">
-            <button
-              className="btn bg-contrast border-none rounded text-white"
-              onClick={handleUdpateToTheSite}
-            >
-              Update to the site
-            </button>
+        <div className="lg:col-start-2 relative">
+          <div className="sticky top-0">
+            <div className="mb-4">
+              <h2 className="text-3xl">Generated Section</h2>
+              {error && <p className="text-red-800 font-medium">{error}</p>}
+              <p className="text-slate-400">
+                Following Section was Generated. Insert It Wherever You’d like
+                on Your Post
+              </p>
+            </div>
+            <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
+              <h2 className="text-2xl mb-4">{generatedHeading}</h2>
+              <hr></hr>
+              {generatedParagraph && generatedParagraph}
+            </div>
+            <div className=" self-start flex-1 order-1 md:order-1">
+              <button
+                className="btn bg-contrast border-none rounded text-white"
+                onClick={handleUdpateToTheSite}
+              >
+                Update to the site
+              </button>
+            </div>
           </div>
         </div>
         {error && <p className="text-5xl font-medium">{error}</p>}
