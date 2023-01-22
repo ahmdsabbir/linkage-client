@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
@@ -20,7 +20,7 @@ const NewProject = () => {
   const form = useForm({ schema: newProjectStartSchema });
   // const { reset } = useForm();
   const { auth } = useAuthState();
-  const [success, setSuccess] = useState("");
+
   const {
     dispatch,
     state: { loading },
@@ -35,7 +35,6 @@ const NewProject = () => {
     });
     try {
       await dispatch({ type: "loading", payload: true });
-
       const response = await API.post("/project", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -46,7 +45,7 @@ const NewProject = () => {
 
       if (response?.status === 200 || response?.status === 201) {
         await dispatch({ type: "loading", payload: false });
-        setSuccess(response?.data?.msg);
+        toast.success(response?.data?.msg);
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
@@ -95,7 +94,6 @@ const NewProject = () => {
           className="flex flex-col md:flex-row"
           minwidth={"min-w-[143px]"}
         />
-        {success && <p className="text-red-700">{success}</p>}
 
         <div className="form-control md:flex-row mt-4 md:ml-[166px]">
           <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">

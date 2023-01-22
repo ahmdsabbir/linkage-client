@@ -117,7 +117,6 @@ const UpdateContent = () => {
     });
 
     try {
-      dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading", payload: true });
       const response = await API.post("core/update-content", postData, {
         headers: {
@@ -127,20 +126,16 @@ const UpdateContent = () => {
         // withCredentials: "true",
       });
       if (response.status == 200 || response.status == 201) {
-        dispatch({ type: "error", payload: "" });
         dispatch({ type: "loading", payload: false });
-        console.log(response);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.response?.data.msg) {
-        dispatch({ type: "error", payload: error?.response?.data.msg });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
+        toast.error(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast.error(error.message);
       }
     }
   };

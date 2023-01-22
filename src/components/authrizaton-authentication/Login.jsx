@@ -68,11 +68,11 @@ const Login = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error.response.status == 401) {
-        toast(error?.response?.data?.msg);
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast.error(error.message);
       } else {
-        toast(error.message ? error.message : "login failed");
+        toast.error(error.message ? error.message : "login failed");
       }
     }
   };

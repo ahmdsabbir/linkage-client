@@ -72,11 +72,11 @@ const ChosenTitleUrl = () => {
     } catch (error) {
       setHeadingLoader(false);
       if (error?.response?.data?.msg) {
-        toast(error?.response?.data?.msg);
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast.error(error.message);
       } else {
-        toast(error.message);
+        toast.error(error.message);
       }
     }
   };

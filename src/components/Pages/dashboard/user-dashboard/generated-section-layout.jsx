@@ -45,7 +45,7 @@ const GeneratedSectionLayout = () => {
         payload: "",
       });
       dispatch({ type: "loading" });
-      await dispatch({ type: "error", payload: "" });
+
       const response = await API.post("core/paragraph", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -56,22 +56,21 @@ const GeneratedSectionLayout = () => {
 
       if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
-        await dispatch({ type: "error", payload: "" });
         await dispatch({
           type: "generatedParagraph",
           payload: response?.data?.paragraph,
         });
       } else {
-        dispatch({ type: "error", payload: response?.data?.msg });
+        toast(response?.data?.msg);
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast(error?.response?.data?.msg);
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast.error(error.message);
       } else {
-        toast(error.message);
+        toast.error(error.message);
       }
     }
   };
