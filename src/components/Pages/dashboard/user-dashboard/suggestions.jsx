@@ -135,7 +135,7 @@ const Suggestions = () => {
           </div>
 
           {/* suggestions generated from api call */}
-          <div>
+          <div className="md:h-screen overflow-hidden overflow-y-scroll">
             {loading ? (
               <Spinner />
             ) : error ? (
