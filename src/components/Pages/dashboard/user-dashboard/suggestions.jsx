@@ -69,11 +69,11 @@ const Suggestions = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast(error?.response?.data?.msg);
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast.error(error.message);
       } else {
-        toast(error.message);
+        toast.error(error.message);
       }
     }
   };

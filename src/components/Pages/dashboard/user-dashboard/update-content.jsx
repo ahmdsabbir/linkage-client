@@ -20,7 +20,7 @@ const UpdateContent = () => {
     },
     dispatch,
   } = useAppState();
-  const { name } = useParams();
+
   const { auth } = useAuthState();
 
   useEffect(() => {
@@ -30,7 +30,6 @@ const UpdateContent = () => {
     });
 
     const getData = async () => {
-      dispatch({ type: "error", payload: "" });
       dispatch({ type: "loading" });
       await dispatch({
         type: "updateAbove",
@@ -42,7 +41,7 @@ const UpdateContent = () => {
       });
       try {
         await dispatch({ type: "loading", payload: true });
-        await dispatch({ type: "error", payload: "" });
+
         const response = await API.post("core/target-headings", postData, {
           headers: {
             "Content-Type": "application/json",
@@ -53,7 +52,7 @@ const UpdateContent = () => {
 
         if (response?.status === 200 && !response?.data?.msg) {
           await dispatch({ type: "loading", payload: false });
-          await dispatch({ type: "error", payload: "" });
+
           await dispatch({
             type: "updateAbove",
             payload: [...response?.data?.headings],
@@ -68,11 +67,11 @@ const UpdateContent = () => {
       } catch (error) {
         dispatch({ type: "loading", payload: false });
         if (error?.response?.data?.msg) {
-          toast(error?.response?.data?.msg);
+          toast.error(error?.response?.data?.msg);
         } else if (error?.message == "Network Error") {
-          toast(error.message);
+          toast.error(error.message);
         } else {
-          toast(error.message);
+          toast.error(error.message);
         }
       }
     };
@@ -93,11 +92,11 @@ const UpdateContent = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast(error?.response?.data?.msg);
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast.error(error.message);
       } else {
-        toast(error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -127,6 +126,7 @@ const UpdateContent = () => {
       });
       if (response.status == 200 || response.status == 201) {
         dispatch({ type: "loading", payload: false });
+        toast.success(response?.data?.msg);
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
