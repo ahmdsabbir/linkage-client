@@ -21,6 +21,8 @@ const Dashboard = () => {
     setIsSidebar(!isSidebar);
   };
 
+  const handleAllProjects = () => {};
+
   return (
     <>
       <div className="relative grid grid-cols-12">
@@ -113,7 +115,7 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
 
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to={"/dashboard"}
                     className={({ isActive }) =>
@@ -136,7 +138,7 @@ const Dashboard = () => {
                   >
                     Payment
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </nav>
 

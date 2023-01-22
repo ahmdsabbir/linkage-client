@@ -83,7 +83,7 @@ const Sidebar = ({
                     Start A New Porject
                   </NavLink>
                 </li>
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
                     History
                   </NavLink>
@@ -92,7 +92,7 @@ const Sidebar = ({
                   <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
                     Payment
                   </NavLink>
-                </li>
+                </li> */}
               </ul>
             </nav>
 

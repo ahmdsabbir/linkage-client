@@ -52,7 +52,7 @@ const GeneratedSectionLayout = () => {
         withCredentials: true,
       });
 
-      if (response?.status === 200 && !response?.data?.msg) {
+      if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
         await dispatch({ type: "error", payload: "" });
         await dispatch({
