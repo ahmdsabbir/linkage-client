@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import API from "../../../../api/api-config";
@@ -62,7 +61,9 @@ const UpdateContent = () => {
             payload: [...response?.data?.headings],
           });
         } else {
-          dispatch({ type: "error", payload: response?.data?.msg });
+          toast.info(
+            response?.data?.msg ? response?.data?.msg : "Something went wrong"
+          );
         }
       } catch (error) {
         dispatch({ type: "loading", payload: false });

@@ -61,7 +61,9 @@ const GeneratedSectionLayout = () => {
           payload: response?.data?.paragraph,
         });
       } else {
-        toast(response?.data?.msg);
+        toast(
+          response?.data?.msg ? response?.data?.msg : "Try anohter anchor text"
+        );
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
