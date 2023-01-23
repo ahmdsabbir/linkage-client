@@ -14,12 +14,11 @@ const UpdateContent = () => {
       choosenTitleUrl,
       updateAbove: { oldData, newData },
       loading,
-      error,
     },
     dispatch,
   } = useAppState();
 
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
 
   useEffect(() => {
     const postData = JSON.stringify({
@@ -48,7 +47,7 @@ const UpdateContent = () => {
           // withCredentials: "true",
         });
 
-        if (response?.status === 200 && !response?.data?.msg) {
+        if (response?.status == 200 && !response?.data?.msg) {
           await dispatch({ type: "loading", payload: false });
 
           await dispatch({
@@ -60,18 +59,24 @@ const UpdateContent = () => {
             payload: [...response?.data?.headings],
           });
         } else {
-          toast.info(
+          await dispatch({ type: "loading", payload: false });
+          toast.warning(
             response?.data?.msg ? response?.data?.msg : "Something went wrong"
           );
         }
       } catch (error) {
         dispatch({ type: "loading", payload: false });
         if (error?.response?.data?.msg) {
-          toast.error(error?.response?.data?.msg);
+          if (error?.response?.data?.msg == "Token has expired") {
+            handleLogout();
+            toast.error(error?.response?.data?.msg);
+          } else {
+            toast.error(error?.response?.data?.msg);
+          }
         } else if (error?.message == "Network Error") {
-          toast.error(error.message);
+          toast(error.message);
         } else {
-          toast.error(error.message);
+          toast(error.message);
         }
       }
     };
@@ -83,6 +88,7 @@ const UpdateContent = () => {
   // udpate the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
+      dispatch({ type: "loading", payload: false });
       const newUpdateAbove = await oldData.map((item) =>
         item.text == heading
           ? { ...item, generatedHeading, generatedParagraph }
@@ -92,11 +98,16 @@ const UpdateContent = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast(error.message);
       } else {
-        toast.error(error.message);
+        toast(error.message);
       }
     }
   };
