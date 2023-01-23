@@ -21,7 +21,7 @@ const ChosenTitleUrl = () => {
     },
     dispatch,
   } = useAppState();
-  const { auth, setAuth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   const navigate = useNavigate();
   // react state
   const [headingLoader, setHeadingLoader] = useState(false);
@@ -36,8 +36,8 @@ const ChosenTitleUrl = () => {
   });
 
   useEffect(() => {
-    // setValue func imported as default value
     let defaultValues = {};
+    // setValue func imported as default value
     defaultValues.title = choosenTitleUrl.title;
     defaultValues.url = choosenTitleUrl.url;
     reset({ ...defaultValues });
@@ -57,25 +57,32 @@ const ChosenTitleUrl = () => {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-          // withCredentials: "true",
         },
+        // withCredentials: "true",
       });
 
-      if (response?.status === 200 && !response?.data?.msg) {
+      if (response?.status == 200 && !response?.data?.msg) {
         setHeadingLoader(false);
         await dispatch({
           type: "generatedHeading",
           payload: response?.data?.heading,
         });
+      } else {
+        setHeadingLoader(false);
+        toast.warning(response?.data?.msg);
       }
     } catch (error) {
-      setHeadingLoader(false);
+      dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast(error.message);
       } else {
-        toast.error(error.message);
+        toast(error.message);
       }
     }
   };
