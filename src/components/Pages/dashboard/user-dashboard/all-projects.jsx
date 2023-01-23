@@ -20,7 +20,7 @@ const AllProjects = () => {
     dispatch,
     error,
   } = useAppState();
-  const { auth, setAuth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   const navigate = useNavigate();
 
   // state for delete project
@@ -47,34 +47,40 @@ const AllProjects = () => {
     // getting all projects if token is available
     if (auth?.token) {
       const getAllProjects = async () => {
-        await dispatch({ type: "loading", payload: false });
+        await dispatch({ type: "loading", payload: true });
         try {
           const response = await apiConfig("/project", {
             headers: {
               "Content-Type": "application/json",
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-              withCredentials: true,
             },
+            // withCredentials: true,
             signal: controller.signal,
           });
 
           if (response?.status == 200) {
+            dispatch({ type: "loading", payload: false });
             await dispatch({
               type: "projects",
               payload: response?.data?.projects,
             });
-            await dispatch({ type: "loading", payload: false });
           } else {
-            await dispatch({ type: "loading", payload: false });
+            dispatch({ type: "loading", payload: false });
             toast.error(error?.response?.data?.msg);
           }
         } catch (error) {
           dispatch({ type: "loading", payload: false });
+
           if (error?.response?.data?.msg) {
-            toast.error(error?.response?.data?.msg);
+            if (error?.response?.data?.msg == "Token has expired") {
+              handleLogout(navigate);
+            } else {
+              toast.error(error?.response?.data?.msg);
+            }
           } else if (error?.message == "Network Error") {
             toast.error(error.message);
           } else {
+            if (error.message == "canceled") return;
             toast.error(error.message);
           }
         }
@@ -107,6 +113,7 @@ const AllProjects = () => {
         },
       });
       if (response?.status == 200 && response?.data?.msg) {
+        console.log(response);
         await dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "projectDelete",
@@ -119,7 +126,11 @@ const AllProjects = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          console.log("logout");
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
         toast.error(error.message);
       } else {
@@ -162,7 +173,6 @@ const AllProjects = () => {
             )}
             <ToastContainer />
           </div>
-          {error && <p className="text-red-700 ">{error}</p>}
 
           {displayConfirmationModal ? (
             <ConfirmationModal

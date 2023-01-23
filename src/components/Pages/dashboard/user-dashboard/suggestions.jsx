@@ -129,8 +129,6 @@ const Suggestions = () => {
           <div className="md:h-screen overflow-hidden overflow-y-scroll">
             {loading ? (
               <Spinner />
-            ) : error ? (
-              error && <p className="text-red-800">{error}</p>
             ) : (
               aiSuggestions?.map((suggestion, i) => (
                 <SuggestionsCard

@@ -22,18 +22,22 @@ const loginFormSchema = z.object({
 });
 
 const Login = () => {
+  // react router dom hooks
   const location = useLocation();
   const navigate = useNavigate();
-  // const from = location?.state.from?.pathname || "/";
+
+  // Auth provider Context
   const { auth, setAuth } = useAuthState();
+  // App state provider Context
   const {
     state: { loading, error },
     dispatch,
   } = useAppState();
-  const from = location.state?.from?.pathname || "/";
+  // const from = location.state?.from?.pathname || "/";
+  // Form custom hook
   const form = useForm({ schema: loginFormSchema });
 
-  // sending user to their dashboard
+  // sending user to their dashboard if token exists
   useEffect(() => {
     if (auth.token) {
       navigate("/dashboard");
@@ -43,22 +47,24 @@ const Login = () => {
   }, [auth]);
 
   const handleLogin = async (data) => {
-    const userData = {
+    const userData = JSON.stringify({
       email: data.email,
       password: data.password,
-    };
+    });
 
     try {
-      await dispatch({ type: "loading" });
-      const response = await API.post("auth/login", JSON.stringify(userData), {
+      dispatch({ type: "loading", payload: true });
+
+      const response = await API.post("auth/login", userData, {
         headers: {
           "Content-Type": "application/json",
-          withCredentials: true,
         },
+        // withCredentials: true,
       });
 
       if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
+        console.log(loading);
         const token = response?.data?.access_token;
         if (token) {
           await setAuth({ token });
@@ -76,7 +82,7 @@ const Login = () => {
       }
     }
   };
-  if (loading && !error) {
+  if (loading) {
     return <Spinner />;
   } else {
     return (
@@ -107,7 +113,6 @@ const Login = () => {
               </Link>
             </label>
 
-            {error && <p className="text-red-800">{error}</p>}
             <div className="form-control mt-6">
               <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
                 Login

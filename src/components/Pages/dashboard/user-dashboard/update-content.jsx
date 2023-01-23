@@ -191,7 +191,7 @@ const UpdateContent = () => {
           <div className="sticky top-0">
             <div className="mb-4">
               <h2 className="text-3xl">Generated Section</h2>
-              {error && <p className="text-red-800 font-medium">{error}</p>}
+
               <p className="text-slate-400">
                 Following Section was Generated. Insert It Wherever You’d like
                 on Your Post

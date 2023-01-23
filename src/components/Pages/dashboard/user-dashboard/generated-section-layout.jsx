@@ -112,10 +112,8 @@ const GeneratedSectionLayout = () => {
         </div>
         <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
           <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-          {loading && !error ? (
+          {loading ? (
             <Spinner className="h-full w-full" />
-          ) : !loading && error ? (
-            <p className="text-red-800">{error}</p>
           ) : (
             generatedParagraph && generatedParagraph
           )}

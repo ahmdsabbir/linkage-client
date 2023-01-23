@@ -5,16 +5,10 @@ import { useAuthState } from "../../context/AuthProvider";
 import Sidebar from "./sidebar";
 
 const Dashboard = () => {
-  const { setAuth } = useAuthState();
+  const { setAuth, handleLogout } = useAuthState();
   const navigate = useNavigate();
   const { dispatch } = useAppState();
   const [isSidebar, setIsSidebar] = useState(false);
-
-  const handleLogout = async () => {
-    await setAuth({});
-    navigate("/login");
-    localStorage.clear();
-  };
 
   // close sidebar function
   const handleCloseSidebar = () => {

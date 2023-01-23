@@ -99,9 +99,6 @@ const projectsReducer = (state, action) => {
     case "loading": {
       return { ...state, loading: action.payload };
     }
-    case "error": {
-      return { ...state, error: action.payload, loading: false };
-    }
 
     default:
       return state;

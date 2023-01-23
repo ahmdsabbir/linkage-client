@@ -104,12 +104,6 @@ const Register = () => {
               placeholder="confirm password"
               {...form.register("confirm")}
             />
-            {/* err message */}
-            {error && (
-              <div>
-                <p className="text-red-800">{error}</p>
-              </div>
-            )}
 
             <div className="form-control mt-6">
               <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600">
