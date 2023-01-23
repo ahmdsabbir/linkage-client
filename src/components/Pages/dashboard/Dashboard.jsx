@@ -48,7 +48,7 @@ const Dashboard = () => {
           className={`hidden invisible visibility md:flex md:visible md:col-span-2 flex-col bg-base  p-4 min-h-screen `}
         >
           {/* sidebar for desktop */}
-          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] min-h-full rounded p-4 flex flex-col">
+          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] min-h-screen rounded p-4 flex flex-col">
             <nav
               className="flex flex-col text-[#123354] "
               data-dev-hint="main-navigation-for-regular-user "

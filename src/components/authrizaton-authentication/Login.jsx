@@ -103,7 +103,7 @@ const Login = () => {
               autoFocus={false}
               {...form.register("password")}
             />
-            <label className="label">
+            <label className="label hidden invisible">
               <Link
                 to={"/reset-password"}
                 className="label-text-alt link link-hover"
@@ -122,7 +122,6 @@ const Login = () => {
             text="Have no account?"
             btnLabel="Register"
             to={"/register"}
-            dispatch={dispatch}
           />
         </div>
       </div>
