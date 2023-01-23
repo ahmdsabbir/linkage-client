@@ -20,7 +20,7 @@ const RelevantTermLayout = () => {
 
   // getting data from global state context provider
   const {
-    state: { selectedProject, loading, error, postTitleUrlTerm },
+    state: { selectedProject, loading, postTitleUrlTerm, handleLogout },
     dispatch,
   } = useAppState();
 
@@ -39,11 +39,8 @@ const RelevantTermLayout = () => {
     // the relevant term has been saved for future use
     try {
       await dispatch({ type: "relevantTerm", payload: data });
-
       // start loading process & empty error state
-      dispatch({ type: "error", payload: "" });
-      dispatch({ type: "loading" });
-
+      dispatch({ type: "loading", type: true });
       // post data to the api
       const response = await API.post("core/suggestions", postData, {
         headers: {
@@ -54,6 +51,7 @@ const RelevantTermLayout = () => {
       });
 
       if (response?.status == 200 && !response?.data?.msg) {
+        dispatch({ type: "loading", type: false });
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
@@ -71,13 +69,17 @@ const RelevantTermLayout = () => {
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-      console.log(error.message);
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast(error.message);
       } else {
-        toast.error(error.message);
+        toast(error.message);
       }
     }
   };
