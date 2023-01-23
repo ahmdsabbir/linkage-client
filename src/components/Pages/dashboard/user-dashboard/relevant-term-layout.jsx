@@ -87,11 +87,13 @@ const RelevantTermLayout = () => {
   };
 
   if (loading) {
-    return <Spinner />;
+    return (
+      <Spinner customClassName={"grid place-items-center h-[50vh] w-full"} />
+    );
   } else {
     return (
       <div className="px-6">
-        <div className="card-body rounded p-0 bg-base-100">
+        <div className="card-body rounded p-0 bg-base-100 ">
           <Form form={form} onSubmit={handleSubmit}>
             <Input
               label={"Relevant Term"}

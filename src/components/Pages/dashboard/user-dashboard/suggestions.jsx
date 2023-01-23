@@ -134,7 +134,9 @@ const Suggestions = () => {
           {/* suggestions generated from api call */}
           <div className="md:h-screen overflow-hidden overflow-y-scroll">
             {loading ? (
-              <Spinner />
+              <Spinner
+                customClassName={"grid place-items-center h-1/2 w-full"}
+              />
             ) : (
               aiSuggestions?.map((suggestion, i) => (
                 <SuggestionsCard

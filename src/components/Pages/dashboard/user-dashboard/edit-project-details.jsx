@@ -58,6 +58,7 @@ const EditProjectDetails = () => {
       if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
         toast.success(response?.data?.msg);
+        // reset();
       } else {
         dispatch({ type: "loading", payload: false });
         toast.success(response?.data?.msg);
@@ -77,7 +78,6 @@ const EditProjectDetails = () => {
         toast(error.message);
       }
     }
-    // reset();
   };
 
   if (loading) {

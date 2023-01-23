@@ -117,7 +117,9 @@ const GeneratedSectionLayout = () => {
         <div className="rounded text-base-100 bg-slate-500 mb-4 p-4  ">
           <h2 className="text-2xl mb-4">{generatedHeading}</h2>
           {loading ? (
-            <Spinner className="h-full w-full grid place-items-center mt-4" />
+            <Spinner
+              customClassName={"grid place-items-center h-[50vh] w-full"}
+            />
           ) : (
             generatedParagraph && generatedParagraph
           )}

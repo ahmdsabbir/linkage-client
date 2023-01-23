@@ -1,13 +1,11 @@
 import React, { useState } from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { useAppState } from "../../context/AppProvider";
+import { NavLink, Outlet } from "react-router-dom";
 import { useAuthState } from "../../context/AuthProvider";
 import Sidebar from "./sidebar";
 
 const Dashboard = () => {
-  const { setAuth, handleLogout } = useAuthState();
-  const navigate = useNavigate();
-  const { dispatch } = useAppState();
+  const { handleLogout } = useAuthState();
+
   const [isSidebar, setIsSidebar] = useState(false);
 
   // close sidebar function
