@@ -103,26 +103,58 @@ const Sidebar = ({
                     Start A New Porject
                   </NavLink>
                 </li>
-                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className={({ isActive }) =>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
                         : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
-                    onClick={handleCloseSidebar}>
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/history"
+                  >
                     History
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className={({ isActive }) =>
+                  <NavLink
+                    className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
                         : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
-                    onClick={handleCloseSidebar}>
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/payment"
+                  >
                     Payment
                   </NavLink>
-                </li> */}
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/documentation"
+                  >
+                    Documentation
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/report-a-problem"
+                  >
+                    Report a Problem
+                  </NavLink>
+                </li>
               </ul>
             </nav>
 

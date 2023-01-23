@@ -104,9 +104,9 @@ const Dashboard = () => {
                   </NavLink>
                 </li>
 
-                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
-                    to={"/dashboard"}
+                    to="/dashboard/history"
                     className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
@@ -118,7 +118,7 @@ const Dashboard = () => {
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
-                    to={"/dashboard"}
+                    to="/dashboard/payment"
                     className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
@@ -127,7 +127,31 @@ const Dashboard = () => {
                   >
                     Payment
                   </NavLink>
-                </li> */}
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/documentation"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                  >
+                    Docmumentation
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/report-a-problem"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                  >
+                    Report a Problem
+                  </NavLink>
+                </li>
               </ul>
             </nav>
 

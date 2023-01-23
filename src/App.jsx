@@ -20,12 +20,16 @@ import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/dashboard/Dashboard";
 import AllProjects from "./components/Pages/dashboard/user-dashboard/all-projects";
+import Documentation from "./components/Pages/dashboard/user-dashboard/documentation";
 import EditProjectDetails from "./components/Pages/dashboard/user-dashboard/edit-project-details";
 import EnterPostTitle from "./components/Pages/dashboard/user-dashboard/enter-post-title";
 import GeneratedSectionLayout from "./components/Pages/dashboard/user-dashboard/generated-section-layout";
+import History from "./components/Pages/dashboard/user-dashboard/history";
 import NewProject from "./components/Pages/dashboard/user-dashboard/new-project";
+import Payment from "./components/Pages/dashboard/user-dashboard/payment";
 import ProjectStarterLayout from "./components/Pages/dashboard/user-dashboard/project-starter-layout";
 import RelevantTermLayout from "./components/Pages/dashboard/user-dashboard/relevant-term-layout";
+import RerportaProblem from "./components/Pages/dashboard/user-dashboard/report-a-problem";
 import Suggestions from "./components/Pages/dashboard/user-dashboard/suggestions";
 import UpdateContent from "./components/Pages/dashboard/user-dashboard/update-content";
 import UserDetails from "./components/Pages/dashboard/user-dashboard/user-details";
@@ -83,6 +87,10 @@ const router = createBrowserRouter(
           {/* project starter layout nested route ends */}
 
           <Route path="user-details" element={<UserDetails />} />
+          <Route path="history" element={<History />} />
+          <Route path="payment" element={<Payment />} />
+          <Route path="documentation" element={<Documentation />} />
+          <Route path="report-a-problem" element={<RerportaProblem />} />
           {/* start a new project */}
           <Route path="new-project" element={<NewProject />} />
         </Route>
