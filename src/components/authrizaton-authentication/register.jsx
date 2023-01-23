@@ -33,7 +33,7 @@ const Register = () => {
   const form = useForm({ schema: signupFormSchema });
   const {
     dispatch,
-    state: { loading, error },
+    state: { loading },
   } = useAppState();
 
   // singup handle function

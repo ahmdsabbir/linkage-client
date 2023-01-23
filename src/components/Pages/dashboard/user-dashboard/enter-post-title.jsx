@@ -30,7 +30,7 @@ const EnterPostTitle = () => {
   };
 
   return (
-    <div className="px-6">
+    <div className="md:px-6">
       <div className="card-body rounded drop-shadow bg-base-100">
         {/* form */}
         <Form form={form} onSubmit={handleSubmit}>
