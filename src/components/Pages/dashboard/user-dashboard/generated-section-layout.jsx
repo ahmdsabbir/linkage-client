@@ -99,7 +99,7 @@ const GeneratedSectionLayout = () => {
             {...form.register("anchorText")}
           />
 
-          <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[132px]">
+          <button className="btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[132px]">
             {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
         </Form>
@@ -126,7 +126,7 @@ const GeneratedSectionLayout = () => {
         </div>
         <div className=" self-start flex-1 order-1 md:order-1">
           <button
-            className="btn bg-contrast border-none rounded text-white"
+            className="btn bg-contrast w-full sm:w-auto border-none rounded text-white"
             onClick={handleUpdateSectionRoute}
             disabled={generatedParagraph ? false : true}
           >

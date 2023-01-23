@@ -30,7 +30,7 @@ const EnterPostTitle = () => {
   };
 
   return (
-    <div className="md:px-6">
+    <div className=" pr-6 sm:pr-8 md:px-6">
       <div className="card-body rounded drop-shadow bg-base-100">
         {/* form */}
         <Form form={form} onSubmit={handleSubmit}>
@@ -53,7 +53,7 @@ const EnterPostTitle = () => {
           {/* button */}
           <button
             type="submit"
-            className="btn bg-accent-dark text-white rounded px-6  border-none sm:ml-[135px]"
+            className="btn w-full sm:w-auto bg-accent-dark text-white rounded px-6 border-none sm:ml-[135px]"
           >
             submit
           </button>

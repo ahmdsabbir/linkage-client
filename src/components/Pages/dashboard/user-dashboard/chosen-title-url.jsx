@@ -132,7 +132,7 @@ const ChosenTitleUrl = () => {
 
           <div className="md:ml-[110px]">
             <button
-              className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded"
+              className="btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded"
               disabled={headingLoader ? true : false}
             >
               {headingLoader ? "Generating..." : "Generate Heading"}

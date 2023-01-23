@@ -178,7 +178,7 @@ const UpdateContent = () => {
                 <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
                   <p className="flex-inital ">{heading.text}</p>
                   <button
-                    className="flex-none px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
+                    className="flex-none w-full sm:w-auto px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
                     onClick={() => handleAbovePost(heading.text)}
                   >
                     Above This
@@ -188,7 +188,7 @@ const UpdateContent = () => {
                 <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
                   <p className="flex-inital ">{heading.text}</p>
                   <button
-                    className="flex-none  px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
+                    className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
                     onClick={() => handleAbovePost(heading.text)}
                   >
                     Above This
@@ -217,7 +217,7 @@ const UpdateContent = () => {
             </div>
             <div className=" self-start flex-1 order-1 md:order-1">
               <button
-                className="btn bg-contrast border-none rounded text-white"
+                className="btn w-full sm:w-auto bg-contrast border-none rounded text-white"
                 onClick={handleUdpateToTheSite}
               >
                 Update to the site

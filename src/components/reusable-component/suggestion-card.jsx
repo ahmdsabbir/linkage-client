@@ -30,7 +30,7 @@ const SuggestionsCard = ({ title, url, id }) => {
         )}
 
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
-          <button className="btn bg-accent-dark text-white capitalize border-none rounded">
+          <button className="btn bg-accent-dark w-full sm:w-auto text-white capitalize border-none rounded">
             choose
           </button>
         </div>

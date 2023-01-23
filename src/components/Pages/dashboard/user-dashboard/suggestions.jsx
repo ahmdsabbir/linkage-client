@@ -107,7 +107,7 @@ const Suggestions = () => {
 
               <button
                 type="submit"
-                className={`btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[228px]`}
+                className={`btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[228px]`}
               >
                 Re-Generate
               </button>
