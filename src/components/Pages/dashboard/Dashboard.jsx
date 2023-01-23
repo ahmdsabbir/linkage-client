@@ -15,8 +15,6 @@ const Dashboard = () => {
     setIsSidebar(!isSidebar);
   };
 
-  const handleAllProjects = () => {};
-
   return (
     <>
       <div className="relative grid grid-cols-12">
@@ -45,7 +43,6 @@ const Dashboard = () => {
           isSidebar={isSidebar}
           handleCloseSidebar={handleCloseSidebar}
           handleLogout={handleLogout}
-          // handleAllProjects={handleAllProjects}
         ></Sidebar>
 
         {/* sidebar container for desktop */}
@@ -66,7 +63,7 @@ const Dashboard = () => {
                     className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
-                        : " block bg-black py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
                   >
                     Dashboard

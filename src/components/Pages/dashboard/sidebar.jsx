@@ -5,7 +5,7 @@ const Sidebar = ({
   children,
   isSidebar,
   handleCloseSidebar,
-  handleAllProjects,
+
   handleLogout,
 }) => {
   return (
@@ -53,24 +53,39 @@ const Sidebar = ({
               <ul>
                 <li className="pt-2 my-2 block">
                   <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    onClick={handleAllProjects}
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to={"/dashboard"}
                   >
                     Dashboard
                   </NavLink>
                 </li>
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
-                    onClick={handleAllProjects}
+                  className={({ isActive }) =>
+                  isActive
+                  ? " block  py-1 px-0 font-semibold"
+                  : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                }
+                to={"/dashboard"}
+                    onClick={handleCloseSidebar}
                   >
                     All Projects
                   </NavLink>
-                </li>
+                </li> */}
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to="/dashboard/user-details"
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
                   >
                     Profile
                   </NavLink>
@@ -78,18 +93,33 @@ const Sidebar = ({
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to="/dashboard/new-project"
-                    className=" block  py-1 px-0 transition duration-200  hover:text-contrast"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
                   >
                     Start A New Porject
                   </NavLink>
                 </li>
                 {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
+                  <NavLink className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}>
                     History
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink className=" block  py-1 px-0 transition duration-200  hover:text-contrast">
+                  <NavLink className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}>
                     Payment
                   </NavLink>
                 </li> */}
