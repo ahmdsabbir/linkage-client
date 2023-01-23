@@ -86,13 +86,13 @@ const Suggestions = () => {
 
   return (
     <div className="">
-      <div className="">
+      <div className=" ">
         {/* serach for more new term form form */}
         <div className="">
           <p className="text-xl font-semibold text-center mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
-          <div className="card-body rounded p-0 bg-base-100 px-6">
+          <div className="card-body rounded p-0 bg-base-100 px-6 ">
             <Form form={form} onSubmit={handleSubmitNewSuggestion}>
               <Input
                 label={"Search More Suggestions"}
@@ -109,7 +109,7 @@ const Suggestions = () => {
                 type="submit"
                 className={`btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[228px]`}
               >
-                Generate suggestion again
+                Re-Generate
               </button>
             </Form>
           </div>
