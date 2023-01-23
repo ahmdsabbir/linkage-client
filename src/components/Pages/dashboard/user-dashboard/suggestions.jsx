@@ -13,16 +13,14 @@ import ChosenTitleUrl from "./chosen-title-url";
 import GenerateHeading from "./generate-heading";
 
 const relevantTerm = z.object({
-  relevantTerm: z
-    .string()
-    .min(4, "relevant term must be more than 4 characters!"),
+  relevantTerm: z.string("Try more relevant words"),
 });
 
 const Suggestions = () => {
   const form = useForm({ schema: relevantTerm });
 
   //   auth provider state
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   // getting data from global state context provider
   const {
     state: {
@@ -31,7 +29,6 @@ const Suggestions = () => {
       aiSuggestions,
       generatedHeading,
       loading,
-      error,
     },
     dispatch,
   } = useAppState();
@@ -45,33 +42,44 @@ const Suggestions = () => {
     });
 
     try {
-      dispatch({ type: "error", payload: "" });
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", payload: true });
       const response = await API.post("/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: "true",
+        // withCredentials: "true",
       });
 
       if (response?.status === 200 && !response?.data?.msg) {
+        dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
       } else {
-        dispatch({ type: "error", payload: response?.data?.msg });
+        dispatch({ type: "loading", payload: false });
+        toast.warning(
+          response?.data?.msg
+            ? response?.data?.msg
+            : `Could not find suggestions.
+               Try another term.`
+        );
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast(error.message);
       } else {
-        toast.error(error.message);
+        toast(error.message);
       }
     }
   };

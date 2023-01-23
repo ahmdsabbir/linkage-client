@@ -20,12 +20,12 @@ const RelevantTermLayout = () => {
 
   // getting data from global state context provider
   const {
-    state: { selectedProject, loading, postTitleUrlTerm, handleLogout },
+    state: { selectedProject, loading, postTitleUrlTerm },
     dispatch,
   } = useAppState();
 
   //   auth provider state
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   // react @{navigate , location} router hook for redirecting desired link and dynamic link id
   const navigate = useNavigate();
 
