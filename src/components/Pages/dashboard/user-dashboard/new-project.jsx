@@ -1,5 +1,4 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { z } from "zod";
@@ -21,9 +20,8 @@ const newProjectStartSchema = z.object({
 const NewProject = () => {
   const form = useForm({ schema: newProjectStartSchema });
   // const { reset } = useForm();
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   // react router dom hook
-  const navigate = useNavigate();
 
   const {
     dispatch,
@@ -58,9 +56,9 @@ const NewProject = () => {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
-          handleLogout(navigate("/"));
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
         } else {
-          console.log(error?.response?.data?.msg);
           toast.error(error?.response?.data?.msg);
         }
       } else if (error?.message == "Network Error") {

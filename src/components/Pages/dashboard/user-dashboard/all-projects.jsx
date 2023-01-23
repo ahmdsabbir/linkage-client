@@ -72,7 +72,7 @@ const AllProjects = () => {
 
           if (error?.response?.data?.msg) {
             if (error?.response?.data?.msg == "Token has expired") {
-              handleLogout(navigate("/"));
+              handleLogout();
             } else {
               toast.error(error?.response?.data?.msg);
             }
@@ -112,21 +112,20 @@ const AllProjects = () => {
         },
       });
       if (response?.status == 200 && response?.data?.msg) {
-        console.log(response);
         await dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "projectDelete",
           payload: projectId,
         });
       } else {
-        console.log(response);
         toast.error(error?.response?.data?.msg);
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
-          console.log("logout");
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
         } else {
           toast.error(error?.response?.data?.msg);
         }

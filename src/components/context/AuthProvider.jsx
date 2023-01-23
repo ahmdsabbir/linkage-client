@@ -12,9 +12,8 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const handleLogout = (navigate) => {
+  const handleLogout = () => {
     setAuth({});
-    navigate;
     localStorage.clear();
   };
 
