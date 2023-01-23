@@ -1,10 +1,11 @@
 import React from "react";
 import { useAppState } from "../context/AppProvider";
 
-const SuggestionsCard = ({ title, url, id }) => {
+const SuggestionsCard = ({ title, url, id, pushUp }) => {
   const { dispatch } = useAppState();
 
   const handleChosenTitleUrl = async () => {
+    pushUp;
     await dispatch({
       type: "choosenTitleUrl",
       payload: { title, url, id },
@@ -30,9 +31,12 @@ const SuggestionsCard = ({ title, url, id }) => {
         )}
 
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
-          <button className="btn bg-accent-dark w-full sm:w-auto text-white capitalize border-none rounded">
+          <a
+            href={`#${pushUp}`}
+            className="btn bg-accent-dark w-full sm:w-auto text-white capitalize border-none rounded"
+          >
             choose
-          </button>
+          </a>
         </div>
       </div>
     </div>

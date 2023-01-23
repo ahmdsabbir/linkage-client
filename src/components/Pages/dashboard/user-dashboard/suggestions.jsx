@@ -86,13 +86,16 @@ const Suggestions = () => {
 
   return (
     <div className="">
-      <div className=" ">
+      <div className="">
         {/* serach for more new term form form */}
         <div className="">
           <p className="text-xl font-semibold text-center mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
-          <div className="card-body rounded p-0 bg-base-100 px-6 ">
+          <div
+            className="card-body rounded p-0 bg-base-100 px-6 "
+            id="chosenTitleUrl"
+          >
             <Form form={form} onSubmit={handleSubmitNewSuggestion}>
               <Input
                 label={"Search More Suggestions"}
@@ -120,7 +123,7 @@ const Suggestions = () => {
         </div>
 
         {/* chosen title url text area, gnerated heading area, ai suggestons card */}
-        <div className="grid grid-cols-2 gap-6 px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
           <div className="flex flex-col gap-4">
             <div className="card rounded bg-base-100">
               {/* generate heading */}
@@ -138,12 +141,13 @@ const Suggestions = () => {
                 customClassName={"grid place-items-center h-1/2 w-full"}
               />
             ) : (
-              aiSuggestions?.map((suggestion, i) => (
+              aiSuggestions?.map((suggestion) => (
                 <SuggestionsCard
                   key={suggestion.post_id}
                   title={suggestion.title}
                   url={suggestion.url}
                   id={suggestion.post_id}
+                  pushUp={"chosenTitleUrl"}
                 />
               ))
             )}
