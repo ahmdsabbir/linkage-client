@@ -19,9 +19,9 @@ const anchorTextSchema = z.object({
 
 const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   const {
-    state: { generatedHeading, generatedParagraph, loading, error },
+    state: { generatedHeading, generatedParagraph, loading },
     dispatch,
   } = useAppState();
 
@@ -42,7 +42,7 @@ const GeneratedSectionLayout = () => {
         type: "generatedParagraph",
         payload: "",
       });
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", payload: true });
 
       const response = await API.post("core/paragraph", postData, {
         headers: {
@@ -59,7 +59,8 @@ const GeneratedSectionLayout = () => {
           payload: response?.data?.paragraph,
         });
       } else {
-        toast(
+        dispatch({ type: "loading", payload: false });
+        toast.warning(
           response?.data?.msg ? response?.data?.msg : "Try anohter anchor text"
         );
       }
@@ -113,10 +114,10 @@ const GeneratedSectionLayout = () => {
             Your Post
           </p>
         </div>
-        <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
+        <div className="rounded text-base-100 bg-slate-500 mb-4 p-4  ">
           <h2 className="text-2xl mb-4">{generatedHeading}</h2>
           {loading ? (
-            <Spinner className="h-full w-full" />
+            <Spinner className="h-full w-full grid place-items-center mt-4" />
           ) : (
             generatedParagraph && generatedParagraph
           )}
