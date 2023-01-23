@@ -30,7 +30,7 @@ const EditProjectDetails = () => {
 
   const handleSubmitProjectDetails = (data) => {
     console.log(data);
-    reset();
+    // reset();
   };
   return (
     <div className="px-6 max-w-screen-2xl">

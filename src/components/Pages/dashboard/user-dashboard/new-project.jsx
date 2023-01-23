@@ -1,6 +1,7 @@
 import React from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -13,7 +14,7 @@ import Spinner from "../../../spinner";
 const newProjectStartSchema = z.object({
   projectName: z.string().min(5, "please input more than 5 characters"),
   domain: z.string().min(5, "please input more than 5 characters"),
-  wpAppPassword: z.string().min(5, "please input more than 5 characters"),
+  wpAppPassword: z.string().min(6, "please input more than 5 characters"),
   wpUsername: z.string().min(4, "please input more than 5 characters"),
 });
 
@@ -21,6 +22,8 @@ const NewProject = () => {
   const form = useForm({ schema: newProjectStartSchema });
   // const { reset } = useForm();
   const { auth } = useAuthState();
+  // react router dom hook
+  const navigate = useNavigate();
 
   const {
     dispatch,
@@ -35,23 +38,31 @@ const NewProject = () => {
       wp_password: data.wpAppPassword,
     });
     try {
-      await dispatch({ type: "loading", payload: true });
-      const response = await API.post("/project", postData, {
+      dispatch({ type: "loading", payload: true });
+      const response = await API.post("project", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
-      if (response?.status === 200 || response?.status === 201) {
-        await dispatch({ type: "loading", payload: false });
+      if (response?.status == 200 || response?.status == 201) {
+        dispatch({ type: "loading", payload: false });
+        toast.success(response?.data?.msg);
+      } else {
+        dispatch({ type: "loading", payload: false });
         toast.success(response?.data?.msg);
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout(navigate("/"));
+        } else {
+          console.log(error?.response?.data?.msg);
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
         toast(error.message);
       } else {
@@ -70,6 +81,7 @@ const NewProject = () => {
             label="Project Name"
             type="text"
             placeholder="Project Name"
+            autoFocus
             {...form.register("projectName")}
             className="flex flex-col md:flex-row "
             minwidth={"min-w-[143px]"}
@@ -103,7 +115,6 @@ const NewProject = () => {
             <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">
               Submit
             </button>
-            <ToastContainer />
           </div>
         </Form>
       </div>

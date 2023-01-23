@@ -1,7 +1,6 @@
 import React from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -97,7 +96,6 @@ const GeneratedSectionLayout = () => {
           <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[132px]">
             {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
-          <ToastContainer />
         </Form>
       </div>
 

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import {
   default as API,
   default as apiConfig,
@@ -73,7 +72,7 @@ const AllProjects = () => {
 
           if (error?.response?.data?.msg) {
             if (error?.response?.data?.msg == "Token has expired") {
-              handleLogout(navigate);
+              handleLogout(navigate("/"));
             } else {
               toast.error(error?.response?.data?.msg);
             }
@@ -171,7 +170,6 @@ const AllProjects = () => {
                 />
               ))
             )}
-            <ToastContainer />
           </div>
 
           {displayConfirmationModal ? (

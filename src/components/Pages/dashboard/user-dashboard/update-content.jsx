@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
 import { useAuthState } from "../../../context/AuthProvider";
@@ -168,7 +167,6 @@ const UpdateContent = () => {
                   >
                     Above This
                   </button>
-                  <ToastContainer />
                 </div>
               ) : (
                 <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
@@ -179,7 +177,6 @@ const UpdateContent = () => {
                   >
                     Above This
                   </button>
-                  <ToastContainer />
                 </div>
               )}
             </div>
@@ -209,7 +206,6 @@ const UpdateContent = () => {
               >
                 Update to the site
               </button>
-              <ToastContainer />
             </div>
           </div>
         </div>

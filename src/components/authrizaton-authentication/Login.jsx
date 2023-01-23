@@ -10,8 +10,7 @@ import { Input } from "../reusable-component/form/input-field";
 import NavigateLoginRegister from "../reusable-component/navigate-login-register";
 import Spinner from "../spinner";
 
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -64,7 +63,7 @@ const Login = () => {
 
       if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
-        console.log(loading);
+
         const token = response?.data?.access_token;
         if (token) {
           await setAuth({ token });
@@ -117,7 +116,6 @@ const Login = () => {
               <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
                 Login
               </button>
-              <ToastContainer />
             </div>
           </Form>
           <NavigateLoginRegister

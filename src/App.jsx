@@ -4,6 +4,7 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 import "./App.css";
 import EmailConfirmationModal from "./components/authrizaton-authentication/email-confirmation-modal";
 
@@ -14,6 +15,7 @@ import ResetPassword from "./components/authrizaton-authentication/reset-passwor
 import ResetPasswordConfirmation from "./components/authrizaton-authentication/reset-password/reset-password-confirmation";
 import ResetPasswordLayout from "./components/authrizaton-authentication/reset-password/reset-password-layout";
 
+import "react-toastify/dist/ReactToastify.css";
 import AboutUs from "./components/Pages/about-us";
 import Contact from "./components/Pages/contact";
 import Dashboard from "./components/Pages/dashboard/Dashboard";
@@ -94,6 +96,7 @@ function App() {
     <>
       <div className="mx-auto">
         <RouterProvider router={router} />
+        <ToastContainer />
       </div>
     </>
   );

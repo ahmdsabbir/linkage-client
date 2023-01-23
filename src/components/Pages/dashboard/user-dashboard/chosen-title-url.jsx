@@ -2,8 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { toast, ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -131,7 +130,7 @@ const ChosenTitleUrl = () => {
             >
               {headingLoader ? "Generating..." : "Generate Heading"}
             </button>
-            <ToastContainer />
+
             <p className="text-black/60 text-sm">
               Remember, You can always regenerate!
             </p>
