@@ -142,11 +142,16 @@ const UpdateContent = () => {
     } catch (error) {
       dispatch({ type: "loading", payload: false });
       if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast(error.message);
       } else {
-        toast.error(error.message);
+        toast(error.message);
       }
     }
   };
