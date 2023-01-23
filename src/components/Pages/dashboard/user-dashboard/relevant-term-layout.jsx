@@ -40,7 +40,8 @@ const RelevantTermLayout = () => {
     try {
       await dispatch({ type: "relevantTerm", payload: data });
       // start loading process & empty error state
-      dispatch({ type: "loading", type: true });
+      dispatch({ type: "loading", payload: true });
+
       // post data to the api
       const response = await API.post("core/suggestions", postData, {
         headers: {
@@ -51,7 +52,7 @@ const RelevantTermLayout = () => {
       });
 
       if (response?.status == 200 && !response?.data?.msg) {
-        dispatch({ type: "loading", type: false });
+        dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
@@ -60,6 +61,7 @@ const RelevantTermLayout = () => {
           `/dashboard/project-starter/${selectedProject.name.toLowerCase()}/suggestions`
         );
       } else {
+        dispatch({ type: "loading", payload: false });
         toast.warning(
           response?.data?.msg
             ? response?.data?.msg
