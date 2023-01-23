@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import {
   default as API,
   default as apiConfig,
@@ -10,7 +12,6 @@ import useRefreshToken from "../../../hook/useRefreshToken";
 import ConfirmationModal from "../../../reusable-component/confirmation-modal";
 import SingleProjectCard from "../../../reusable-component/single-project-card";
 import Spinner from "../../../spinner";
-
 const AllProjects = () => {
   const refresh = useRefreshToken();
   // global state context provider
@@ -37,7 +38,6 @@ const AllProjects = () => {
     await dispatch({ type: "generatedParagraph", payload: "" });
     await dispatch({ type: "updateAbove", payload: [] });
     await dispatch({ type: "newUpdateAbove", payload: [] });
-    await dispatch({ type: "error", payload: "" });
   };
 
   useEffect(() => {
@@ -48,7 +48,6 @@ const AllProjects = () => {
     if (auth?.token) {
       const getAllProjects = async () => {
         await dispatch({ type: "loading", payload: false });
-        await dispatch({ type: "error", payload: "" });
         try {
           const response = await apiConfig("/project", {
             headers: {
@@ -65,37 +64,18 @@ const AllProjects = () => {
               payload: response?.data?.projects,
             });
             await dispatch({ type: "loading", payload: false });
-            await dispatch({ type: "error", payload: "" });
-            console.log(response);
           } else {
             await dispatch({ type: "loading", payload: false });
-            await dispatch({ type: "error", payload: response?.data?.msg });
+            toast.error(error?.response?.data?.msg);
           }
         } catch (error) {
-          await dispatch({ type: "loading", payload: !loading });
-          if (!error?.response) {
-            await dispatch({
-              type: "error",
-              payload: "Your session has been expired. Please login again.",
-            });
-          } else if (error?.status == 400) {
-            dispatch({
-              type: "error",
-              payload: "missing username or password",
-            });
-          } else if (error.response.status == 401) {
-            await setAuth({});
-            localStorage.clear();
-            // navigate("/login", { state: { from: location }, replace: true });
-            await dispatch({
-              type: "error",
-              payload: "Your session has been expired. Please login again.",
-            });
-            navigate("/login");
+          dispatch({ type: "loading", payload: false });
+          if (error?.response?.data?.msg) {
+            toast.error(error?.response?.data?.msg);
           } else if (error?.message == "Network Error") {
-            dispatch({ type: "error", payload: error?.message });
+            toast.error(error.message);
           } else {
-            dispatch({ type: "error", payload: error?.message });
+            toast.error(error.message);
           }
         }
       };
@@ -103,7 +83,7 @@ const AllProjects = () => {
       getAllProjects();
     }
 
-    // stop the request afte the data is mounted
+    // stop the request afte the component is unmounted
     return () => {
       controller && controller.abort();
     };
@@ -115,11 +95,10 @@ const AllProjects = () => {
   };
 
   // delete projct handler
-  const handleDeleteProject = async (id) => {
-    const findProject = projects.find((project) => project.id == id);
+  const handleDeleteProject = async (Id) => {
+    const findProject = await projects.find((project) => project.id == Id);
 
     try {
-      await dispatch({ type: "error", payload: "" });
       await dispatch({ type: "loading", payload: true });
       const response = await API.delete(`project/${findProject.id}`, {
         headers: {
@@ -133,22 +112,18 @@ const AllProjects = () => {
           type: "projectDelete",
           payload: projectId,
         });
-        await dispatch({ type: "error", payload: response?.data?.msg });
       } else {
         console.log(response);
-        await dispatch({ type: "loading", payload: false });
-        // await dispatch({ type: "error", payload: response?.data?.msg });
+        toast.error(error?.response?.data?.msg);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.response?.data?.msg) {
-        dispatch({ type: "error", payload: error?.response?.data?.msg });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
+        toast.error(error.message);
       } else {
-        dispatch({ type: "error", payload: error?.message });
+        toast.error(error.message);
       }
     }
     setDisplayConfirmationModal(false);
@@ -185,6 +160,7 @@ const AllProjects = () => {
                 />
               ))
             )}
+            <ToastContainer />
           </div>
           {error && <p className="text-red-700 ">{error}</p>}
 

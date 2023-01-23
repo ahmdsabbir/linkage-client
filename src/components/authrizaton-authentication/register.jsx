@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { z } from "zod";
 import API from "../../api/api-config";
 import { useAppState } from "../context/AppProvider";
@@ -43,37 +45,28 @@ const Register = () => {
       password: data.password,
     });
     try {
-      await dispatch({ type: "error", payload: "" });
       await dispatch({ type: "loading" });
       dispatch({ type: "loading", payload: false });
       const response = await API.post("auth/register", postJsonData, {
         headers: {
           "Content-Type": "application/json",
-          withCredentials: true,
         },
+        // withCredentials: true,
       });
 
       if (response.status == 201 || response.status == 200) {
-        await dispatch({ type: "error", payload: "" });
-        await dispatch({ type: "loading", payload: false });
         dispatch({ type: "loading", payload: false });
+        toast.success(response?.data?.msg);
         navigate("/verify");
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-
-      if (!error.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error.response.data.msg) {
-        await dispatch({
-          type: "error",
-          payload: error.response.data.msg,
-        });
+      if (error?.response?.data?.msg) {
+        toast.error(error?.response?.data?.msg);
+      } else if (error?.message == "Network Error") {
+        toast.error(error.message);
       } else {
-        await dispatch({
-          type: "error",
-          payload: error.message,
-        });
+        toast.error(error.message);
       }
     }
   };
@@ -122,6 +115,7 @@ const Register = () => {
               <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600">
                 Register
               </button>
+              <ToastContainer />
             </div>
           </Form>
           <NavigateLoginRegister

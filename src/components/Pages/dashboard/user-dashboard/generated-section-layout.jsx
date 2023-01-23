@@ -39,7 +39,6 @@ const GeneratedSectionLayout = () => {
 
     try {
       // start loading process & empty error state
-      await dispatch({ type: "error", payload: "" });
       await dispatch({
         type: "generatedParagraph",
         payload: "",
