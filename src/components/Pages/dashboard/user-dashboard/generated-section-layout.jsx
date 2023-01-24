@@ -44,7 +44,7 @@ const GeneratedSectionLayout = () => {
       });
       dispatch({ type: "loading", payload: true });
 
-      const response = await API.post("core/paragraph", postData, {
+      const response = await API.post("api/core/paragraph", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth?.token ? `Bearer ${auth?.token}` : "",

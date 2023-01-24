@@ -48,7 +48,7 @@ const AllProjects = () => {
       const getAllProjects = async () => {
         await dispatch({ type: "loading", payload: true });
         try {
-          const response = await apiConfig("/project", {
+          const response = await apiConfig("api/project", {
             headers: {
               "Content-Type": "application/json",
               Authorization: auth.token ? `Bearer ${auth?.token}` : "",
