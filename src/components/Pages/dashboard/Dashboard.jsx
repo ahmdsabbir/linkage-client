@@ -49,13 +49,15 @@ const Dashboard = () => {
           className={`hidden invisible visibility md:relative md:flex md:visible md:col-span-2 flex-col bg-base  p-4 min-h-screen `}
         >
           {/* sidebar for desktop */}
-          <div className="sticky top-0 text-left bg-[#eaedf2] text-[#8D9DAE] min-h-screen rounded p-4 flex flex-col">
+          <div className="sticky top-0 text-left bg-[#eaedf2]  min-h-screen rounded p-4 flex flex-col break-words">
             <nav
               className="flex flex-col text-[#123354] "
               data-dev-hint="main-navigation-for-regular-user "
             >
               <div className=" mb-6">
-                <div className="text-xl font-bold ">Linkage</div>
+                <div className="text-sm md:text-lg font-bold ">
+                  {"< linkage.io />"}
+                </div>
                 {/*   <p className="text-sm text-slate-500">
                   All your interlinking issues solved!
                 </p> */}
@@ -67,7 +69,7 @@ const Dashboard = () => {
                     className={({ isActive }) =>
                       isActive
                         ? " block  py-1 px-0 font-semibold"
-                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                        : " block  py-1 px-0 font-normal transition duration-200 hover:text-contrast"
                     }
                   >
                     Dashboard

@@ -11,6 +11,7 @@ import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import Spinner from "../../../spinner";
 import ChosenTitleUrl from "./chosen-title-url";
 import GenerateHeading from "./generate-heading";
+import "./scrollbar.css";
 
 const relevantTerm = z.object({
   relevantTerm: z.string("Try more relevant words"),
@@ -135,7 +136,13 @@ const Suggestions = () => {
           </div>
 
           {/* suggestions generated from api call */}
-          <div className="md:h-screen overflow-hidden overflow-y-scroll">
+          <div
+            className="md:h-screen overflow-hidden overflow-y-scroll scroll-smooth "
+            style={{
+              scrollbarColor: " #eaedf2 #172B4D",
+              scrollbarWidth: "thin",
+            }}
+          >
             {loading ? (
               <Spinner
                 customClassName={"grid place-items-center h-1/2 w-full"}

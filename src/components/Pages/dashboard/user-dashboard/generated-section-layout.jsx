@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import API from "../../../../api/api-config";
@@ -21,11 +21,10 @@ const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
   const { auth, handleLogout } = useAuthState();
   const {
-    state: { generatedHeading, generatedParagraph, loading },
+    state: { generatedHeading, generatedParagraph, loading, postTitleUrlTerm },
     dispatch,
   } = useAppState();
 
-  const location = useLocation();
   const { name } = useParams();
   const navigate = useNavigate();
 
@@ -34,6 +33,7 @@ const GeneratedSectionLayout = () => {
     const postData = JSON.stringify({
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
+      source_url: postTitleUrlTerm.source_url,
     });
 
     try {
@@ -126,11 +126,11 @@ const GeneratedSectionLayout = () => {
         </div>
         <div className=" self-start flex-1 order-1 md:order-1">
           <button
-            className="btn bg-contrast w-full sm:w-auto border-none rounded text-white"
+            className="btn bg-contrast w-full sm:w-auto border-none rounded text-white capitalize"
             onClick={handleUpdateSectionRoute}
             disabled={generatedParagraph ? false : true}
           >
-            Yup..Looks Good!
+            Next Step
           </button>
         </div>
       </div>

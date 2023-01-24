@@ -102,7 +102,7 @@ const router = createBrowserRouter(
 function App() {
   return (
     <>
-      <div className="mx-auto">
+      <div className="mx-auto break-words">
         <RouterProvider router={router} />
         <ToastContainer />
       </div>

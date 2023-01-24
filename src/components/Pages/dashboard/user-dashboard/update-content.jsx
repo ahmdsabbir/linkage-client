@@ -168,31 +168,78 @@ const UpdateContent = () => {
                 <div
                   className={`${
                     heading.name == "h3" && "ml-2 sm:ml-4 md:ml-8 p-4 mb-4"
-                  }  p-4 mb-4 border-2 rounded-md flex flex-col gap-4 items-center   bg-slate-500  text-base-100 `}
+                  } text-accent-dark mb-2 rounded border border-accent-dark/20 p-4 bg-accent-dark/5`}
                 >
-                  <h2 className="text-2xl">{heading?.generatedHeading}</h2>
+                  <h2 className=" font-semibold mb-2 ">
+                    {heading?.generatedHeading}
+                  </h2>
                   {heading?.generatedParagraph}
                 </div>
               )}
+
               {heading.name == "h2" ? (
-                <div className="p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  <p className="flex-inital ">{heading.text}</p>
-                  <button
-                    className="flex-none w-full sm:w-auto px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
-                    onClick={() => handleAbovePost(heading.text)}
+                <div
+                  className={` p-4 mb-4 border rounded-md flex flex-col md:flex-row gap-4 items-center md:items-start  justify-between border-accent-dark/20 `}
+                >
+                  <p className="flex-inital font-medium  text-accent-dark ">
+                    {heading.text}
+                  </p>
+
+                  <div
+                    className="tooltip hover:tooltip-open tooltip-right"
+                    data-tip="hello"
                   >
-                    Above This
-                  </button>
+                    <button
+                      className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12"
+                      onClick={() => handleAbovePost(heading.text)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="#667793"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               ) : (
-                <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border-2 border-slate-600 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  <p className="flex-inital ">{heading.text}</p>
-                  <button
-                    className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm bg-accent-light text-white rounded-full shadow-sm col-start-12"
-                    onClick={() => handleAbovePost(heading.text)}
+                <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border border-accent-dark/20 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                  <p className="flex-inital  text-accent-dark font-medium">
+                    {heading.text}
+                  </p>
+
+                  <div
+                    className="tooltip hover:tooltip-open tooltip-right"
+                    data-tip="hello"
                   >
-                    Above This
-                  </button>
+                    <button
+                      className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12"
+                      onClick={() => handleAbovePost(heading.text)}
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        strokeWidth={1.5}
+                        stroke="#667793"
+                        className="w-4 h-4"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                        />
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>
@@ -203,16 +250,16 @@ const UpdateContent = () => {
         <div className="lg:col-start-2 relative">
           <div className="sticky top-0">
             <div className="mb-4">
-              <h2 className="text-3xl">Generated Section</h2>
+              <h2 className="text-3xl text-accent-dark">Generated Section</h2>
 
               <p className="text-slate-400">
                 Following Section was Generated. Insert It Wherever You’d like
                 on Your Post
               </p>
             </div>
-            <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
-              <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-              <hr></hr>
+            <div className="rounded border border-accent-dark/20 text-accent-dark bg-accent-dark/5 mb-4 p-4 ">
+              <h2 className="font-semibold mb-4">{generatedHeading}</h2>
+              <hr className=" mb-2"></hr>
               {generatedParagraph && generatedParagraph}
             </div>
             <div className=" self-start flex-1 order-1 md:order-1">

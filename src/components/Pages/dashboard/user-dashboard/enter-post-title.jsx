@@ -35,18 +35,18 @@ const EnterPostTitle = () => {
         {/* form */}
         <Form form={form} onSubmit={handleSubmit}>
           <Input
-            label="Enter Post Title"
+            label="Source Title"
             type="text"
-            hintText="aka, Target Post"
-            placeholder="post title here..."
+            // hintText="aka, Target Post"
+            placeholder="post title..."
             className="flex flex-col sm:flex-row"
             autoFocus={true}
             {...form.register("postTitle")}
           />
           <Input
-            label="Post URL"
+            label="Source URL"
             type="text"
-            placeholder="post url here..."
+            placeholder="post url..."
             className="flex flex-col sm:flex-row"
             {...form.register("postURL")}
           />
