@@ -23,7 +23,7 @@ const RelevantTermLayout = () => {
     state: { selectedProject, loading, postTitleUrlTerm },
     dispatch,
   } = useAppState();
-  console.log(selectedProject);
+  // console.log(selectedProject);
 
   //   auth provider state
   const { auth, handleLogout } = useAuthState();
