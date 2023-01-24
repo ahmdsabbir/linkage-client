@@ -66,7 +66,7 @@ const RelevantTermLayout = () => {
         toast.warning(
           response?.data?.msg
             ? response?.data?.msg
-            : `Could not find suggestions.
+            : `Could not find awesome suggestions.
                Try another term.`
         );
       }
