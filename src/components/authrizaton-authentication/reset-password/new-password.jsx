@@ -22,7 +22,6 @@ const NewPasword = () => {
   const form = useForm({ schema: newPasswordSchema });
   const navigate = useNavigate();
   const handleSubmitNewPassword = (data) => {
-    console.log(data);
     navigate("/reset-password/confirmation");
   };
   return (

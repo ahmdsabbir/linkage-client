@@ -11,7 +11,7 @@ const Home = () => {
 
         <NavLink
           className={
-            "btn bg-contrast hover:bg-contrast-dark border-none text-white"
+            "btn rounded bg-contrast hover:bg-contrast-dark border-none text-white"
           }
           to={"/login"}
         >

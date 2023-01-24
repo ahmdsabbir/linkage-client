@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const UserDetails = () => {
+const Payment = () => {
   return (
     <div className="h-screen grid place-items-center">
       <div className="card rounded lg:card-side bg-base-100 shadow-xl">
@@ -22,4 +22,4 @@ const UserDetails = () => {
   );
 };
 
-export default UserDetails;
+export default Payment;

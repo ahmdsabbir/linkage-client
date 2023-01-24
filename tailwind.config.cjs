@@ -33,7 +33,7 @@ module.exports = {
         "contrast-dark": "#43AA8B",
         "accent-dark": "#172B4D",
         light: "#D9D9D9",
-        contrast: "#4EBF9D",
+
         "accent-light": "#667793",
       },
     },

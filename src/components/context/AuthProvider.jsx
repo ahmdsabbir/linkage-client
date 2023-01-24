@@ -4,7 +4,6 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState({});
-  const [authLoading, setAuthLoading] = useState(false);
 
   useEffect(() => {
     const loggedInUser = localStorage.getItem("linkage_token");
@@ -13,10 +12,13 @@ const AuthProvider = ({ children }) => {
     }
   }, []);
 
+  const handleLogout = () => {
+    setAuth({});
+    localStorage.clear();
+  };
+
   return (
-    <AuthContext.Provider
-      value={{ auth, setAuth, authLoading, setAuthLoading }}
-    >
+    <AuthContext.Provider value={{ auth, setAuth, handleLogout }}>
       {children}
     </AuthContext.Provider>
   );

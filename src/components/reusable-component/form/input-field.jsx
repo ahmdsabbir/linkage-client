@@ -8,16 +8,17 @@ export const Input = forwardRef(function Input(
     hintText,
     autoFocus = false,
     className = "flex flex-col",
+    minwidth = "min-w-[117px]",
     ...props
   },
   ref
 ) {
   return (
     <>
-      <div
-        className={`${className} gap-2 sm:gap-4 md:items-center mb-2 md:mb-2  `}
-      >
-        <label className="self-start flex flex-col label text-base min-w-[117px] max-w-[217px] md:pb-2">
+      <div className={`${className} sm:gap-2 md:gap-4 mb-2 md:mb-2  `}>
+        <label
+          className={`self-start flex flex-col label text-base  ${minwidth} max-w-[217px] md:pb-2`}
+        >
           <span className="font-medium self-start">{label}</span>
           {hintText && (
             <span className="self-start text-black/60 text-sm">{hintText}</span>
@@ -29,7 +30,7 @@ export const Input = forwardRef(function Input(
           ref={ref}
           autoFocus={autoFocus}
           {...props}
-          className="flex-auto input input-bordered focus:outline-0 rounded"
+          className=" flex-grow inline-flex items-stretch input input-bordered focus:outline-0 rounded"
         />
       </div>
       <FieldError name={props.name} />

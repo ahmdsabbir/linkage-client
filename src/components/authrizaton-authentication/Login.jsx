@@ -10,6 +10,8 @@ import { Input } from "../reusable-component/form/input-field";
 import NavigateLoginRegister from "../reusable-component/navigate-login-register";
 import Spinner from "../spinner";
 
+import { toast } from "react-toastify";
+
 const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   password: z
@@ -19,106 +21,117 @@ const loginFormSchema = z.object({
 });
 
 const Login = () => {
+  // react router dom hooks
   const location = useLocation();
   const navigate = useNavigate();
-  // const from = location?.state.from?.pathname || "/";
+
+  // Auth provider Context
   const { auth, setAuth } = useAuthState();
+  // App state provider Context
   const {
-    state: { loading, error },
+    state: { loading },
     dispatch,
   } = useAppState();
-  const from = location.state?.from?.pathname || "/";
+  // const from = location.state?.from?.pathname || "/";
+  // Form custom hook
   const form = useForm({ schema: loginFormSchema });
 
-  // sending user to their dashboard
+  // sending user to their dashboard if token exists
   useEffect(() => {
     if (auth.token) {
       navigate("/dashboard");
+    } else {
+      navigate("/login");
     }
   }, [auth]);
 
   const handleLogin = async (data) => {
-    const userData = {
+    const userData = JSON.stringify({
       email: data.email,
       password: data.password,
-    };
+    });
 
     try {
-      dispatch({ type: "error", payload: "" });
-      dispatch({ type: "loading" });
-      const response = await API.post("/auth/login", JSON.stringify(userData), {
+      dispatch({ type: "loading", payload: true });
+
+      const response = await API.post("auth/login", userData, {
         headers: {
           "Content-Type": "application/json",
-          withCredentials: true,
         },
+        // withCredentials: true,
       });
 
-      if (response.status === 200) {
+      if (response?.status == 200 || response?.status == 201) {
+        dispatch({ type: "loading", payload: false });
+
         const token = response?.data?.access_token;
         if (token) {
           await setAuth({ token });
           localStorage.setItem("linkage_token", token);
         }
-        // navigate(from, { replace: true });
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error.response) {
-        dispatch({ type: "error", payload: error.message });
-      } else if (error.status === 400) {
-        dispatch({ type: "error", payload: "missing username or password" });
-      } else if (error?.message === "Network Error") {
-        dispatch({ type: "error", payload: error.message });
+      dispatch({ type: "loading", payload: false });
+      if (error.response.status == 401) {
+        toast.error(error?.response?.data?.msg);
+      } else if (error?.message == "Network Error") {
+        toast.error(error.message);
       } else {
-        dispatch({ type: "error", payload: "login failed" });
+        toast.error(error.message ? error.message : "login failed");
       }
     }
   };
-  if (loading && !error) {
+  if (loading) {
     return <Spinner />;
   } else {
     return (
-      <div className="grid place-self-center h-screen">
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
-          <Form form={form} onSubmit={handleLogin}>
-            <Input
-              label="Email"
-              type="text"
-              autoFocus={true}
-              placeholder="email@mail.com"
-              {...form.register("email")}
-            />
-            <Input
-              label="password"
-              type="password"
-              placeholder="password"
-              autoFocus={false}
-              {...form.register("password")}
-            />
-            <label className="label">
-              <Link
-                to={"/reset-password"}
-                className="label-text-alt link link-hover"
-              >
-                Forgot password?
-              </Link>
-            </label>
-
-            {error && <p className="text-red-800">{error}</p>}
-            <div className="form-control mt-6">
-              <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600">
+      <>
+        <div className="grid place-items-center h-screen ">
+          <div className=" max-w-3xl rounded shadow-sm w-full">
+            <div className="card-body">
+              <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
                 Login
-              </button>
+              </h2>
+              <Form form={form} onSubmit={handleLogin}>
+                <Input
+                  label="Email"
+                  type="text"
+                  autoFocus={true}
+                  placeholder="email@mail.com"
+                  {...form.register("email")}
+                />
+                <Input
+                  label="password"
+                  type="password"
+                  placeholder="password"
+                  autoFocus={false}
+                  {...form.register("password")}
+                />
+                <label className="label hidden invisible">
+                  <Link
+                    to={"/reset-password"}
+                    className="label-text-alt link link-hover"
+                  >
+                    Forgot password?
+                  </Link>
+                </label>
+
+                <div className="form-control   mt-6">
+                  <button className="btn bg-contrast w-full md:w-auto  text-white border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+                    Login
+                  </button>
+                </div>
+              </Form>
+              <NavigateLoginRegister
+                text="Have no account?"
+                btnLabel="Register"
+                to={"/register"}
+              />
             </div>
-          </Form>
-          <NavigateLoginRegister
-            text="Have no account?"
-            btnLabel="Register"
-            to={"/register"}
-          />
+          </div>
         </div>
-      </div>
+      </>
+      // </div>
     );
   }
 };

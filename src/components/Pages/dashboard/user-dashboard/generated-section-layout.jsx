@@ -1,5 +1,6 @@
 import React from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -18,13 +19,12 @@ const anchorTextSchema = z.object({
 
 const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   const {
-    state: { generatedHeading, generatedParagraph, loading, error },
+    state: { generatedHeading, generatedParagraph, loading, postTitleUrlTerm },
     dispatch,
   } = useAppState();
 
-  const location = useLocation();
   const { name } = useParams();
   const navigate = useNavigate();
 
@@ -33,44 +33,50 @@ const GeneratedSectionLayout = () => {
     const postData = JSON.stringify({
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
+      source_url: postTitleUrlTerm.source_url,
     });
 
     try {
       // start loading process & empty error state
-      await dispatch({ type: "error", payload: "" });
       await dispatch({
         type: "generatedParagraph",
         payload: "",
       });
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", payload: true });
+
       const response = await API.post("core/paragraph", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth?.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: true,
+        // withCredentials: true,
       });
 
-      if (response?.status === 200 && !response?.data?.msg) {
+      if (response?.status == 200 || response?.status == 201) {
         dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "generatedParagraph",
           payload: response?.data?.paragraph,
         });
-        await dispatch({ type: "error", payload: "" });
       } else {
-        dispatch({ type: "error", payload: response?.data?.msg });
+        dispatch({ type: "loading", payload: false });
+        toast.warning(
+          response?.data?.msg ? response?.data?.msg : "Try anohter anchor text"
+        );
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
+        toast(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast(error.message);
       }
     }
   };
@@ -93,8 +99,8 @@ const GeneratedSectionLayout = () => {
             {...form.register("anchorText")}
           />
 
-          <button className="btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[132px]">
-            Generate Section
+          <button className="btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[132px]">
+            {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
         </Form>
       </div>
@@ -102,28 +108,30 @@ const GeneratedSectionLayout = () => {
       {/* generated Section */}
       <div className="lg:col-start-2">
         <div className="mb-4">
-          <h2 className="text-3xl">Generated Section</h2>
+          <h2 className="text-3xl text-accent-dark">Generated Section</h2>
           <p className="text-slate-400">
             Following Section was Generated. Insert It Wherever You’d like on
             Your Post
           </p>
         </div>
-        <div className="rounded text-base-100 bg-slate-500 mb-4 p-4 ">
-          <h2 className="text-2xl mb-4">{generatedHeading}</h2>
-          {loading && !error ? (
-            <Spinner className="h-full w-full" />
-          ) : !loading && error ? (
-            <p className="text-red-800">{error}</p>
+        <div className="rounded border border-accent-dark/20 text-accent-dark bg-accent-dark/5 mb-4 p-4  ">
+          <h2 className="font-semibold mb-4">{generatedHeading}</h2>
+          <hr className=" mb-2"></hr>
+          {loading ? (
+            <Spinner
+              customClassName={"grid place-items-center h-[50vh] w-full"}
+            />
           ) : (
             generatedParagraph && generatedParagraph
           )}
         </div>
         <div className=" self-start flex-1 order-1 md:order-1">
           <button
-            className="btn bg-contrast border-none rounded text-white"
+            className="btn bg-contrast w-full sm:w-auto border-none rounded text-white capitalize"
             onClick={handleUpdateSectionRoute}
+            disabled={generatedParagraph ? false : true}
           >
-            Yup..Looks Good!
+            Next Step
           </button>
         </div>
       </div>

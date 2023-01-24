@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useEffect, useReducer } from "react";
 export const AppStateContext = createContext();
 
 const initialState = {
@@ -97,10 +97,7 @@ const projectsReducer = (state, action) => {
       };
 
     case "loading": {
-      return { ...state, loading: true };
-    }
-    case "error": {
-      return { ...state, error: action.payload, loading: false };
+      return { ...state, loading: action.payload };
     }
 
     default:
@@ -122,6 +119,11 @@ const AppProvider = ({ children }) => {
     initialState,
     getStorageValue
   );
+
+  // get localstorage items from localstorage
+  useEffect(() => {
+    localStorage.setItem("projectData", JSON.stringify(state));
+  }, [state]);
 
   // regular state
   return (

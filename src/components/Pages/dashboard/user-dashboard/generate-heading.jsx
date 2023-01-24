@@ -10,14 +10,16 @@ const GenerateHeading = ({ title }) => {
         {title ? (
           <h2 className="card-title text-accent-dark">{title} </h2>
         ) : (
-          <p className="text-accent-dark">generated heading will be here</p>
+          <p className="text-accent-dark/40 font-semibold ">
+            {"[ Generated heading will be here ]"}
+          </p>
         )}
       </div>
 
       {title && (
         <div className="card-actions">
           <button
-            className=" mt-4 btn bg-contrast text-white capitalize hover:bg-contrast-dark border-none rounded"
+            className=" mt-4 w-full sm:w-auto btn bg-contrast text-white capitalize hover:bg-contrast-dark border-none rounded"
             onClick={() =>
               navigate(
                 `/dashboard/project-starter/${name.toLowerCase()}/generated-heading`

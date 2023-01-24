@@ -1,4 +1,5 @@
 import React from "react";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import API from "../../../../api/api-config";
 import { useAppState } from "../../../context/AppProvider";
@@ -10,18 +11,17 @@ import SuggestionsCard from "../../../reusable-component/suggestion-card";
 import Spinner from "../../../spinner";
 import ChosenTitleUrl from "./chosen-title-url";
 import GenerateHeading from "./generate-heading";
+import "./scrollbar.css";
 
 const relevantTerm = z.object({
-  relevantTerm: z
-    .string()
-    .min(4, "relevant term must be more than 4 characters!"),
+  relevantTerm: z.string("Try more relevant words"),
 });
 
 const Suggestions = () => {
   const form = useForm({ schema: relevantTerm });
 
   //   auth provider state
-  const { auth } = useAuthState();
+  const { auth, handleLogout } = useAuthState();
   // getting data from global state context provider
   const {
     state: {
@@ -30,7 +30,6 @@ const Suggestions = () => {
       aiSuggestions,
       generatedHeading,
       loading,
-      error,
     },
     dispatch,
   } = useAppState();
@@ -44,36 +43,44 @@ const Suggestions = () => {
     });
 
     try {
-      dispatch({ type: "error", payload: "" });
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
-      dispatch({ type: "loading" });
+      dispatch({ type: "loading", payload: true });
       const response = await API.post("/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
         },
-        withCredentials: "true",
+        // withCredentials: "true",
       });
-      console.log(response);
+
       if (response?.status === 200 && !response?.data?.msg) {
+        dispatch({ type: "loading", payload: false });
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
-        await dispatch({ type: "error", payload: "" });
       } else {
-        dispatch({ type: "error", payload: response?.data?.msg });
+        dispatch({ type: "loading", payload: false });
+        toast.warning(
+          response?.data?.msg
+            ? response?.data?.msg
+            : `Could not find suggestions.
+               Try another term.`
+        );
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: !loading });
-      if (!error?.response) {
-        dispatch({ type: "error", payload: error?.message });
-      } else if (error?.status == 400 || error?.status == 401) {
-        dispatch({ type: "error", payload: "missing username or password" });
+      dispatch({ type: "loading", payload: false });
+      if (error?.response?.data?.msg) {
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
       } else if (error?.message == "Network Error") {
-        dispatch({ type: "error", payload: error?.message });
+        toast(error.message);
       } else {
-        dispatch({ type: "error", payload: "server error" });
+        toast(error.message);
       }
     }
   };
@@ -86,12 +93,16 @@ const Suggestions = () => {
           <p className="text-xl font-semibold text-center mb-4">
             Not Happy with the suggestions? Try with different Term
           </p>
-          <div className="card-body rounded p-0 bg-base-100 px-6">
+          <div
+            className="card-body rounded p-0 bg-base-100 px-6 "
+            id="chosenTitleUrl"
+          >
             <Form form={form} onSubmit={handleSubmitNewSuggestion}>
               <Input
-                label={"Search More Suggestions"}
+                label={"Relevant Term"}
                 hintText={"Tip: Try to choose relevant terms."}
                 type="text"
+                defaultValue={postTitleUrlTerm.relevant_term}
                 placeholder="relevant term..."
                 className="flex flex-col md:flex-row "
                 autoFocus={true}
@@ -100,9 +111,9 @@ const Suggestions = () => {
 
               <button
                 type="submit"
-                className={`btn bg-accent-dark hover:bg-[#1A3353] capitalize text-white border-none rounded md:ml-[228px]`}
+                className={`btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[228px]`}
               >
-                Generate suggestion again
+                Try Again
               </button>
             </Form>
           </div>
@@ -113,7 +124,7 @@ const Suggestions = () => {
         </div>
 
         {/* chosen title url text area, gnerated heading area, ai suggestons card */}
-        <div className="grid grid-cols-2 gap-6 px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 px-6">
           <div className="flex flex-col gap-4">
             <div className="card rounded bg-base-100">
               {/* generate heading */}
@@ -125,18 +136,25 @@ const Suggestions = () => {
           </div>
 
           {/* suggestions generated from api call */}
-          <div>
+          <div
+            className="md:h-screen overflow-hidden overflow-y-scroll scroll-smooth "
+            style={{
+              scrollbarColor: " #eaedf2 #172B4D",
+              scrollbarWidth: "thin",
+            }}
+          >
             {loading ? (
-              <Spinner />
-            ) : error ? (
-              error && <p className="text-red-800">{error}</p>
+              <Spinner
+                customClassName={"grid place-items-center h-1/2 w-full"}
+              />
             ) : (
-              aiSuggestions?.map((suggestion, i) => (
+              aiSuggestions?.map((suggestion) => (
                 <SuggestionsCard
                   key={suggestion.post_id}
                   title={suggestion.title}
                   url={suggestion.url}
                   id={suggestion.post_id}
+                  pushUp={"chosenTitleUrl"}
                 />
               ))
             )}

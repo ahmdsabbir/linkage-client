@@ -1,57 +1,40 @@
 import React from "react";
-import { NavLink, useNavigate } from "react-router-dom";
-import { useAppState } from "../../context/AppProvider";
-import { useAuthState } from "../../context/AuthProvider";
+import { NavLink } from "react-router-dom";
 
-const Sidebar = ({ children, isSidebar, handleCloseSidebar }) => {
-  const { auth, setAuth } = useAuthState();
-  const navigate = useNavigate();
+const Sidebar = ({
+  children,
+  isSidebar,
+  handleCloseSidebar,
 
-  const { dispatch } = useAppState();
-
-  const handleLogout = async () => {
-    localStorage.removeItem("linkage_token");
-    await setAuth({});
-    navigate("/login");
-    localStorage.clear();
-  };
-
-  const handleAllProjects = async () => {
-    await dispatch({ type: "selectedProject", payload: {} });
-    await dispatch({ type: "postTitleUrl", payload: {} });
-    await dispatch({ type: "aiSuggestions", payload: [] });
-    await dispatch({ type: "choosenTitleUrl", payload: {} });
-    await dispatch({ type: "generatedHeading", payload: "" });
-    await dispatch({ type: "generatedParagraph", payload: "" });
-    await dispatch({ type: "updateAbove", payload: [] });
-    await dispatch({ type: "newUpdateAbove", payload: [] });
-    navigate("/dashboard");
-  };
-
+  handleLogout,
+}) => {
   return (
     <main
       className={`absolute overflow-hidden z-10 bg-gray-900 text-white bg-opacity-25 inset-0 transform ease-in-out 
-${
-  isSidebar
-    ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
-    : " transition-all delay-500 opacity-0 -translate-x-full  "
-}`}
+    ${
+      isSidebar
+        ? " transition-opacity opacity-100 duration-500 -translate-x-0  "
+        : " transition-all delay-500 opacity-0 -translate-x-full  "
+    }`}
     >
+      <div>{children}</div>
       <section
-        className={`w-screen max-w-lg left-0 absolute bg-slate-800 h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
+        className={`w-screen max-w-xs left-0 absolute bg-[#eaedf2]  h-full shadow-xl delay-400 duration-500 ease-in-out transition-all transform 
   ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
   `}
       >
-        <article className="relative w-screen max-w-lg pb-10 flex flex-col space-y-6 overflow-y-scroll h-full">
-          <header className="flex items-center justify-between p-4 font-bold text-lg">
-            <p className="text-slate-100">Dashboard</p>
-            <button className="btn font-bold" onClick={handleCloseSidebar}>
+        <article className="relative w-screen max-w-xs p-4 flex flex-col  overflow-y-scroll h-screen max-h-screen">
+          <header className="flex items-center justify-between  font-bold text-lg h-auto">
+            <p className=" text-[#123354] hover:text-contrast mb-4">
+              Dashboard
+            </p>
+            <button className="" onClick={handleCloseSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
-                stroke="currentColor"
+                stroke="#4EBF9D"
                 className="w-6 h-6"
               >
                 <path
@@ -62,41 +45,126 @@ ${
               </svg>
             </button>
           </header>
-          <div>{children}</div>
-          <div>
+          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] flex flex-col rounded p-4 flex-grow">
             <nav
-              className="text-slate-100 font-bold"
-              data-dev-hint="second-main-navigation or footer navigation"
+              className=" text-[#123354] "
+              data-dev-hint="main-navigation-for-regular-user "
             >
-              <NavLink
-                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                onClick={handleAllProjects}
-              >
-                All Projects
-              </NavLink>
-              <NavLink
-                to="/dashboard/user-details"
-                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                onClick={handleCloseSidebar}
-              >
-                Profile
-              </NavLink>
-
-              <NavLink
-                to="/dashboard/new-project"
-                className="block py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-                onClick={handleCloseSidebar}
-              >
-                Start A New Porject
-              </NavLink>
+              <ul>
+                <li className="pt-2 my-2 block">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to={"/dashboard"}
+                  >
+                    Dashboard
+                  </NavLink>
+                </li>
+                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                  className={({ isActive }) =>
+                  isActive
+                  ? " block  py-1 px-0 font-semibold"
+                  : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                }
+                to={"/dashboard"}
+                    onClick={handleCloseSidebar}
+                  >
+                    All Projects
+                  </NavLink>
+                </li> */}
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/user-details"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                  >
+                    Profile
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/new-project"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                  >
+                    Start A New Porject
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/history"
+                  >
+                    History
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/payment"
+                  >
+                    Payment
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/documentation"
+                  >
+                    Documentation
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                    to="/dashboard/report-a-problem"
+                  >
+                    Report a Problem
+                  </NavLink>
+                </li>
+              </ul>
             </nav>
+
+            <button
+              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
+              onClick={handleLogout}
+            >
+              Logout
+            </button>
           </div>
-          <button
-            className="font-bold py-2 px-4 transition duration-200 hover:bg-gray-700 hover:text-white"
-            onClick={handleLogout}
-          >
-            Logout
-          </button>
         </article>
       </section>
       <section

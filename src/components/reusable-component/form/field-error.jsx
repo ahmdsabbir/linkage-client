@@ -13,7 +13,7 @@ const FieldError = ({ name }) => {
   if (!error) return null;
 
   return (
-    <span className="alert alert-error shadow-lg w-auto p-2 mb-2">
+    <span className="alert text-error shadow-lg w-auto p-2 mb-2">
       <div>
         <svg
           xmlns="http://www.w3.org/2000/svg"
