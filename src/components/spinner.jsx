@@ -11,16 +11,19 @@ const Spinner = ({ customClassName }) => {
       }
     >
       <div className="loader">
-        <span>J</span>
-        <span>u</span>
+        <span>P</span>
+        <span>l</span>
+        <span>e</span>
+        <span>a</span>
         <span>s</span>
+        <span>e</span>
+        <span>&nbsp;</span>
+        <span>w</span>
+        <span>a</span>
+        <span>i</span>
         <span>t</span>
         <span>&nbsp;</span>
-        <span>A</span>
-        <span>&nbsp;</span>
-        <span>S</span>
-        <span>e</span>
-        <span>c...</span>
+        <span>for a moment...</span>
       </div>
     </div>
   );

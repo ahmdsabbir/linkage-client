@@ -37,7 +37,7 @@ const NewProject = () => {
     });
     try {
       dispatch({ type: "loading", payload: true });
-      const response = await API.post("project", postData, {
+      const response = await API.post("api/project", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",

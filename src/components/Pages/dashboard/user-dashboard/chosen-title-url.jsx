@@ -54,7 +54,7 @@ const ChosenTitleUrl = () => {
       // set loading state
       setHeadingLoader(true);
       // post data to the api
-      const response = await API.post("core/heading", postData, {
+      const response = await API.post("api/core/heading", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
