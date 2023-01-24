@@ -146,7 +146,7 @@ const AllProjects = () => {
         <>
           <div className=" px-6 gap-6">
             <h2 className="text-5xl font-bold mb-4">All Projects</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {projects?.length <= 0 ? (
                 <div>
                   <p>No Projects Yet</p>

@@ -85,46 +85,53 @@ const Login = () => {
     return <Spinner />;
   } else {
     return (
-      <div className="grid place-self-center h-screen">
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-5xl font-semibold text-center mb-5">Login</h2>
-          <Form form={form} onSubmit={handleLogin}>
-            <Input
-              label="Email"
-              type="text"
-              autoFocus={true}
-              placeholder="email@mail.com"
-              {...form.register("email")}
-            />
-            <Input
-              label="password"
-              type="password"
-              placeholder="password"
-              autoFocus={false}
-              {...form.register("password")}
-            />
-            <label className="label hidden invisible">
-              <Link
-                to={"/reset-password"}
-                className="label-text-alt link link-hover"
-              >
-                Forgot password?
-              </Link>
-            </label>
-
-            <div className="form-control mt-6">
-              <button className="btn bg-contrast text-white border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+      <>
+        <div className="grid place-items-center h-screen ">
+          <div className=" max-w-3xl rounded shadow w-full">
+            <div className="card-body">
+              <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
                 Login
-              </button>
+              </h2>
+              <Form form={form} onSubmit={handleLogin}>
+                <Input
+                  label="Email"
+                  type="text"
+                  autoFocus={true}
+                  placeholder="email@mail.com"
+                  {...form.register("email")}
+                />
+                <Input
+                  label="password"
+                  type="password"
+                  placeholder="password"
+                  autoFocus={false}
+                  {...form.register("password")}
+                />
+                <label className="label hidden invisible">
+                  <Link
+                    to={"/reset-password"}
+                    className="label-text-alt link link-hover"
+                  >
+                    Forgot password?
+                  </Link>
+                </label>
+
+                <div className="form-control   mt-6">
+                  <button className="btn bg-contrast w-full md:w-auto  text-white border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+                    Login
+                  </button>
+                </div>
+              </Form>
+              <NavigateLoginRegister
+                text="Have no account?"
+                btnLabel="Register"
+                to={"/register"}
+              />
             </div>
-          </Form>
-          <NavigateLoginRegister
-            text="Have no account?"
-            btnLabel="Register"
-            to={"/register"}
-          />
+          </div>
         </div>
-      </div>
+      </>
+      // </div>
     );
   }
 };

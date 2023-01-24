@@ -41,7 +41,7 @@ const SingleProjectCard = ({
   };
 
   return (
-    <div className="flex gap-4 card rounded shadow p-4">
+    <div className="flex gap-4 card rounded shadow p-4 ">
       <div className="flex flex-col gap-3 break-words">
         {name ? (
           <p>

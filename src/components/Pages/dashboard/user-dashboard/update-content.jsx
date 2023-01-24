@@ -187,7 +187,7 @@ const UpdateContent = () => {
 
                   <div
                     className="tooltip hover:tooltip-open tooltip-right"
-                    data-tip="hello"
+                    data-tip="Insert the generated section above this <h2> in your original post"
                   >
                     <button
                       className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12"
@@ -218,7 +218,7 @@ const UpdateContent = () => {
 
                   <div
                     className="tooltip hover:tooltip-open tooltip-right"
-                    data-tip="hello"
+                    data-tip="Insert the generated section above this <h3> in your original post"
                   >
                     <button
                       className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12"
@@ -264,10 +264,10 @@ const UpdateContent = () => {
             </div>
             <div className=" self-start flex-1 order-1 md:order-1">
               <button
-                className="btn w-full sm:w-auto bg-contrast border-none rounded text-white"
+                className="btn w-full sm:w-auto bg-contrast border-none rounded text-white capitalize"
                 onClick={handleUdpateToTheSite}
               >
-                Update to the site
+                Update post
               </button>
             </div>
           </div>

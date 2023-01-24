@@ -99,7 +99,7 @@ const Suggestions = () => {
           >
             <Form form={form} onSubmit={handleSubmitNewSuggestion}>
               <Input
-                label={"Search More Suggestions"}
+                label={"Relevant Term"}
                 hintText={"Tip: Try to choose relevant terms."}
                 type="text"
                 defaultValue={postTitleUrlTerm.relevant_term}
@@ -113,7 +113,7 @@ const Suggestions = () => {
                 type="submit"
                 className={`btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[228px]`}
               >
-                Re-Generate
+                Try Again
               </button>
             </Form>
           </div>

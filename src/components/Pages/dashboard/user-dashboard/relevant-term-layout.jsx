@@ -110,7 +110,7 @@ const RelevantTermLayout = () => {
               type="submit"
               className={`btn btn-primary w-full sm:w-auto text-white rounded border-none capitalize bg-accent-dark hover:bg-[#1A3353] md:ml-[232px] md:mt-[-15px] `}
             >
-              Submit
+              Find Suggestions
             </button>
           </Form>
         </div>

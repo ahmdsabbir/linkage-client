@@ -74,48 +74,52 @@ const Register = () => {
     return <Spinner />;
   } else {
     return (
-      <div className="grid place-self-center h-screen">
-        <div className="flex flex-col items-center justify-center">
-          <h2 className="text-5xl  font-semibold text-center mb-5">Register</h2>
-          <Form form={form} onSubmit={handleSubmitRegister}>
-            <Input
-              label="Username"
-              type="text"
-              placeholder="username"
-              className="flex flex-col"
-              {...form.register("username")}
-            />
-            <Input
-              label="Email"
-              type="text"
-              placeholder="email@mail.com"
-              {...form.register("email")}
-            />
-            <Input
-              label="Password"
-              type="password"
-              placeholder="password"
-              {...form.register("password")}
-            />
-            <Input
-              label="Confirm Password"
-              type="password"
-              placeholder="confirm password"
-              {...form.register("confirm")}
-            />
+      <div className="grid place-items-center h-screen ">
+        <div className=" max-w-3xl rounded shadow w-full">
+          <div className="card-body">
+            <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
+              Register
+            </h2>
+            <Form form={form} onSubmit={handleSubmitRegister}>
+              <Input
+                label="Username"
+                type="text"
+                placeholder="username"
+                className="flex flex-col"
+                {...form.register("username")}
+              />
+              <Input
+                label="Email"
+                type="text"
+                placeholder="email@mail.com"
+                {...form.register("email")}
+              />
+              <Input
+                label="Password"
+                type="password"
+                placeholder="password"
+                {...form.register("password")}
+              />
+              <Input
+                label="Confirm Password"
+                type="password"
+                placeholder="confirm password"
+                {...form.register("confirm")}
+              />
 
-            <div className="form-control mt-6">
-              <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600 capitalize">
-                Register
-              </button>
-            </div>
-          </Form>
-          <NavigateLoginRegister
-            text="Already a user?"
-            btnLabel="Login"
-            to={"/login"}
-            dispatch={dispatch}
-          />
+              <div className="form-control mt-6">
+                <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+                  Register
+                </button>
+              </div>
+            </Form>
+            <NavigateLoginRegister
+              text="Already a user?"
+              btnLabel="Login"
+              to={"/login"}
+              dispatch={dispatch}
+            />
+          </div>
         </div>
       </div>
     );
