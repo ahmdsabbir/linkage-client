@@ -162,88 +162,94 @@ const UpdateContent = () => {
     return (
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-6">
         <div>
-          {newData.map((heading, i) => (
-            <div key={i}>
-              {heading?.generatedHeading && heading?.generatedParagraph && (
-                <div
-                  className={`${
-                    heading.name == "h3" && "ml-2 sm:ml-4 md:ml-8 p-4 mb-4"
-                  } text-accent-dark mb-2 rounded border border-accent-dark/20 p-4 bg-accent-dark/5`}
-                >
-                  <h2 className=" font-semibold mb-2 ">
-                    {heading?.generatedHeading}
-                  </h2>
-                  {heading?.generatedParagraph}
-                </div>
-              )}
-
-              {heading.name == "h2" ? (
-                <div
-                  className={` p-4 mb-4 border rounded-md flex flex-col md:flex-row gap-4 items-center md:items-start  justify-between border-accent-dark/20 `}
-                >
-                  <p className="flex-inital font-medium  text-accent-dark ">
-                    {heading.text}
-                  </p>
-
+          {newData.length == 0 ? (
+            <p className="text-red-800 font-bold">
+              Something went wrong. Please try again!
+            </p>
+          ) : (
+            newData.map((heading, i) => (
+              <div key={i}>
+                {heading?.generatedHeading && heading?.generatedParagraph && (
                   <div
-                    className="tooltip hover:tooltip-open tooltip-right"
-                    data-tip="Insert the generated section above this <h2> in your original post"
+                    className={`${
+                      heading.name == "h3" && "ml-2 sm:ml-4 md:ml-8 p-4 mb-4"
+                    } text-accent-dark mb-2 rounded border border-accent-dark/20 p-4 bg-accent-dark/5`}
                   >
-                    <button
-                      className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12"
-                      onClick={() => handleAbovePost(heading.text)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="#667793"
-                        className="w-4 h-4"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
-                        />
-                      </svg>
-                    </button>
+                    <h2 className=" font-semibold mb-2 ">
+                      {heading?.generatedHeading}
+                    </h2>
+                    {heading?.generatedParagraph}
                   </div>
-                </div>
-              ) : (
-                <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border border-accent-dark/20 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                  <p className="flex-inital  text-accent-dark font-medium">
-                    {heading.text}
-                  </p>
+                )}
 
+                {heading.name == "h2" ? (
                   <div
-                    className="tooltip hover:tooltip-open tooltip-right"
-                    data-tip="Insert the generated section above this <h3> in your original post"
+                    className={` p-4 mb-4 border rounded-md flex flex-col md:flex-row gap-4 items-center md:items-start  justify-between border-accent-dark/20 `}
                   >
-                    <button
-                      className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12"
-                      onClick={() => handleAbovePost(heading.text)}
+                    <p className="flex-inital font-medium  text-accent-dark ">
+                      {heading.text}
+                    </p>
+
+                    <div
+                      className="tooltip hover:tooltip-open tooltip-right"
+                      data-tip="Insert the generated section above this <h2> in your original post"
                     >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={1.5}
-                        stroke="#667793"
-                        className="w-4 h-4"
+                      <button
+                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12"
+                        onClick={() => handleAbovePost(heading.text)}
                       >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
-                        />
-                      </svg>
-                    </button>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="#667793"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                          />
+                        </svg>
+                      </button>
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
-          ))}
+                ) : (
+                  <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border border-accent-dark/20 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                    <p className="flex-inital  text-accent-dark font-medium">
+                      {heading.text}
+                    </p>
+
+                    <div
+                      className="tooltip hover:tooltip-open tooltip-right"
+                      data-tip="Insert the generated section above this <h3> in your original post"
+                    >
+                      <button
+                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12"
+                        onClick={() => handleAbovePost(heading.text)}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={1.5}
+                          stroke="#667793"
+                          className="w-4 h-4"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M9 15L3 9m0 0l6-6M3 9h12a6 6 0 010 12h-3"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ))
+          )}
         </div>
 
         {/* generated Section */}
