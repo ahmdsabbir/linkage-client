@@ -77,7 +77,7 @@ const AllProjects = () => {
               toast.error(error?.response?.data?.msg);
             }
           } else if (error?.message == "Network Error") {
-            toast.error(error.message);
+            toast.error("something went wrong");
           } else {
             if (error.message == "canceled") return;
             toast.error(error.message);
@@ -130,7 +130,7 @@ const AllProjects = () => {
           toast.error(error?.response?.data?.msg);
         }
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast.error("something went wrong");
       } else {
         toast.error(error.message);
       }

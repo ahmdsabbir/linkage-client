@@ -16,7 +16,7 @@ const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
   password: z
     .string()
-    .min(4, "Please choose a longer password")
+    .min(6, "Please choose a longer password")
     .max(256, "Consider using a short password"),
 });
 
@@ -75,7 +75,7 @@ const Login = () => {
       if (error.response.status == 401) {
         toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
-        toast.error(error.message);
+        toast.error("something went wrong");
       } else {
         toast.error(error.message ? error.message : "login failed");
       }
