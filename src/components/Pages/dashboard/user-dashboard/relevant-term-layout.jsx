@@ -44,7 +44,7 @@ const RelevantTermLayout = () => {
       dispatch({ type: "loading", payload: true });
 
       // post data to the api
-      const response = await API.post("core/suggestions", postData, {
+      const response = await API.post("api/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
