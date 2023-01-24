@@ -108,14 +108,15 @@ const GeneratedSectionLayout = () => {
       {/* generated Section */}
       <div className="lg:col-start-2">
         <div className="mb-4">
-          <h2 className="text-3xl">Generated Section</h2>
+          <h2 className="text-3xl text-accent-dark">Generated Section</h2>
           <p className="text-slate-400">
             Following Section was Generated. Insert It Wherever You’d like on
             Your Post
           </p>
         </div>
-        <div className="rounded text-base-100 bg-slate-500 mb-4 p-4  ">
-          <h2 className="text-2xl mb-4">{generatedHeading}</h2>
+        <div className="rounded border border-accent-dark/20 text-accent-dark bg-accent-dark/5 mb-4 p-4  ">
+          <h2 className="font-semibold mb-4">{generatedHeading}</h2>
+          <hr className=" mb-2"></hr>
           {loading ? (
             <Spinner
               customClassName={"grid place-items-center h-[50vh] w-full"}
