@@ -147,6 +147,10 @@ const Suggestions = () => {
               <Spinner
                 customClassName={"grid place-items-center h-1/2 w-full"}
               />
+            ) : aiSuggestions.length == 0 ? (
+              <p className="text-red-800 font-bold">
+                Something went wrong. Please try again!
+              </p>
             ) : (
               aiSuggestions?.map((suggestion) => (
                 <SuggestionsCard
