@@ -102,7 +102,7 @@ const NewProject = () => {
           />
           <Input
             label="WP App. Password"
-            type="password"
+            type="text"
             placeholder="WP App. Password"
             {...form.register("wpAppPassword")}
             className="flex flex-col md:flex-row"

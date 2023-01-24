@@ -10,7 +10,9 @@ const GenerateHeading = ({ title }) => {
         {title ? (
           <h2 className="card-title text-accent-dark">{title} </h2>
         ) : (
-          <p className="text-accent-dark">generated heading will be here</p>
+          <p className="text-accent-dark/40 font-semibold ">
+            {"[ Generated heading will be here ]"}
+          </p>
         )}
       </div>
 

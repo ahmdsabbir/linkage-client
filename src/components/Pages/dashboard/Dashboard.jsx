@@ -17,7 +17,7 @@ const Dashboard = () => {
     <>
       <div className="relative grid grid-cols-12">
         {/* menu button for mobile */}
-        <div className="md:hidden col-span-1 flex flex-col items-center bg-base p-4 min-h-screen">
+        <div className="md:hidden md:invisible col-span-1 flex flex-col items-center bg-base p-4 min-h-screen">
           <button className=" " onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -44,16 +44,22 @@ const Dashboard = () => {
         ></Sidebar>
 
         {/* sidebar container for desktop */}
+
         <div
-          className={`hidden invisible visibility md:flex md:visible md:col-span-2 flex-col bg-base  p-4 min-h-screen `}
+          className={`hidden invisible visibility md:relative md:flex md:visible md:col-span-2 flex-col bg-base  p-4 min-h-screen `}
         >
           {/* sidebar for desktop */}
-          <div className="text-left bg-[#eaedf2] text-[#8D9DAE] min-h-screen rounded p-4 flex flex-col">
+          <div className="sticky top-0 text-left bg-[#eaedf2] text-[#8D9DAE] min-h-screen rounded p-4 flex flex-col">
             <nav
               className="flex flex-col text-[#123354] "
               data-dev-hint="main-navigation-for-regular-user "
             >
-              <div className="text-xl mb-6">LOGO</div>
+              <div className=" mb-6">
+                <div className="text-xl font-bold ">Linkage</div>
+                {/*   <p className="text-sm text-slate-500">
+                  All your interlinking issues solved!
+                </p> */}
+              </div>
               <ul>
                 <li className="pt-2 my-2 block">
                   <NavLink
@@ -156,7 +162,7 @@ const Dashboard = () => {
             </nav>
 
             <button
-              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto"
+              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto capitalize"
               onClick={handleLogout}
             >
               Logout

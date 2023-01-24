@@ -60,7 +60,7 @@ const SingleProjectCard = ({
 
         {wpUserName ? (
           <p>
-            <span className="font-semibold mr-2">WP App. Password:</span>{" "}
+            <span className="font-semibold mr-2">WP Username:</span>{" "}
             {wpUserName}
           </p>
         ) : (
@@ -95,6 +95,7 @@ const SingleProjectCard = ({
           onClick={() => {
             handleEditProject(id);
           }}
+          disabled
         >
           Edit
         </NavLink>

@@ -144,47 +144,50 @@ const AllProjects = () => {
         <Spinner />
       ) : (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-2 px-6 gap-6">
-            {projects?.length <= 0 ? (
-              <div>
-                <p>No Projects Yet</p>
-                <button className="btn" onClick={handleNewPorject}>
-                  Start A New Porject
-                </button>
-              </div>
-            ) : (
-              projects?.map((project) => (
-                <SingleProjectCard
-                  key={project.id}
-                  name={project.name}
-                  domain={project.domain}
-                  id={project.id}
-                  dateAdded={project.date_added}
-                  wpUserName={project.wp_username}
-                  wpPassword={project.wp_password}
-                  dispatch={dispatch}
-                  showModal={setDisplayConfirmationModal}
-                  setProjectId={setProjectId}
-                  navigate={navigate}
-                />
-              ))
-            )}
-          </div>
+          <div className=" px-6 gap-6">
+            <h2 className="text-5xl font-bold mb-4">All Projects</h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {projects?.length <= 0 ? (
+                <div>
+                  <p>No Projects Yet</p>
+                  <button className="btn" onClick={handleNewPorject}>
+                    Start A New Porject
+                  </button>
+                </div>
+              ) : (
+                projects?.map((project) => (
+                  <SingleProjectCard
+                    key={project.id}
+                    name={project.name}
+                    domain={project.domain}
+                    id={project.id}
+                    dateAdded={project.date_added}
+                    wpUserName={project.wp_username}
+                    wpPassword={project.wp_password}
+                    dispatch={dispatch}
+                    showModal={setDisplayConfirmationModal}
+                    setProjectId={setProjectId}
+                    navigate={navigate}
+                  />
+                ))
+              )}
+            </div>
 
-          {displayConfirmationModal ? (
-            <ConfirmationModal
-              showModal={setDisplayConfirmationModal}
-              confirmModal={handleDeleteProject}
-              projectId={projectId}
-              setProjectId={setProjectId}
-            />
-          ) : null}
+            {displayConfirmationModal ? (
+              <ConfirmationModal
+                showModal={setDisplayConfirmationModal}
+                confirmModal={handleDeleteProject}
+                projectId={projectId}
+                setProjectId={setProjectId}
+              />
+            ) : null}
+          </div>
         </>
       )}
-
+      {/* 
       <button className="btn" onClick={() => refresh()}>
         Refresh Token
-      </button>
+      </button> */}
     </>
   );
 };
