@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
 import { useAppState } from "../context/AppProvider";
@@ -22,11 +22,18 @@ const loginFormSchema = z.object({
 
 const Login = () => {
   // react router dom hooks
-  const location = useLocation();
   const navigate = useNavigate();
 
   // Auth provider Context
   const { auth, setAuth } = useAuthState();
+  /*   const [plus, setPlus] = useState(null);
+  const handleError = () => {
+    setPlus((prev) => prev + 1);
+  };
+  function Bomb() {
+    throw new Error("kaboom");
+  } */
+
   // App state provider Context
   const {
     state: { loading },
@@ -87,6 +94,10 @@ const Login = () => {
     return (
       <>
         <div className="grid place-items-center h-screen ">
+          {/*  <button className="btn" onClick={handleError}>
+            {plus}
+          </button>
+          <div>{plus == 2 ? <Bomb /> : "working fine"}</div> */}
           <div className=" max-w-3xl rounded shadow-sm w-full">
             <div className="card-body">
               <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
