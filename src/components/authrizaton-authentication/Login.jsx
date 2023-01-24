@@ -61,7 +61,7 @@ const Login = () => {
     try {
       dispatch({ type: "loading", payload: true });
 
-      const response = await API.post("auth/login", userData, {
+      const response = await API.post("api/auth/login", userData, {
         headers: {
           "Content-Type": "application/json",
         },

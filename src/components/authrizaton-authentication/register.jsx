@@ -46,7 +46,7 @@ const Register = () => {
     try {
       await dispatch({ type: "loading" });
       dispatch({ type: "loading", payload: false });
-      const response = await API.post("auth/register", postJsonData, {
+      const response = await API.post("api/auth/register", postJsonData, {
         headers: {
           "Content-Type": "application/json",
         },
