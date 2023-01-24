@@ -62,7 +62,7 @@ const NewProject = () => {
           toast.error(error?.response?.data?.msg);
         }
       } else if (error?.message == "Network Error") {
-        toast(error.message);
+        toast("something went wrong");
       } else {
         toast(error.message);
       }
