@@ -39,7 +39,7 @@ const UpdateContent = () => {
       try {
         await dispatch({ type: "loading", payload: true });
 
-        const response = await API.post("core/target-headings", postData, {
+        const response = await API.post("api/core/target-headings", postData, {
           headers: {
             "Content-Type": "application/json",
             Authorization: auth.token ? `Bearer ${auth?.token}` : "",
@@ -128,7 +128,7 @@ const UpdateContent = () => {
 
     try {
       dispatch({ type: "loading", payload: true });
-      const response = await API.post("core/update-content", postData, {
+      const response = await API.post("api/core/update-content", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
