@@ -29,7 +29,7 @@ const Login = () => {
   const { auth, setAuth } = useAuthState();
   // App state provider Context
   const {
-    state: { loading, error },
+    state: { loading },
     dispatch,
   } = useAppState();
   // const from = location.state?.from?.pathname || "/";
@@ -87,7 +87,7 @@ const Login = () => {
     return (
       <>
         <div className="grid place-items-center h-screen ">
-          <div className=" max-w-3xl rounded shadow w-full">
+          <div className=" max-w-3xl rounded shadow-sm w-full">
             <div className="card-body">
               <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
                 Login

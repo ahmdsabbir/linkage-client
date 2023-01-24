@@ -75,7 +75,7 @@ const Register = () => {
   } else {
     return (
       <div className="grid place-items-center h-screen ">
-        <div className=" max-w-3xl rounded shadow w-full">
+        <div className=" max-w-3xl rounded shadow-sm w-full">
           <div className="card-body">
             <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
               Register
