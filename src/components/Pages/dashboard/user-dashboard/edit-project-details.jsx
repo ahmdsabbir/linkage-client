@@ -36,7 +36,6 @@ const EditProjectDetails = () => {
      post Data must update
       edit project address must update before using this function
      
-     
      */
     const postData = JSON.stringify({
       name: data.projectName,
