@@ -148,9 +148,12 @@ const AllProjects = () => {
             <h2 className="text-5xl font-bold mb-4">All Projects</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {projects?.length <= 0 ? (
-                <div>
+                <div className="grid place-items-center h-full">
                   <p>No Projects Yet</p>
-                  <button className="btn capitalize" onClick={handleNewProject}>
+                  <button
+                    className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize"
+                    onClick={handleNewProject}
+                  >
                     Create a Project
                   </button>
                 </div>

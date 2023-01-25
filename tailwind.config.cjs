@@ -5,31 +5,39 @@ module.exports = {
     themes: [
       {
         light: {
-          // primary: "#a7ff9e",
+          primary: "#D8E1FC",
 
-          secondary: "#c8ce1c",
+          secondary: "#377DFF",
 
-          accent: "#abf492",
+          accent: "#12CFAF",
 
-          neutral: "#212C3B",
+          neutral: "#4E5D78",
 
-          "base-100": "#F8F7F8",
+          "base-100": "#fff",
 
           info: "#4974E9",
 
           success: "#58E9AA",
 
-          warning: "#D0A106",
+          warning: "#FFD101",
 
-          error: "#F76983",
+          error: "#EB464C",
+          sidebar: "#eaedf2",
+
+          "sidebar-text": "#123354",
+          "main-text": "#141414",
+          "muted-text-light": "#BABABA",
+          "muted-text": "#969899",
+          "extra-text": "#fafafa",
+          "extra-text-more": "#e3e8ec",
         },
       },
     ],
   },
-  theme: {
+  /*  theme: {
     extend: {
       colors: {
-        contrast: "#4EBF9D",
+        contrast: "#12cfaf",
         "contrast-dark": "#43AA8B",
         "accent-dark": "#172B4D",
         light: "#D9D9D9",
@@ -37,6 +45,6 @@ module.exports = {
         "accent-light": "#667793",
       },
     },
-  },
+  }, */
   plugins: [require("daisyui")],
 };
