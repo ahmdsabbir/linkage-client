@@ -150,7 +150,7 @@ const AllProjects = () => {
               {projects?.length <= 0 ? (
                 <div>
                   <p>No Projects Yet</p>
-                  <button className="btn" onClick={handleNewProject}>
+                  <button className="btn capitalize" onClick={handleNewProject}>
                     Create a Project
                   </button>
                 </div>
@@ -185,7 +185,7 @@ const AllProjects = () => {
         </>
       )}
       {/* 
-      <button className="btn" onClick={() => refresh()}>
+      <button className="btn capitalize" onClick={() => refresh()}>
         Refresh Token
       </button> */}
     </>

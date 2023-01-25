@@ -23,7 +23,7 @@ const EnterPostTitle = () => {
   const { name } = useParams();
 
   // post request
-  // if funciton cold be more percise. remember to edit the @{if else} funciton
+  // if function cold be more precise. remember to edit the @{if else} function
   const handleSubmit = async (data) => {
     await dispatch({ type: "postTitleUrl", payload: data });
     navigate(`/dashboard/project-starter/${name.toLowerCase()}/relevant`);
@@ -53,7 +53,7 @@ const EnterPostTitle = () => {
           {/* button */}
           <button
             type="submit"
-            className="btn w-full sm:w-auto bg-accent-dark text-white rounded px-6 border-none sm:ml-[135px]"
+            className="btn w-full sm:w-auto bg-accent-dark text-white rounded px-6 border-none sm:ml-[135px] capitalize"
           >
             submit
           </button>

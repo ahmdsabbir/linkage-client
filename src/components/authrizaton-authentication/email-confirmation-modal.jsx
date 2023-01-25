@@ -14,7 +14,7 @@ const EmailConfirmationModal = () => {
           An email has been sent to your mail. Please check your email.
         </p>
         <button
-          className="btn border-0 rounded text-white"
+          className="btn border-0 rounded text-white capitalize"
           onClick={handleGotoLogin}
         >
           Go to login

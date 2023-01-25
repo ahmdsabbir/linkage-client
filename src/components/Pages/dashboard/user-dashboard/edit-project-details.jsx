@@ -194,7 +194,7 @@ const EditProjectDetails = () => {
           )}
 
           <div className="form-control md:flex-row md:ml-[158px]">
-            <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">
+            <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded capitalize">
               Submit
             </button>
           </div>

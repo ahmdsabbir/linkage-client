@@ -94,7 +94,7 @@ const Login = () => {
     return (
       <>
         <div className="grid place-items-center h-screen ">
-          <button className="btn" onClick={handleError}>
+          <button className="btn capitalize" onClick={handleError}>
             {plus}
           </button>
           <div>{plus == 2 ? <Bomb /> : "working fine"}</div>

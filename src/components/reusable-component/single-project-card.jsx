@@ -19,7 +19,7 @@ const SingleProjectCard = ({
   const navigate = useNavigate();
 
   // start projct handler
-  const handleStarteProject = async (id) => {
+  const handleStartProject = async (id) => {
     const findProject = projects.find((project) => project.id == id);
     await dispatch({
       type: "selectedProject",
@@ -85,8 +85,8 @@ const SingleProjectCard = ({
       </div>
       <div className="flex flex-col sm:flex-row gap-2 ">
         <button
-          className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 "
-          onClick={() => handleStarteProject(id)}
+          className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize"
+          onClick={() => handleStartProject(id)}
         >
           Start Project
         </button>
@@ -100,7 +100,7 @@ const SingleProjectCard = ({
           Edit
         </NavLink>
         <button
-          className="btn bg-accent-light text-white rounded  border-none hover:bg-error hover:text-base-300 focus:bg-slate-600"
+          className="btn bg-accent-light text-white rounded  border-none hover:bg-error hover:text-base-300 focus:bg-slate-600 capitalize"
           onClick={() => {
             showModal(true);
             setProjectId(id);

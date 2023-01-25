@@ -47,7 +47,7 @@ const UpdateContent = () => {
           // withCredentials: "true",
         });
 
-        if (response?.status == 200 && !response?.data?.msg) {
+        if (response?.status == 200) {
           await dispatch({ type: "loading", payload: false });
 
           await dispatch({
@@ -85,7 +85,7 @@ const UpdateContent = () => {
     getData();
   }, []);
 
-  // udpate the data above the heading on @{}
+  // update the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
       dispatch({ type: "loading", payload: false });
@@ -112,7 +112,7 @@ const UpdateContent = () => {
     }
   };
 
-  const handleUdpateToTheSite = async () => {
+  const handleUpdateToTheSite = async () => {
     const tagText = newData.find(
       (item) => item.generatedParagraph === generatedParagraph
     );
@@ -195,7 +195,7 @@ const UpdateContent = () => {
                       data-tip="Insert the generated section above this <h2> in your original post"
                     >
                       <button
-                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12"
+                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12 capitalize"
                         onClick={() => handleAbovePost(heading.text)}
                       >
                         <svg
@@ -226,7 +226,7 @@ const UpdateContent = () => {
                       data-tip="Insert the generated section above this <h3> in your original post"
                     >
                       <button
-                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12"
+                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12 capitalize"
                         onClick={() => handleAbovePost(heading.text)}
                       >
                         <svg
@@ -271,7 +271,7 @@ const UpdateContent = () => {
             <div className=" self-start flex-1 order-1 md:order-1">
               <button
                 className="btn w-full sm:w-auto bg-contrast border-none rounded text-white capitalize"
-                onClick={handleUdpateToTheSite}
+                onClick={handleUpdateToTheSite}
               >
                 Update post
               </button>
