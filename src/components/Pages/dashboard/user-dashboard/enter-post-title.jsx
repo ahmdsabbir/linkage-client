@@ -35,7 +35,7 @@ const EnterPostTitle = () => {
         {/* form */}
         <Form form={form} onSubmit={handleSubmit}>
           <Input
-            label="Source Title"
+            label="Target Title"
             type="text"
             // hintText="aka, Target Post"
             placeholder="post title..."
@@ -44,7 +44,7 @@ const EnterPostTitle = () => {
             {...form.register("postTitle")}
           />
           <Input
-            label="Source URL"
+            label="Target URL"
             type="text"
             placeholder="post url..."
             className="flex flex-col sm:flex-row"
