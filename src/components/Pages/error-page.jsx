@@ -1,9 +1,10 @@
 import React from "react";
-import { useRouteError } from "react-router-dom";
+import { useNavigate, useRouteError } from "react-router-dom";
 // import errorImage from "../../assets/404-error.svg";
 
 const ErrorPage = () => {
   const error = useRouteError();
+  const navigate = useNavigate();
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-2 h-screen items-center p-6">
@@ -384,7 +385,11 @@ const ErrorPage = () => {
             y={100.713}
             x={234.87}
           >
-            {error?.response?.status ? error?.response?.status : error.message}
+            {error?.response?.status
+              ? error?.response?.status
+              : error?.status
+              ? error?.status
+              : "Sorry"}
           </text>
           <text
             transform="matrix(.9848 -.17365 .17203 .97566 -18.371 55.525)"
@@ -395,7 +400,9 @@ const ErrorPage = () => {
             y={149.78}
             x={273.481}
           >
-            {error.message}
+            <a className="bg-slate-400" onClick={() => navigate(-1)}>
+              {"Back"}
+            </a>
           </text>
           <path
             fill="#fafafa"

@@ -62,12 +62,12 @@ const Dashboard = () => {
                 </p> */}
               </div>
               <ul>
-                <li className="pt-2 my-2 block">
+                <li className="pt-2 my-2 ">
                   <NavLink
                     to={"/dashboard"}
                     className={({ isActive }) =>
                       isActive
-                        ? " block  py-1 px-0 "
+                        ? " block  py-1 px-0 font-bold"
                         : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
                   >
