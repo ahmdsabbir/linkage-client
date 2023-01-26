@@ -28,8 +28,8 @@ const GeneratedSectionLayout = () => {
   const { name } = useParams();
   const navigate = useNavigate();
 
-  // anchortext field handler
-  const handleAchorTextSubmit = async (data) => {
+  // anchor text field handler
+  const handleAnchorTextSubmit = async (data) => {
     const postData = JSON.stringify({
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
@@ -61,7 +61,7 @@ const GeneratedSectionLayout = () => {
       } else {
         dispatch({ type: "loading", payload: false });
         toast.warning(
-          response?.data?.msg ? response?.data?.msg : "Try anohter anchor text"
+          response?.data?.msg ? response?.data?.msg : "Try another anchor text"
         );
       }
     } catch (error) {
@@ -89,7 +89,7 @@ const GeneratedSectionLayout = () => {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-6">
       {/* anchor input field */}
       <div className="lg:col-start-1">
-        <Form form={form} onSubmit={handleAchorTextSubmit}>
+        <Form form={form} onSubmit={handleAnchorTextSubmit}>
           <Input
             label="Anchor Text"
             type="text"
@@ -99,7 +99,7 @@ const GeneratedSectionLayout = () => {
             {...form.register("anchorText")}
           />
 
-          <button className="btn bg-accent-dark hover:bg-[#1A3353] w-full sm:w-auto capitalize text-white border-none rounded md:ml-[132px]">
+          <button className="btn  w-full sm:w-auto btn-primary  border-none rounded md:ml-[132px] capitalize">
             {generatedParagraph ? "Regenerate Section" : "Generate Section"}
           </button>
         </Form>
@@ -127,7 +127,7 @@ const GeneratedSectionLayout = () => {
         </div>
         <div className=" self-start flex-1 order-1 md:order-1">
           <button
-            className="btn bg-contrast w-full sm:w-auto border-none rounded text-white capitalize"
+            className="btn btn-primary  w-full sm:w-auto border-none rounded capitalize"
             onClick={handleUpdateSectionRoute}
             disabled={generatedParagraph ? false : true}
           >

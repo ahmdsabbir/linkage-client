@@ -18,7 +18,7 @@ const Dashboard = () => {
       <div className="relative grid grid-cols-12">
         {/* menu button for mobile */}
         <div className="md:hidden md:invisible col-span-1 flex flex-col items-center bg-base p-4 min-h-screen">
-          <button className=" " onClick={handleCloseSidebar}>
+          <button className="capitalize " onClick={handleCloseSidebar}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -62,16 +62,28 @@ const Dashboard = () => {
                 </p> */}
               </div>
               <ul>
-                <li className="pt-2 my-2 block">
+                <li className="pt-2 my-2 ">
                   <NavLink
                     to={"/dashboard"}
                     className={({ isActive }) =>
                       isActive
-                        ? " block  py-1 px-0 font-semibold"
-                        : " block  py-1 px-0 font-normal transition duration-200 hover:text-contrast"
+                        ? " block  py-1 px-0 font-bold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
                   >
-                    Dashboard
+                    All Projects
+                  </NavLink>
+                </li>
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/new-project"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
+                    }
+                  >
+                    Create Project
                   </NavLink>
                 </li>
                 {/*  <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
@@ -96,18 +108,6 @@ const Dashboard = () => {
                     }
                   >
                     Profile
-                  </NavLink>
-                </li>
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink
-                    to="/dashboard/new-project"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " block  py-1 px-0 font-semibold"
-                        : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
-                    }
-                  >
-                    Start A New Porject
                   </NavLink>
                 </li>
 
@@ -144,7 +144,7 @@ const Dashboard = () => {
                         : " block  py-1 px-0 font-normal transition duration-200  hover:text-contrast"
                     }
                   >
-                    Docmumentation
+                    Documentation
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
@@ -163,7 +163,7 @@ const Dashboard = () => {
             </nav>
 
             <button
-              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto capitalize"
+              className=" btn btn-primary rounded  border-none  mt-auto capitalize"
               onClick={handleLogout}
             >
               Logout

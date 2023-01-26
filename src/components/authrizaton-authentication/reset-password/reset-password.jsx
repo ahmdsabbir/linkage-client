@@ -30,7 +30,7 @@ const ResetPassword = () => {
           />
 
           <div className="form-control mt-6">
-            <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600">
+            <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600 capitalize">
               Submit
             </button>
           </div>

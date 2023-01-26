@@ -44,14 +44,14 @@ const ConfirmationModal = ({
           </div>
           <div className="text-center md:text-right mt-4 md:flex md:justify-end">
             <button
-              className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2"
+              className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-red-200 text-red-700 rounded-lg font-semibold text-sm md:ml-2 md:order-2 capitalize"
               onClick={() => confirmModal(projectId)}
             >
               Delete Project
             </button>
             <button
               className="block w-full md:inline-block md:w-auto px-4 py-3 md:py-2 bg-gray-200 rounded-lg font-semibold text-sm mt-4
-          md:mt-0 md:order-1"
+          md:mt-0 md:order-1 capitalize"
               onClick={() => {
                 showModal(false);
                 setProjectId(null);

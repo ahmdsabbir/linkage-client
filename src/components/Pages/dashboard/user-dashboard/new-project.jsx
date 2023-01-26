@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { z } from "zod";
@@ -22,6 +23,7 @@ const NewProject = () => {
   // const { reset } = useForm();
   const { auth, handleLogout } = useAuthState();
   // react router dom hook
+  const navigate = useNavigate();
 
   const {
     dispatch,
@@ -110,11 +112,13 @@ const NewProject = () => {
           />
 
           <div className="form-control md:flex-row mt-4 md:ml-[166px]">
-            <button className="btn bg-contrast border-0 text-white hover:bg-contrast-dark focus:bg-slate-600 rounded">
-              Submit
+            <button className="btn btn-primary   rounded capitalize">
+              Create Project
             </button>
           </div>
         </Form>
+
+        {/* <button onClick={() => navigate("/dashboard")}>Got All projects</button> */}
       </div>
     );
   }

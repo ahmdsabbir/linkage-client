@@ -28,7 +28,7 @@ const Sidebar = ({
             <p className=" text-[#123354] hover:text-contrast mb-4">
               Dashboard
             </p>
-            <button className="" onClick={handleCloseSidebar}>
+            <button className="capitalize" onClick={handleCloseSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -61,22 +61,23 @@ const Sidebar = ({
                     onClick={handleCloseSidebar}
                     to={"/dashboard"}
                   >
-                    Dashboard
-                  </NavLink>
-                </li>
-                {/* <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink
-                  className={({ isActive }) =>
-                  isActive
-                  ? " block  py-1 px-0 font-semibold"
-                  : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
-                }
-                to={"/dashboard"}
-                    onClick={handleCloseSidebar}
-                  >
                     All Projects
                   </NavLink>
-                </li> */}
+                </li>
+
+                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
+                  <NavLink
+                    to="/dashboard/new-project"
+                    className={({ isActive }) =>
+                      isActive
+                        ? " block  py-1 px-0 font-semibold"
+                        : " block py-1 px-0 font-normal transition duration-200 hover:text-contrast"
+                    }
+                    onClick={handleCloseSidebar}
+                  >
+                    Create Project
+                  </NavLink>
+                </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
                   <NavLink
                     to="/dashboard/user-details"
@@ -88,19 +89,6 @@ const Sidebar = ({
                     onClick={handleCloseSidebar}
                   >
                     Profile
-                  </NavLink>
-                </li>
-                <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">
-                  <NavLink
-                    to="/dashboard/new-project"
-                    className={({ isActive }) =>
-                      isActive
-                        ? " block  py-1 px-0 font-semibold"
-                        : " block py-1 px-0 font-normal transition duration-200  hover:text-contrast"
-                    }
-                    onClick={handleCloseSidebar}
-                  >
-                    Start A New Porject
                   </NavLink>
                 </li>
                 <li className="pt-2 my-2 border-t border-dashed border-[#b1bcc8]">

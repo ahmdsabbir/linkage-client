@@ -94,18 +94,18 @@ const AllProjects = () => {
     };
   }, []);
 
-  // start a new projecct handler
-  const handleNewPorject = () => {
+  // start a new project handler
+  const handleNewProject = () => {
     navigate("new-project");
   };
 
-  // delete projct handler
+  // delete project handler
   const handleDeleteProject = async (Id) => {
     const findProject = await projects.find((project) => project.id == Id);
 
     try {
       await dispatch({ type: "loading", payload: true });
-      const response = await API.delete(`project/${findProject.id}`, {
+      const response = await API.delete(`api/project/${findProject.id}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
@@ -148,10 +148,13 @@ const AllProjects = () => {
             <h2 className="text-5xl font-bold mb-4">All Projects</h2>
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
               {projects?.length <= 0 ? (
-                <div>
+                <div className="grid place-items-center h-full">
                   <p>No Projects Yet</p>
-                  <button className="btn" onClick={handleNewPorject}>
-                    Start A New Porject
+                  <button
+                    className="btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize"
+                    onClick={handleNewProject}
+                  >
+                    Create a Project
                   </button>
                 </div>
               ) : (
@@ -185,7 +188,7 @@ const AllProjects = () => {
         </>
       )}
       {/* 
-      <button className="btn" onClick={() => refresh()}>
+      <button className="btn capitalize" onClick={() => refresh()}>
         Refresh Token
       </button> */}
     </>

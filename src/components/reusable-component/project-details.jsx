@@ -18,39 +18,39 @@ const ProjectDetails = () => {
         <div className="flex flex-col  gap-4 ">
           {selectedProject?.name && (
             <div className="flex gap-2 md:gap-4 font-medium">
-              <h1 className="text-xl">Project Title:</h1>
+              <h1 className="text-xl">Project name:</h1>
               <p className="text-lg">{selectedProject.name}</p>
             </div>
           )}
 
           {selectedProject?.domain && (
             <div className="flex flex-col sm:flex-row gap-2 md:gap-4 ">
-              <span className="font-medium">Project Domain:</span>
+              <span className="font-medium">Domain:</span>
               <span className="">{selectedProject.domain}</span>
             </div>
           )}
 
           {postTitleUrlTerm?.source_title && (
             <div className="flex flex-col sm:flex-row gap-2 md:gap-4 ">
-              <span className="font-medium">Source Title:</span>
+              <span className="font-medium">Target Title:</span>
               <span className="">{postTitleUrlTerm?.source_title}</span>
             </div>
           )}
           {postTitleUrlTerm?.source_url && (
             <div className="flex flex-col sm:flex-row gap-2 md:gap-4 ">
-              <span className="font-medium">Source URL:</span>
+              <span className="font-medium">Target URL:</span>
               <span className="">{postTitleUrlTerm?.source_url}</span>
             </div>
           )}
           {choosenTitleUrl?.title && (
             <div className="flex flex-col sm:flex-row gap-2 md:gap-4">
-              <span className="font-medium">Target Title:</span>
+              <span className="font-medium">Source Title:</span>
               <span className="">{choosenTitleUrl?.title}</span>
             </div>
           )}
           {choosenTitleUrl?.url && (
             <div className="flex flex-col sm:flex-row gap-2 md:gap-4 ">
-              <span className="font-medium">Target URL:</span>
+              <span className="font-medium">Source URL:</span>
               <span className="">{choosenTitleUrl?.url}</span>
             </div>
           )}

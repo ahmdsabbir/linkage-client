@@ -108,7 +108,7 @@ const Register = () => {
               />
 
               <div className="form-control mt-6">
-                <button className="btn bg-contrast border-none text-white hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+                <button className="btn btn-primary  border-none  capitalize">
                   Register
                 </button>
               </div>

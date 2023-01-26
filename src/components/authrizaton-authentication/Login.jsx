@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import API from "../../api/api-config";
@@ -26,13 +26,16 @@ const Login = () => {
 
   // Auth provider Context
   const { auth, setAuth } = useAuthState();
-  const [plus, setPlus] = useState(null);
+
+  /*   const [plus, setPlus] = useState(null);
   const handleError = () => {
     setPlus((prev) => prev + 1);
   };
+
+  // error test
   function Bomb() {
-    throw new Error("kaboom");
-  }
+    throw new Error("kaboom, Oh my god. some problem has happened");
+  } */
 
   // App state provider Context
   const {
@@ -79,7 +82,8 @@ const Login = () => {
       }
     } catch (error) {
       dispatch({ type: "loading", payload: false });
-      if (error.response.status == 401) {
+
+      if (error?.response?.data?.msg) {
         toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {
         toast.error("something went wrong");
@@ -94,10 +98,10 @@ const Login = () => {
     return (
       <>
         <div className="grid place-items-center h-screen ">
-          <button className="btn" onClick={handleError}>
+          {/*  <button className="btn capitalize" onClick={handleError}>
             {plus}
           </button>
-          <div>{plus == 2 ? <Bomb /> : "working fine"}</div>
+          <div>{plus == 2 ? <Bomb /> : "working fine"}</div> */}
           <div className=" max-w-3xl rounded shadow-sm w-full">
             <div className="card-body">
               <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
@@ -128,7 +132,7 @@ const Login = () => {
                 </label>
 
                 <div className="form-control   mt-6">
-                  <button className="btn bg-contrast w-full md:w-auto  text-white border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
+                  <button className="btn btn-primary  w-full md:w-auto   border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
                     Login
                   </button>
                 </div>
