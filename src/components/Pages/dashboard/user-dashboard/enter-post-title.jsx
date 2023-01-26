@@ -53,7 +53,7 @@ const EnterPostTitle = () => {
           {/* button */}
           <button
             type="submit"
-            className="btn w-full sm:w-auto bg-accent-dark text-white rounded px-6 border-none sm:ml-[135px] capitalize"
+            className="btn btn-primary w-full sm:w-auto bg-accent-dark  rounded px-6 border-none sm:ml-[135px] capitalize"
           >
             submit
           </button>

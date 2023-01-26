@@ -33,7 +33,7 @@ const SuggestionsCard = ({ title, url, id, pushUp }) => {
         <div className="card-actions mt-4" onClick={handleChosenTitleUrl}>
           <a
             href={`#${pushUp}`}
-            className="btn bg-accent-dark w-full sm:w-auto text-white capitalize border-none rounded"
+            className="btn btn-primary  w-full sm:w-auto  capitalize border-none rounded"
           >
             choose
           </a>

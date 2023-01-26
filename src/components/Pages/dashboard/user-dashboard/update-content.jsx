@@ -105,9 +105,9 @@ const UpdateContent = () => {
           toast.error(error?.response?.data?.msg);
         }
       } else if (error?.message == "Network Error") {
-        toast("something went wrong");
+        toast.error("something went wrong");
       } else {
-        toast(error.message);
+        toast.error(error.message);
       }
     }
   };
@@ -116,6 +116,11 @@ const UpdateContent = () => {
     const tagText = newData.find(
       (item) => item.generatedParagraph === generatedParagraph
     );
+
+    if (!tagText) {
+      toast.error("You did not chose any post title or url");
+      return;
+    }
 
     const postData = JSON.stringify({
       domain: selectedProject.domain,
@@ -173,7 +178,7 @@ const UpdateContent = () => {
                   <div
                     className={`${
                       heading.name == "h3" && "ml-2 sm:ml-4 md:ml-8 p-4 mb-4"
-                    } text-accent-dark mb-2 rounded border border-accent-dark/20 p-4 bg-accent-dark/5`}
+                    } mb-2 rounded border border-accent-dark/20 p-4 bg-accent-dark/5`}
                   >
                     <h2 className=" font-semibold mb-2 ">
                       {heading?.generatedHeading}
@@ -186,16 +191,14 @@ const UpdateContent = () => {
                   <div
                     className={` p-4 mb-4 border rounded-md flex flex-col md:flex-row gap-4 items-center md:items-start  justify-between border-accent-dark/20 `}
                   >
-                    <p className="flex-inital font-medium  text-accent-dark ">
-                      {heading.text}
-                    </p>
+                    <p className="flex-inital font-medium   ">{heading.text}</p>
 
                     <div
                       className="tooltip hover:tooltip-open tooltip-right"
                       data-tip="Insert the generated section above this <h2> in your original post"
                     >
                       <button
-                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border-accent-dark/20 text-white rounded-full shadow-sm col-start-12 capitalize"
+                        className="flex-none  w-full sm:w-auto px-4 py-2  border  rounded-full shadow-sm col-start-12"
                         onClick={() => handleAbovePost(heading.text)}
                       >
                         <svg
@@ -216,17 +219,15 @@ const UpdateContent = () => {
                     </div>
                   </div>
                 ) : (
-                  <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border border-accent-dark/20 rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
-                    <p className="flex-inital  text-accent-dark font-medium">
-                      {heading.text}
-                    </p>
+                  <div className="ml-2 sm:ml-4 md:ml-8 p-4 mb-4 border  rounded-md flex flex-col sm:flex-row gap-4 items-center justify-between">
+                    <p className="flex-initial   font-medium">{heading.text}</p>
 
                     <div
                       className="tooltip hover:tooltip-open tooltip-right"
                       data-tip="Insert the generated section above this <h3> in your original post"
                     >
                       <button
-                        className="flex-none  w-full sm:w-auto px-4 py-2 font-semibold text-sm  border text-white rounded-full shadow-sm col-start-12 capitalize"
+                        className="flex-none  w-full sm:w-auto px-4 py-2  border  rounded-full shadow-sm col-start-12 "
                         onClick={() => handleAbovePost(heading.text)}
                       >
                         <svg
@@ -256,21 +257,21 @@ const UpdateContent = () => {
         <div className="lg:col-start-2 relative">
           <div className="sticky top-0">
             <div className="mb-4">
-              <h2 className="text-3xl text-accent-dark">Generated Section</h2>
+              <h2 className="text-3xl ">Generated Section</h2>
 
               <p className="text-slate-400">
                 Following Section was Generated. Insert It Wherever You’d like
                 on Your Post
               </p>
             </div>
-            <div className="rounded border border-accent-dark/20 text-accent-dark bg-accent-dark/5 mb-4 p-4 ">
+            <div className="rounded border   mb-4 p-4 ">
               <h2 className="font-semibold mb-4">{generatedHeading}</h2>
               <hr className=" mb-2"></hr>
               {generatedParagraph && generatedParagraph}
             </div>
             <div className=" self-start flex-1 order-1 md:order-1">
               <button
-                className="btn w-full sm:w-auto bg-contrast border-none rounded text-white capitalize"
+                className="btn btn-primary w-full sm:w-auto bg-contrast border-none rounded capitalize font-bold text-[#4E5D78]"
                 onClick={handleUpdateToTheSite}
               >
                 Update post

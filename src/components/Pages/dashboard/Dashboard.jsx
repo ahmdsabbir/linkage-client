@@ -163,7 +163,7 @@ const Dashboard = () => {
             </nav>
 
             <button
-              className=" btn bg-contrast text-white rounded  border-none hover:bg-contrast-dark focus:bg-slate-600 mt-auto capitalize"
+              className=" btn btn-primary rounded  border-none  mt-auto capitalize"
               onClick={handleLogout}
             >
               Logout
