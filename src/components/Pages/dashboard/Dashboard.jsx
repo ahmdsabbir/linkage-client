@@ -55,8 +55,8 @@ const Dashboard = () => {
               data-dev-hint="main-navigation-for-regular-user "
             >
               <div className=" mb-6">
-                <div className="text-sm  font-bold ">{"< linkage.io />"}</div>
-                <p className="text-sm font-thin ">[v .0.1]</p>
+                <div className="text-sm  font-bold ">{"< linkages.io />"}</div>
+                <p className="text-sm font-thin ">[v 0.2]</p>
                 {/*   <p className="text-sm text-slate-500">
                   All your interlinking issues solved!
                 </p> */}

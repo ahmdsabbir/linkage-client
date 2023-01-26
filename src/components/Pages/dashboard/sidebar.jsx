@@ -25,9 +25,10 @@ const Sidebar = ({
       >
         <article className="relative w-screen max-w-xs p-4 flex flex-col  overflow-y-scroll h-screen max-h-screen">
           <header className="flex items-center justify-between  font-bold text-lg h-auto">
-            <p className=" text-[#123354] hover:text-contrast mb-4">
-              Dashboard
-            </p>
+            <div className=" text-[#123354] hover:text-contrast mb-4">
+              <div className="text-sm  font-bold ">{"< linkages.io />"}</div>
+              <p className="text-sm font-thin ">[v 0.2]</p>
+            </div>
             <button className="capitalize" onClick={handleCloseSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
