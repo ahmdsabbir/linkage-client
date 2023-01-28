@@ -145,8 +145,16 @@ const Login = () => {
             </div>
           </div>
         </div>
+
+        {/* confirmation card */}
+        {/* <Stepper /> */}
+        {/* <button
+          className="btn btn-primary"
+          onClick={() => dispatch({ type: "userSteps", payload: 1 })}
+        >
+          add
+        </button> */}
       </>
-      // </div>
     );
   }
 };

@@ -17,7 +17,7 @@ const initialState = {
     newData: [],
   },
   loading: false,
-  error: "",
+  userSteps: 1,
   currentUser: {},
 };
 
@@ -96,6 +96,9 @@ const projectsReducer = (state, action) => {
         loading: false,
       };
 
+    case "userSteps": {
+      return { ...state, userSteps: state.userSteps + action.payload };
+    }
     case "loading": {
       return { ...state, loading: action.payload };
     }
@@ -120,6 +123,17 @@ const AppProvider = ({ children }) => {
     getStorageValue
   );
 
+  const clearAppState = async () => {
+    await dispatch({ type: "selectedProject", payload: {} });
+    await dispatch({ type: "postTitleUrl", payload: {} });
+    await dispatch({ type: "aiSuggestions", payload: [] });
+    await dispatch({ type: "choosenTitleUrl", payload: {} });
+    await dispatch({ type: "generatedHeading", payload: "" });
+    await dispatch({ type: "generatedParagraph", payload: "" });
+    await dispatch({ type: "updateAbove", payload: [] });
+    await dispatch({ type: "newUpdateAbove", payload: [] });
+  };
+
   // get localstorage items from localstorage
   useEffect(() => {
     localStorage.setItem("projectData", JSON.stringify(state));
@@ -131,6 +145,7 @@ const AppProvider = ({ children }) => {
       value={{
         state,
         dispatch,
+        clearAppState,
       }}
     >
       {children}

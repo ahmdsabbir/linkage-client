@@ -17,7 +17,7 @@ const AllProjects = () => {
   const {
     state: { projects, loading },
     dispatch,
-    error,
+    clearAppState,
   } = useAppState();
   const { auth, handleLogout } = useAuthState();
   const navigate = useNavigate();
@@ -27,17 +27,6 @@ const AllProjects = () => {
   const [projectId, setProjectId] = useState(null);
   const [displayConfirmationModal, setDisplayConfirmationModal] =
     useState(false);
-
-  const clearAppState = async () => {
-    await dispatch({ type: "selectedProject", payload: {} });
-    await dispatch({ type: "postTitleUrl", payload: {} });
-    await dispatch({ type: "aiSuggestions", payload: [] });
-    await dispatch({ type: "choosenTitleUrl", payload: {} });
-    await dispatch({ type: "generatedHeading", payload: "" });
-    await dispatch({ type: "generatedParagraph", payload: "" });
-    await dispatch({ type: "updateAbove", payload: [] });
-    await dispatch({ type: "newUpdateAbove", payload: [] });
-  };
 
   useEffect(() => {
     const controller = new AbortController();

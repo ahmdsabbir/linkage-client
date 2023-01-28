@@ -44,7 +44,6 @@ const Register = () => {
       password: data.password,
     });
     try {
-      await dispatch({ type: "loading" });
       dispatch({ type: "loading", payload: false });
       const response = await API.post("api/auth/register", postJsonData, {
         headers: {

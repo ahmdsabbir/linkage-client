@@ -18,7 +18,7 @@ const newPasswordSchema = z
     message: "password did not match",
   });
 
-const NewPasword = () => {
+const NewPassword = () => {
   const form = useForm({ schema: newPasswordSchema });
   const navigate = useNavigate();
   const handleSubmitNewPassword = (data) => {
@@ -52,4 +52,4 @@ const NewPasword = () => {
   );
 };
 
-export default NewPasword;
+export default NewPassword;

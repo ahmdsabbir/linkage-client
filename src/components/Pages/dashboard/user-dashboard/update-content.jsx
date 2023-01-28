@@ -27,12 +27,11 @@ const UpdateContent = () => {
     });
 
     const getData = async () => {
-      dispatch({ type: "loading" });
-      await dispatch({
+      dispatch({
         type: "updateAbove",
         payload: [],
       });
-      await dispatch({
+      dispatch({
         type: "newUpdateAbove",
         payload: [],
       });
@@ -46,8 +45,9 @@ const UpdateContent = () => {
           },
           // withCredentials: "true",
         });
+        console.log(response);
 
-        if (response?.status == 200) {
+        if (response?.status == 200 && !response?.data?.headings.length == 0) {
           await dispatch({ type: "loading", payload: false });
 
           await dispatch({
@@ -129,6 +129,7 @@ const UpdateContent = () => {
       paragraph_content: generatedParagraph,
       chosen_heading_text: tagText.text,
       chosen_heading_tag: tagText.tag,
+      chosen_heading_name: tagText.name,
     });
 
     try {

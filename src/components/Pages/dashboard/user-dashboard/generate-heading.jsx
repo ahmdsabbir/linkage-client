@@ -17,7 +17,7 @@ const GenerateHeading = ({ title }) => {
       </div>
 
       {title && (
-        <div className="card-actions">
+        <div className="card-actions p-4">
           <button
             className="btn btn-primary mt-4 w-full sm:w-auto   border-none rounded capitalize"
             onClick={() =>
