@@ -11,7 +11,6 @@ import NavigateLoginRegister from "../reusable-component/navigate-login-register
 import Spinner from "../spinner";
 
 import { toast } from "react-toastify";
-import Stepper from "../Stepper";
 
 const loginFormSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -148,13 +147,13 @@ const Login = () => {
         </div>
 
         {/* confirmation card */}
-        <Stepper />
-        <button
+        {/* <Stepper /> */}
+        {/* <button
           className="btn btn-primary"
           onClick={() => dispatch({ type: "userSteps", payload: 1 })}
         >
           add
-        </button>
+        </button> */}
       </>
     );
   }

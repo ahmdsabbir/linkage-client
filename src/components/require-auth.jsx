@@ -3,7 +3,6 @@ import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppState } from "./context/AppProvider";
 import { useAuthState } from "./context/AuthProvider";
 
-import { useBeforeUnload } from "react-router-dom";
 const RequireAuth = () => {
   const {
     auth: { token },
@@ -12,13 +11,13 @@ const RequireAuth = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  useBeforeUnload(
+  /*   useBeforeUnload(
     React.useCallback(() => {
       clearAppState();
       localStorage.removeItem("projectData");
     }, [clearAppState])
   );
-
+ */
   return token ? (
     <Outlet />
   ) : (

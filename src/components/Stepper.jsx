@@ -7,7 +7,7 @@ const Stepper = () => {
   const {
     state: { userSteps },
   } = useAppState();
-  console.log(userSteps);
+
   return (
     <ul className="steps">
       {steps.map((step, i) => (

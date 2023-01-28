@@ -45,7 +45,7 @@ const Suggestions = () => {
     try {
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
       dispatch({ type: "loading", payload: true });
-      const response = await API.post("core/suggestions", postData, {
+      const response = await API.post("api/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
           Authorization: auth.token ? `Bearer ${auth?.token}` : "",
@@ -130,7 +130,7 @@ const Suggestions = () => {
               {/* generate heading */}
               <ChosenTitleUrl />
             </div>
-            <div className="card bg-base-100 ">
+            <div className="card bg-primary/20 ">
               <GenerateHeading title={generatedHeading} />
             </div>
           </div>
