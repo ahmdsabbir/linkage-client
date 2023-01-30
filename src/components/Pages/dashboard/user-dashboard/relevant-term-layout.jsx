@@ -20,7 +20,9 @@ const RelevantTermLayout = () => {
 
   // getting data from global state context provider
   const {
-    state: { selectedProject, loading, postTitleUrlTerm },
+    state: { selectedProject, postTitleUrlTerm },
+    loading,
+    setLoading,
     dispatch,
   } = useAppState();
   // console.log(selectedProject);
@@ -41,8 +43,7 @@ const RelevantTermLayout = () => {
     try {
       await dispatch({ type: "relevantTerm", payload: data });
       // start loading process & empty error state
-      dispatch({ type: "loading", payload: true });
-
+      setLoading(true);
       // post data to the api
       const response = await API.post("api/core/suggestions", postData, {
         headers: {
@@ -53,7 +54,7 @@ const RelevantTermLayout = () => {
       });
 
       if (response?.status == 200 && !response?.data?.msg) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
@@ -62,7 +63,7 @@ const RelevantTermLayout = () => {
           `/dashboard/project-starter/${selectedProject.name.toLowerCase()}/suggestions`
         );
       } else {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.warning(
           response?.data?.msg
             ? response?.data?.msg
@@ -71,7 +72,7 @@ const RelevantTermLayout = () => {
         );
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();

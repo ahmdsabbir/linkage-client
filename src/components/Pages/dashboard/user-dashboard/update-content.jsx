@@ -13,8 +13,10 @@ const UpdateContent = () => {
       selectedProject,
       choosenTitleUrl,
       updateAbove: { oldData, newData },
-      loading,
     },
+    loading,
+    setLoading,
+
     dispatch,
   } = useAppState();
 
@@ -36,7 +38,7 @@ const UpdateContent = () => {
         payload: [],
       });
       try {
-        await dispatch({ type: "loading", payload: true });
+        setLoading(true);
 
         const response = await API.post("api/core/target-headings", postData, {
           headers: {
@@ -45,10 +47,9 @@ const UpdateContent = () => {
           },
           // withCredentials: "true",
         });
-        console.log(response);
 
         if (response?.status == 200 && !response?.data?.headings.length == 0) {
-          await dispatch({ type: "loading", payload: false });
+          setLoading(false);
 
           await dispatch({
             type: "updateAbove",
@@ -59,13 +60,15 @@ const UpdateContent = () => {
             payload: [...response?.data?.headings],
           });
         } else {
-          await dispatch({ type: "loading", payload: false });
+          setLoading(false);
+
           toast.warning(
             response?.data?.msg ? response?.data?.msg : "Something went wrong"
           );
         }
       } catch (error) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
+
         if (error?.response?.data?.msg) {
           if (error?.response?.data?.msg == "Token has expired") {
             handleLogout();
@@ -88,7 +91,8 @@ const UpdateContent = () => {
   // update the data above the heading on @{}
   const handleAbovePost = async (heading) => {
     try {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
+
       const newUpdateAbove = await oldData.map((item) =>
         item.text == heading
           ? { ...item, generatedHeading, generatedParagraph }
@@ -96,7 +100,8 @@ const UpdateContent = () => {
       );
       await dispatch({ type: "newUpdateAbove", payload: newUpdateAbove });
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
+
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();
@@ -133,7 +138,8 @@ const UpdateContent = () => {
     });
 
     try {
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
+
       const response = await API.post("api/core/update-content", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -142,11 +148,13 @@ const UpdateContent = () => {
         // withCredentials: "true",
       });
       if (response.status == 200 || response.status == 201) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
+
         toast.success(response?.data?.msg);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
+
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();
@@ -192,7 +200,9 @@ const UpdateContent = () => {
                   <div
                     className={` p-4 mb-4 border rounded-md flex flex-col md:flex-row gap-4 items-center md:items-start  justify-between border-accent-dark/20 `}
                   >
-                    <p className="flex-inital font-medium   ">{heading.text}</p>
+                    <p className="flex-initial font-medium   ">
+                      {heading.text}
+                    </p>
 
                     <div
                       className="tooltip hover:tooltip-open tooltip-right"

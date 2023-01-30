@@ -15,7 +15,9 @@ const AllProjects = () => {
   const refresh = useRefreshToken();
   // global state context provider
   const {
-    state: { projects, loading },
+    state: { projects },
+    loading,
+    setLoading,
     dispatch,
     clearAppState,
   } = useAppState();
@@ -35,7 +37,7 @@ const AllProjects = () => {
     // getting all projects if token is available
     if (auth?.token) {
       const getAllProjects = async () => {
-        await dispatch({ type: "loading", payload: true });
+        setLoading(true);
         try {
           const response = await apiConfig("api/project", {
             headers: {
@@ -53,11 +55,11 @@ const AllProjects = () => {
               payload: response?.data?.projects,
             });
           } else {
-            dispatch({ type: "loading", payload: false });
+            setLoading(false);
             toast.error(error?.response?.data?.msg);
           }
         } catch (error) {
-          dispatch({ type: "loading", payload: false });
+          setLoading(false);
 
           if (error?.response?.data?.msg) {
             if (error?.response?.data?.msg == "Token has expired") {
@@ -93,7 +95,7 @@ const AllProjects = () => {
     const findProject = await projects.find((project) => project.id == Id);
 
     try {
-      await dispatch({ type: "loading", payload: true });
+      setLoading(true);
       const response = await API.delete(`api/project/${findProject.id}`, {
         headers: {
           "Content-Type": "application/json",
@@ -101,7 +103,7 @@ const AllProjects = () => {
         },
       });
       if (response?.status == 200 && response?.data?.msg) {
-        await dispatch({ type: "loading", payload: false });
+        setLoading(false);
         await dispatch({
           type: "projectDelete",
           payload: projectId,

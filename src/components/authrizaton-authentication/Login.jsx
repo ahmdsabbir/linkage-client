@@ -38,10 +38,7 @@ const Login = () => {
   } */
 
   // App state provider Context
-  const {
-    state: { loading },
-    dispatch,
-  } = useAppState();
+  const { loading, setLoading, dispatch } = useAppState();
   // const from = location.state?.from?.pathname || "/";
   // Form custom hook
   const form = useForm({ schema: loginFormSchema });
@@ -62,7 +59,7 @@ const Login = () => {
     });
 
     try {
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
 
       const response = await API.post("api/auth/login", userData, {
         headers: {
@@ -72,7 +69,7 @@ const Login = () => {
       });
 
       if (response?.status == 200 || response?.status == 201) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
 
         const token = response?.data?.access_token;
         if (token) {
@@ -81,7 +78,7 @@ const Login = () => {
         }
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
 
       if (error?.response?.data?.msg) {
         toast.error(error?.response?.data?.msg);

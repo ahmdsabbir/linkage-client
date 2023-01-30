@@ -19,7 +19,9 @@ const projectDetailsSchema = z.object({
 const EditProjectDetails = () => {
   const { auth, handleLogout } = useAuthState();
   const {
-    state: { postTitleUrlTerm, loading },
+    state: { postTitleUrlTerm },
+    loading,
+    setLoading,
   } = useAppState();
 
   const {
@@ -45,7 +47,7 @@ const EditProjectDetails = () => {
     });
 
     try {
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
       const response = await API.post("PROJECTEditPOstWillBeHErer", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -55,15 +57,15 @@ const EditProjectDetails = () => {
       });
 
       if (response?.status == 200 || response?.status == 201) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.success(response?.data?.msg);
         // reset();
       } else {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.success(response?.data?.msg);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();

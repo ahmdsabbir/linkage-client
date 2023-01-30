@@ -1,15 +1,12 @@
 import React from "react";
-import { Navigate, Outlet, useLocation, useNavigate } from "react-router-dom";
-import { useAppState } from "./context/AppProvider";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuthState } from "./context/AuthProvider";
 
 const RequireAuth = () => {
   const {
     auth: { token },
   } = useAuthState();
-  const { clearAppState } = useAppState();
   const location = useLocation();
-  const navigate = useNavigate();
 
   /*   useBeforeUnload(
     React.useCallback(() => {
