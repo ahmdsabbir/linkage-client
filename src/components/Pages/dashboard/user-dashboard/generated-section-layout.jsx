@@ -21,8 +21,10 @@ const GeneratedSectionLayout = () => {
   const form = useForm({ schema: anchorTextSchema });
   const { auth, handleLogout } = useAuthState();
   const {
-    state: { generatedHeading, generatedParagraph, loading, postTitleUrlTerm },
+    state: { generatedHeading, generatedParagraph, postTitleUrlTerm },
     dispatch,
+    loading,
+    setLoading,
   } = useAppState();
 
   const { name } = useParams();
@@ -42,7 +44,7 @@ const GeneratedSectionLayout = () => {
         type: "generatedParagraph",
         payload: "",
       });
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
 
       const response = await API.post("api/core/paragraph", postData, {
         headers: {
@@ -53,19 +55,19 @@ const GeneratedSectionLayout = () => {
       });
 
       if (response?.status == 200 || response?.status == 201) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         await dispatch({
           type: "generatedParagraph",
           payload: response?.data?.paragraph,
         });
       } else {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.warning(
           response?.data?.msg ? response?.data?.msg : "Try another anchor text"
         );
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();

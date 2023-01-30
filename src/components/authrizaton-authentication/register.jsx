@@ -31,10 +31,7 @@ const signupFormSchema = z
 const Register = () => {
   const navigate = useNavigate();
   const form = useForm({ schema: signupFormSchema });
-  const {
-    dispatch,
-    state: { loading },
-  } = useAppState();
+  const { dispatch, loading, setLoading } = useAppState();
 
   // singup handle function
   const handleSubmitRegister = async (data) => {
@@ -44,7 +41,7 @@ const Register = () => {
       password: data.password,
     });
     try {
-      dispatch({ type: "loading", payload: false });
+      setLoading(true);
       const response = await API.post("api/auth/register", postJsonData, {
         headers: {
           "Content-Type": "application/json",
@@ -53,12 +50,12 @@ const Register = () => {
       });
 
       if (response.status == 201 || response.status == 200) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.success(response?.data?.msg);
         navigate("/verify");
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
       if (error?.response?.data?.msg) {
         toast.error(error?.response?.data?.msg);
       } else if (error?.message == "Network Error") {

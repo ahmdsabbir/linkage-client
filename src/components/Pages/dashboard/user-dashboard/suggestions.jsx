@@ -29,8 +29,9 @@ const Suggestions = () => {
       postTitleUrlTerm,
       aiSuggestions,
       generatedHeading,
-      loading,
     },
+    loading,
+    setLoading,
     dispatch,
   } = useAppState();
 
@@ -44,7 +45,7 @@ const Suggestions = () => {
 
     try {
       await dispatch({ type: "relevantTerm", payload: data.relevantTerm });
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
       const response = await API.post("api/core/suggestions", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -54,13 +55,14 @@ const Suggestions = () => {
       });
 
       if (response?.status == 200 && !response?.data?.msg) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         await dispatch({
           type: "aiSuggestions",
           payload: [...response?.data?.suggestions],
         });
       } else {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
+
         toast.warning(
           response?.data?.msg
             ? response?.data?.msg
@@ -69,7 +71,8 @@ const Suggestions = () => {
         );
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
+
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();

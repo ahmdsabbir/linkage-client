@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import React, {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
 export const AppStateContext = createContext();
 
 const initialState = {
@@ -16,7 +22,6 @@ const initialState = {
     oldData: [],
     newData: [],
   },
-  loading: false,
   userSteps: 1,
   currentUser: {},
 };
@@ -99,9 +104,6 @@ const projectsReducer = (state, action) => {
     case "userSteps": {
       return { ...state, userSteps: state.userSteps + action.payload };
     }
-    case "loading": {
-      return { ...state, loading: action.payload };
-    }
 
     default:
       return state;
@@ -123,6 +125,8 @@ const AppProvider = ({ children }) => {
     getStorageValue
   );
 
+  const [loading, setLoading] = useState(false);
+
   const clearAppState = async () => {
     await dispatch({ type: "selectedProject", payload: {} });
     await dispatch({ type: "postTitleUrl", payload: {} });
@@ -132,6 +136,7 @@ const AppProvider = ({ children }) => {
     await dispatch({ type: "generatedParagraph", payload: "" });
     await dispatch({ type: "updateAbove", payload: [] });
     await dispatch({ type: "newUpdateAbove", payload: [] });
+    setLoading(false);
   };
 
   // get localstorage items from localstorage
@@ -146,6 +151,8 @@ const AppProvider = ({ children }) => {
         state,
         dispatch,
         clearAppState,
+        loading,
+        setLoading,
       }}
     >
       {children}

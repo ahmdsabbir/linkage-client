@@ -25,10 +25,7 @@ const NewProject = () => {
   // react router dom hook
   const navigate = useNavigate();
 
-  const {
-    dispatch,
-    state: { loading },
-  } = useAppState();
+  const { dispatch, loading, setLoading } = useAppState();
 
   const handleNewProjectDetails = async (data) => {
     const postData = JSON.stringify({
@@ -38,7 +35,7 @@ const NewProject = () => {
       wp_password: data.wpAppPassword,
     });
     try {
-      dispatch({ type: "loading", payload: true });
+      setLoading(true);
       const response = await API.post("api/project", postData, {
         headers: {
           "Content-Type": "application/json",
@@ -48,14 +45,16 @@ const NewProject = () => {
       });
 
       if (response?.status == 200 || response?.status == 201) {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
         toast.success(response?.data?.msg);
       } else {
-        dispatch({ type: "loading", payload: false });
+        setLoading(false);
+
         toast.success(response?.data?.msg);
       }
     } catch (error) {
-      dispatch({ type: "loading", payload: false });
+      setLoading(false);
+
       if (error?.response?.data?.msg) {
         if (error?.response?.data?.msg == "Token has expired") {
           handleLogout();
