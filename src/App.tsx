@@ -4,8 +4,9 @@ import {
   Route,
   RouterProvider,
 } from "react-router-dom";
-import Documentation from "./documentation";
-import ErrorPage from "./error-page";
+import Documentation from "./components/documentation";
+import ErrorPage from "./components/error-page";
+import Test from "./components/test";
 import RootLayout from "./root-layout";
 
 const router = createBrowserRouter(
@@ -23,6 +24,7 @@ const App = () => {
     <div className="container mx-auto">
       <Documentation />
       <RouterProvider router={router} />
+      <Test />
     </div>
   );
 };
