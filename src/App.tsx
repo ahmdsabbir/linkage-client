@@ -7,7 +7,7 @@ import {
 import Documentation from "./components/documentation";
 import ErrorPage from "./components/error-page";
 import Test from "./components/test";
-import Home from "./pages/home";
+import Home from "./pages/home/home";
 import RootLayout from "./root-layout";
 
 const router = createBrowserRouter(

@@ -3,7 +3,7 @@ const Header = () => {
     <section className="bg-white ">
       <nav className="container mx-auto flex items-center justify-between p-6">
         <a href="http://localhost:3000/">
-          <span className="text-2xl font-bold">linkages.io</span>
+          <span className="text-2xl font-bold text-blue-600">linkages.io</span>
         </a>
         <div className="flex items-center gap-2 ">
           <div className=" flex items-center justify-between  ">
@@ -17,7 +17,7 @@ const Header = () => {
               className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400 lg:mx-8"
               href="http://localhost:3000/"
             >
-              Components
+              Features
             </a>
             <a
               className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400 lg:mx-8"
