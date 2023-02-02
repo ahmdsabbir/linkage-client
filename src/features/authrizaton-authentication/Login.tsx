@@ -1,159 +1,88 @@
-import React, { useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { z } from "zod";
-import API from "../../api/api-config";
-import { useAppState } from "../context/AppProvider";
-import { useAuthState } from "../context/AuthProvider";
-import useForm from "../hook/useForm";
-import Form from "../reusable-component/form/form";
-import { Input } from "../reusable-component/form/input-field";
-import NavigateLoginRegister from "../reusable-component/navigate-login-register";
-import Spinner from "../spinner";
-
-import { toast } from "react-toastify";
-
-const loginFormSchema = z.object({
-  email: z.string().email("Please enter a valid email address."),
-  password: z
-    .string()
-    .min(4, "Please choose a longer password")
-    .max(256, "Consider using a short password"),
-});
-
 const Login = () => {
-  // react router dom hooks
-  const navigate = useNavigate();
+  return (
+    <div>
+      <div className="text-9xl font-extrabold">Login</div>
 
-  // Auth provider Context
-  const { auth, setAuth } = useAuthState();
+      {/* login form */}
 
-  /*   const [plus, setPlus] = useState(null);
-  const handleError = () => {
-    setPlus((prev) => prev + 1);
-  };
-
-  // error test
-  function Bomb() {
-    throw new Error("kaboom, Oh my god. some problem has happened");
-  } */
-
-  // App state provider Context
-  const { loading, setLoading, dispatch } = useAppState();
-  // const from = location.state?.from?.pathname || "/";
-  // Form custom hook
-  const form = useForm({ schema: loginFormSchema });
-
-  // sending user to their dashboard if token exists
-  useEffect(() => {
-    if (auth.token) {
-      navigate("/dashboard");
-    } else {
-      navigate("/login");
-    }
-  }, [auth]);
-
-  const handleLogin = async (data) => {
-    const userData = JSON.stringify({
-      email: data.email,
-      password: data.password,
-    });
-
-    try {
-      setLoading(true);
-
-      const response = await API.post("api/auth/login", userData, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-        // withCredentials: true,
-      });
-
-      if (response?.status == 200 || response?.status == 201) {
-        setLoading(false);
-
-        const token = response?.data?.access_token;
-        if (token) {
-          await setAuth({ token });
-          localStorage.setItem("linkage_token", token);
-        }
-      }
-    } catch (error) {
-      setLoading(false);
-
-      if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
-      } else if (error?.message == "Network Error") {
-        toast.error("something went wrong");
-      } else {
-        toast.error(error.message ? error.message : "login failed");
-      }
-    }
-  };
-  if (loading) {
-    return <Spinner />;
-  } else {
-    return (
-      <>
-        <div className="grid place-items-center h-screen ">
-          {/*  <button className="btn capitalize" onClick={handleError}>
-            {plus}
-          </button>
-          <div>{plus == 2 ? <Bomb /> : "working fine"}</div> */}
-          <div className=" max-w-3xl rounded shadow-sm w-full">
-            <div className="card-body">
-              <h2 className="text-5xl font-semibold text-center mb-5 text-accent-dark">
-                Login
-              </h2>
-              <Form form={form} onSubmit={handleLogin}>
-                <Input
-                  label="Email"
-                  type="text"
-                  autoFocus={true}
-                  placeholder="email@mail.com"
-                  {...form.register("email")}
-                />
-                <Input
-                  label="password"
-                  type="password"
-                  placeholder="password"
-                  autoFocus={false}
-                  {...form.register("password")}
-                />
-                <label className="label hidden invisible">
-                  <Link
-                    to={"/reset-password"}
-                    className="label-text-alt link link-hover"
-                  >
-                    Forgot password?
-                  </Link>
-                </label>
-
-                <div className="form-control   mt-6">
-                  <button className="btn btn-primary  w-full md:w-auto   border-none hover:bg-contrast-dark focus:bg-slate-600 capitalize">
-                    Login
-                  </button>
-                </div>
-              </Form>
-              <NavigateLoginRegister
-                text="Have no account?"
-                btnLabel="Register"
-                to={"/register"}
+      <div>
+        <section className="bg-white dark:bg-gray-900">
+          <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+            <form className="w-full max-w-md">
+              <img
+                className="h-7 w-auto sm:h-8"
+                src="https://merakiui.com/images/logo.svg"
+                alt=""
               />
-            </div>
-          </div>
-        </div>
+              <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800 dark:text-white sm:text-3xl">
+                sign In
+              </h1>
+              <div className="relative mt-8 flex items-center">
+                <span className="absolute">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mx-3 h-6 w-6 text-gray-300 dark:text-gray-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="email"
+                  className="block w-full rounded-lg border bg-white py-3 px-11 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                  placeholder="Email address"
+                />
+              </div>
+              <div className="relative mt-4 flex items-center">
+                <span className="absolute">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="mx-3 h-6 w-6 text-gray-300 dark:text-gray-500"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    strokeWidth={2}
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                    />
+                  </svg>
+                </span>
+                <input
+                  type="password"
+                  className="block w-full rounded-lg border bg-white px-10 py-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                  placeholder="Password"
+                />
+              </div>
+              <div className="mt-6">
+                <button className="w-full transform rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                  Sign in
+                </button>
 
-        {/* confirmation card */}
-        {/* <Stepper /> */}
-        {/* <button
-          className="btn btn-primary"
-          onClick={() => dispatch({ type: "userSteps", payload: 1 })}
-        >
-          add
-        </button> */}
-      </>
-    );
-  }
+                <div className="mt-6 text-center ">
+                  <a
+                    href="http://localhost:3000/"
+                    className="text-sm text-blue-500 hover:underline dark:text-blue-400"
+                  >
+                    Don’t have an account yet? Sign up
+                  </a>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  );
 };
 
 export default Login;
