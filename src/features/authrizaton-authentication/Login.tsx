@@ -1,8 +1,6 @@
 const Login = () => {
   return (
     <div>
-      <div className="text-9xl font-extrabold">Login</div>
-
       {/* login form */}
 
       <div>
