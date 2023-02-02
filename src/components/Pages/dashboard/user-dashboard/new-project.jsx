@@ -1,0 +1,126 @@
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
+import { z } from "zod";
+import API from "../../../../api/api-config";
+import { useAppState } from "../../../context/AppProvider";
+import { useAuthState } from "../../../context/AuthProvider";
+import useForm from "../../../hook/useForm";
+import Form from "../../../reusable-component/form/form";
+import { Input } from "../../../reusable-component/form/input-field";
+import Spinner from "../../../spinner";
+
+const newProjectStartSchema = z.object({
+  projectName: z.string().min(5, "please input more than 5 characters"),
+  domain: z.string().min(5, "please input more than 5 characters"),
+  wpAppPassword: z.string().min(6, "please input more than 5 characters"),
+  wpUsername: z.string().min(4, "please input more than 5 characters"),
+});
+
+const NewProject = () => {
+  const form = useForm({ schema: newProjectStartSchema });
+  // const { reset } = useForm();
+  const { auth, handleLogout } = useAuthState();
+  // react router dom hook
+  const navigate = useNavigate();
+
+  const { dispatch, loading, setLoading } = useAppState();
+
+  const handleNewProjectDetails = async (data) => {
+    const postData = JSON.stringify({
+      name: data.projectName,
+      domain: data.domain,
+      wp_username: data.wpUsername,
+      wp_password: data.wpAppPassword,
+    });
+    try {
+      setLoading(true);
+      const response = await API.post("api/project", postData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+        // withCredentials: true,
+      });
+
+      if (response?.status == 200 || response?.status == 201) {
+        setLoading(false);
+        toast.success(response?.data?.msg);
+      } else {
+        setLoading(false);
+
+        toast.success(response?.data?.msg);
+      }
+    } catch (error) {
+      setLoading(false);
+
+      if (error?.response?.data?.msg) {
+        if (error?.response?.data?.msg == "Token has expired") {
+          handleLogout();
+          toast.error(error?.response?.data?.msg);
+        } else {
+          toast.error(error?.response?.data?.msg);
+        }
+      } else if (error?.message == "Network Error") {
+        toast("something went wrong");
+      } else {
+        toast(error.message);
+      }
+    }
+  };
+
+  if (loading) {
+    return <Spinner />;
+  } else {
+    return (
+      <div className="px-6">
+        <Form form={form} onSubmit={handleNewProjectDetails}>
+          <Input
+            label="Project Name"
+            type="text"
+            placeholder="Project Name"
+            autoFocus
+            {...form.register("projectName")}
+            className="flex flex-col md:flex-row "
+            minwidth={"min-w-[143px]"}
+          />
+          <Input
+            label="Domain"
+            type="text"
+            placeholder="domain url..."
+            {...form.register("domain")}
+            className="flex flex-col md:flex-row"
+            minwidth={"min-w-[143px]"}
+          />
+          <Input
+            label="WP Username"
+            type="text"
+            placeholder="wpUsername"
+            {...form.register("wpUsername")}
+            className="flex flex-col md:flex-row"
+            minwidth={"min-w-[143px]"}
+          />
+          <Input
+            label="WP App. Password"
+            type="text"
+            placeholder="WP App. Password"
+            {...form.register("wpAppPassword")}
+            className="flex flex-col md:flex-row"
+            minwidth={"min-w-[143px]"}
+          />
+
+          <div className="form-control md:flex-row mt-4 md:ml-[166px]">
+            <button className="btn btn-primary   rounded capitalize">
+              Create Project
+            </button>
+          </div>
+        </Form>
+
+        {/* <button onClick={() => navigate("/dashboard")}>Got All projects</button> */}
+      </div>
+    );
+  }
+};
+
+export default NewProject;
