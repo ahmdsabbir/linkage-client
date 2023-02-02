@@ -4,5 +4,6 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [],
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call
+  plugins: [require("@tailwindcss/typography")],
 };
