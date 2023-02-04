@@ -1,4 +1,4 @@
-const Documentation = () => {
+const TestingCard = () => {
   return (
     <div className="max-w-2xl overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
       <img
@@ -53,4 +53,4 @@ const Documentation = () => {
   );
 };
 
-export default Documentation;
+export default TestingCard;
