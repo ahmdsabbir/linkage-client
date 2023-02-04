@@ -33,10 +33,7 @@ const Header = () => {
             </a>
           </div>
 
-          <a
-            className="mt-4 block rounded-lg bg-blue-600 px-5 py-2 text-center text-sm capitalize text-white hover:bg-blue-500 lg:mt-0 lg:w-auto"
-            href="http://localhost:3000/"
-          >
+          <a className="btn-primary btn" href="http://localhost:3000/">
             Get started
           </a>
         </div>
@@ -48,9 +45,7 @@ const Header = () => {
           </h1>
           Solutions to all of your interlinking problems in one place
           <p className="mt-6 text-gray-500 dark:text-gray-300"></p>
-          <button className="mt-6 rounded-lg bg-blue-600 px-5 py-2 text-center text-sm font-medium capitalize leading-5 text-white hover:bg-blue-500 focus:outline-none lg:mx-0 lg:w-auto">
-            Explore for more
-          </button>
+          <button className="btn-primary btn mt-6">Explore for more</button>
           {/* <p className="mt-3 text-sm text-gray-400 ">No credit card required</p> */}
         </div>
         <div className="mt-10 flex justify-center">
