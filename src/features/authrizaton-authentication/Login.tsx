@@ -11,21 +11,21 @@ const Login = () => {
             alt=""
           />
 
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800 dark:text-white sm:text-3xl">
+          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
             sign In
           </h1>
           <Input
             type={"text"}
             placeholder={"Email address"}
-            svg={
+            svgIcon={
               <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mx-3 h-6 w-6 text-gray-300 "
+                  className="mx-3 h-6 w-6 text-gray-700 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                 >
                   <path
                     strokeLinecap="round"
@@ -39,15 +39,15 @@ const Login = () => {
           <Input
             type={"password"}
             placeholder={"password here"}
-            svg={
+            svgIcon={
               <span className="absolute">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="mx-3 h-6 w-6 text-gray-300 "
+                  className="mx-3 h-6 w-6 text-gray-700 "
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
-                  strokeWidth={2}
+                  strokeWidth={1.5}
                 >
                   <path
                     strokeLinecap="round"
@@ -60,7 +60,7 @@ const Login = () => {
           />
 
           <div className="mt-6">
-            <button className="w-full transform rounded bg-dodger-blue-500 px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+            <button className="w-full transform rounded bg-primary px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
               Sign in
             </button>
 

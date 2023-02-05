@@ -1,19 +1,47 @@
-interface InputPropsFaces {
+interface TextFieldProps {
+  id?: string;
+  label?: string;
+  infoText?: string;
   type: string;
   placeholder: string;
-  svg: JSX.Element;
+  error?: string;
+  svgIcon?: JSX.Element;
+  //   inputProps?: unknown;
 }
 
-const Input = ({ type, placeholder, svg }: InputPropsFaces) => {
+const Input = ({
+  id,
+  label,
+  infoText,
+  svgIcon,
+  type,
+  placeholder,
+}: TextFieldProps) => {
   return (
-    <div className="relative mt-6 flex items-center">
-      {svg && svg}
-      <input
-        type={type}
-        className="block w-full rounded border bg-primary/5 py-3 px-11 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-        placeholder={placeholder}
-      />
-    </div>
+    <>
+      {label && (
+        <label htmlFor={id} className="label flex-col items-baseline">
+          <span className="label-text text-base font-medium text-gray-700">
+            {label}
+          </span>
+          {infoText && (
+            <span className="font-base label-text text-base text-gray-400">
+              {infoText}
+            </span>
+          )}
+        </label>
+      )}
+      <div className="relative mt-2 flex items-center ">
+        {svgIcon && svgIcon}
+        <input
+          type={type}
+          className={`block w-full rounded border bg-primary/5 py-3 ${
+            svgIcon ? "px-11" : "px-5"
+          }  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+          placeholder={placeholder}
+        />
+      </div>
+    </>
   );
 };
 
