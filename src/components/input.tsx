@@ -36,7 +36,7 @@ const Input = ({
         {svgIcon && svgIcon}
         <input
           type={type}
-          className={`block w-full rounded border bg-primary/5 py-3 ${
+          className={`block w-full rounded  bg-primary/5 py-3 ${
             svgIcon ? "px-11" : "px-5"
           }  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
           placeholder={placeholder}

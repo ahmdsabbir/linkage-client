@@ -1,9 +1,6 @@
 import HeadingOrParagraph from "./heading-or-paragraph";
 
-interface GeneratedHeading {
-  generatedHeading: string;
-}
-const GeneratedHeading = ({ generatedHeading }: GeneratedHeading) => {
+const GeneratedHeading = () => {
   return (
     <>
       <HeadingOrParagraph
