@@ -1,3 +1,4 @@
+import ChosenTitleUrl from "../../components/chosenTitleUrl";
 import RelevantTerm from "../../components/relevant-term";
 import Suggestions from "../../components/suggestions";
 import TargetTitleUrl from "../../components/target-title-url";
@@ -11,6 +12,7 @@ const SinglePage = () => {
       <TargetTitleUrl />
       <RelevantTerm />
       <Suggestions />
+      <ChosenTitleUrl />
     </div>
   );
 };

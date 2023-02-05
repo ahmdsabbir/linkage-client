@@ -6,6 +6,7 @@ interface TextFieldProps {
   placeholder: string;
   error?: string;
   svgIcon?: JSX.Element;
+  autofocus?: boolean;
   //   inputProps?: unknown;
 }
 
