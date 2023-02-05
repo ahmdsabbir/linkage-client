@@ -45,6 +45,10 @@ const ChosenTitleUrl = () => {
             />
           </div>
         </div>
+        {/* button */}
+        <div className="mt-6">
+          <button className="btn-primary btn ">Generate Heading</button>
+        </div>
       </div>
     </div>
   );
