@@ -60,9 +60,7 @@ const Login = () => {
           />
 
           <div className="mt-6">
-            <button className="w-full transform rounded bg-primary px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-              Sign in
-            </button>
+            <button className="btn-primary btn w-full">Sign in</button>
 
             <div className="mt-6 text-center ">
               <a

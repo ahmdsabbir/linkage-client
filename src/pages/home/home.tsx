@@ -3,6 +3,7 @@ import Login from "../../features/authrizaton-authentication/Login";
 import Register from "../../features/authrizaton-authentication/register";
 import CenterContent from "./center-content";
 import ComingSoon from "./coming-soon";
+import SinglePage from "./dashboard/single-page";
 import Features from "./features";
 import Header from "./header";
 import SideImage from "./side-image";
@@ -10,6 +11,7 @@ import SideImage from "./side-image";
 const Home = () => {
   return (
     <>
+      <SinglePage />
       <Input
         id={"relevantTerm"}
         label={"Relevant Term"}
