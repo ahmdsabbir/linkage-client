@@ -1,4 +1,5 @@
-import TargetTitleUrl from "../../../components/target-title-url";
+import RelevantTerm from "../../components/relevant-term";
+import TargetTitleUrl from "../../components/target-title-url";
 
 const SinglePage = () => {
   return (
@@ -7,6 +8,7 @@ const SinglePage = () => {
         Single page post for user&rsquo;s dashboard
       </h2>
       <TargetTitleUrl />
+      <RelevantTerm />
     </div>
   );
 };
