@@ -1,4 +1,5 @@
 import RelevantTerm from "../../components/relevant-term";
+import Suggestions from "../../components/suggestions";
 import TargetTitleUrl from "../../components/target-title-url";
 
 const SinglePage = () => {
@@ -9,6 +10,7 @@ const SinglePage = () => {
       </h2>
       <TargetTitleUrl />
       <RelevantTerm />
+      <Suggestions />
     </div>
   );
 };
