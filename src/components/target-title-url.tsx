@@ -22,20 +22,8 @@ const TargetTitleUrl = () => {
             placeholder={"Target URL"}
           />
 
-          <div className="mt-6">
-            <button className="w-full transform rounded bg-primary px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-              Sign in
-            </button>
-            <button className="btn-primary btn">Sign in</button>
-
-            <div className="mt-6 text-center ">
-              <a
-                href="http://localhost:3000/"
-                className="text-sm text-dodger-blue-500 hover:underline"
-              >
-                Don’t have an account yet? Sign up
-              </a>
-            </div>
+          <div className="mt-4">
+            <button className="btn-primary btn">Next</button>
           </div>
         </form>
       </div>
