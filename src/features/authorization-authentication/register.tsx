@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Input from "../../components/input";
 
 const Register = () => {
@@ -17,7 +18,7 @@ const Register = () => {
               href="http://localhost:3000/"
               className="w-1/3 border-b-2 border-blue-500 pb-4 text-center font-medium capitalize text-gray-800 dark:border-blue-400 dark:text-white"
             >
-              sign up
+              Register
             </a>
           </div>
 
@@ -113,16 +114,14 @@ const Register = () => {
           />
 
           <div className="mt-6">
-            <button className="w-full transform rounded-lg bg-primary px-6 py-3 text-sm font-medium capitalize tracking-wide text-white transition-colors duration-300 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
-              Sign Up
-            </button>
+            <button className="btn-primary btn w-full">Register</button>
             <div className="mt-6 text-center ">
-              <a
-                href="http://localhost:3000/"
+              <Link
+                to={"/login"}
                 className="text-sm text-blue-500 hover:underline dark:text-blue-400"
               >
-                Already have an account?
-              </a>
+                Already have an account? Log In
+              </Link>
             </div>
           </div>
         </form>
