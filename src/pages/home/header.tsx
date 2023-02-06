@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Header = () => {
   return (
     <section className="relative bg-white">
@@ -26,9 +28,9 @@ const Header = () => {
           </div>
         </div>
 
-        <a className="btn-primary btn mr-2 " href="http://localhost:3000/">
-          Get started
-        </a>
+        <Link className="btn-primary btn mr-2 font-semibold" to={"/login"}>
+          Log In
+        </Link>
       </nav>
       <div className="container mx-auto px-6 py-16 text-center">
         <div className="mx-auto max-w-lg">

@@ -1,5 +1,7 @@
+import { Outlet } from "react-router-dom";
+
 const RootLayout = () => {
-  return <div className="text-5xl font-bold"></div>;
+  return <Outlet />;
 };
 
 export default RootLayout;
