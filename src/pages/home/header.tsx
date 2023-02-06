@@ -35,10 +35,20 @@ const Header = () => {
           <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">
             AI powered interlinking
           </h1>
-          Solutions to all of your interlinking problems in one place
-          <p className="mt-6 text-gray-500 dark:text-gray-300"></p>
+          <span className="text-gray-500">
+            Solutions to all of your interlinking problems in one place
+          </span>
+          <p className="mt-6 text-gray-500 "></p>
           <button className="btn-primary btn mt-6">Explore for more</button>
           {/* <p className="mt-3 text-sm text-gray-400 ">No credit card required</p> */}
+          <h1 className="text-center text-5xl font-extrabold lg:text-7xl 2xl:text-8xl">
+            <span className="bg-gradient-to-br from-teal-500 via-indigo-500 to-sky-500 bg-clip-text text-transparent dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500">
+              Alpha
+            </span>
+            <span className="bg-gradient-to-tr from-blue-500 via-pink-500 to-red-500 bg-clip-text text-transparent dark:from-sky-300 dark:via-pink-300 dark:to-red-500">
+              Version
+            </span>
+          </h1>
         </div>
         <div className="mt-10 flex justify-center">
           <img

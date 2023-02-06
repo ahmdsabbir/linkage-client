@@ -1,8 +1,8 @@
 const SideImage = () => {
   return (
     <div className="lg:flex">
-      <div className="flex w-full items-center justify-center px-6 py-8 lg:h-[32rem] lg:w-1/2">
-        <div className="max-w-xl">
+      <div className="order-2 flex w-full items-center justify-center px-6 py-8 lg:h-[32rem] lg:w-1/2">
+        <div className=" max-w-xl">
           <h2 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
             Build Your New{" "}
             <span className="text-blue-600 dark:text-blue-400">Idea</span>
@@ -28,7 +28,7 @@ const SideImage = () => {
           </div>
         </div>
       </div>
-      <div className="h-64 w-full lg:h-auto lg:w-1/2">
+      <div className="order-1 h-64 w-full lg:h-auto lg:w-1/2">
         <div
           className="h-full w-full bg-cover"
           style={{
