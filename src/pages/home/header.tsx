@@ -2,9 +2,29 @@ const Header = () => {
   return (
     <section className="bg-white ">
       <nav className="container mx-auto flex items-center justify-between p-6">
-        <a href="http://localhost:3000/">
-          <span className="text-2xl font-bold text-blue-600">linkages.io</span>
-        </a>
+        <div className="flex flex-row items-center">
+          <div className="h-10 w-10 p-2">
+            <button className="mr-1 ">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth="1.5"
+                stroke="currentColor"
+                className="h-6 w-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+                />
+              </svg>
+            </button>
+          </div>
+          <div className="flex h-5 w-[90px] items-center justify-center py-[18px] pl-4 pr-[14px]">
+            <p className="text-sm font-bold text-blue-600">linkages</p>
+          </div>
+        </div>
         <div className="flex items-center gap-2 ">
           <div className=" flex items-center justify-between  ">
             <a
