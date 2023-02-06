@@ -1,6 +1,6 @@
 const Header = () => {
   return (
-    <section className="bg-white ">
+    <section className="relative bg-white">
       <nav className="container mx-auto  flex items-center justify-between p-6">
         <div className="flex flex-row items-center">
           <div className="h-10 w-10 p-2">
@@ -50,7 +50,14 @@ const Header = () => {
       </div>
 
       {/* sidebar */}
-      <section className="absolute inset-y-0 left-0 w-60 py-28 px-0  "></section>
+      {/* <section className="absolute inset-y-0 left-0 w-60 bg-gray-600 py-28  px-0 text-white">
+        <div
+          className="flex-column z-1 visibility -bottom-128 fixed inset-x-0 -top-28 flex h-full 
+        "
+        >
+          <h1>text</h1>
+        </div>
+      </section> */}
     </section>
   );
 };
