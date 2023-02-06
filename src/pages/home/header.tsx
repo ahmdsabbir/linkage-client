@@ -1,7 +1,7 @@
 const Header = () => {
   return (
     <section className="bg-white ">
-      <nav className="container mx-auto flex items-center justify-between p-6">
+      <nav className="container mx-auto  flex items-center justify-between p-6">
         <div className="flex flex-row items-center">
           <div className="h-10 w-10 p-2">
             <button className="mr-1 ">
@@ -25,38 +25,10 @@ const Header = () => {
             <p className="text-sm font-bold text-blue-600">linkages</p>
           </div>
         </div>
-        <div className="flex items-center gap-2 ">
-          <div className=" flex items-center justify-between  ">
-            <a
-              className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500  dark:hover:text-blue-400 lg:mx-8"
-              href="http://localhost:3000/"
-            >
-              Home
-            </a>
-            <a
-              className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400 lg:mx-8"
-              href="http://localhost:3000/"
-            >
-              Features
-            </a>
-            <a
-              className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400 lg:mx-8"
-              href="http://localhost:3000/"
-            >
-              Pricing
-            </a>
-            <a
-              className="transform text-gray-700 transition-colors duration-300 hover:text-blue-500 dark:hover:text-blue-400 lg:mx-8"
-              href="http://localhost:3000/"
-            >
-              Contact
-            </a>
-          </div>
 
-          <a className="btn-primary btn" href="http://localhost:3000/">
-            Get started
-          </a>
-        </div>
+        <a className="btn-primary btn mr-2 " href="http://localhost:3000/">
+          Get started
+        </a>
       </nav>
       <div className="container mx-auto px-6 py-16 text-center">
         <div className="mx-auto max-w-lg">
