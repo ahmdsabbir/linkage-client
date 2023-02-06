@@ -4,7 +4,7 @@ const ArticleHeadingCard = () => {
       <div className=" max-w-xl  rounded border border-primary/25  bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
         <div className="relative flex items-center justify-between  p-6">
           {/* card will have h3 and also h2. H3 will have left margin  */}
-          <h2 className=" mr-4  text-lg text-gray-400">
+          <h2 className=" mr-4  text-lg ">
             AI Generated Relevant Paragraph. So, given a user id, this method
             creates and returns a token from the payload and the secret key set
             in the config.py file.
