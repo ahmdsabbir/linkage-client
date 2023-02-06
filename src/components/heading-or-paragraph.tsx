@@ -24,14 +24,14 @@ const HeadingOrParagraph = ({
                 : "use a section helper text"}
             </p>
           </header>
-          <body>
+          <div>
             {generatedHeading && (
               <p className=" text-xl font-medium text-slate-700">
                 {generatedHeading}
               </p>
             )}
             {generateParagraph && (
-              <p className=" text-xl  text-gray-400">
+              <div className=" text-xl  text-gray-400">
                 <p>
                   AI Generated Relevant Paragraph. So, given a user id, this
                   method creates and returns a token from the payload and the
@@ -40,9 +40,9 @@ const HeadingOrParagraph = ({
                   The payload is where we add metadata about the token and
                   information about the user. This info is often referred to as
                 </p>
-              </p>
+              </div>
             )}
-          </body>
+          </div>
         </div>
       </div>
     </div>
