@@ -43,7 +43,7 @@ ${
             <nav className="-mx-3 flex-1 space-y-3 ">
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-800 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700  "
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -103,7 +103,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="#https://magic.reactjs.net/htmltojsx.htm"
+                href="# http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +168,7 @@ ${
               </a>
               <a
                 className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="https://magic.reactjs.net/htmltojsx.htm"
+                href=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -209,7 +209,7 @@ ${
               </div>
               <div className="mt-6 flex items-center justify-between">
                 <a
-                  href="https://magic.reactjs.net/htmltojsx.htm"
+                  href=" http://127.0.0.1:3000/"
                   className="flex items-center gap-x-2"
                 >
                   <img
@@ -222,7 +222,7 @@ ${
                   </span>
                 </a>
                 <a
-                  href="https://magic.reactjs.net/htmltojsx.htm"
+                  href=" http://127.0.0.1:3000/"
                   className="rotate-180 text-gray-500 transition-colors duration-200 hover:text-blue-500 rtl:rotate-0 dark:text-gray-400 dark:hover:text-blue-400"
                 >
                   <svg

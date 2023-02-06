@@ -7,12 +7,10 @@ import Features from "./features";
 import Header from "./header";
 import SideImage from "./side-image";
 import Sidebar from "./sidebar";
-import SidebarTest from "./sidebar-mix";
 
 const Home = () => {
   return (
     <>
-      <SidebarTest />
       <Sidebar />
       <SinglePage />
 
