@@ -48,6 +48,9 @@ const Header = () => {
           />
         </div>
       </div>
+
+      {/* sidebar */}
+      <section className="absolute inset-y-0 left-0 w-60 py-28 px-0  "></section>
     </section>
   );
 };
