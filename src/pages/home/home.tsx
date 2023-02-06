@@ -13,7 +13,6 @@ const Home = () => {
     <>
       <Sidebar />
       <SinglePage />
-
       <Login />
       <Register />
       <Header />

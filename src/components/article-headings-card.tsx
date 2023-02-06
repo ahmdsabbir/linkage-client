@@ -14,7 +14,7 @@ const ArticleHeadingCard = () => {
             creates and returns a token from the payload and the secret key set
             in the config.py file.
           </h3> */}
-          <button className="top-3/2 btn-primary btn absolute -right-7 border-primary/20 bg-white p-2 text-primary hover:text-white">
+          <button className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
