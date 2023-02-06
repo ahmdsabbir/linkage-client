@@ -9,15 +9,20 @@ import TargetTitleUrl from "../../components/target-title-url";
 
 const SinglePage = () => {
   return (
-    <div>
-      <TargetTitleUrl />
-      <RelevantTerm />
-      <Suggestions />
-      <ChosenTitleUrl />
-      <GeneratedHeading />
-      <AnchorField />
-      <GeneratedParagraph />
-      <ArticleHeadingCard />
+    <div className="flex">
+      <div>
+        <TargetTitleUrl />
+        <RelevantTerm />
+        <Suggestions />
+        <ChosenTitleUrl />
+        <GeneratedHeading />
+        <AnchorField />
+        <GeneratedParagraph />
+        <ArticleHeadingCard />
+      </div>
+      <div>
+        <Suggestions />
+      </div>
     </div>
   );
 };
