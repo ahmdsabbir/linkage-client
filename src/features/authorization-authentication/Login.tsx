@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Input from "../../components/input";
 
 const Login = () => {
@@ -63,12 +64,12 @@ const Login = () => {
             <button className="btn-primary btn w-full">Sign in</button>
 
             <div className="mt-6 text-center ">
-              <a
-                href="http://localhost:3000/"
+              <Link
+                to="/register"
                 className="text-sm text-dodger-blue-500 hover:underline"
               >
-                Don’t have an account yet? Sign up
-              </a>
+                Don’t have an account yet? Register
+              </Link>
             </div>
           </div>
         </form>
