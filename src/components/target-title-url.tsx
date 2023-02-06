@@ -14,6 +14,7 @@ const TargetTitleUrl = () => {
             type={"text"}
             placeholder={"Target Title"}
             infoText={"aka, Target Post"}
+            tooltipText={"aka, Target Post"}
           />
           <Input
             id="TargetURL"
