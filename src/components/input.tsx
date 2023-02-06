@@ -26,19 +26,19 @@ const Input = ({
         <label htmlFor={id} className="label flex-col items-baseline">
           <span
             className={`label-text ${
-              tooltipText ? "inline-flex gap-2" : ""
+              tooltipText ? "inline-flex items-center gap-2" : ""
             }  text-base font-medium text-gray-700`}
           >
             {label}
             {tooltipText && (
-              <span className="tooltip" data-tip={tooltipText}>
+              <span className="tooltip tooltip-info " data-tip={tooltipText}>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
                   strokeWidth={1.5}
                   stroke="currentColor"
-                  className="h-6 w-6 text-gray-400"
+                  className="h-5 w-5 text-gray-400"
                 >
                   <path
                     strokeLinecap="round"
