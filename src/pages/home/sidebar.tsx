@@ -3,7 +3,7 @@ import { useState } from "react";
 const Sidebar = () => {
   const [isSidebar, setIsSidebar] = useState(true);
   const handleCloseSidebar = () => {
-    setIsSidebar(false);
+    setIsSidebar(!isSidebar);
   };
   return (
     <aside
@@ -14,13 +14,13 @@ ${
     : " -translate-x-full opacity-0 transition-all delay-500  "
 }`}
     >
-      <section
-        className={`delay-400 max-w-w-72 absolute left-0 h-full w-72 transform bg-primary/80 shadow-xl transition-all duration-500 ease-in-out 
+      <div
+        className={`delay-400 max-w-w-72 absolute left-0 h-full w-72 transform bg-primary shadow-xl transition-all duration-500 ease-in-out 
   ${isSidebar ? " translate-x-0 " : " -translate-x-full"}
   `}
       >
-        <article className="max-w-w-72 relative flex h-full w-72 flex-col space-y-6 overflow-y-scroll pb-10">
-          <header className="flex items-center justify-between p-4 text-lg font-bold">
+        <div className="max-w-w-72 relative flex h-full w-72 flex-col space-y-6 overflow-y-scroll pb-10">
+          <div className="flex items-center justify-between p-4 text-lg font-bold">
             <p className="text-slate-100">Dashboard</p>
             <button className=" font-bold" onClick={handleCloseSidebar}>
               <svg
@@ -38,7 +38,7 @@ ${
                 />
               </svg>
             </button>
-          </header>
+          </div>
           <div>
             <nav
               className="font-bold text-slate-100"
@@ -68,8 +68,8 @@ ${
             </nav>
           </div>
           <div>Children will be here as prop</div>
-        </article>
-      </section>
+        </div>
+      </div>
     </aside>
   );
 };
