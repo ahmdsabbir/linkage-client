@@ -27,6 +27,12 @@ const Login = () => {
 
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
     console.log("submit", data);
+    const error = "error happened";
+    setError("username", {
+      type: "server",
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      message: error,
+    });
   };
 
   return (
