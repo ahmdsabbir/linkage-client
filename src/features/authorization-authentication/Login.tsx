@@ -12,6 +12,8 @@ const LoginSchema = z.object({
     .max(64, "Consider using a short password"),
 });
 
+type SignupFormValue = z.infer<typeof LoginSchema>;
+
 interface HandLoginSubmitProps {
   data: object;
 }
@@ -22,7 +24,7 @@ const Login = () => {
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm({ resolver: zodResolver(LoginSchema) });
+  } = useForm<SignupFormValue>({ resolver: zodResolver(LoginSchema) });
 
   const handLoginSubmit = (data: HandLoginSubmitProps) => {
     console.log("submit", data);
