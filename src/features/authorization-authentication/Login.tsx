@@ -1,5 +1,4 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { z } from "zod";
@@ -10,8 +9,12 @@ const LoginSchema = z.object({
   password: z
     .string()
     .min(4, "Please choose a longer password")
-    .max(256, "Consider using a short password"),
+    .max(64, "Consider using a short password"),
 });
+
+interface HandLoginSubmitProps {
+  data: object;
+}
 
 const Login = () => {
   const {
@@ -21,14 +24,17 @@ const Login = () => {
     formState: { errors },
   } = useForm({ resolver: zodResolver(LoginSchema) });
 
-  const onValid = useCallback((data: unknown) => {
-    console.log("onValid", data);
-  }, []);
+  const handLoginSubmit = (data: HandLoginSubmitProps) => {
+    console.log("submit", data);
+  };
 
   return (
     <section className="bg-white">
       <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
-        <form className="w-full max-w-md" onSubmit={handleSubmit(onValid)}>
+        <form
+          className="w-full max-w-md"
+          onSubmit={handleSubmit(handLoginSubmit)}
+        >
           <img
             className="h-7 w-auto sm:h-8"
             src="https://merakiui.com/images/logo.svg"
