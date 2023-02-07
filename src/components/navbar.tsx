@@ -10,7 +10,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="container relative mx-auto  flex items-center justify-between p-6">
+      <nav className=" flex items-center justify-between p-6">
         <div className="flex flex-row items-center">
           <div className="h-10 w-10 p-2">
             <button onClick={handleSidebar} className="mr-1 ">

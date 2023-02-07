@@ -7,7 +7,7 @@ const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
   return (
     <aside
       onClick={handleSidebar}
-      className={`absolute inset-0 z-10 transform overflow-hidden bg-primary bg-opacity-25 text-white ease-in-out 
+      className={`fixed inset-0 z-10 transform overflow-hidden bg-primary bg-opacity-25 text-white ease-in-out 
 ${
   isSidebar
     ? " -translate-x-0 opacity-100 transition-opacity duration-500  "

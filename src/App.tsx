@@ -35,10 +35,10 @@ const router = createBrowserRouter(
 
 const App = () => {
   return (
-    <div className="container mx-auto break-words">
+    <>
       {/* <TestingCard /> */}
       <RouterProvider router={router} />
-    </div>
+    </>
   );
 };
 
