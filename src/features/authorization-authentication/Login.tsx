@@ -6,8 +6,11 @@ import { z } from "zod";
 import Input from "../../components/input";
 
 const LoginSchema = z.object({
-  email: z.string().email(),
-  password: z.string(),
+  email: z.string().email("Please enter a valid email address."),
+  password: z
+    .string()
+    .min(4, "Please choose a longer password")
+    .max(256, "Consider using a short password"),
 });
 
 const Login = () => {
@@ -36,7 +39,7 @@ const Login = () => {
             sign In
           </h1>
           <Input
-            type={"text"}
+            type={"email"}
             placeholder={"Email address"}
             svgIcon={
               <span className="absolute">

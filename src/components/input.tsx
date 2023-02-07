@@ -85,8 +85,8 @@ const Input = ({
           disabled={isDisabled}
           {...(inputProps ?? {})}
         />
-        {error ? <span className="label-text text-error">{error}</span> : null}
       </div>
+      {error ? <span className="label-text text-error">{error}</span> : null}
     </>
   );
 };
