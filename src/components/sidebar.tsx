@@ -1,3 +1,5 @@
+import { NavLink } from "react-router-dom";
+
 interface SidebarProps {
   isSidebar: boolean;
   handleSidebar: () => void;
@@ -42,9 +44,11 @@ ${
           </div>
           <div className="mt-6 flex flex-1 flex-col justify-between">
             <nav className="-mx-3 flex-1 space-y-3 ">
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-800 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700  "
-                href=" http://127.0.0.1:3000/"
+              <NavLink
+                className={
+                  "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700   "
+                }
+                to=" http://127.0.0.1:3000/"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -61,10 +65,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Home</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href=" http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/dashboard"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -81,10 +89,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Dashboard</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href=" http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/projects"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -101,10 +113,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Projects</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href=" http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/tasks"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -121,10 +137,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Tasks</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href="# http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/reporting"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -146,10 +166,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Reporting</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href=" http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/users"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -166,10 +190,14 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Users</span>
-              </a>
-              <a
-                className="flex transform items-center rounded-lg px-3 py-2 text-gray-600 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-                href=" http://127.0.0.1:3000/"
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/noting"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -191,7 +219,7 @@ ${
                   />
                 </svg>
                 <span className="mx-2 text-sm font-medium">Setting</span>
-              </a>
+              </NavLink>
             </nav>
             <div className="mt-6">
               <div className="rounded-lg bg-gray-100 p-3 ">
