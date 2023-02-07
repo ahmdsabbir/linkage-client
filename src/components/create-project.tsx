@@ -3,7 +3,7 @@ import Input from "./input";
 const CreateProject = () => {
   return (
     <section>
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+      <div className="container mx-auto flex min-h-[90vh] items-center justify-center px-6">
         <form className="w-full max-w-md">
           <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
             Create Your project
@@ -32,7 +32,7 @@ const CreateProject = () => {
           <Input
             id="Wp App. Password"
             label="Wp App. Password"
-            type={"Password"}
+            type={"password"}
             placeholder={"Wp App. Password"}
           />
 
