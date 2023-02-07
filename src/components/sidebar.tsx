@@ -45,34 +45,12 @@ ${
           <div className="mt-6 flex flex-1 flex-col justify-between">
             <nav className="-mx-3 flex-1 space-y-3 ">
               <NavLink
-                className={
-                  "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700   "
-                }
-                to=" http://127.0.0.1:3000/"
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  strokeWidth="1.5"
-                  stroke="currentColor"
-                  className="h-5 w-5"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"
-                  />
-                </svg>
-                <span className="mx-2 text-sm font-medium">Home</span>
-              </NavLink>
-              <NavLink
                 className={({ isActive }) =>
                   isActive
                     ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                     : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                 }
-                to={"/dashboard"}
+                to={"/"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -96,7 +74,31 @@ ${
                     ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                     : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                 }
-                to={"/projects"}
+                to={"/dashboard/create-project"}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="h-5 w-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
+                  />
+                </svg>
+                <span className="mx-2 text-sm font-medium">Crate project</span>
+              </NavLink>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive
+                    ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
+                    : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
+                }
+                to={"/dashboard/all-projects"}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
