@@ -1,3 +1,4 @@
+import Navbar from "../../components/navbar";
 import CenterContent from "./center-content";
 import ComingSoon from "./coming-soon";
 import Features from "./features";
@@ -7,6 +8,7 @@ import SideImage from "./side-image";
 const Home = () => {
   return (
     <>
+      <Navbar />
       <Header />
       <CenterContent />
       <Features />

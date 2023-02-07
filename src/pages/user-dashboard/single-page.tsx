@@ -20,9 +20,6 @@ const SinglePage = () => {
         <GeneratedParagraph />
         <ArticleHeadingCard />
       </div>
-      <div>
-        <Suggestions />
-      </div>
     </div>
   );
 };
