@@ -63,6 +63,10 @@ const Login = () => {
           <div className="mt-6">
             <button className="btn-primary btn w-full">Sign in</button>
 
+            <Link to={"/dashboard"} className=" btn w-full bg-accent">
+              Sign in Test
+            </Link>
+
             <div className="mt-6 text-center ">
               <Link
                 to="/register"

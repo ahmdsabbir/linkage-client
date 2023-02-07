@@ -7,7 +7,7 @@ import {
 import ErrorPage from "./components/error-page";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
-import Home from "./pages/home/home";
+import Home from "./pages/home";
 import AllProjects from "./pages/user-dashboard/all-projects";
 import DashboardDetails from "./pages/user-dashboard/dashboard-details";
 import DashboardLayout from "./pages/user-dashboard/dashboard-layout";
