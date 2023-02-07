@@ -1,13 +1,17 @@
-import { Link } from "react-router-dom";
+import SingleProjectCard from "../../components/single-project-card";
 
 const DashboardDetails = () => {
   return (
     <div>
-      <h1 className="text-5xl text-gray-900"> Dashboard Details</h1>
-
-      <Link to={"/dashboard/single-page"} className="btn-primary btn">
-        All Projects
-      </Link>
+      <SingleProjectCard
+        projectName={"InterLink"}
+        projectURL={
+          "https://www.figma.com/file/QckhWKiLf1qDHlS5QItYiZ/Interlink?node-id=383%3A3121&t=HEm22xkppTvRWgtb-0"
+        }
+        projectUserName={"Jo Doe"}
+        projectAdminPassword={"51654dsfgvdsg"}
+        projectCreatedDate={"2023/07/02"}
+      />
     </div>
   );
 };
