@@ -1,3 +1,5 @@
+import { RefCallBack } from "react-hook-form";
+
 interface TextFieldProps {
   id?: string;
   label?: string;
@@ -9,7 +11,18 @@ interface TextFieldProps {
   autofocus?: boolean;
   tooltipText?: string;
   isDisabled?: boolean;
-  //   inputProps?: unknown;
+  inputProps?: {
+    onChange?: (ev: unknown) => unknown;
+    onBlur?: (ev: unknown) => unknown;
+    ref?: RefCallBack;
+    name?: "string";
+    min?: string | number;
+    maxLength?: number;
+    mainLength?: number;
+    pattern?: string;
+    required: boolean;
+    disabled?: boolean;
+  };
 }
 
 const Input = ({
@@ -21,6 +34,8 @@ const Input = ({
   placeholder,
   tooltipText,
   isDisabled,
+  inputProps,
+  error,
 }: TextFieldProps) => {
   return (
     <>
@@ -68,7 +83,9 @@ const Input = ({
           }  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
           placeholder={placeholder}
           disabled={isDisabled}
+          {...(inputProps ?? {})}
         />
+        {error ? <span className="label-text text-error">{error}</span> : null}
       </div>
     </>
   );
