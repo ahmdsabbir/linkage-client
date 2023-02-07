@@ -5,9 +5,9 @@ const RootLayout = () => {
   return (
     <>
       <Navbar />
-      <div className="container  mx-auto break-words">
+      <main className="container  mx-auto break-words">
         <Outlet />
-      </div>
+      </main>
     </>
   );
 };
