@@ -1,11 +1,31 @@
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useCallback } from "react";
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { z } from "zod";
 import Input from "../../components/input";
 
+const LoginSchema = z.object({
+  email: z.string().email(),
+  password: z.string(),
+});
+
 const Login = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: zodResolver(LoginSchema) });
+
+  const onValid = useCallback((data: unknown) => {
+    console.log("onValid", data);
+  }, []);
+
   return (
     <section className="bg-white">
       <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
-        <form className="w-full max-w-md">
+        <form className="w-full max-w-md" onSubmit={handleSubmit(onValid)}>
           <img
             className="h-7 w-auto sm:h-8"
             src="https://merakiui.com/images/logo.svg"
@@ -36,6 +56,8 @@ const Login = () => {
                 </svg>
               </span>
             }
+            inputProps={register("email")}
+            error={errors.email?.message as string}
           />
           <Input
             type={"password"}
@@ -58,25 +80,26 @@ const Login = () => {
                 </svg>
               </span>
             }
+            inputProps={register("password")}
+            error={errors.password?.message as string}
           />
 
           <div className="mt-6">
             <button className="btn-primary btn w-full">Sign in</button>
-
-            <Link to={"/dashboard"} className=" btn w-full bg-accent">
-              Sign in Test
-            </Link>
-
-            <div className="mt-6 text-center ">
-              <Link
-                to="/register"
-                className="text-sm text-dodger-blue-500 hover:underline"
-              >
-                Don’t have an account yet? Register
-              </Link>
-            </div>
           </div>
         </form>
+      </div>
+
+      <div className="mt-6 text-center ">
+        <Link to={"/dashboard"} className=" btn w-full bg-accent">
+          Sign in Test
+        </Link>
+        <Link
+          to="/register"
+          className="text-sm text-dodger-blue-500 hover:underline"
+        >
+          Don’t have an account yet? Register
+        </Link>
       </div>
     </section>
   );

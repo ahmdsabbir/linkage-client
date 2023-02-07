@@ -4,7 +4,7 @@ interface TextFieldProps {
   id?: string;
   label?: string;
   infoText?: string;
-  type: string;
+  type: "text" | "password" | "email";
   placeholder: string;
   error?: string;
   svgIcon?: JSX.Element;
