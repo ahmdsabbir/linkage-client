@@ -1,4 +1,4 @@
-import { RefCallBack } from "react-hook-form";
+import { RefCallback } from "react";
 
 interface TextFieldProps {
   id?: string;
@@ -14,13 +14,14 @@ interface TextFieldProps {
   inputProps?: {
     onChange?: (ev: unknown) => unknown;
     onBlur?: (ev: unknown) => unknown;
-    ref?: RefCallBack;
-    name?: "string";
+    ref?: RefCallback<HTMLInputElement>;
+    name?: string;
     min?: string | number;
+    max?: string | number;
     maxLength?: number;
-    mainLength?: number;
+    minLength?: number;
     pattern?: string;
-    required: boolean;
+    required?: boolean;
     disabled?: boolean;
   };
 }
