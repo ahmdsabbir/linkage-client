@@ -1,18 +1,19 @@
-import { useState } from "react";
+interface SidebarProps {
+  isSidebar: boolean;
+  handleSidebar: () => void;
+}
 
-const Sidebar = () => {
-  const [isSidebar, setIsSidebar] = useState(true);
-  const handleCloseSidebar = () => {
-    setIsSidebar(!isSidebar);
-  };
+const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
   return (
     <aside
+      onClick={handleSidebar}
       className={`absolute inset-0 z-10 transform overflow-hidden bg-primary bg-opacity-25 text-white ease-in-out 
 ${
   isSidebar
     ? " -translate-x-0 opacity-100 transition-opacity duration-500  "
     : " -translate-x-full opacity-0 transition-all delay-500  "
 }`}
+      aria-hidden="true"
     >
       <div
         className={`delay-400 max-w-64 absolute left-0 h-full w-64 transform bg-primary shadow-xl transition-all duration-500 ease-in-out 
@@ -22,7 +23,7 @@ ${
         <div className="flex h-screen w-64 flex-col overflow-y-auto border-r bg-white px-5 py-8 rtl:border-r-0 rtl:border-l">
           <div className="flex items-center justify-between p-4 text-lg font-bold">
             <p className="text-gray-800">Dashboard</p>
-            <button className=" font-bold" onClick={handleCloseSidebar}>
+            <button className=" font-bold" onClick={handleSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
