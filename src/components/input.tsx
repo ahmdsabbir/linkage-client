@@ -8,6 +8,7 @@ interface TextFieldProps {
   svgIcon?: JSX.Element;
   autofocus?: boolean;
   tooltipText?: string;
+  isDisabled?: boolean;
   //   inputProps?: unknown;
 }
 
@@ -19,6 +20,7 @@ const Input = ({
   type,
   placeholder,
   tooltipText,
+  isDisabled,
 }: TextFieldProps) => {
   return (
     <>
@@ -65,6 +67,7 @@ const Input = ({
             svgIcon ? "px-11" : "px-5"
           }  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
           placeholder={placeholder}
+          disabled={isDisabled}
         />
       </div>
     </>

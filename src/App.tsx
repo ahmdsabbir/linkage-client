@@ -5,6 +5,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import CreateProject from "./components/create-project";
+import EditProject from "./components/edit-project";
 import ErrorPage from "./components/error-page";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
@@ -24,6 +25,7 @@ const router = createBrowserRouter(
       <Route path="dashboard" element={<DashboardLayout />}>
         <Route index element={<DashboardDetails />} />
         <Route path="create-project" element={<CreateProject />} />
+        <Route path="edit-project" element={<EditProject />} />
         <Route path="all-projects" element={<AllProjects />} />
         <Route path="single-page" element={<SinglePage />} />
       </Route>

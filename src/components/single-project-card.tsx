@@ -73,8 +73,8 @@ const SingleProjectCard = ({
           </span>
           <span> Start</span>
         </Link>
-        <a
-          href="http://localhost:3000/dashboard"
+        <Link
+          to={"/dashboard/edit-project"}
           className="hover:text-bold inline-flex space-x-1 rounded border border-warning/25 p-1 font-medium text-warning hover:bg-warning/10"
         >
           <span>
@@ -94,11 +94,8 @@ const SingleProjectCard = ({
             </svg>
           </span>
           <span> Edit</span>
-        </a>
-        <a
-          href="http://localhost:3000/dashboard"
-          className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 "
-        >
+        </Link>
+        <button className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 ">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +113,7 @@ const SingleProjectCard = ({
             </svg>
           </span>
           <span> Delete</span>
-        </a>
+        </button>
       </div>
     </div>
   );
