@@ -109,7 +109,7 @@ const getStorageValue = (defaultValue = initialState) => {
   return initial || defaultValue;
 };
 
-const AppProvider = ({ children }) => {
+const UpdatePostProvider = ({ children }) => {
   // final state management with useReducer hook
   const [state, dispatch] = useReducer(
     projectsReducer,
@@ -152,7 +152,7 @@ const AppProvider = ({ children }) => {
   );
 };
 
-export default AppProvider;
+export default UpdatePostProvider;
 
 export const useAppState = () => {
   const context = useContext(UpdatePostContext);
