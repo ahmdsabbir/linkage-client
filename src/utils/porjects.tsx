@@ -1,12 +1,11 @@
-import bookPlaceholderSvg from "assets/book-placeholder.svg";
+import { queryCache, useQuery } from "@tanstack/react-query";
 import { useClient } from "context/auth-context";
 import * as React from "react";
-import { queryCache, useQuery } from "react-query";
 
 const loadingBook = {
   title: "Loading...",
   author: "loading...",
-  coverImageUrl: bookPlaceholderSvg,
+  coverImageUrl: "bookPlaceholderSvg",
   publisher: "Loading Publishing",
   synopsis: "Loading...",
   loadingBook: true,

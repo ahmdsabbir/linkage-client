@@ -1,4 +1,6 @@
 import { createRoot } from "react-dom/client";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import App from "./App";
 import AuthProvider from "./context/auth-context";
 import UpdatePostProvider from "./context/update-post-context";
@@ -15,6 +17,7 @@ root.render(
   <AuthProvider>
     <UpdatePostProvider>
       <App />
+      <ToastContainer />
     </UpdatePostProvider>
   </AuthProvider>
 );
