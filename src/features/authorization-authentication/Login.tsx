@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -38,15 +39,20 @@ const Login = () => {
     } else {
       navigate("/dashboard");
     }
-  }, [auth]);
+  }, [auth, navigate]);
 
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
     try {
       const response = await primaryAxios.post("posts", data);
       await setAuth(response.data);
-      console.log(response);
     } catch (error) {
-      console.log(error);
+      if (error?.response?.data?.msg) {
+        toast.error(error?.response?.data?.msg);
+      } else if (error?.message == "Network Error") {
+        toast.error("something went wrong");
+      } else {
+        toast.error(error.message ? error.message : "login failed");
+      }
     }
   };
 
@@ -120,11 +126,7 @@ const Login = () => {
           </div>
         </form>
       </div>
-
-      <div className="mt-6 text-center ">
-        <Link to={"/dashboard"} className=" btn w-full bg-accent">
-          Sign in Test
-        </Link>
+      <div className=" text-center ">
         <Link
           to="/register"
           className="text-sm text-dodger-blue-500 hover:underline"
