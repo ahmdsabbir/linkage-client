@@ -1,17 +1,13 @@
 import { createContext, useContext, useState } from "react";
 
-type AuthContextType = {
-  auth: object;
-};
-
 type ProviderChildren = {
   children: React.ReactNode;
 };
 
-export const AuthContext = createContext<AuthContextType>({ auth: {} });
+export const AuthContext = createContext();
 
 const AuthProvider = ({ children }: ProviderChildren) => {
-  const [auth, setAuth] = useState<AuthContextType>({});
+  const [auth, setAuth] = useState({});
 
   /*   useEffect(() => {
     const loggedInUser = localStorage.getItem("linkage_token");
