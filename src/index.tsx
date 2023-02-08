@@ -1,7 +1,7 @@
 import { createRoot } from "react-dom/client";
 import App from "./App";
-import AuthProvider from "./context/auth-provider";
-import UpdatePostProvider from "./context/udpate-post-provider";
+import AuthProvider from "./context/auth-context";
+import UpdatePostProvider from "./context/update-post-context";
 import "./index.css";
 
 const container = document.getElementById("root");

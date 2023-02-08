@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { z } from "zod";
 import Input from "../../components/input";
+import { useAuthState } from "../../context/auth-context";
+import { primaryAxios } from "../../lib/api-config";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -17,6 +22,8 @@ interface HandLoginSubmitProps {
 }
 
 const Login = () => {
+  const { auth, setAuth } = useAuthState();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -25,14 +32,22 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm({ resolver: zodResolver(LoginSchema) });
 
+  useEffect(() => {
+    if (Object.keys(auth).length === 0 && auth.constructor === Object) {
+      navigate("/login");
+    } else {
+      navigate("/dashboard");
+    }
+  }, [auth]);
+
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
-    console.log("submit", data);
-    const error = "error happened";
-    setError("username", {
-      type: "server",
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      message: error,
-    });
+    try {
+      const response = await primaryAxios.post("posts", data);
+      await setAuth(response.data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
