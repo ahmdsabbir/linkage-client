@@ -5,7 +5,7 @@ import {
   useReducer,
   useState,
 } from "react";
-export const AppStateContext = createContext();
+export const UpdatePostContext = createContext();
 
 const initialState = {
   projects: [],
@@ -32,7 +32,6 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         projects: [...action.payload],
-        loading: false,
       };
     case "projectDelete":
       return {
@@ -40,14 +39,11 @@ const projectsReducer = (state, action) => {
         projects: [
           ...state.projects.filter((project) => project.id != action.payload),
         ],
-
-        loading: false,
       };
     case "selectedProject":
       return {
         ...state,
         selectedProject: { ...action.payload },
-        loading: false,
       };
     case "postTitleUrl":
       return {
@@ -70,7 +66,6 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         aiSuggestions: [...action.payload],
-        loading: false,
       };
     case "choosenTitleUrl":
       return {
@@ -86,19 +81,16 @@ const projectsReducer = (state, action) => {
       return {
         ...state,
         generatedParagraph: action.payload,
-        loading: false,
       };
     case "updateAbove":
       return {
         ...state,
         updateAbove: { ...state.updateAbove, oldData: [...action.payload] },
-        loading: false,
       };
     case "newUpdateAbove":
       return {
         ...state,
         updateAbove: { ...state.updateAbove, newData: [...action.payload] },
-        loading: false,
       };
 
     case "userSteps": {
@@ -146,7 +138,7 @@ const AppProvider = ({ children }) => {
 
   // regular state
   return (
-    <AppStateContext.Provider
+    <UpdatePostContext.Provider
       value={{
         state,
         dispatch,
@@ -156,14 +148,14 @@ const AppProvider = ({ children }) => {
       }}
     >
       {children}
-    </AppStateContext.Provider>
+    </UpdatePostContext.Provider>
   );
 };
 
 export default AppProvider;
 
 export const useAppState = () => {
-  const context = useContext(AppStateContext);
+  const context = useContext(UpdatePostContext);
   if (!context) {
     throw new Error("useAppState must be used within the AppProvider");
   }
