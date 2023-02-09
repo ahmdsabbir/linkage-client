@@ -6,6 +6,8 @@ import App from "./App";
 import AuthProvider from "./context/auth-context";
 import UpdatePostProvider from "./context/update-post-context";
 import "./index.css";
+
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 const queryClient = new QueryClient();
 
 const container = document.getElementById("root");
@@ -23,5 +25,6 @@ root.render(
         <ToastContainer />
       </UpdatePostProvider>
     </AuthProvider>
+    <ReactQueryDevtools initialIsOpen={true} />
   </QueryClientProvider>
 );

@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 
 interface SingleProjectCardProps {
+  id: string | number;
   projectName: string;
   projectURL: string;
   projectUserName: string;
   projectAdminPassword: string;
   projectCreatedDate: string;
+  handleStartProject: (id: string | number) => void;
 }
 
 const SingleProjectCard = ({
@@ -14,6 +16,8 @@ const SingleProjectCard = ({
   projectUserName,
   projectAdminPassword,
   projectCreatedDate,
+  id,
+  handleStartProject,
 }: SingleProjectCardProps) => {
   return (
     <div className="w-full max-w-sm  rounded-md bg-white p-6 shadow-md ">
@@ -51,8 +55,8 @@ const SingleProjectCard = ({
       </div>
       {/* CTA */}
       <div className=" mt-4 flex items-center justify-between border-t border-t-gray-200 pt-4 ">
-        <Link
-          to={"/dashboard/single-page"}
+        <button
+          onClick={() => handleStartProject(id)}
           className="hover:text-bold inline-flex space-x-1 rounded border border-primary/25 p-1 font-medium text-primary hover:bg-primary/10 "
         >
           <span>
@@ -72,7 +76,7 @@ const SingleProjectCard = ({
             </svg>
           </span>
           <span> Start</span>
-        </Link>
+        </button>
         <Link
           to={"/dashboard/edit-project"}
           className="hover:text-bold inline-flex space-x-1 rounded border border-warning/25 p-1 font-medium text-warning hover:bg-warning/10"
