@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import { QueryCache, useQueryClient } from "@tanstack/react-query";
+import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
@@ -40,35 +40,26 @@ const ArticleHeading = () => {
     return response.data;
   };
 
-  if (generatedParagraph && generatedHeading) {
-    console.log(chosenTitleUrl.post_id, selectedProject.domain);
-    return;
-    const { data } = useQuery({
-      queryKey: ["articleHeadings"],
-      queryFn: getArticleHeadings,
-      refetchOnWindowFocus: false,
-      refetchOnmount: false,
-      retry: false,
-      // refetchOnReconnect: false,
-      // staleTime: 5 * 60 * 1000,
-    });
-  }
+  const { data } = useQuery({
+    queryKey: ["articleHeadings"],
+    queryFn: getArticleHeadings,
+    refetchOnWindowFocus: false,
+    refetchOnmount: false,
+    retry: false,
+    // refetchOnReconnect: false,
+    // staleTime: 5 * 60 * 1000,
+  });
 
-  // start project handler
-  /*  const handleStartProject = async (id: { id: number | string }) => {
-      const selectedProject = projects?.find(
-        (project: { id: { id: string | number } }) => project.id == id
-      );
-      await dispatch({
-        type: "selectedProject",
-        payload: selectedProject,
-      });
-      navigate(`/dashboard/single-page`);
-    };
- */
   return (
-    <div>
-      <ArticleHeadingCard />
+    <div className="mt-5 space-y-3">
+      {data?.headings.map((heading, i) => (
+        <ArticleHeadingCard
+          key={heading + i}
+          name={heading.name}
+          text={heading.text}
+          text={heading.text}
+        />
+      ))}
     </div>
   );
 };
