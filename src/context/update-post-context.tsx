@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import {
   createContext,
   useContext,
@@ -10,7 +11,7 @@ export const UpdatePostContext = createContext();
 const initialState = {
   projects: [],
   selectedProject: {},
-  postTitleUrlTerm: {
+  targetTitleUrlTerm: {
     target_title: "",
     relevant_term: "",
     target_url: "",
@@ -45,20 +46,20 @@ const projectsReducer = (state, action) => {
         ...state,
         selectedProject: { ...action.payload },
       };
-    case "postTitleUrl":
+    case "targetTitleUrl":
       return {
         ...state,
-        postTitleUrlTerm: {
-          ...state.postTitleUrlTerm,
-          target_title: action.payload.postTitle,
-          target_url: action.payload.postURL,
+        targetTitleUrlTerm: {
+          ...state.targetTitleUrlTerm,
+          target_title: action.payload.targetTitle,
+          target_url: action.payload.targetURL,
         },
       };
     case "relevantTerm":
       return {
         ...state,
-        postTitleUrlTerm: {
-          ...state.postTitleUrlTerm,
+        targetTitleUrlTerm: {
+          ...state.targetTitleUrlTerm,
           relevant_term: action.payload.relevantTerm,
         },
       };
@@ -78,13 +79,16 @@ const projectsReducer = (state, action) => {
         generatedHeading: action.payload,
       };
     case "generatedParagraph":
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...state,
         generatedParagraph: action.payload,
       };
     case "updateAbove":
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
       return {
         ...state,
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
         updateAbove: { ...state.updateAbove, oldData: [...action.payload] },
       };
     case "newUpdateAbove":
@@ -121,7 +125,7 @@ const UpdatePostProvider = ({ children }) => {
 
   const clearAppState = async () => {
     await dispatch({ type: "selectedProject", payload: {} });
-    await dispatch({ type: "postTitleUrl", payload: {} });
+    await dispatch({ type: "targetTitleUrl", payload: {} });
     await dispatch({ type: "aiSuggestions", payload: [] });
     await dispatch({ type: "choosenTitleUrl", payload: {} });
     await dispatch({ type: "generatedHeading", payload: "" });
