@@ -61,12 +61,11 @@ const AllProjects = () => {
     const selectedProject = projects?.find(
       (project: { id: { id: string | number } }) => project.id == id
     );
-
     await dispatch({
       type: "selectedProject",
       payload: selectedProject,
     });
-    navigate(`"/dashboard/single-page"}`);
+    navigate(`/dashboard/single-page`);
   };
 
   /* const handleEditProject = async (id) => {
