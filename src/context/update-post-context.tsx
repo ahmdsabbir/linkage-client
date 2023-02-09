@@ -68,10 +68,10 @@ const projectsReducer = (state, action) => {
         ...state,
         aiSuggestions: [...action.payload],
       };
-    case "choosenTitleUrl":
+    case "chosenTitleUrl":
       return {
         ...state,
-        choosenTitleUrl: { ...action.payload },
+        chosenTitleUrl: { ...action.payload },
       };
     case "generatedHeading":
       return {
@@ -127,7 +127,7 @@ const UpdatePostProvider = ({ children }) => {
     await dispatch({ type: "selectedProject", payload: {} });
     await dispatch({ type: "targetTitleUrl", payload: {} });
     await dispatch({ type: "aiSuggestions", payload: [] });
-    await dispatch({ type: "choosenTitleUrl", payload: {} });
+    await dispatch({ type: "chosenTitleUrl", payload: {} });
     await dispatch({ type: "generatedHeading", payload: "" });
     await dispatch({ type: "generatedParagraph", payload: "" });
     await dispatch({ type: "updateAbove", payload: [] });
