@@ -7,7 +7,6 @@ const baseURL = "http://192.168.101.14:5000";
 // const baseURL = "https://linkages.io";
 
 // const baseURL = "https://jsonplaceholder.typicode.com";
-
 export const primaryClient = axios.create({
   baseURL,
   method: "POST",
@@ -16,13 +15,19 @@ export const primaryClient = axios.create({
   },
 });
 
-export const axiosPrivate = axios.create({
+export const privateClient = axios.create({
   baseURL: baseURL,
-  headers: {
+  /*  headers: {
     "Content-Type": "application/json",
-  },
-  withCredentials: true,
+    Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+  }, */
+
+  // withCredentials: true,
 });
+
+export async function authClient(endpoint: string) {
+  privateClient(`endpoint`);
+}
 
 /* export async function authClient(endpoint: string, data: unknown) {
   const config = {
