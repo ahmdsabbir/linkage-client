@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useAuthState } from "../context/auth-context";
@@ -37,49 +39,48 @@ const CreateProject = () => {
     resolver: zodResolver(CreateProjectSchema),
   });
 
+  const queryClient = useQueryClient();
+
   // axios post
-  const getSuggestions = async (data): Promise<{ data: unknown }> => {
+  const createProject = async (data): Promise<{ data: unknown }> => {
     const postData = JSON.stringify({
-      domain: selectedProject.domain,
-      relevant_term: data.relevantTerm,
-      source_title: targetTitleUrlTerm.target_title,
+      name: data.projectName,
+      domain: data.domain,
+      wp_username: data.wpUsername,
+      wp_password: data.wpAppPassword,
     });
 
-    const response = await privateClient.post(
-      "api/core/suggestions",
-      postData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-      }
-    );
+    const response = await privateClient.post("api/project", postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
 
     return response.data;
   };
 
   // mutation
   const mutation = useMutation({
-    mutationFn: getSuggestions,
+    mutationFn: createProject,
     onSuccess: async (successData) => {
       // Invalidate and refetch
-      await dispatch({
-        type: "aiSuggestions",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [...successData?.suggestions],
-      });
+      queryClient.invalidateQueries({ queryKey: ["projects"] });
     },
   });
 
-  const handleRelevantSubmit = async (data) => {
-    await dispatch({ type: "relevantTerm", payload: data });
+  const handleCreateProjectSubmit = async (data) => {
+    console.log(data);
+    return;
     mutation.mutate(data);
   };
   return (
     <section>
       <div className="container mx-auto flex min-h-[90vh] items-center justify-center px-6">
-        <form className="w-full max-w-md">
+        <form
+          className="w-full max-w-md"
+          onSubmit={handleSubmit(handleCreateProjectSubmit)}
+        >
           <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
             Create Your project
           </h1>
