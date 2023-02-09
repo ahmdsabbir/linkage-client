@@ -1,3 +1,4 @@
+import { QueryCache } from "@tanstack/react-query";
 import { createContext, useContext, useState } from "react";
 
 type ProviderChildren = {
@@ -8,6 +9,7 @@ export const AuthContext = createContext();
 
 const AuthProvider = ({ children }: ProviderChildren) => {
   const [auth, setAuth] = useState({});
+  const queryCache = new QueryCache();
 
   /*   useEffect(() => {
     const loggedInUser = localStorage.getItem("linkage_token");
@@ -18,6 +20,7 @@ const AuthProvider = ({ children }: ProviderChildren) => {
 
   const handleLogout = () => {
     setAuth({});
+    queryCache.clear();
     // localStorage.clear();
   };
 

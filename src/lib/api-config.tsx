@@ -25,10 +25,6 @@ export const privateClient = axios.create({
   // withCredentials: true,
 });
 
-export async function authClient(endpoint: string) {
-  privateClient(`endpoint`);
-}
-
 /* export async function authClient(endpoint: string, data: unknown) {
   const config = {
     method: "POST",
