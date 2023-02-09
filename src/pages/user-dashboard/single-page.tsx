@@ -1,5 +1,5 @@
 import AnchorField from "../../components/anchor-field";
-import ArticleHeadingCard from "../../components/article-headings-card";
+import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
 import RelevantTerm from "../../components/relevant-term";
 import Suggestions from "../../components/suggestions";
@@ -14,7 +14,7 @@ const SinglePage = () => {
         <Suggestions />
         <AnchorField />
         <GeneratedParagraph />
-        <ArticleHeadingCard />
+        <ArticleHeading />
       </div>
     </div>
   );
