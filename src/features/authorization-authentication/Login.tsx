@@ -37,7 +37,11 @@ const Login = () => {
   } = useForm({ resolver: zodResolver(LoginSchema) });
 
   useEffect(() => {
-    if (Object.keys(auth).length === 0 && auth.constructor === Object) {
+    if (
+      Object.keys(auth).length === 0 &&
+      auth.constructor === Object &&
+      !auth?.token
+    ) {
       navigate("/login");
     } else {
       navigate("/dashboard");
@@ -46,8 +50,8 @@ const Login = () => {
 
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
     try {
-      const response = await primaryClient.post("posts", data);
-      await setAuth(response.data);
+      const response = await primaryClient.post("api/auth/login", data);
+      await setAuth({ token: response.data.access_token });
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error?.response?.data?.msg) {

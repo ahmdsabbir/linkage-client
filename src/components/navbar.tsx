@@ -1,8 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthState } from "../context/auth-context";
 import Sidebar from "./sidebar";
 
 const Navbar = () => {
+  // auth hooks
+  const { auth, handleLogout } = useAuthState();
   const [isSidebar, setIsSidebar] = useState(false);
   const handleSidebar = () => {
     setIsSidebar(!isSidebar);
@@ -34,10 +39,18 @@ const Navbar = () => {
             <p className="text-sm font-bold text-blue-600">linkages</p>
           </div>
         </div>
-
-        <Link className="btn-primary btn mr-2 font-semibold" to={"/login"}>
-          Log In
-        </Link>
+        {auth.token ? (
+          <button
+            onClick={handleLogout}
+            className="btn-primary btn mr-2 font-semibold"
+          >
+            Logout
+          </button>
+        ) : (
+          <Link className="btn-primary btn mr-2 font-semibold" to={"/login"}>
+            Log In
+          </Link>
+        )}
       </nav>
 
       {/* onclick Sidebar will show and hide  */}

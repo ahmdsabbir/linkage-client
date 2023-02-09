@@ -18,7 +18,7 @@ const AuthProvider = ({ children }: ProviderChildren) => {
 
   const handleLogout = () => {
     setAuth({});
-    localStorage.clear();
+    // localStorage.clear();
   };
 
   return (
