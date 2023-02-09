@@ -29,7 +29,6 @@ const TargetTitleUrl = () => {
 
   const handleTargetTitleURLSubmit = async (data) => {
     await dispatch({ type: "targetTitleUrl", payload: data });
-    console.log(data);
   };
 
   return (

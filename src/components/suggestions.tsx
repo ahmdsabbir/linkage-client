@@ -4,6 +4,7 @@
 import { Key } from "react";
 import { useAppState } from "../context/update-post-context";
 import ChosenTitleUrl from "./chosenTitleUrl";
+import GeneratedHeading from "./generated-heading";
 import SuggestionsCard from "./suggestions-card";
 
 const Suggestions = () => {
@@ -45,7 +46,10 @@ const Suggestions = () => {
           )}
         </div>
       </div>
-      <ChosenTitleUrl />
+      <div className="flex flex-col">
+        <ChosenTitleUrl />
+        <GeneratedHeading />
+      </div>
     </div>
   );
 };

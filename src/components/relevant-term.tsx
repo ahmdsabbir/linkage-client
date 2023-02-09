@@ -38,7 +38,6 @@ const RelevantTerm = () => {
       relevant_term: data.relevantTerm,
       source_title: targetTitleUrlTerm.target_title,
     });
-    console.log(postData);
 
     const response = await privateClient.post(
       "api/core/suggestions",
@@ -59,7 +58,6 @@ const RelevantTerm = () => {
     mutationFn: getSuggestions,
     onSuccess: async (successData) => {
       // Invalidate and refetch
-      console.log(successData?.suggestions);
       await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
