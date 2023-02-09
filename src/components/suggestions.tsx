@@ -20,12 +20,14 @@ const Suggestions = () => {
         <div className="space-y-5">
           {aiSuggestions.map(
             (suggestion: {
-              post_id: Key | null | undefined;
+              post_id: Key | id | undefined;
               title: string;
               url: string;
+              id: string | number;
             }) => (
               <SuggestionsCard
                 key={suggestion.post_id}
+                id={suggestion.post_id}
                 sourceTitle={suggestion.title}
                 sourceUrl={suggestion.url}
               />

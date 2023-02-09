@@ -1,8 +1,13 @@
 interface PropsSuggestionsCard {
   sourceTitle: string;
   sourceUrl: string;
+  id: number | string;
 }
-const SuggestionsCard = ({ sourceTitle, sourceUrl }: PropsSuggestionsCard) => {
+const SuggestionsCard = ({
+  id,
+  sourceTitle,
+  sourceUrl,
+}: PropsSuggestionsCard) => {
   return (
     <div className="max-w-xl  rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
       {/*  <!-- Body--> */}
