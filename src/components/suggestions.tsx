@@ -17,19 +17,21 @@ const Suggestions = () => {
         <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
           Suggestions
         </h2>
-        {aiSuggestions.map(
-          (suggestion: {
-            post_id: Key | null | undefined;
-            title: string;
-            url: string;
-          }) => (
-            <SuggestionsCard
-              key={suggestion.post_id}
-              sourceTitle={suggestion.title}
-              sourceUrl={suggestion.url}
-            />
-          )
-        )}
+        <div className="space-y-5">
+          {aiSuggestions.map(
+            (suggestion: {
+              post_id: Key | null | undefined;
+              title: string;
+              url: string;
+            }) => (
+              <SuggestionsCard
+                key={suggestion.post_id}
+                sourceTitle={suggestion.title}
+                sourceUrl={suggestion.url}
+              />
+            )
+          )}
+        </div>
       </div>
     </div>
   );
