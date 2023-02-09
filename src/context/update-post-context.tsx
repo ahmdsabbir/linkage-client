@@ -11,9 +11,9 @@ const initialState = {
   projects: [],
   selectedProject: {},
   postTitleUrlTerm: {
-    source_title: "",
+    target_title: "",
     relevant_term: "",
-    source_url: "",
+    target_url: "",
   },
   aiSuggestions: [],
   chosenTitleUrl: {},
@@ -50,8 +50,8 @@ const projectsReducer = (state, action) => {
         ...state,
         postTitleUrlTerm: {
           ...state.postTitleUrlTerm,
-          source_title: action.payload.postTitle,
-          source_url: action.payload.postURL,
+          target_title: action.payload.postTitle,
+          target_url: action.payload.postURL,
         },
       };
     case "relevantTerm":
