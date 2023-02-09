@@ -50,16 +50,13 @@ const ArticleHeading = () => {
     // staleTime: 5 * 60 * 1000,
   });
 
+  //   show above on select card
+
   return (
     <div className="flex items-center justify-start">
       <div className="mt-5 space-y-3">
         {data?.headings.map((heading, i) => (
-          <ArticleHeadingCard
-            key={heading + i}
-            name={heading.name}
-            text={heading.text}
-            text={heading.text}
-          />
+          <ArticleHeadingCard key={heading + i} heading={heading} />
         ))}
       </div>
     </div>

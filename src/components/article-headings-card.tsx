@@ -1,16 +1,34 @@
-const ArticleHeadingCard = ({ name, tag, text }) => {
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+import { useAppState } from "../context/update-post-context";
+
+const ArticleHeadingCard = ({ heading }) => {
+  const {
+    state: { generatedParagraph },
+  } = useAppState();
+  // update the data above the heading on @{}
+  let selectedParagraph = "";
+
+  const handleAbovePost = (head) => {
+    if (head.text === heading.text) {
+      selectedParagraph = generatedParagraph;
+      console.log(selectedParagraph);
+    }
+  };
   return (
     <div className=" items-center justify-center px-6">
       <div className=" max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
+        {selectedParagraph && selectedParagraph}
         <div className="relative flex items-center justify-between p-6">
           {/* card will have h3 and also h2. H3 will have left margin  */}
-          <h2 className=" mr-4 text-lg ">{text}</h2>
-          {/* <h3 className=" mr-4 text-lg text-gray-400">
-            AI Generated Relevant Paragraph. So, given a user id, this method
-            creates and returns a token from the payload and the secret key set
-            in the config.py file.
-          </h3> */}
-          <button className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white">
+          {heading.name === "h2" ? (
+            <h2 className=" mr-4 text-lg ">{heading.text}</h2>
+          ) : (
+            <h3 className=" text-md ml-10 ">{heading.text}</h3>
+          )}
+          <button
+            className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white"
+            onClick={() => handleAbovePost(heading)}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
