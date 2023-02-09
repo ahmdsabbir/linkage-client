@@ -3,6 +3,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Key } from "react";
 import { useAppState } from "../context/update-post-context";
+import ChosenTitleUrl from "./chosenTitleUrl";
 import SuggestionsCard from "./suggestions-card";
 
 const Suggestions = () => {
@@ -10,7 +11,15 @@ const Suggestions = () => {
     state: { aiSuggestions },
     dispatch,
   } = useAppState();
-  console.log(aiSuggestions);
+
+  const handleSelectSuggestion = async (id) => {
+    const selectedSuggestion = aiSuggestions.find((sug) => sug.post_id == id);
+    await dispatch({
+      type: "chosenTitleUrl",
+      payload: { ...selectedSuggestion },
+    });
+  };
+
   return (
     <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
       <div>
@@ -30,11 +39,13 @@ const Suggestions = () => {
                 id={suggestion.post_id}
                 sourceTitle={suggestion.title}
                 sourceUrl={suggestion.url}
+                handleSelectSuggestion={handleSelectSuggestion}
               />
             )
           )}
         </div>
       </div>
+      <ChosenTitleUrl />
     </div>
   );
 };

@@ -2,14 +2,16 @@ interface PropsSuggestionsCard {
   sourceTitle: string;
   sourceUrl: string;
   id: number | string;
+  handleSelectSuggestion: (id) => void;
 }
 const SuggestionsCard = ({
   id,
   sourceTitle,
   sourceUrl,
+  handleSelectSuggestion,
 }: PropsSuggestionsCard) => {
   return (
-    <div className="max-w-xl  rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
+    <div className="max-w-xl rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
       {/*  <!-- Body--> */}
       <div className="p-6">
         {/* <header className="mb-4">
@@ -31,7 +33,12 @@ const SuggestionsCard = ({
       </div>
       {/*  <!-- Action base sized basic button --> */}
       <div className="flex p-6 pt-0">
-        <button className="btn-primary btn">Choose</button>
+        <button
+          className="btn-primary btn"
+          onClick={() => handleSelectSuggestion(id)}
+        >
+          Choose
+        </button>
       </div>
     </div>
   );
