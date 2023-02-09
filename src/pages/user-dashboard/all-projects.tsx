@@ -23,12 +23,12 @@ interface ApiProject {
 
 const AllProjects = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
   const { auth } = useAuthState();
   const {
     state: { projects },
     dispatch,
   } = useAppState();
+  const navigate = useNavigate();
 
   const queryCache = new QueryCache();
 

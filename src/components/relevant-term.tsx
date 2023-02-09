@@ -1,7 +1,14 @@
+/* eslint-disable no-unsafe-optional-chaining */
+/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
+import { privateClient } from "../lib/api-config";
 import Input from "./input";
 
 const RelevantTermSchema = z.object({
@@ -11,8 +18,11 @@ const RelevantTermSchema = z.object({
 });
 
 const RelevantTerm = () => {
-  const { state, dispatch } = useAppState();
-
+  const {
+    state: { selectedProject, targetTitleUrlTerm },
+    dispatch,
+  } = useAppState();
+  const { auth } = useAuthState();
   const {
     register,
     handleSubmit,
@@ -21,8 +31,46 @@ const RelevantTerm = () => {
     resolver: zodResolver(RelevantTermSchema),
   });
 
+  // axios post
+  const getSuggestions = async (data): Promise<{ data: unknown }> => {
+    const postData = JSON.stringify({
+      domain: selectedProject.domain,
+      relevant_term: data.relevantTerm,
+      source_title: targetTitleUrlTerm.target_title,
+    });
+    console.log(postData);
+
+    const response = await privateClient.post(
+      "api/core/suggestions",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+
+    return response.data;
+  };
+
+  // mutation
+  const mutation = useMutation({
+    mutationFn: getSuggestions,
+    onSuccess: async (successData) => {
+      // Invalidate and refetch
+      console.log(successData?.suggestions);
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [...successData?.suggestions],
+      });
+    },
+  });
+
   const handleRelevantSubmit = async (data) => {
     await dispatch({ type: "relevantTerm", payload: data });
+    mutation.mutate(data);
   };
 
   return (
