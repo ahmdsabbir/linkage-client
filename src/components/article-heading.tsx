@@ -51,15 +51,17 @@ const ArticleHeading = () => {
   });
 
   return (
-    <div className="mt-5 space-y-3">
-      {data?.headings.map((heading, i) => (
-        <ArticleHeadingCard
-          key={heading + i}
-          name={heading.name}
-          text={heading.text}
-          text={heading.text}
-        />
-      ))}
+    <div className="flex items-center justify-start">
+      <div className="mt-5 space-y-3">
+        {data?.headings.map((heading, i) => (
+          <ArticleHeadingCard
+            key={heading + i}
+            name={heading.name}
+            text={heading.text}
+            text={heading.text}
+          />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 const ArticleHeadingCard = ({ name, tag, text }) => {
   return (
-    <div className="flex items-center justify-center px-6">
+    <div className=" items-center justify-center px-6">
       <div className=" max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
         <div className="relative flex items-center justify-between p-6">
           {/* card will have h3 and also h2. H3 will have left margin  */}
