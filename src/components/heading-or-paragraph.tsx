@@ -29,18 +29,7 @@ const HeadingOrParagraph = ({
               {generatedHeading}
             </p>
           )}
-          {generateParagraph && (
-            <div className=" text-xl  text-gray-400">
-              <p>
-                AI Generated Relevant Paragraph. So, given a user id, this
-                method creates and returns a token from the payload and the
-                secret key set in the config.py file.{" "}
-                <a href="http://localhost:3000/">given anchor text</a>
-                The payload is where we add metadata about the token and
-                information about the user. This info is often referred to as
-              </p>
-            </div>
-          )}
+          {generateParagraph && generateParagraph}
         </div>
       </div>
     </div>
