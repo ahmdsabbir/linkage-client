@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
@@ -9,7 +11,7 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import Input from "../../components/input";
 import { useAuthState } from "../../context/auth-context";
-import { primaryAxios } from "../../lib/api-config";
+import { primaryClient } from "../../lib/api-config";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -44,15 +46,19 @@ const Login = () => {
 
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
     try {
-      const response = await primaryAxios.post("posts", data);
+      const response = await primaryClient.post("posts", data);
       await setAuth(response.data);
     } catch (error) {
-      if (error?.response?.data?.msg) {
-        toast.error(error?.response?.data?.msg);
-      } else if (error?.message == "Network Error") {
-        toast.error("something went wrong");
+      if (axios.isAxiosError(error)) {
+        if (error?.response?.data?.msg) {
+          toast.error(error?.response?.data?.msg);
+        } else if (error?.message == "Network Error") {
+          toast.error("something went wrong");
+        } else {
+          toast.error(error.message ? error.message : "login failed");
+        }
       } else {
-        toast.error(error.message ? error.message : "login failed");
+        toast.error("something went wrong");
       }
     }
   };

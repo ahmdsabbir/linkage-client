@@ -8,7 +8,7 @@ import axios from "axios";
 
 const baseURL = "https://jsonplaceholder.typicode.com";
 
-export const primaryAxios = axios.create({
+export const primaryClient = axios.create({
   baseURL,
   method: "POST",
   headers: {
