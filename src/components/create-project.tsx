@@ -34,6 +34,7 @@ const CreateProject = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(CreateProjectSchema),
@@ -44,7 +45,7 @@ const CreateProject = () => {
   // axios post
   const createProject = async (data): Promise<{ data: unknown }> => {
     const postData = JSON.stringify({
-      name: data.projectName,
+      name: data.projectTitle,
       domain: data.domain,
       wp_username: data.wpUsername,
       wp_password: data.wpAppPassword,
@@ -65,14 +66,16 @@ const CreateProject = () => {
     mutationFn: createProject,
     onSuccess: async (successData) => {
       // Invalidate and refetch
+      console.log(successData);
       queryClient.invalidateQueries({ queryKey: ["projects"] });
+      reset();
     },
   });
 
   const handleCreateProjectSubmit = async (data) => {
     console.log(data);
-    return;
     mutation.mutate(data);
+    return;
   };
   return (
     <section>
