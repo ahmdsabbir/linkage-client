@@ -1,6 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+import { useAppState } from "../context/update-post-context";
 import Input from "./input";
 
+interface HandTargetTitleURLProps {
+  data: object;
+}
+
 const TargetTitleUrl = () => {
+  const { dispatch } = useAppState();
+
+  const handleTargetTitleURL = async (data: HandTargetTitleURLProps) => {
+    await dispatch({ type: "postTitleUrl", payload: data });
+  };
+
   return (
     <section>
       <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
