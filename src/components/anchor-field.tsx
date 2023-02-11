@@ -24,6 +24,7 @@ const AnchorField = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(AnchorTextSchema),
@@ -56,6 +57,7 @@ const AnchorField = () => {
         type: "generatedParagraph",
         payload: para.paragraph,
       });
+      reset();
     },
   });
 
