@@ -9,9 +9,11 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
+import { useErrorHandling } from "../utils/error-handling";
 import ArticleHeadingCard from "./article-headings-card";
 
 const ArticleHeading = () => {
@@ -62,7 +64,7 @@ const ArticleHeading = () => {
     // refetchOnReconnect: false,
     // staleTime: 5 * 60 * 1000,
   });
-
+  const errorFunc = useErrorHandling();
   useEffect(() => {
     if (data) {
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -110,6 +112,10 @@ const ArticleHeading = () => {
     mutationFn: postFinalData,
     onSuccess: async (headingData) => {
       console.log(headingData);
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
     },
   });
 
