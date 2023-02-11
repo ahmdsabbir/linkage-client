@@ -9,6 +9,10 @@ import EditProject from "./components/edit-project";
 import ErrorPage from "./components/error-page";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
+import History from "./pages/dummy/History";
+import Reporters from "./pages/dummy/reporters";
+import Settings from "./pages/dummy/settings";
+import Users from "./pages/dummy/users";
 import Home from "./pages/home";
 import AllProjects from "./pages/user-dashboard/all-projects";
 import DashboardDetails from "./pages/user-dashboard/dashboard-details";
@@ -28,6 +32,10 @@ const router = createBrowserRouter(
         <Route path="edit-project" element={<EditProject />} />
         <Route path="all-projects" element={<AllProjects />} />
         <Route path="single-page" element={<SinglePage />} />
+        <Route path="history" element={<History />} />
+        <Route path="reporters" element={<Reporters />} />
+        <Route path="users" element={<Users />} />
+        <Route path="settings" element={<Settings />} />
       </Route>
 
       {/* user authentication */}

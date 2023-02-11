@@ -48,7 +48,7 @@ ${
           {auth.token ? (
             <div className="mt-6 flex flex-1 flex-col justify-between">
               <nav className="-mx-3 flex-1 space-y-3 ">
-                <NavLink
+                {/*  <NavLink
                   className={({ isActive }) =>
                     isActive
                       ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
@@ -71,7 +71,7 @@ ${
                     />
                   </svg>
                   <span className="mx-2 text-sm font-medium">Dashboard</span>
-                </NavLink>
+                </NavLink> */}
                 <NavLink
                   className={({ isActive }) =>
                     isActive
@@ -128,7 +128,7 @@ ${
                       ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                       : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                   }
-                  to={"/tasks"}
+                  to={"/dashboard/history"}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@ ${
                       d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">Tasks</span>
+                  <span className="mx-2 text-sm font-medium">History</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -152,7 +152,7 @@ ${
                       ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                       : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                   }
-                  to={"/reporting"}
+                  to={"/dashboard/reporters"}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +181,7 @@ ${
                       ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                       : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                   }
-                  to={"/users"}
+                  to={"/dashboard/users"}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -205,7 +205,7 @@ ${
                       ? "flex transform items-center rounded-lg bg-gray-200 px-3 py-2 text-gray-800 transition-colors duration-300"
                       : "flex transform items-center rounded-lg px-3 py-2 text-gray-500 transition-colors duration-300 hover:bg-gray-100 hover:text-gray-700"
                   }
-                  to={"/noting"}
+                  to={"/dashboard/settings"}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
