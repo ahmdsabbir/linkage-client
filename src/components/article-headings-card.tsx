@@ -21,7 +21,7 @@ const ArticleHeadingCard = ({ heading, handleUpdateAbove }) => {
               <button
                 className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white"
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                onClick={() => handleUpdateAbove(heading.tag)}
+                onClick={() => handleUpdateAbove(heading)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -55,7 +55,7 @@ const ArticleHeadingCard = ({ heading, handleUpdateAbove }) => {
               <button
                 className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white"
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                onClick={() => handleUpdateAbove(heading.tag)}
+                onClick={() => handleUpdateAbove(heading)}
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
