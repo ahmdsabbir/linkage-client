@@ -51,7 +51,9 @@ const Login = () => {
   const handLoginSubmit = async (data: HandLoginSubmitProps) => {
     try {
       const response = await primaryClient.post("api/auth/login", data);
-      await setAuth({ token: response.data.access_token });
+      if (response.status == 200 || response.status == 201) {
+        await setAuth({ token: response.data.access_token });
+      }
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error?.response?.data?.msg) {

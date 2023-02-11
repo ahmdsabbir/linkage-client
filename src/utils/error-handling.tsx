@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useAuth } from "../context/temporary-authContext";
 
-const { handleLogout } = useAuth();
+import { useAuthState } from "../context/auth-context";
 
 const useErrorHandling = () => {
+  const { handleLogout } = useAuthState();
   const errorFunc = async (error: {
     response: { data: { msg: string } };
     message: string;

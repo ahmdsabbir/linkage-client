@@ -1,4 +1,4 @@
-import * as auth from "auth-provider";
+/* import * as auth from "auth-provider";
 import * as React from "react";
 import { client } from "utils/api-client";
 import { useAsync } from "../utils/hooks";
@@ -85,3 +85,4 @@ function useClient() {
 }
 
 export { AuthProvider, useAuth, useClient };
+ */

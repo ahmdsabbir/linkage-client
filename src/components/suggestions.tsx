@@ -27,7 +27,7 @@ const Suggestions = () => {
   };
 
   return (
-    <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+    <div className=" flex h-fit  max-h-fit gap-4 px-6">
       <div>
         <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
           Suggestions

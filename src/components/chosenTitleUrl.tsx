@@ -90,7 +90,7 @@ const ChosenTitleUrl = () => {
   };
 
   return (
-    <div>
+    <div className="mb-6">
       <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
         Source Title and Url you have chosen
       </h2>
@@ -144,7 +144,6 @@ const ChosenTitleUrl = () => {
           <button className="btn-primary btn">Generate Heading</button>
         </div>
       </form>
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6"></div>
     </div>
   );
 };
