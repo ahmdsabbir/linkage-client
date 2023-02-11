@@ -14,11 +14,13 @@ const Suggestions = () => {
   } = useAppState();
 
   const handleSelectSuggestion = async (id) => {
-    const selectedSuggestion = aiSuggestions.find((sug) => sug.post_id == id);
-    await dispatch({
-      type: "chosenTitleUrl",
-      payload: { ...selectedSuggestion },
-    });
+    if (id) {
+      const selectedSuggestion = aiSuggestions.find((sug) => sug.post_id == id);
+      await dispatch({
+        type: "chosenTitleUrl",
+        payload: { ...selectedSuggestion },
+      });
+    }
   };
 
   return (

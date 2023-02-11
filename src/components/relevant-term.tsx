@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -5,10 +6,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
+import { useErrorHandling } from "../utils/error-handling";
 import Input from "./input";
 
 const RelevantTermSchema = z.object({
@@ -31,6 +34,8 @@ const RelevantTerm = () => {
   } = useForm({
     resolver: zodResolver(RelevantTermSchema),
   });
+
+  const errorFunc = useErrorHandling();
 
   // axios post
   const getSuggestions = async (data): Promise<{ data: unknown }> => {
@@ -79,6 +84,10 @@ const RelevantTerm = () => {
         payload: [...successData?.suggestions],
       });
       reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.warning(errorMsg);
     },
   });
 

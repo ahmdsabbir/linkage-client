@@ -29,9 +29,9 @@ const SinglePage = () => {
     <div className="flex">
       <div>
         <TargetTitleUrl />
-        <RelevantTerm ref={relevantTerm} />
-        <Suggestions ref={suggestions} />
-        <AnchorField ref={anchorField} />
+        <RelevantTerm />
+        <Suggestions />
+        <AnchorField />
         <GeneratedParagraph />
         {generatedParagraph ? <ArticleHeading /> : null}
       </div>

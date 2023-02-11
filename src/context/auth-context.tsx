@@ -20,7 +20,9 @@ const AuthProvider = ({ children }: ProviderChildren) => {
 
   const handleLogout = () => {
     setAuth({});
+    localStorage.clear();
     queryCache.clear();
+
     // localStorage.clear();
   };
 
