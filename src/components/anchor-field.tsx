@@ -3,10 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
+import { useErrorHandling } from "../utils/error-handling";
 import Input from "./input";
 
 const AnchorTextSchema = z.object({
@@ -30,6 +32,7 @@ const AnchorField = () => {
     resolver: zodResolver(AnchorTextSchema),
   });
   const { auth } = useAuthState();
+  const errorFunc = useErrorHandling();
 
   // axios post
   const getParagraph = async (data): Promise<{ data: unknown }> => {
@@ -58,6 +61,10 @@ const AnchorField = () => {
         payload: para.paragraph,
       });
       reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
     },
   });
 
