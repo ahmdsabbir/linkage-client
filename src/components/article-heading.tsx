@@ -63,6 +63,10 @@ const ArticleHeading = () => {
     retry: false,
     // refetchOnReconnect: false,
     // staleTime: 5 * 60 * 1000,
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
   });
   const errorFunc = useErrorHandling();
   useEffect(() => {
