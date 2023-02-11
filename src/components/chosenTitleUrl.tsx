@@ -119,7 +119,8 @@ const ChosenTitleUrl = () => {
             </label>
             <textarea
               placeholder="chosen title..."
-              className="   block h-32 w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
+              className="   disabled: block h-32 w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+              disabled
               {...register("url")}
             />
           </div>
