@@ -6,6 +6,7 @@ import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
 import RelevantTerm from "../../components/relevant-term";
+import SelectedProjectDetails from "../../components/selected-project-details";
 import Suggestions from "../../components/suggestions";
 import TargetTitleUrl from "../../components/target-title-url";
 import { useAppState } from "../../context/update-post-context";
@@ -33,7 +34,10 @@ const SinglePage = () => {
         <Suggestions />
         <AnchorField />
         <GeneratedParagraph />
-        {generatedParagraph ? <ArticleHeading /> : null}
+        <div className="flex">
+          {generatedParagraph ? <ArticleHeading /> : null}
+          {generatedParagraph ? <SelectedProjectDetails /> : null}
+        </div>
       </div>
     </div>
   );
