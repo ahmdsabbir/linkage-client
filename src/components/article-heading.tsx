@@ -131,12 +131,14 @@ const ArticleHeading = () => {
         </div>
       </div>
       <div className="mt-5 flex items-center justify-start">
-        <button
-          className="btn-primary btn ml-5 w-72 max-w-6xl"
-          onClick={() => handleUpdateToTheSite(updatePost)}
-        >
-          Update
-        </button>
+        {updatePost && (
+          <button
+            className="btn-primary btn ml-5 w-72 max-w-6xl"
+            onClick={() => handleUpdateToTheSite(updatePost)}
+          >
+            Update
+          </button>
+        )}
       </div>
     </>
   );
