@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -18,6 +20,7 @@ const TargetTitleUrl = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(TargetTitleUrlSchema),
@@ -27,7 +30,10 @@ const TargetTitleUrl = () => {
   const { state, dispatch } = useAppState();
 
   const handleTargetTitleURLSubmit = async (data) => {
-    await dispatch({ type: "targetTitleUrl", payload: data });
+    if (data.targetTitle && data.targetURL) {
+      await dispatch({ type: "targetTitleUrl", payload: data });
+      reset();
+    }
   };
 
   return (

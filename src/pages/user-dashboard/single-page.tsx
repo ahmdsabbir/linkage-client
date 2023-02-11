@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useRef } from "react";
 import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
@@ -17,19 +20,18 @@ const SinglePage = () => {
   const anchorField = useRef(null);
   // onclick(() => scrollToSection(relevantTerm))
 
-  const scrollToSection = (elementRef) => {
+  /*   const scrollToSection = (elementRef) => {
     window.scrollTo({
-      top: elementRef.current.offsetTop,
-      behavior: "smooth",
+      top: elementRef.current.scrollIntoView({ behavior: "smooth" }),
     });
-  };
+  }; */
   return (
     <div className="flex">
       <div>
         <TargetTitleUrl />
-        <RelevantTerm />
-        <Suggestions />
-        <AnchorField />
+        <RelevantTerm ref={relevantTerm} />
+        <Suggestions ref={suggestions} />
+        <AnchorField ref={anchorField} />
         <GeneratedParagraph />
         {generatedParagraph ? <ArticleHeading /> : null}
       </div>
