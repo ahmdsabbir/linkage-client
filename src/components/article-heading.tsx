@@ -118,23 +118,27 @@ const ArticleHeading = () => {
   };
 
   return (
-    <div className="flex items-center justify-start">
-      <div className="mt-5 space-y-3">
-        {checkData?.map((heading, i) => (
-          <ArticleHeadingCard
-            key={i}
-            heading={heading}
-            handleUpdateAbove={handleUpdateAbove}
-          />
-        ))}
+    <>
+      <div className=" flex items-center justify-start">
+        <div className="mt-5 space-y-3">
+          {checkData?.map((heading, i) => (
+            <ArticleHeadingCard
+              key={i}
+              heading={heading}
+              handleUpdateAbove={handleUpdateAbove}
+            />
+          ))}
+        </div>
       </div>
-      <button
-        className="btn-primary btn"
-        onClick={() => handleUpdateToTheSite(updatePost)}
-      >
-        Update
-      </button>
-    </div>
+      <div className="mt-5 flex items-center justify-start">
+        <button
+          className="btn-primary btn ml-5 w-72 max-w-6xl"
+          onClick={() => handleUpdateToTheSite(updatePost)}
+        >
+          Update
+        </button>
+      </div>
+    </>
   );
 };
 
