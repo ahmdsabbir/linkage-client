@@ -3,9 +3,11 @@
 import { useMutation } from "@tanstack/react-query";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
+import { useErrorHandling } from "../utils/error-handling";
 
 type FormValues = {
   title: string;
@@ -38,6 +40,7 @@ const ChosenTitleUrl = () => {
   } = useAppState();
 
   const { auth } = useAuthState();
+  const errorFunc = useErrorHandling();
 
   useEffect(() => {
     // setValue func imported as default value
@@ -75,6 +78,10 @@ const ChosenTitleUrl = () => {
         payload: headingData?.heading,
       });
       reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
     },
   });
 
