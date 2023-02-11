@@ -93,7 +93,14 @@ const AnchorField = () => {
           />
 
           <div className="mt-4">
-            <button className="btn-primary btn">Next</button>
+            <button
+              className="btn-primary btn"
+              disabled={mutation.isLoading ? true : false}
+            >
+              {mutation.isLoading
+                ? "Generating Paragraph..."
+                : "Generate Paragraph"}
+            </button>
           </div>
         </form>
       </div>

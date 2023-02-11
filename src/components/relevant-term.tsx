@@ -121,7 +121,9 @@ const RelevantTerm = () => {
           />
 
           <div className="mt-4">
-            <button className="btn-primary btn">Get Suggestions</button>
+            <button className="btn-primary btn">
+              {mutation.isLoading ? "Getting Suggestions" : "Get Suggestiongs"}
+            </button>
           </div>
         </form>
       </div>

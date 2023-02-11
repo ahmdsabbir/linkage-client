@@ -141,7 +141,12 @@ const ChosenTitleUrl = () => {
         </div>
         {/* button */}
         <div className="mt-6">
-          <button className="btn-primary btn">Generate Heading</button>
+          <button
+            className="btn-primary btn"
+            disabled={mutation.isLoading ? true : false}
+          >
+            {mutation.isLoading ? "Generating Heading..." : "Generate Heading"}
+          </button>
         </div>
       </form>
     </div>

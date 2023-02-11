@@ -158,26 +158,33 @@ const ArticleHeading = () => {
 
   return (
     <>
-      <div className=" flex items-center justify-start">
-        <div className="mt-5 space-y-3">
-          {checkData?.map((heading, i) => (
-            <ArticleHeadingCard
-              key={i}
-              heading={heading}
-              handleUpdateAbove={handleUpdateAbove}
-            />
-          ))}
+      <div className=" order-1 flex flex-grow flex-col sm:order-1 ">
+        <div className=" flex items-center justify-start">
+          <div className="mt-5 space-y-3">
+            {checkData?.map((heading, i) => (
+              <ArticleHeadingCard
+                key={i}
+                heading={heading}
+                handleUpdateAbove={handleUpdateAbove}
+              />
+            ))}
+          </div>
         </div>
-      </div>
-      <div className="mt-5 flex items-center justify-start">
-        {updatePost && (
-          <button
-            className="btn-primary btn ml-5 w-72 max-w-6xl"
-            onClick={() => handleUpdateToTheSite(updatePost)}
-          >
-            Update
-          </button>
-        )}
+        <div className="mt-5 flex items-center justify-start">
+          {updatePost && (
+            <button
+              className="btn-primary btn ml-5 w-72 max-w-6xl"
+              onClick={() => handleUpdateToTheSite(updatePost)}
+              disabled={mutation.isLoading ? true : false}
+            >
+              {mutation.isLoading
+                ? "Updating to the site"
+                : mutation.isSuccess
+                ? "Updated"
+                : "Update to the site"}
+            </button>
+          )}
+        </div>
       </div>
     </>
   );

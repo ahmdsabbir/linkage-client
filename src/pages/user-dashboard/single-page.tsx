@@ -34,7 +34,7 @@ const SinglePage = () => {
         <Suggestions />
         <AnchorField />
         <GeneratedParagraph />
-        <div className="flex">
+        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
           {generatedParagraph ? <ArticleHeading /> : null}
           {generatedParagraph ? <SelectedProjectDetails /> : null}
         </div>

@@ -5,7 +5,7 @@ const SelectedProjectDetails = () => {
     state: { selectedProject, chosenTitleUrl, generatedHeading, relevantTerm },
   } = useAppState();
   return (
-    <div className="felx flex-col">
+    <div className="felx  flex-col sm:order-2">
       <div className="card w-full flex-shrink-0 rounded bg-[#eaedf2] px-6 text-[#123354] ">
         <div className="card-body gap-4 px-0  md:text-left ">
           <div className="flex flex-col  gap-4 ">
