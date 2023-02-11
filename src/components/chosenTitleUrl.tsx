@@ -12,6 +12,8 @@ const ChosenTitleUrl = () => {
     register,
     reset,
     handleSubmit,
+    setValue,
+
     formState: { errors },
   } = useForm();
 
@@ -31,11 +33,11 @@ const ChosenTitleUrl = () => {
     const defaultValues = {};
     // setValue func imported as default value
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    defaultValues.title = chosenTitleUrl.title;
+
+    setValue("title", chosenTitleUrl.title);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-    defaultValues.url = chosenTitleUrl.url;
-    reset({ ...defaultValues });
-  }, [chosenTitleUrl, reset]);
+    setValue("url", chosenTitleUrl.url);
+  }, [chosenTitleUrl, setValue]);
 
   // post data to the server
   // axios post
@@ -63,6 +65,7 @@ const ChosenTitleUrl = () => {
         type: "generatedHeading",
         payload: headingData?.heading,
       });
+      reset();
     },
   });
 
