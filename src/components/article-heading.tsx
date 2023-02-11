@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -20,6 +21,7 @@ const ArticleHeading = () => {
   const queryClient = useQueryClient();
   const queryCache = new QueryCache();
   const { auth } = useAuthState();
+
   const [checkData, setCheckData] = useState([]);
   const [updatePost, setUpdatePost] = useState();
   const {
@@ -31,6 +33,7 @@ const ArticleHeading = () => {
     },
     dispatch,
   } = useAppState();
+  const errorFunc = useErrorHandling();
 
   const getArticleHeadings = async (): Promise<{
     headings(headings: unknown): unknown;
@@ -68,7 +71,6 @@ const ArticleHeading = () => {
       toast.error(errorMsg);
     },
   });
-  const errorFunc = useErrorHandling();
   useEffect(() => {
     if (data) {
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -116,7 +118,33 @@ const ArticleHeading = () => {
     mutationFn: postFinalData,
     onSuccess: async (headingData) => {
       await queryClient.invalidateQueries({ queryKey: ["articleHeadings"] });
-      toast.success(headingData?.msg);
+      toast.success(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `${headingData?.msg}.Please go back to make new update to your site.`
+      );
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [],
+      });
+      await dispatch({
+        type: "generatedHeading",
+        payload: "",
+      });
+
+      await dispatch({
+        type: "generatedParagraph",
+        payload: "",
+      });
+      await dispatch({
+        type: "relevantTerm",
+        payload: "data",
+      });
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [...successData?.suggestions],
+      });
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);

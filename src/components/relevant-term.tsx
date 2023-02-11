@@ -79,6 +79,10 @@ const RelevantTerm = () => {
         payload: "",
       });
       await dispatch({
+        type: "relevantTerm",
+        payload: "data",
+      });
+      await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
