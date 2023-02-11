@@ -84,18 +84,6 @@ const projectsReducer = (state, action) => {
         ...state,
         generatedParagraph: action.payload,
       };
-    case "updateAbove":
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return {
-        ...state,
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
-        updateAbove: { ...state.updateAbove, oldData: [...action.payload] },
-      };
-    case "newUpdateAbove":
-      return {
-        ...state,
-        updateAbove: { ...state.updateAbove, newData: [...action.payload] },
-      };
 
     case "userSteps": {
       return { ...state, userSteps: state.userSteps + action.payload };

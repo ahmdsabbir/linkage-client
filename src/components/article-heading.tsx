@@ -123,6 +123,15 @@ const ArticleHeading = () => {
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
       await dispatch({
+        type: "targetTitleUrlTerm",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [],
+      });
+      await dispatch({
+        type: "relevantTerm",
+        payload: "",
+      });
+      await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [],
@@ -135,10 +144,6 @@ const ArticleHeading = () => {
       await dispatch({
         type: "generatedParagraph",
         payload: "",
-      });
-      await dispatch({
-        type: "relevantTerm",
-        payload: "data",
       });
       await dispatch({
         type: "aiSuggestions",
