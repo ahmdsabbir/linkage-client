@@ -26,6 +26,7 @@ const RelevantTerm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(RelevantTermSchema),
@@ -63,6 +64,7 @@ const RelevantTerm = () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
       });
+      reset();
     },
   });
 
