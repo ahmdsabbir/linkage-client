@@ -25,7 +25,6 @@ const TargetTitleUrl = () => {
 
   const navigate = useNavigate();
   const { state, dispatch } = useAppState();
-  console.log(state);
 
   const handleTargetTitleURLSubmit = async (data) => {
     await dispatch({ type: "targetTitleUrl", payload: data });

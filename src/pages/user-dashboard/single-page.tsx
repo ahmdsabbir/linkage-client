@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
@@ -10,6 +11,18 @@ const SinglePage = () => {
   const {
     state: { generatedParagraph },
   } = useAppState();
+
+  const relevantTerm = useRef(null);
+  const suggestions = useRef(null);
+  const anchorField = useRef(null);
+  // onclick(() => scrollToSection(relevantTerm))
+
+  const scrollToSection = (elementRef) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop,
+      behavior: "smooth",
+    });
+  };
   return (
     <div className="flex">
       <div>
