@@ -10,13 +10,7 @@ const ArticleHeading = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuthState();
   const {
-    state: {
-      projects,
-      chosenTitleUrl,
-      selectedProject,
-      generatedParagraph,
-      generatedHeading,
-    },
+    state: { chosenTitleUrl, selectedProject },
     dispatch,
   } = useAppState();
 
