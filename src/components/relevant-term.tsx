@@ -62,6 +62,20 @@ const RelevantTerm = () => {
       await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [],
+      });
+      await dispatch({
+        type: "generatedHeading",
+        payload: "",
+      });
+
+      await dispatch({
+        type: "generatedParagraph",
+        payload: "",
+      });
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
       });
       reset();
