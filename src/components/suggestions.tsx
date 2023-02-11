@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { Key } from "react";
+import { toast } from "react-toastify";
 import { useAppState } from "../context/update-post-context";
 import ChosenTitleUrl from "./chosenTitleUrl";
 import GeneratedHeading from "./generated-heading";
@@ -20,6 +21,8 @@ const Suggestions = () => {
         type: "chosenTitleUrl",
         payload: { ...selectedSuggestion },
       });
+    } else {
+      toast.error("slection failed");
     }
   };
 
