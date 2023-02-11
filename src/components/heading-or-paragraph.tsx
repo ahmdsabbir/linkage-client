@@ -11,7 +11,7 @@ const HeadingOrParagraph = ({
   generateParagraph,
 }: HeadingOrParagraph) => {
   return (
-    <div className="max-w-xl  rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
+    <div className="my-10 max-w-xl rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
       <div className="p-6">
         <header>
           <h3 className=" text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">

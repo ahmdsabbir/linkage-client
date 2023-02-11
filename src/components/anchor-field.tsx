@@ -74,7 +74,7 @@ const AnchorField = () => {
 
   return (
     <section>
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+      <div className=" mx-auto my-10 flex items-center justify-center px-6">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleAnchorSubmit)}

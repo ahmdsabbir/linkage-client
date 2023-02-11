@@ -38,7 +38,7 @@ const TargetTitleUrl = () => {
 
   return (
     <section>
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+      <div className=" mb-10 flex items-center justify-center ">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleTargetTitleURLSubmit)}

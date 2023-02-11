@@ -7,7 +7,7 @@ const GeneratedParagraph = () => {
     dispatch,
   } = useAppState();
   return (
-    <>
+    <div className="flex items-center justify-center">
       <HeadingOrParagraph
         sectionName={"Generated Paragraph"}
         sectionHelperText={`Following Section was Generated. Insert It Wherever You’d like on Your Post`}
@@ -17,7 +17,7 @@ const GeneratedParagraph = () => {
             : "Generated Paragraph Will be here"
         }
       />
-    </>
+    </div>
   );
 };
 

@@ -143,7 +143,7 @@ const ArticleHeading = () => {
       await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [...successData?.suggestions],
+        payload: [],
       });
     },
     onError: async (error) => {
