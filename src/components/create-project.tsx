@@ -3,10 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 import { z } from "zod";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
+import { useErrorHandling } from "../utils/error-handling";
 import Input from "./input";
 
 const CreateProjectSchema = z.object({
@@ -41,6 +43,7 @@ const CreateProject = () => {
   });
 
   const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
 
   // axios post
   const createProject = async (data): Promise<{ data: unknown }> => {
@@ -66,16 +69,17 @@ const CreateProject = () => {
     mutationFn: createProject,
     onSuccess: async (successData) => {
       // Invalidate and refetch
-      console.log(successData);
-      queryClient.invalidateQueries({ queryKey: ["projects"] });
+      await queryClient.invalidateQueries({ queryKey: ["projects"] });
       reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
     },
   });
 
   const handleCreateProjectSubmit = async (data) => {
-    console.log(data);
     mutation.mutate(data);
-    return;
   };
   return (
     <section>

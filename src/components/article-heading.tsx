@@ -18,6 +18,7 @@ import ArticleHeadingCard from "./article-headings-card";
 
 const ArticleHeading = () => {
   const queryClient = useQueryClient();
+  const queryCache = new QueryCache();
   const { auth } = useAuthState();
   const [checkData, setCheckData] = useState([]);
   const [updatePost, setUpdatePost] = useState();
@@ -31,28 +32,27 @@ const ArticleHeading = () => {
     dispatch,
   } = useAppState();
 
-  const queryCache = new QueryCache();
-
   const getArticleHeadings = async (): Promise<{
-    headings(headings: any): unknown;
+    headings(headings: unknown): unknown;
     data: unknown;
   }> => {
-    const postData = JSON.stringify({
-      post_id: chosenTitleUrl.post_id,
-      domain: selectedProject.domain,
-    });
-    const response = await privateClient.post(
-      "api/core/target-headings",
-      postData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-      }
-    );
-
-    return response.data;
+    if (generatedParagraph) {
+      const postData = JSON.stringify({
+        post_id: chosenTitleUrl.post_id,
+        domain: selectedProject.domain,
+      });
+      const response = await privateClient.post(
+        "api/core/target-headings",
+        postData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+          },
+        }
+      );
+      return response.data;
+    }
   };
 
   const { data } = useQuery({
@@ -115,7 +115,8 @@ const ArticleHeading = () => {
   const mutation = useMutation({
     mutationFn: postFinalData,
     onSuccess: async (headingData) => {
-      console.log(headingData);
+      await queryClient.invalidateQueries({ queryKey: ["articleHeadings"] });
+      toast.success(headingData?.msg);
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
