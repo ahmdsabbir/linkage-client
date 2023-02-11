@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
@@ -9,8 +11,9 @@ import ArticleHeadingCard from "./article-headings-card";
 const ArticleHeading = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuthState();
+  const [checkData, setCheckData] = useState();
   const {
-    state: { chosenTitleUrl, selectedProject },
+    state: { chosenTitleUrl, selectedProject, generatedParagraph },
     dispatch,
   } = useAppState();
 
@@ -31,6 +34,7 @@ const ArticleHeading = () => {
         },
       }
     );
+
     return response.data;
   };
 
@@ -44,13 +48,32 @@ const ArticleHeading = () => {
     // staleTime: 5 * 60 * 1000,
   });
 
+  useEffect(() => {
+    if (data) {
+      setCheckData(data.headings);
+    }
+  }, [data]);
+
+  const handleUpdateAbove = (tag) => {
+    const myArray = checkData.map(({ generatedParagraph, ...rest }) => rest);
+
+    const newArray = myArray.map((item) =>
+      item.tag === tag ? { ...item, generatedParagraph } : item
+    );
+    setCheckData(newArray);
+  };
+
   //   show above on select card
 
   return (
     <div className="flex items-center justify-start">
       <div className="mt-5 space-y-3">
-        {data?.headings.map((heading, i) => (
-          <ArticleHeadingCard key={heading + i} heading={heading} />
+        {checkData?.map((heading, i) => (
+          <ArticleHeadingCard
+            key={heading + i}
+            heading={heading}
+            handleUpdateAbove={handleUpdateAbove}
+          />
         ))}
       </div>
     </div>
