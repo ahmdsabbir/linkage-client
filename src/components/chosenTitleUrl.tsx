@@ -7,6 +7,11 @@ import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 
+type FormValues = {
+  title: string;
+  url: string;
+};
+
 const ChosenTitleUrl = () => {
   const {
     register,
@@ -15,7 +20,12 @@ const ChosenTitleUrl = () => {
     setValue,
 
     formState: { errors },
-  } = useForm();
+  } = useForm<FormValues>({
+    defaultValues: {
+      title: "",
+      url: "",
+    },
+  });
 
   const {
     state: {
@@ -30,7 +40,6 @@ const ChosenTitleUrl = () => {
   const { auth } = useAuthState();
 
   useEffect(() => {
-    const defaultValues = {};
     // setValue func imported as default value
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
 
@@ -92,7 +101,7 @@ const ChosenTitleUrl = () => {
             <textarea
               placeholder="chosen title..."
               className="  block h-32 w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
-              {...register("url")}
+              {...register("title")}
             />
             <p className="mt-3 text-xs text-gray-400 dark:text-gray-600">
               You can edit the post title as your needs before you hit the next
@@ -110,8 +119,8 @@ const ChosenTitleUrl = () => {
             </label>
             <textarea
               placeholder="chosen title..."
-              className="  block h-32 w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
-              {...register("title")}
+              className="   block h-32 w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
+              {...register("url")}
             />
           </div>
         </div>
