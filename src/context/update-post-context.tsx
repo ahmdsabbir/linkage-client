@@ -112,15 +112,12 @@ const UpdatePostProvider = ({ children }) => {
   const [loading, setLoading] = useState(false);
 
   const clearAppState = async () => {
-    await dispatch({ type: "selectedProject", payload: {} });
-    await dispatch({ type: "targetTitleUrl", payload: {} });
-    await dispatch({ type: "aiSuggestions", payload: [] });
-    await dispatch({ type: "chosenTitleUrl", payload: {} });
-    await dispatch({ type: "generatedHeading", payload: "" });
-    await dispatch({ type: "generatedParagraph", payload: "" });
-    await dispatch({ type: "updateAbove", payload: [] });
-    await dispatch({ type: "newUpdateAbove", payload: [] });
-    setLoading(false);
+    dispatch({ type: "selectedProject", payload: {} });
+    dispatch({ type: "targetTitleUrl", payload: {} });
+    dispatch({ type: "aiSuggestions", payload: [] });
+    dispatch({ type: "chosenTitleUrl", payload: {} });
+    dispatch({ type: "generatedHeading", payload: "" });
+    dispatch({ type: "generatedParagraph", payload: "" });
   };
 
   // get localstorage items from localstorage
