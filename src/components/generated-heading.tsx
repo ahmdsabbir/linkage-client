@@ -10,7 +10,11 @@ const GeneratedHeading = () => {
       <HeadingOrParagraph
         sectionName={`Generated Heading`}
         sectionHelperText={`AI Generated Relevant Heading`}
-        generatedHeading={generatedHeading}
+        generatedHeading={
+          generatedHeading
+            ? generatedHeading
+            : "Your generated paragraph will be here"
+        }
       />
     </>
   );
