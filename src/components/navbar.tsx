@@ -2,13 +2,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState } from "react";
 import { Link } from "react-router-dom";
+
 import { useAuthState } from "../context/auth-context";
+import { useLogout } from "../utils/log-out-handling";
 import Sidebar from "./sidebar";
 
 const Navbar = () => {
   // auth hooks
-  const { auth, handleLogout } = useAuthState();
+  const { auth } = useAuthState();
   const [isSidebar, setIsSidebar] = useState(false);
+  const logout = useLogout();
   const handleSidebar = () => {
     setIsSidebar(!isSidebar);
   };
@@ -41,7 +44,7 @@ const Navbar = () => {
         </div>
         {auth.token ? (
           <button
-            onClick={handleLogout}
+            onClick={logout}
             className="btn-primary btn mr-2 font-semibold"
           >
             Logout

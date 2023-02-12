@@ -1,11 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useReducer,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 export const UpdatePostContext = createContext();
 
 const initialState = {
@@ -94,24 +88,12 @@ const projectsReducer = (state, action) => {
   }
 };
 
-const getStorageValue = (defaultValue = initialState) => {
-  // getting stored value
-  const saved = localStorage.getItem("projectData");
-  const initial = JSON.parse(saved);
-  return initial || defaultValue;
-};
-
 const UpdatePostProvider = ({ children }) => {
   // final state management with useReducer hook
-  const [state, dispatch] = useReducer(
-    projectsReducer,
-    initialState,
-    getStorageValue
-  );
-
-  const [loading, setLoading] = useState(false);
+  const [state, dispatch] = useReducer(projectsReducer, initialState);
 
   const clearAppState = async () => {
+    dispatch({ type: "projects", payload: [] });
     dispatch({ type: "selectedProject", payload: {} });
     dispatch({ type: "targetTitleUrl", payload: {} });
     dispatch({ type: "aiSuggestions", payload: [] });
@@ -132,8 +114,6 @@ const UpdatePostProvider = ({ children }) => {
         state,
         dispatch,
         clearAppState,
-        loading,
-        setLoading,
       }}
     >
       {children}
