@@ -84,6 +84,7 @@ const RelevantTerm = () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
       });
+
       reset();
     },
     onError: async (error) => {

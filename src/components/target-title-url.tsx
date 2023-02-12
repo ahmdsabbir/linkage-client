@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -16,6 +17,7 @@ const TargetTitleUrlSchema = z.object({
   targetURL: z.string().url(),
 });
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const TargetTitleUrl = () => {
   const {
     register,
@@ -32,6 +34,8 @@ const TargetTitleUrl = () => {
   const handleTargetTitleURLSubmit = async (data) => {
     if (data.targetTitle && data.targetURL) {
       await dispatch({ type: "targetTitleUrl", payload: data });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+
       reset();
     }
   };
