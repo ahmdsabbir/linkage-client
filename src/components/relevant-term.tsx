@@ -12,6 +12,7 @@ import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 import { useErrorHandling } from "../utils/error-handling";
+import ButtonLoader from "./button-loader";
 import Input from "./input";
 
 const RelevantTermSchema = z.object({
@@ -79,10 +80,6 @@ const RelevantTerm = () => {
         payload: "",
       });
       await dispatch({
-        type: "relevantTerm",
-        payload: "data",
-      });
-      await dispatch({
         type: "aiSuggestions",
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
@@ -121,8 +118,17 @@ const RelevantTerm = () => {
           />
 
           <div className="mt-4">
-            <button className="btn-primary btn">
-              {mutation.isLoading ? "Getting Suggestions" : "Get Suggestiongs"}
+            <button
+              className={`btn ${
+                mutation.isLoading ? "btn-disabled " : "btn-primary "
+              }`}
+              disabled={mutation.isLoading ? true : false}
+            >
+              {mutation.isLoading ? (
+                <ButtonLoader loadingText={"Getting Suggestions"} />
+              ) : (
+                "Get Suggestions"
+              )}
             </button>
           </div>
         </form>
