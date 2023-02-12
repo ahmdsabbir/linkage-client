@@ -8,6 +8,7 @@ interface SingleProjectCardProps {
   projectAdminPassword: string;
   projectCreatedDate: string;
   handleStartProject: (id: string | number) => void;
+  setShowModal: (arg0: boolean) => void;
 }
 
 const SingleProjectCard = ({
@@ -18,6 +19,7 @@ const SingleProjectCard = ({
   projectCreatedDate,
   id,
   handleStartProject,
+  setShowModal,
 }: SingleProjectCardProps) => {
   return (
     <div className="w-full max-w-sm  rounded-md bg-white p-6 shadow-md ">
@@ -99,7 +101,10 @@ const SingleProjectCard = ({
           </span>
           <span> Edit</span>
         </Link>
-        <button className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 ">
+        <button
+          onClick={() => setShowModal(true)}
+          className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 "
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
