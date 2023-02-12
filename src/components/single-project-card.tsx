@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Link } from "react-router-dom";
 
 interface SingleProjectCardProps {
@@ -20,6 +21,7 @@ const SingleProjectCard = ({
   id,
   handleStartProject,
   setShowModal,
+  setProjectId,
 }: SingleProjectCardProps) => {
   return (
     <div className="w-full max-w-sm  rounded-md bg-white p-6 shadow-md ">
@@ -102,7 +104,9 @@ const SingleProjectCard = ({
           <span> Edit</span>
         </Link>
         <button
-          onClick={() => setShowModal(true)}
+          onClick={() => {
+            setShowModal(true), setProjectId(id);
+          }}
           className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 "
         >
           <span>
