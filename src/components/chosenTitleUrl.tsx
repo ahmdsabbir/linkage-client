@@ -8,6 +8,7 @@ import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 import { useErrorHandling } from "../utils/error-handling";
+import ButtonLoader from "./button-loader";
 
 type FormValues = {
   title: string;
@@ -142,10 +143,16 @@ const ChosenTitleUrl = () => {
         {/* button */}
         <div className="mt-6">
           <button
-            className="btn-primary btn"
+            className={`btn ${
+              mutation.isLoading ? "btn-disabled " : "btn-primary "
+            }`}
             disabled={mutation.isLoading ? true : false}
           >
-            {mutation.isLoading ? "Generating Heading..." : "Generate Heading"}
+            {mutation.isLoading ? (
+              <ButtonLoader loadingText={"Generating Heading..."} />
+            ) : (
+              "Generate Heading"
+            )}
           </button>
         </div>
       </form>
