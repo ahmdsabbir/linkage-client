@@ -4,13 +4,20 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { QueryCache, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  QueryCache,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import { Key } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import SingleProjectCard from "../../components/single-project-card";
 import { useAuthState } from "../../context/auth-context";
 import { useAppState } from "../../context/update-post-context";
 import { privateClient } from "../../lib/api-config";
+import { useErrorHandling } from "../../utils/error-handling";
 
 interface ApiProject {
   id: Key | string | number;
@@ -28,6 +35,7 @@ const AllProjects = () => {
     state: { projects },
     dispatch,
   } = useAppState();
+  const errorFunc = useErrorHandling();
   const navigate = useNavigate();
 
   const queryCache = new QueryCache();
@@ -80,6 +88,34 @@ const AllProjects = () => {
     );
   }; */
 
+  const deleteProject = async (id: unknown): Promise<{ data: unknown }> => {
+    const response = await privateClient.post(`api/project/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+
+    return response.data;
+  };
+
+  const mutation = useMutation({
+    mutationFn: deleteProject,
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast("Project deleted Successfully");
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.warning(errorMsg);
+    },
+  });
+
+  const handleDeleteProject = (id) => {
+    mutation.mutate(id);
+  };
+
   return (
     <>
       <p className="text-9xl text-gray-800"> All Projects list</p>
@@ -95,6 +131,7 @@ const AllProjects = () => {
             projectCreatedDate={project.date_added}
             handleStartProject={handleStartProject}
             // handleEditProject={handleEditProject}
+            handleDeleteProject={handleDeleteProject}
           />
         ))}
       </div>
