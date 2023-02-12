@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "../context/auth-context";
+import { useLogout } from "../utils/log-out-handling";
 
 interface SidebarProps {
   isSidebar: boolean;
@@ -7,7 +8,8 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
-  const { auth, handleLogout } = useAuthState();
+  const { auth } = useAuthState();
+  const logout = useLogout();
   return (
     <aside
       onClick={handleSidebar}
@@ -259,7 +261,7 @@ ${
                     </span>
                   </a>
                   <button
-                    onClick={handleLogout}
+                    onClick={logout}
                     className="rotate-180 text-gray-500 transition-colors duration-200 hover:text-blue-500 rtl:rotate-0 dark:text-gray-400 dark:hover:text-blue-400"
                   >
                     <svg
