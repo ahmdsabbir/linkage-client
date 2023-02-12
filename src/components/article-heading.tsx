@@ -31,7 +31,7 @@ const ArticleHeading = () => {
       generatedHeading,
       generatedParagraph,
     },
-    clearAppState,
+    clearProjectState,
     dispatch,
   } = useAppState();
   const errorFunc = useErrorHandling();
@@ -123,7 +123,7 @@ const ArticleHeading = () => {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
-      clearAppState();
+      clearProjectState();
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);

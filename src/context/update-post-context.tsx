@@ -101,6 +101,14 @@ const UpdatePostProvider = ({ children }) => {
     dispatch({ type: "generatedHeading", payload: "" });
     dispatch({ type: "generatedParagraph", payload: "" });
   };
+  const clearProjectState = async () => {
+    dispatch({ type: "selectedProject", payload: {} });
+    dispatch({ type: "targetTitleUrl", payload: {} });
+    dispatch({ type: "aiSuggestions", payload: [] });
+    dispatch({ type: "chosenTitleUrl", payload: {} });
+    dispatch({ type: "generatedHeading", payload: "" });
+    dispatch({ type: "generatedParagraph", payload: "" });
+  };
 
   // get localstorage items from localstorage
   useEffect(() => {
@@ -114,6 +122,7 @@ const UpdatePostProvider = ({ children }) => {
         state,
         dispatch,
         clearAppState,
+        clearProjectState,
       }}
     >
       {children}
