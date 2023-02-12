@@ -31,6 +31,7 @@ const ArticleHeading = () => {
       generatedHeading,
       generatedParagraph,
     },
+    clearAppState,
     dispatch,
   } = useAppState();
   const errorFunc = useErrorHandling();
@@ -39,23 +40,21 @@ const ArticleHeading = () => {
     headings(headings: unknown): unknown;
     data: unknown;
   }> => {
-    if (generatedParagraph) {
-      const postData = JSON.stringify({
-        post_id: chosenTitleUrl.post_id,
-        domain: selectedProject.domain,
-      });
-      const response = await privateClient.post(
-        "api/core/target-headings",
-        postData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-          },
-        }
-      );
-      return response.data;
-    }
+    const postData = JSON.stringify({
+      post_id: chosenTitleUrl.post_id,
+      domain: selectedProject.domain,
+    });
+    const response = await privateClient.post(
+      "api/core/target-headings",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+    return response.data;
   };
 
   const { data } = useQuery({
@@ -64,6 +63,8 @@ const ArticleHeading = () => {
     refetchOnWindowFocus: false,
     refetchOnmount: false,
     retry: false,
+    enabled: !!generatedParagraph,
+
     // refetchOnReconnect: false,
     // staleTime: 5 * 60 * 1000,
     onError: async (error) => {
@@ -122,34 +123,7 @@ const ArticleHeading = () => {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
-      await dispatch({
-        type: "targetTitleUrlTerm",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [],
-      });
-      await dispatch({
-        type: "relevantTerm",
-        payload: "",
-      });
-      await dispatch({
-        type: "aiSuggestions",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [],
-      });
-      await dispatch({
-        type: "generatedHeading",
-        payload: "",
-      });
-
-      await dispatch({
-        type: "generatedParagraph",
-        payload: "",
-      });
-      await dispatch({
-        type: "aiSuggestions",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [],
-      });
+      clearAppState();
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
