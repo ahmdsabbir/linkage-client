@@ -39,7 +39,9 @@ const SinglePage = () => {
         </div>
       </div>
       <div>
-        <SelectedProjectDetails />
+        <div className="sticky top-0  ">
+          <SelectedProjectDetails />
+        </div>
       </div>
     </div>
   );
