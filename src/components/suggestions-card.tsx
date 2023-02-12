@@ -11,7 +11,7 @@ const SuggestionsCard = ({
   handleSelectSuggestion,
 }: PropsSuggestionsCard) => {
   return (
-    <div className="max-w-xl rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
+    <div className="max-w-xl rounded border border-gray-100 bg-white text-left text-gray-500 shadow-md shadow-slate-200">
       {/*  <!-- Body--> */}
       <div className="p-6">
         {/* <header className="mb-4">
