@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
@@ -15,12 +15,10 @@ const SinglePage = () => {
   const {
     state: { generatedParagraph },
   } = useAppState();
-  const [multiStep, setMultiStep] = useState(1);
-  console.log(multiStep);
 
-  const relevantTerm = useRef(null);
-  const suggestions = useRef(null);
-  const anchorField = useRef(null);
+  const relevantTermRef = useRef(null);
+  const suggestionsRef = useRef(null);
+  const anchorFieldRef = useRef(null);
   // onclick(() => scrollToSection(relevantTerm))
 
   /*   const scrollToSection = (elementRef) => {
@@ -31,9 +29,9 @@ const SinglePage = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-3">
       <div className="col-span-2">
-        <ol className="0 flex w-full flex-col items-center text-center text-sm font-medium text-gray-500 sm:text-base">
-          <li className=" flex min-h-[80vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
-            <span className="flex items-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
+        <ol className="0 flex w-full flex-col items-center  text-sm font-medium text-gray-500 sm:text-base">
+          <li className=" after: flex min-h-[60vh] flex-col items-center justify-center  text-blue-600 md:w-full ">
+            <span className="flex items-center text-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
                 aria-hidden="true"
                 className="mr-2 h-4 w-4 sm:h-5 sm:w-5"
@@ -52,7 +50,8 @@ const SinglePage = () => {
             </span>
             <TargetTitleUrl />
           </li>
-          <li className=" flex min-h-[80vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
+
+          <li className=" flex min-h-[60vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
             <span className="flex items-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
                 aria-hidden="true"
@@ -70,9 +69,11 @@ const SinglePage = () => {
               Step
               <span className="hidden sm:ml-2 sm:inline-flex">Two</span>
             </span>
+
             <RelevantTerm />
           </li>
-          <li className=" flex min-h-[80vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
+
+          <li className=" flex min-h-[60vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
             <span className="flex items-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
                 aria-hidden="true"
@@ -92,7 +93,7 @@ const SinglePage = () => {
             </span>
             <Suggestions />
           </li>
-          <li className=" flex min-h-[80vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
+          <li className=" flex min-h-[50vh] flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
             <span className="flex items-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
                 aria-hidden="true"
@@ -132,7 +133,10 @@ const SinglePage = () => {
             </span>
             <GeneratedParagraph />
           </li>
-          <li className=" flex flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full ">
+          <li
+            id="gotoGeneratedParagraph"
+            className=" flex flex-col items-center justify-center text-blue-600 after:mx-6 after:hidden  after:w-full after:border-gray-200    md:w-full "
+          >
             <span className="flex items-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
                 aria-hidden="true"

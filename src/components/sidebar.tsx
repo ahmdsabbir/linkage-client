@@ -232,20 +232,6 @@ ${
                 </NavLink>
               </nav>
               <div className="mt-6">
-                <div className="rounded-lg bg-gray-100 p-3 ">
-                  <h2 className="text-sm font-medium text-gray-800 dark:text-white">
-                    New feature availabel!
-                  </h2>
-                  <p className="mt-1 text-xs text-gray-500 ">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Natus harum officia eligendi velit.
-                  </p>
-                  <img
-                    className="mt-2 h-32 w-full rounded-lg object-cover"
-                    src="https://images.unsplash.com/photo-1658953229664-e8d5ebd039ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&h=1374&q=80"
-                    alt=""
-                  />
-                </div>
                 <div className="mt-6 flex items-center justify-between">
                   <a
                     href=" http://127.0.0.1:3000/"
@@ -256,8 +242,8 @@ ${
                       src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&h=634&q=80"
                       alt="avatar"
                     />
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-200">
-                      John Doe
+                    <span className="text-sm font-medium text-gray-700 ">
+                      Logout
                     </span>
                   </a>
                   <button
@@ -270,7 +256,7 @@ ${
                       viewBox="0 0 24 24"
                       strokeWidth="1.5"
                       stroke="currentColor"
-                      className="h-5 w-5"
+                      className="h-5 w-5 text-gray-700"
                     >
                       <path
                         strokeLinecap="round"

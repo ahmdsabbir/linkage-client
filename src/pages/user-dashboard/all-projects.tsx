@@ -124,7 +124,7 @@ const AllProjects = () => {
 
   return (
     <>
-      <p className="text-9xl text-gray-800"> All Projects list</p>
+      {/* <p className="text-5xl text-gray-800"> All Projects list</p> */}
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-10">
         {data?.projects?.map((project) => (
           <SingleProjectCard

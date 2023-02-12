@@ -45,7 +45,7 @@ const SingleProjectCard = ({
           </span>
         </div>
         <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">WP App. Password</span>
+          <span className="text-sm text-gray-400">WP Application Password</span>
           <span className=" text-lg font-semibold text-gray-600 ">
             {projectAdminPassword}
           </span>

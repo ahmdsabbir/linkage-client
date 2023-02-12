@@ -8,6 +8,7 @@ import ChosenTitleUrl from "./chosenTitleUrl";
 import GeneratedHeading from "./generated-heading";
 import SuggestionsCard from "./suggestions-card";
 
+// eslint-disable-next-line react/display-name
 const Suggestions = () => {
   const {
     state: { aiSuggestions },

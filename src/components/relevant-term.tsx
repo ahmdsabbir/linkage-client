@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable @typescript-eslint/no-misused-promises */
@@ -21,6 +23,7 @@ const RelevantTermSchema = z.object({
     .min(4, "relevant term must be more than 4 characters!"),
 });
 
+// eslint-disable-next-line react/display-name
 const RelevantTerm = () => {
   const {
     state: { selectedProject, targetTitleUrlTerm },
@@ -84,6 +87,7 @@ const RelevantTerm = () => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         payload: [...successData?.suggestions],
       });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
 
       reset();
     },

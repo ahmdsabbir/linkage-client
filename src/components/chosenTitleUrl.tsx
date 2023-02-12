@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useMutation } from "@tanstack/react-query";
@@ -116,8 +117,8 @@ const ChosenTitleUrl = () => {
             )}
 
             <p className="dark:text-accent-300 mt-3 text-xs text-accent">
-              You can edit the post title as your needs before you hit the next
-              button !
+              You can edit the post title as your needs before you hit the
+              generate heading button !
             </p>
           </div>
           <div>
@@ -146,7 +147,12 @@ const ChosenTitleUrl = () => {
             className={`btn ${
               mutation.isLoading ? "btn-disabled " : "btn-primary "
             }`}
-            disabled={mutation.isLoading ? true : false}
+            disabled={
+              mutation.isLoading ||
+              !(chosenTitleUrl.title && chosenTitleUrl.url)
+                ? true
+                : false
+            }
           >
             {mutation.isLoading ? (
               <ButtonLoader loadingText={"Generating Heading..."} />

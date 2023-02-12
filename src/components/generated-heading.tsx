@@ -16,6 +16,11 @@ const GeneratedHeading = () => {
             : "Your generated paragraph will be here"
         }
       />
+      {generatedHeading && (
+        <a className="btn-primary btn" href={"#gotoGeneratedParagraph"}>
+          Next
+        </a>
+      )}
     </>
   );
 };

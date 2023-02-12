@@ -38,13 +38,15 @@ const SelectedProjectDetails = () => {
             )}
             {targetTitleUrlTerm?.target_url && (
               <div className="flex flex-col gap-1 ">
-                <span className="font-medium text-gray-500">relevantTerm:</span>
+                <span className="font-medium text-gray-500">Target Url:</span>
                 <span className="">{targetTitleUrlTerm?.target_url}</span>
               </div>
             )}
             {targetTitleUrlTerm?.relevant_term && (
               <div className="flex flex-col gap-1 ">
-                <span className="font-medium text-gray-500">relevantTerm:</span>
+                <span className="font-medium text-gray-500">
+                  Relevant Term:
+                </span>
                 <span className="">{targetTitleUrlTerm?.relevant_term}</span>
               </div>
             )}
@@ -64,7 +66,7 @@ const SelectedProjectDetails = () => {
 
             {generatedHeading && (
               <div className="flex flex-col gap-1">
-                <span className="font-medium text-gray-500">
+                <span className="font-medium text-gray-800">
                   Generated Heading:
                 </span>
                 <span className="">{generatedHeading}</span>
@@ -72,8 +74,8 @@ const SelectedProjectDetails = () => {
             )}
             {generatedParagraph && (
               <div className="flex flex-col gap-1">
-                <span className="font-medium text-gray-500">
-                  Generated Heading:
+                <span className="font-medium text-gray-800">
+                  Generated Paragraph:
                 </span>
                 <span className="">{generatedParagraph}</span>
               </div>

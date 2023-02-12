@@ -10,12 +10,14 @@ import {
   useQueryClient,
 } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 import { useErrorHandling } from "../utils/error-handling";
 import ArticleHeadingCard from "./article-headings-card";
+import ButtonLoader from "./button-loader";
 
 const ArticleHeading = () => {
   const queryClient = useQueryClient();
@@ -34,7 +36,9 @@ const ArticleHeading = () => {
     clearProjectState,
     dispatch,
   } = useAppState();
+
   const errorFunc = useErrorHandling();
+  const navigate = useNavigate();
 
   const getArticleHeadings = async (): Promise<{
     headings(headings: unknown): unknown;
@@ -57,7 +61,7 @@ const ArticleHeading = () => {
     return response.data;
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["articleHeadings"],
     queryFn: getArticleHeadings,
     refetchOnWindowFocus: false,
@@ -123,6 +127,7 @@ const ArticleHeading = () => {
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
+
       clearProjectState();
     },
     onError: async (error) => {
@@ -138,32 +143,52 @@ const ArticleHeading = () => {
   return (
     <>
       <div className=" order-1 flex flex-grow flex-col sm:order-1 ">
-        <div className=" flex items-center justify-start">
-          <div className="mt-5 space-y-3">
-            {checkData?.map((heading, i) => (
-              <ArticleHeadingCard
-                key={i}
-                heading={heading}
-                handleUpdateAbove={handleUpdateAbove}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="mt-5 flex items-center justify-start">
-          {updatePost && (
-            <button
-              className="btn-primary btn ml-5 w-72 max-w-6xl"
-              onClick={() => handleUpdateToTheSite(updatePost)}
-              disabled={mutation.isLoading ? true : false}
-            >
-              {mutation.isLoading
-                ? "Updating to the site"
-                : mutation.isSuccess
-                ? "Updated"
-                : "Update to the site"}
-            </button>
-          )}
-        </div>
+        <h2 className="text-center text-2xl text-gray-700">Article Headings</h2>
+        <p className="text-center text-sm">
+          {"These are the heading <h2> and <h3> of the source title"}
+        </p>
+        <p className="text-center text-sm">
+          {"Choose one to add the generated content above the heading"}
+        </p>
+
+        {isLoading ? (
+          <>{"Getting article heading"}</>
+        ) : (
+          <>
+            {" "}
+            <div className=" flex items-center justify-start">
+              <div className="mt-5 space-y-3">
+                {checkData?.map((heading, i) => (
+                  <ArticleHeadingCard
+                    key={i}
+                    heading={heading}
+                    generatedHeading={generatedHeading}
+                    handleUpdateAbove={handleUpdateAbove}
+                  />
+                ))}
+              </div>
+            </div>
+            <div className="mt-5 flex items-center justify-start">
+              {updatePost && (
+                <button
+                  className={`btn ml-5 w-72 max-w-6xl ${
+                    mutation.isLoading ? "btn-disabled " : "btn-primary "
+                  }`}
+                  onClick={() => handleUpdateToTheSite(updatePost)}
+                  disabled={mutation.isLoading ? true : false}
+                >
+                  {mutation.isLoading ? (
+                    <ButtonLoader loadingText={"Updating..."} />
+                  ) : mutation.isSuccess ? (
+                    "Updated"
+                  ) : (
+                    "Update post"
+                  )}
+                </button>
+              )}
+            </div>
+          </>
+        )}
       </div>
     </>
   );

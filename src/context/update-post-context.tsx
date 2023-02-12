@@ -96,14 +96,15 @@ const UpdatePostProvider = ({ children }) => {
     dispatch({ type: "projects", payload: [] });
     dispatch({ type: "selectedProject", payload: {} });
     dispatch({ type: "targetTitleUrl", payload: {} });
+    dispatch({ type: "relevantTerm", payload: {} });
     dispatch({ type: "aiSuggestions", payload: [] });
     dispatch({ type: "chosenTitleUrl", payload: {} });
     dispatch({ type: "generatedHeading", payload: "" });
     dispatch({ type: "generatedParagraph", payload: "" });
   };
   const clearProjectState = async () => {
-    dispatch({ type: "selectedProject", payload: {} });
     dispatch({ type: "targetTitleUrl", payload: {} });
+    dispatch({ type: "relevantTerm", payload: {} });
     dispatch({ type: "aiSuggestions", payload: [] });
     dispatch({ type: "chosenTitleUrl", payload: {} });
     dispatch({ type: "generatedHeading", payload: "" });

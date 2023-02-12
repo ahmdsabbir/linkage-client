@@ -4,7 +4,11 @@
 import ShowGeneratedHeading from "./show-genereated-heading";
 
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-const ArticleHeadingCard = ({ heading, handleUpdateAbove }) => {
+const ArticleHeadingCard = ({
+  heading,
+  handleUpdateAbove,
+  generatedHeading,
+}) => {
   return (
     <div className=" items-center justify-center px-6">
       {heading.name === "h2" ? (
@@ -12,6 +16,7 @@ const ArticleHeadingCard = ({ heading, handleUpdateAbove }) => {
           {heading.generatedParagraph && (
             <ShowGeneratedHeading
               paragraph={heading.generatedParagraph}
+              generatedHeading={generatedHeading}
               margin={undefined}
             />
           )}
