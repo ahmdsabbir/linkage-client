@@ -9,6 +9,7 @@ import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 import { useErrorHandling } from "../utils/error-handling";
+import ButtonLoader from "./button-loader";
 import Input from "./input";
 
 const CreateProjectSchema = z.object({
@@ -70,6 +71,7 @@ const CreateProject = () => {
     onSuccess: async (successData) => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({ queryKey: ["projects"] });
+      toast.success("project created successfully");
       reset();
     },
     onError: async (error) => {
@@ -128,7 +130,18 @@ const CreateProject = () => {
           />
 
           <div className="mt-4">
-            <button className="btn-primary btn">Create Project</button>
+            <button
+              className={`btn ${
+                mutation.isLoading ? "btn-disabled " : "btn-primary "
+              }`}
+              disabled={mutation.isLoading ? true : false}
+            >
+              {mutation.isLoading ? (
+                <ButtonLoader loadingText={"Creating Your Project"} />
+              ) : (
+                "Crate Project"
+              )}
+            </button>
           </div>
         </form>
       </div>
