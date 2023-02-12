@@ -27,18 +27,18 @@ const SinglePage = () => {
     });
   }; */
   return (
-    <div className="flex">
+    <div className="grid grid-cols-1 md:grid-cols-2">
       <div>
         <TargetTitleUrl />
         <RelevantTerm />
         <Suggestions />
         <AnchorField />
         <GeneratedParagraph />
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+        <div className="mt-10">
           {generatedParagraph ? <ArticleHeading /> : null}
-          {generatedParagraph ? <SelectedProjectDetails /> : null}
         </div>
       </div>
+      <div> {generatedParagraph ? <SelectedProjectDetails /> : null}</div>
     </div>
   );
 };
