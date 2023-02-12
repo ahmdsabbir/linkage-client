@@ -150,7 +150,7 @@ const SinglePage = () => {
               Step
               <span className="hidden sm:ml-2 sm:inline-flex">Six</span>
             </span>
-            <div className="mt-10">
+            <div className="mt-10 mb-10 text-left">
               {generatedParagraph ? (
                 <ArticleHeading />
               ) : (
