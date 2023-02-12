@@ -27,8 +27,8 @@ const SinglePage = () => {
     });
   }; */
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2">
-      <div>
+    <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="col-span-2">
         <TargetTitleUrl />
         <RelevantTerm />
         <Suggestions />
@@ -38,7 +38,9 @@ const SinglePage = () => {
           {generatedParagraph ? <ArticleHeading /> : null}
         </div>
       </div>
-      <div> {generatedParagraph ? <SelectedProjectDetails /> : null}</div>
+      <div>
+        <SelectedProjectDetails />
+      </div>
     </div>
   );
 };
