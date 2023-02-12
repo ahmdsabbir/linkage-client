@@ -77,7 +77,7 @@ const Register = () => {
 
   return (
     <section className="bg-white ">
-      <div className="container mx-auto flex min-h-screen items-center justify-center px-6">
+      <div className="container mx-auto flex min-h-[80vh] items-center justify-center px-6">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleRegisterSubmit)}
