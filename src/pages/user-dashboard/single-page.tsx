@@ -165,7 +165,7 @@ const SinglePage = () => {
         </ol>
       </div>
       <div>
-        <div className="sticky top-0  ">
+        <div className="sticky top-14 ">
           <SelectedProjectDetails />
         </div>
       </div>

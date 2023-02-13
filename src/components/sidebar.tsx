@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "../context/auth-context";
-import { useLogout } from "../utils/log-out-handling";
 
 interface SidebarProps {
   isSidebar: boolean;
@@ -9,7 +8,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
   const { auth } = useAuthState();
-  const logout = useLogout();
+
   return (
     <aside
       onClick={handleSidebar}

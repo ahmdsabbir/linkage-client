@@ -20,7 +20,7 @@ const Navbar = () => {
     <>
       <nav
         className="sticky top-0 z-10
-       flex items-center justify-between bg-white p-6"
+       flex items-center justify-between bg-white p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6"
       >
         <div className="flex flex-row items-center">
           <div className="h-10 w-10 p-2">
