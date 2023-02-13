@@ -5,12 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {
-  QueryCache,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -31,7 +26,6 @@ const AllProjects = () => {
   const errorFunc = useErrorHandling();
   const navigate = useNavigate();
 
-  const queryCache = new QueryCache();
   const [showModal, setShowModal] = useState(false);
   const [projectId, setProjectId] = useState(null);
 
@@ -49,11 +43,11 @@ const AllProjects = () => {
     return response.data;
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
+    // refetchOnMount: false,
     retry: false,
 
     // staleTime: 5 * 60 * 1000,
@@ -126,6 +120,7 @@ const AllProjects = () => {
   return (
     <>
       {/* <p className="text-5xl text-gray-800"> All Projects list</p> */}
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-10">
         {data?.projects?.map((project) => (
           <SingleProjectCard
