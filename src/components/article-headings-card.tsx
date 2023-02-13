@@ -50,6 +50,7 @@ const ArticleHeadingCard = ({
         <div>
           {heading.generatedParagraph && (
             <ShowGeneratedHeading
+              generatedHeading={generatedHeading}
               paragraph={heading.generatedParagraph}
               margin={"ml-7"}
             />
