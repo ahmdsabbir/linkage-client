@@ -5,6 +5,7 @@ import { useRef } from "react";
 import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
+import Progressbar from "../../components/progressbar";
 import RelevantTerm from "../../components/relevant-term";
 import SelectedProjectDetails from "../../components/selected-project-details";
 import Suggestions from "../../components/suggestions";
@@ -30,6 +31,9 @@ const SinglePage = () => {
     <div className="grid grid-cols-1 md:grid-cols-3">
       <div className="col-span-2">
         <ol className="0 flex w-full flex-col items-center  text-sm font-medium text-gray-500 sm:text-base">
+          <li className=" text-gray-700-600 sticky top-24 flex flex-col items-center  justify-center md:w-full ">
+            <Progressbar />
+          </li>
           <li className=" after: flex min-h-[60vh] flex-col items-center justify-center  text-blue-600 md:w-full ">
             <span className="flex items-center text-center after:mx-2 after:font-light after:text-gray-200 after:content-['/'] dark:after:text-gray-500 sm:after:hidden">
               <svg
