@@ -18,7 +18,7 @@ const TargetTitleUrlSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TargetTitleUrl = () => {
+const TargetTitleUrl = ({ relevantTermRef }) => {
   const {
     register,
     handleSubmit,
@@ -35,14 +35,14 @@ const TargetTitleUrl = () => {
     if (data.targetTitle && data.targetURL) {
       await dispatch({ type: "targetTitleUrl", payload: data });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-
+      relevantTermRef.current.scrollIntoView({ behavior: "smooth" });
       reset();
     }
   };
 
   return (
     <section>
-      <div className=" mb-10 flex items-center justify-center ">
+      <div className="mb-10 flex min-h-screen items-center justify-center ">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleTargetTitleURLSubmit)}

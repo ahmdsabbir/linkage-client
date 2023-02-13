@@ -7,6 +7,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -24,7 +25,7 @@ const RelevantTermSchema = z.object({
 });
 
 // eslint-disable-next-line react/display-name
-const RelevantTerm = () => {
+const RelevantTerm = ({ relevantTermRef }, ref) => {
   const {
     state: { selectedProject, targetTitleUrlTerm },
     dispatch,
@@ -103,7 +104,7 @@ const RelevantTerm = () => {
   };
 
   return (
-    <section>
+    <section ref={relevantTermRef}>
       <div className=" my-10  flex items-center justify-center px-6">
         <form
           className="w-full max-w-md"
@@ -142,4 +143,4 @@ const RelevantTerm = () => {
   );
 };
 
-export default RelevantTerm;
+export default forwardRef(RelevantTerm);
