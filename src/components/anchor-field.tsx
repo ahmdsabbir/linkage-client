@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -18,7 +19,7 @@ const AnchorTextSchema = z.object({
     .min(4, "relevant term must be more than 4 characters!"),
 });
 
-const AnchorField = () => {
+const AnchorField = ({ anchorFieldRef }, ref) => {
   const {
     state: { generatedHeading, targetTitleUrlTerm, chosenTitleUrl },
     dispatch,
@@ -74,7 +75,7 @@ const AnchorField = () => {
   };
 
   return (
-    <section>
+    <section ref={anchorFieldRef}>
       <div className=" mx-auto my-10 flex min-h-80v items-center justify-center px-6">
         <form
           className="w-full max-w-md"
@@ -113,4 +114,4 @@ const AnchorField = () => {
   );
 };
 
-export default AnchorField;
+export default forwardRef(AnchorField);

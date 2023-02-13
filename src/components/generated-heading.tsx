@@ -1,7 +1,7 @@
 import { useAppState } from "../context/update-post-context";
 import HeadingOrParagraph from "./heading-or-paragraph";
 
-const GeneratedHeading = () => {
+const GeneratedHeading = ({ anchorFieldRef }) => {
   const {
     state: { generatedHeading },
   } = useAppState();
@@ -17,9 +17,14 @@ const GeneratedHeading = () => {
         }
       />
       {generatedHeading && (
-        <a className="btn-primary btn" href={"#gotoGeneratedParagraph"}>
+        <button
+          className="btn-primary btn"
+          onClick={() =>
+            anchorFieldRef.current.scrollIntoView({ behavior: "smooth" })
+          }
+        >
           Next
-        </a>
+        </button>
       )}
     </>
   );

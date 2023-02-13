@@ -20,6 +20,8 @@ const Basic = () => {
   const relevantTermRef = useRef(null);
   const suggestionsRef = useRef(null);
   const anchorFieldRef = useRef(null);
+  const paragraphRef = useRef(null);
+  const articleHeadingRef = useRef(null);
   // onclick(() => scrollToSection(relevantTerm))
 
   /*   const scrollToSection = (elementRef) => {
@@ -36,16 +38,29 @@ const Basic = () => {
           </div>
           <TargetTitleUrl relevantTermRef={relevantTermRef} />
 
-          <RelevantTerm relevantTermRef={relevantTermRef} />
+          <RelevantTerm
+            suggestionsRef={suggestionsRef}
+            relevantTermRef={relevantTermRef}
+          />
 
-          {!aiSuggestions.length === 0 && <Suggestions />}
+          {aiSuggestions.length && (
+            <Suggestions
+              anchorFieldRef={anchorFieldRef}
+              suggestionsRef={suggestionsRef}
+            />
+          )}
 
-          <AnchorField />
-          {generatedParagraph && <GeneratedParagraph />}
+          <AnchorField anchorFieldRef={anchorFieldRef} />
+          {generatedParagraph && (
+            <GeneratedParagraph
+              articleHeadingRef={articleHeadingRef}
+              paragraphRef={paragraphRef}
+            />
+          )}
 
           <div className="mt-10 mb-10 text-left">
             {generatedParagraph ? (
-              <ArticleHeading />
+              <ArticleHeading articleHeadingRef={articleHeadingRef} />
             ) : (
               <p className="text-gray-700">
                 Paragraph must be generated to go to last step

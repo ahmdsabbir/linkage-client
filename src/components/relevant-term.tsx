@@ -25,7 +25,7 @@ const RelevantTermSchema = z.object({
 });
 
 // eslint-disable-next-line react/display-name
-const RelevantTerm = ({ relevantTermRef }, ref) => {
+const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   const {
     state: { selectedProject, targetTitleUrlTerm },
     dispatch,
@@ -89,7 +89,7 @@ const RelevantTerm = ({ relevantTermRef }, ref) => {
         payload: [...successData?.suggestions],
       });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-
+      suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
       reset();
     },
     onError: async (error) => {

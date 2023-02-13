@@ -9,7 +9,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
@@ -19,7 +19,7 @@ import { useErrorHandling } from "../utils/error-handling";
 import ArticleHeadingCard from "./article-headings-card";
 import ButtonLoader from "./button-loader";
 
-const ArticleHeading = () => {
+const ArticleHeading = ({ articleHeadingRef }, ref) => {
   const queryClient = useQueryClient();
   const queryCache = new QueryCache();
   const { auth } = useAuthState();
@@ -142,7 +142,10 @@ const ArticleHeading = () => {
 
   return (
     <>
-      <div className="order-1 flex min-h-80v flex-grow flex-col sm:order-1 ">
+      <div
+        ref={articleHeadingRef}
+        className="order-1 flex min-h-80v flex-grow flex-col sm:order-1 "
+      >
         <h2 className="text-center text-2xl text-gray-700">Article Headings</h2>
         <p className="text-center text-sm">
           {"These are the heading <h2> and <h3> of the source title"}
@@ -194,4 +197,4 @@ const ArticleHeading = () => {
   );
 };
 
-export default ArticleHeading;
+export default forwardRef(ArticleHeading);
