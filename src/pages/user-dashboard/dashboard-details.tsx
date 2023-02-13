@@ -14,13 +14,9 @@ const DashboardDetails = () => {
             <span className="text-xs font-medium uppercase text-blue-600 dark:text-blue-400">
               Hello,
             </span>
-            <a
-              href="http://localhost:3000/"
-              className="mt-2 block transform text-xl font-semibold text-gray-800 transition-colors duration-300 hover:text-gray-600 hover:underline dark:text-white"
-              tabIndex={0}
-            >
+            <p className="text-gray100 mt-2  block text-xl font-semibold   ">
               Welcome to the dashboard
-            </a>
+            </p>
             <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Please click the button to see your all projects
             </p>
@@ -31,7 +27,7 @@ const DashboardDetails = () => {
               View my Projects
             </NavLink>
           </div>
-          <div className="mt-4">
+          {/*  <div className="mt-4">
             <div className="flex items-center">
               <div className="flex items-center">
                 <img
@@ -52,7 +48,7 @@ const DashboardDetails = () => {
                 {new Date().getFullYear()}
               </span>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

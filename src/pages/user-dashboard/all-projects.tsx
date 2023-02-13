@@ -67,9 +67,11 @@ const AllProjects = () => {
 
   // start project handler
   const handleStartProject = async (id: { id: number | string }) => {
+    console.log(projects);
     const selectedProject = projects?.find(
       (project: { id: { id: string | number } }) => project.id == id
     );
+    console.log(selectedProject);
     await dispatch({
       type: "selectedProject",
       payload: selectedProject,
@@ -115,7 +117,6 @@ const AllProjects = () => {
   });
 
   const handleDeleteProject = (id) => {
-    console.log(id);
     if (id) {
       mutation.mutate(id);
       setShowModal(false);

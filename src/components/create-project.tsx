@@ -139,7 +139,7 @@ const CreateProject = () => {
               {mutation.isLoading ? (
                 <ButtonLoader loadingText={"Creating Your Project"} />
               ) : (
-                "Crate Project"
+                "Create Project"
               )}
             </button>
           </div>

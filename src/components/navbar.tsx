@@ -18,7 +18,10 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 flex items-center justify-between bg-white p-6">
+      <nav
+        className="sticky top-0 z-10
+       flex items-center justify-between bg-white p-6"
+      >
         <div className="flex flex-row items-center">
           <div className="h-10 w-10 p-2">
             <button onClick={handleSidebar} className="mr-1 ">
@@ -39,7 +42,9 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex h-5 w-[90px] items-center justify-center py-[18px] pl-4 pr-[14px]">
-            <p className="text-sm font-bold text-blue-600">linkages</p>
+            <Link to={"/"} className="text-sm font-bold text-blue-600">
+              linkages
+            </Link>
           </div>
         </div>
         {auth.token ? (
