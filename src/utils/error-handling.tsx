@@ -2,17 +2,17 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import { useAuthState } from "../context/auth-context";
+import { useLogout } from "./log-out-handling";
 
 const useErrorHandling = () => {
-  const { handleLogout } = useAuthState();
+  const logout = useLogout();
   const errorFunc = async (error: {
     response: { data: { msg: string } };
     message: string;
   }) => {
     if (error?.response?.data?.msg) {
       if (error?.response?.data?.msg == "Token has expired") {
-        await handleLogout();
+        await logout();
         return error?.response?.data?.msg;
       } else {
         return error?.response?.data?.msg;

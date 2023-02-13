@@ -196,9 +196,3 @@ const AllProjects = () => {
   );
 };
 export default AllProjects;
-
-/* function refetchOnWindowFocus(
-  context: QueryFunctionContext<QueryKey, any>
-): unknown {
-  throw new Error("Function not implemented.");
-} */
