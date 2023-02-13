@@ -3,7 +3,6 @@ import { createContext, useContext, useEffect, useReducer } from "react";
 export const UpdatePostContext = createContext();
 
 const initialState = {
-  projects: [],
   selectedProject: {},
   targetTitleUrlTerm: {
     target_title: "",
@@ -13,28 +12,13 @@ const initialState = {
   aiSuggestions: [],
   chosenTitleUrl: {},
   generatedHeading: "",
-  updateAbove: {
-    oldData: [],
-    newData: [],
-  },
+
   userSteps: 1,
   currentUser: {},
 };
 
 const projectsReducer = (state, action) => {
   switch (action.type) {
-    case "projects":
-      return {
-        ...state,
-        projects: [...action.payload],
-      };
-    case "projectDelete":
-      return {
-        ...state,
-        projects: [
-          ...state.projects.filter((project) => project.id != action.payload),
-        ],
-      };
     case "selectedProject":
       return {
         ...state,
@@ -93,7 +77,6 @@ const UpdatePostProvider = ({ children }) => {
   const [state, dispatch] = useReducer(projectsReducer, initialState);
 
   const clearAppState = async () => {
-    dispatch({ type: "projects", payload: [] });
     dispatch({ type: "selectedProject", payload: {} });
     dispatch({ type: "targetTitleUrl", payload: {} });
     dispatch({ type: "relevantTerm", payload: {} });

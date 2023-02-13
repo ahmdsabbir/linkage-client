@@ -19,10 +19,7 @@ import { useErrorHandling } from "../../utils/error-handling";
 const AllProjects = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuthState();
-  const {
-    state: { projects },
-    dispatch,
-  } = useAppState();
+  const { dispatch } = useAppState();
   const errorFunc = useErrorHandling();
   const navigate = useNavigate();
 
@@ -49,7 +46,6 @@ const AllProjects = () => {
     refetchOnWindowFocus: false,
     // refetchOnMount: false,
     retry: 2,
-
     staleTime: Infinity,
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
 
@@ -61,16 +57,20 @@ const AllProjects = () => {
 
   // start project handler
   const handleStartProject = async (id: { id: number | string }) => {
-    console.log(projects);
-    const selectedProject = projects?.find(
-      (project: { id: { id: string | number } }) => project.id == id
-    );
-    console.log(selectedProject);
-    await dispatch({
-      type: "selectedProject",
-      payload: selectedProject,
-    });
-    navigate(`/dashboard/single-page`);
+    if (!id) {
+      return;
+    } else {
+      const selectedProject = data?.projects?.find(
+        (project: { id: { id: string | number } }) => project.id == id
+      );
+      if (selectedProject) {
+        await dispatch({
+          type: "selectedProject",
+          payload: selectedProject,
+        });
+        navigate(`/dashboard/single-page`);
+      }
+    }
   };
 
   /* const handleEditProject = async (id) => {
@@ -106,7 +106,7 @@ const AllProjects = () => {
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
-      toast.warning(errorMsg);
+      toast.error(errorMsg);
     },
   });
 
