@@ -44,11 +44,7 @@ const Progressbar = () => {
       >
         Step 5
       </li>
-      {/* <li
-        className={` step ${generatedParagraph && "step-primary text-primary"}`}
-      >
-        Step 6
-      </li> */}
+      <li className={` step `}>Completed</li>
     </ul>
   );
 };

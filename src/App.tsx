@@ -15,9 +15,9 @@ import Settings from "./pages/dummy/settings";
 import Users from "./pages/dummy/users";
 import Home from "./pages/home";
 import AllProjects from "./pages/user-dashboard/all-projects";
+import Basic from "./pages/user-dashboard/basic";
 import DashboardDetails from "./pages/user-dashboard/dashboard-details";
 import DashboardLayout from "./pages/user-dashboard/dashboard-layout";
-import SinglePage from "./pages/user-dashboard/single-page";
 import RootLayout from "./root-layout";
 
 const router = createBrowserRouter(
@@ -31,7 +31,7 @@ const router = createBrowserRouter(
         <Route path="create-project" element={<CreateProject />} />
         <Route path="edit-project" element={<EditProject />} />
         <Route path="all-projects" element={<AllProjects />} />
-        <Route path="single-page" element={<SinglePage />} />
+        <Route path="basic" element={<Basic />} />
         <Route path="history" element={<History />} />
         <Route path="reporters" element={<Reporters />} />
         <Route path="users" element={<Users />} />

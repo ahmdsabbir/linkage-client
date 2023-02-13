@@ -68,7 +68,7 @@ const AllProjects = () => {
           type: "selectedProject",
           payload: selectedProject,
         });
-        navigate(`/dashboard/single-page`);
+        navigate(`/dashboard/basic`);
       }
     }
   };

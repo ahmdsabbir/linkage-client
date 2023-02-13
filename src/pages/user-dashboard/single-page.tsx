@@ -12,7 +12,7 @@ import Suggestions from "../../components/suggestions";
 import TargetTitleUrl from "../../components/target-title-url";
 import { useAppState } from "../../context/update-post-context";
 
-const SinglePage = () => {
+const Basic = () => {
   const {
     state: { generatedParagraph },
   } = useAppState();
@@ -177,4 +177,4 @@ const SinglePage = () => {
   );
 };
 
-export default SinglePage;
+export default Basic;
