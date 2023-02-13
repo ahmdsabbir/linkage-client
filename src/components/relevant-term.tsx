@@ -105,7 +105,7 @@ const RelevantTerm = ({ relevantTermRef }, ref) => {
 
   return (
     <section ref={relevantTermRef}>
-      <div className=" my-10  flex items-center justify-center px-6">
+      <div className=" my-10 flex  min-h-80v items-center justify-center px-6">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleRelevantSubmit)}

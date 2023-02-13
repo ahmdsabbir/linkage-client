@@ -42,7 +42,7 @@ const TargetTitleUrl = ({ relevantTermRef }) => {
 
   return (
     <section>
-      <div className="mb-10 flex min-h-10v items-center justify-center ">
+      <div className="mb-10 flex min-h-80v items-center justify-center ">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleTargetTitleURLSubmit)}

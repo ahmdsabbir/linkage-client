@@ -142,7 +142,7 @@ const ArticleHeading = () => {
 
   return (
     <>
-      <div className=" order-1 flex flex-grow flex-col sm:order-1 ">
+      <div className="order-1 flex min-h-80v flex-grow flex-col sm:order-1 ">
         <h2 className="text-center text-2xl text-gray-700">Article Headings</h2>
         <p className="text-center text-sm">
           {"These are the heading <h2> and <h3> of the source title"}
