@@ -48,9 +48,9 @@ const AllProjects = () => {
     queryFn: getProjects,
     refetchOnWindowFocus: false,
     // refetchOnMount: false,
-    retry: false,
+    retry: 2,
 
-    // staleTime: 5 * 60 * 1000,
+    staleTime: Infinity,
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
 
     onError: async (error) => {
