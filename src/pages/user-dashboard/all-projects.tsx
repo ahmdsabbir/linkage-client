@@ -55,7 +55,7 @@ const AllProjects = () => {
     refetchOnWindowFocus: false,
     refetchOnMount: false,
     retry: false,
-    // refetchOnReconnect: false,
+
     // staleTime: 5 * 60 * 1000,
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
 

@@ -22,7 +22,7 @@ const Navbar = () => {
         className="sticky top-0 z-10
        flex items-center justify-between bg-white p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6"
       >
-        <div className="flex flex-row items-center">
+        <div className="flex flex-row items-center gap-3">
           <div className="h-10 w-10 p-2">
             <button onClick={handleSidebar} className="mr-1 ">
               <svg
@@ -43,7 +43,13 @@ const Navbar = () => {
           </div>
           <div className="flex h-5 w-[90px] items-center justify-center py-[18px] pl-4 pr-[14px]">
             <Link to={"/"} className="text-sm font-bold text-blue-600">
-              linkages
+              <div className="h-auto w-32">
+                <img
+                  src="../assets/img/logo.png"
+                  alt="linkages.io"
+                  className="h-full w-full"
+                />
+              </div>
             </Link>
           </div>
         </div>
