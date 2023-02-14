@@ -64,8 +64,10 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
           )}
         </div>
         <div className="flex flex-col">
-          <ChosenTitleUrl />
-          <GeneratedHeading anchorFieldRef={anchorFieldRef} />
+          <div className="sticky top-20 ">
+            <ChosenTitleUrl />
+            <GeneratedHeading anchorFieldRef={anchorFieldRef} />
+          </div>
         </div>
       </div>
     </section>
