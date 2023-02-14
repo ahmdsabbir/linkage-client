@@ -81,17 +81,18 @@ const SelectedProjectDetails = () => {
                 )}
 
                 {generatedHeading && (
-                  <div className="flex flex-col gap-1">
-                    <span className="font-medium text-gray-500">
+                  <div className="flex flex-col gap-1 ">
+                    <div className=" font-medium text-gray-500">
                       Generated Heading
-                    </span>
-                    <span className="inline-flex items-center justify-between space-x-1">
-                      <span className="">{generatedHeading}</span>
+                    </div>
+                    <div className="relative  ">
+                      <div className="">{generatedHeading}</div>
+
                       <CopyToClipboard
                         text={generatedHeading}
                         onCopy={() => setIsCopied(true)}
                       >
-                        <button className="rounded  border  p-2 text-gray-200 hover:bg-primary/25">
+                        <button className="absolute right-0 -top-8 rounded  border  p-1  text-gray-200 hover:bg-primary/25">
                           {isCopied ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -125,20 +126,22 @@ const SelectedProjectDetails = () => {
                           )}
                         </button>
                       </CopyToClipboard>
-                    </span>
+                    </div>
                   </div>
                 )}
                 {generatedParagraph && (
-                  <div className="flex flex-col gap-1">
-                    <span>
-                      <span className="font-medium text-gray-800">
-                        {generatedParagraph}
-                      </span>
+                  <div className="flex flex-col gap-1 ">
+                    <div className=" font-medium text-gray-500">
+                      Generated Paragraph
+                    </div>
+                    <div className="relative  ">
+                      <div className="">{generatedParagraph}</div>
+
                       <CopyToClipboard
                         text={generatedParagraph}
                         onCopy={() => setIsCopied(true)}
                       >
-                        <button className="rounded  border  p-2 text-gray-200 hover:bg-primary/25">
+                        <button className="absolute right-0 -top-8 rounded  border  p-1  text-gray-200 hover:bg-primary/25">
                           {isCopied ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +175,7 @@ const SelectedProjectDetails = () => {
                           )}
                         </button>
                       </CopyToClipboard>
-                    </span>
+                    </div>
                   </div>
                 )}
               </div>
