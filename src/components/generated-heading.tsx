@@ -1,12 +1,13 @@
+import { forwardRef } from "react";
 import { useAppState } from "../context/update-post-context";
 import HeadingOrParagraph from "./heading-or-paragraph";
 
-const GeneratedHeading = ({ anchorFieldRef }) => {
+const GeneratedHeading = ({ anchorFieldRef, articleHeadingRef }, ref) => {
   const {
     state: { generatedHeading },
   } = useAppState();
   return (
-    <>
+    <div ref={articleHeadingRef}>
       <HeadingOrParagraph
         sectionName={`Generated Heading`}
         sectionHelperText={`AI Generated Relevant Heading`}
@@ -26,8 +27,8 @@ const GeneratedHeading = ({ anchorFieldRef }) => {
           Next
         </button>
       )}
-    </>
+    </div>
   );
 };
 
-export default GeneratedHeading;
+export default forwardRef(GeneratedHeading);

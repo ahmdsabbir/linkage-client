@@ -43,14 +43,15 @@ const Basic = () => {
             relevantTermRef={relevantTermRef}
           />
 
-          {aiSuggestions.length && (
-            <Suggestions
-              anchorFieldRef={anchorFieldRef}
-              suggestionsRef={suggestionsRef}
-            />
-          )}
+          <Suggestions
+            anchorFieldRef={anchorFieldRef}
+            suggestionsRef={suggestionsRef}
+          />
 
-          <AnchorField anchorFieldRef={anchorFieldRef} />
+          <AnchorField
+            anchorFieldRef={anchorFieldRef}
+            paragraphRef={paragraphRef}
+          />
           {generatedParagraph && (
             <GeneratedParagraph
               articleHeadingRef={articleHeadingRef}

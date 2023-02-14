@@ -19,7 +19,7 @@ const AnchorTextSchema = z.object({
     .min(4, "relevant term must be more than 4 characters!"),
 });
 
-const AnchorField = ({ anchorFieldRef }, ref) => {
+const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
   const {
     state: { generatedHeading, targetTitleUrlTerm, chosenTitleUrl },
     dispatch,
@@ -62,7 +62,7 @@ const AnchorField = ({ anchorFieldRef }, ref) => {
         type: "generatedParagraph",
         payload: para.paragraph,
       });
-      reset();
+      paragraphRef.current.scrollIntoView({ behavior: "smooth" });
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
