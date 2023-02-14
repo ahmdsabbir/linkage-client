@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -18,7 +19,7 @@ const TargetTitleUrlSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TargetTitleUrl = () => {
+const TargetTitleUrl = ({ relevantTermRef, targetTitleRef }, ref) => {
   const {
     register,
     handleSubmit,
@@ -35,47 +36,53 @@ const TargetTitleUrl = () => {
     if (data.targetTitle && data.targetURL) {
       await dispatch({ type: "targetTitleUrl", payload: data });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-
+      relevantTermRef.current.scrollIntoView({ behavior: "smooth" });
       reset();
     }
   };
 
   return (
     <section>
-      <div className=" mb-10 flex items-center justify-center ">
-        <form
-          className="w-full max-w-md"
-          onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
-        >
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
-            Input Your Target Title and url here
-          </h1>
-          <Input
-            id="target Title"
-            label="Target Title"
-            type={"text"}
-            placeholder={"target Title"}
-            infoText={"aka, Target Post"}
-            tooltipText={"aka, Target Post"}
-            inputProps={register("targetTitle")}
-            error={errors.targetTitle?.message as string}
-          />
-          <Input
-            id="target URL"
-            label="Target URL"
-            type={"text"}
-            placeholder={"target URL"}
-            inputProps={register("targetURL")}
-            error={errors.targetURL?.message as string}
-          />
-
-          <div className="mt-4">
-            <button className="btn-primary btn">Next</button>
-          </div>
-        </form>
+      <div
+        ref={targetTitleRef}
+        className="mb-10 flex min-h-80v items-center justify-center "
+      >
+        <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
+          <form
+            className="w-full max-w-md"
+            onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
+          >
+            <Input
+              id="target Title"
+              label="Target Post Title"
+              type={"text"}
+              placeholder={"example: My Awesome Post"}
+              // infoText={"aka, Target Post"}
+              tooltipText={
+                "Insert the title/main topic of the post you’re trying to build links for. Our AI will make predictions based on this title, thus you should change/modify "
+              }
+              inputProps={register("targetTitle")}
+              error={errors.targetTitle?.message as string}
+            />
+            <Input
+              id="target URL"
+              label="Target Post URL"
+              type={"text"}
+              placeholder={"example: https://example.com/my-awesome-post"}
+              tooltipText={
+                "Insert the URL of the post you’re trying to build links for. This URL will "
+              }
+              inputProps={register("targetURL")}
+              error={errors.targetURL?.message as string}
+            />
+            <div className="mt-4">
+              <button className="btn-primary btn">Continue</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
 };
 
-export default TargetTitleUrl;
+export default forwardRef(TargetTitleUrl);

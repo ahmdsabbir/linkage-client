@@ -7,6 +7,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
@@ -24,7 +25,7 @@ const RelevantTermSchema = z.object({
 });
 
 // eslint-disable-next-line react/display-name
-const RelevantTerm = () => {
+const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   const {
     state: { selectedProject, targetTitleUrlTerm },
     dispatch,
@@ -88,7 +89,7 @@ const RelevantTerm = () => {
         payload: [...successData?.suggestions],
       });
       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-
+      suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
       reset();
     },
     onError: async (error) => {
@@ -103,43 +104,45 @@ const RelevantTerm = () => {
   };
 
   return (
-    <section>
-      <div className=" my-10  flex items-center justify-center px-6">
-        <form
-          className="w-full max-w-md"
-          onSubmit={handleSubmit(handleRelevantSubmit)}
-        >
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
-            Input Your Relevant Term
-          </h1>
-          <Input
-            id={"relevantTerm"}
-            label={"Relevant Term"}
-            infoText={"aka, Target Post"}
-            type={"text"}
-            placeholder={"relevant term"}
-            inputProps={register("relevantTerm")}
-            error={errors.relevantTerm?.message as string}
-          />
+    <section ref={relevantTermRef}>
+      <div className=" my-10 flex min-h-80v  items-center justify-center px-6 pt-20">
+        <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
+          <form
+            className="w-full max-w-md"
+            onSubmit={handleSubmit(handleRelevantSubmit)}
+          >
+            <Input
+              id={"relevantTerm"}
+              label={"Relevant Term"}
+              // infoText={"aka, Target Post"}
+              type={"text"}
+              placeholder={"example: wise turtle"}
+              tooltipText={
+                "This is the term that we will base our suggestions on."
+              }
+              inputProps={register("relevantTerm")}
+              error={errors.relevantTerm?.message as string}
+            />
 
-          <div className="mt-4">
-            <button
-              className={`btn ${
-                mutation.isLoading ? "btn-disabled " : "btn-primary "
-              }`}
-              disabled={mutation.isLoading ? true : false}
-            >
-              {mutation.isLoading ? (
-                <ButtonLoader loadingText={"Getting Suggestions"} />
-              ) : (
-                "Get Suggestions"
-              )}
-            </button>
-          </div>
-        </form>
+            <div className="mt-4">
+              <button
+                className={`btn ${
+                  mutation.isLoading ? "btn-disabled " : "btn-primary "
+                }`}
+                disabled={mutation.isLoading ? true : false}
+              >
+                {mutation.isLoading ? (
+                  <ButtonLoader loadingText={"Getting Suggestions"} />
+                ) : (
+                  "Get Suggestions"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
 };
 
-export default RelevantTerm;
+export default forwardRef(RelevantTerm);

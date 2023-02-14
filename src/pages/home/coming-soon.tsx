@@ -4,18 +4,18 @@ const ComingSoon = () => {
       <section className="flex flex-1 items-center">
         <div className="flex w-full flex-col ">
           <h1 className="text-center text-5xl font-extrabold lg:text-7xl 2xl:text-8xl">
-            <span className="bg-gradient-to-br from-teal-500 via-indigo-500 to-sky-500 bg-clip-text text-transparent dark:from-teal-200 dark:via-indigo-300 dark:to-sky-500">
+            <span className="bg-gradient-to-br from-teal-500 via-indigo-500 to-sky-500 bg-clip-text text-transparent ">
               Coming
             </span>
-            <span className="bg-gradient-to-tr from-blue-500 via-pink-500 to-red-500 bg-clip-text text-transparent dark:from-sky-300 dark:via-pink-300 dark:to-red-500">
+            <span className="bg-gradient-to-tr from-blue-500 via-pink-500 to-red-500 bg-clip-text text-transparent ">
               Soon
             </span>
           </h1>
-          <p className="mx-auto mt-6 max-w-3xl text-center text-lg text-gray-700 dark:text-white md:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit alias
-            nihil incidunt.
+          <p className="mx-auto mt-6 max-w-3xl text-center text-lg text-gray-700 ">
+            The app is currently on alpha version. Bear with us, more handy
+            features will be added soon.
           </p>
-          <div className="mt-8 flex flex-col space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
+          {/*  <div className="mt-8 flex flex-col space-y-3 sm:-mx-2 sm:flex-row sm:justify-center sm:space-y-0">
             <input
               id="email"
               type="text"
@@ -26,9 +26,9 @@ const ComingSoon = () => {
               Notify Me
             </button>
           </div>
-          <p className="text-md mt-8 text-center text-gray-700  md:text-xl">
+           <p className="text-md mt-8 text-center text-gray-700  md:text-xl">
             Notify me when App is launched :)
-          </p>
+          </p> */}
         </div>
       </section>
       <footer className="mt-12 flex flex-col items-center sm:flex-row sm:justify-between">

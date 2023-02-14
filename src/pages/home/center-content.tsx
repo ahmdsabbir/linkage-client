@@ -2,14 +2,14 @@ const CenterContent = () => {
   return (
     <div className="container mx-auto px-6 py-16 text-center">
       <div className="mx-auto max-w-lg">
-        <h1 className="text-3xl font-semibold text-gray-800 dark:text-white lg:text-4xl">
-          Create beautiful website layout with Meraki UI.
+        <h1 className="font-semibold text-gray-800 text-3xl  lg:text-4xl">
+          Try Our Silo App!
         </h1>
-        <p className="mt-6 text-gray-500 dark:text-gray-300">
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Libero
-          similique obcaecati illum mollitia.
+        <p className="mt-6 text-gray-500 text-base">
+          Cluster your articles together following silo internal linking to
+          build relevancy!
         </p>
-        <div className="mx-auto mt-6 w-full max-w-sm rounded-md border bg-transparent focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 focus-within:ring-opacity-40 dark:border-gray-700 dark:focus-within:border-blue-300">
+        {/*    <div className="mx-auto mt-6 w-full max-w-sm rounded-md border bg-transparent focus-within:border-blue-400 focus-within:ring focus-within:ring-blue-300 focus-within:ring-opacity-40 ">
           <form className="flex flex-col md:flex-row">
             <input
               type="email"
@@ -23,7 +23,7 @@ const CenterContent = () => {
               Join Us
             </button>
           </form>
-        </div>
+        </div> */}
       </div>
       <div className="mx-auto mt-20 max-w-screen-xl">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-6 lg:grid-cols-5">

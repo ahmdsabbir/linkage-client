@@ -9,7 +9,7 @@ import {
   useQuery,
   useQueryClient,
 } from "@tanstack/react-query";
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
@@ -19,7 +19,10 @@ import { useErrorHandling } from "../utils/error-handling";
 import ArticleHeadingCard from "./article-headings-card";
 import ButtonLoader from "./button-loader";
 
-const ArticleHeading = () => {
+const ArticleHeading = (
+  { articleHeadingRef, targetTitleRef, relevantTermRef },
+  ref
+) => {
   const queryClient = useQueryClient();
   const queryCache = new QueryCache();
   const { auth } = useAuthState();
@@ -34,6 +37,7 @@ const ArticleHeading = () => {
       generatedParagraph,
     },
     clearProjectState,
+    clearRelevantProject,
     dispatch,
   } = useAppState();
 
@@ -142,12 +146,17 @@ const ArticleHeading = () => {
 
   return (
     <>
-      <div className=" order-1 flex flex-grow flex-col sm:order-1 ">
-        <h2 className="text-center text-2xl text-gray-700">Article Headings</h2>
-        <p className="text-center text-sm">
+      <div
+        ref={articleHeadingRef}
+        className="order-1 flex min-h-80v flex-grow flex-col  pt-40 sm:order-1"
+      >
+        <h2 className="text-center font-medium text-gray-700 text-2xl">
+          Article Headings
+        </h2>
+        <p className="text-center text-gray-700 text-sm">
           {"These are the heading <h2> and <h3> of the source title"}
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-gray-700 text-sm">
           {"Choose one to add the generated content above the heading"}
         </p>
 
@@ -155,8 +164,7 @@ const ArticleHeading = () => {
           <>{"Getting article heading"}</>
         ) : (
           <>
-            {" "}
-            <div className=" flex items-center justify-start">
+            <div className=" flex flex-col items-center justify-center">
               <div className="mt-5 space-y-3">
                 {checkData?.map((heading, i) => (
                   <ArticleHeadingCard
@@ -167,25 +175,51 @@ const ArticleHeading = () => {
                   />
                 ))}
               </div>
-            </div>
-            <div className="mt-5 flex items-center justify-start">
-              {updatePost && (
-                <button
-                  className={`btn ml-5 w-72 max-w-6xl ${
-                    mutation.isLoading ? "btn-disabled " : "btn-primary "
-                  }`}
-                  onClick={() => handleUpdateToTheSite(updatePost)}
-                  disabled={mutation.isLoading ? true : false}
-                >
-                  {mutation.isLoading ? (
-                    <ButtonLoader loadingText={"Updating..."} />
-                  ) : mutation.isSuccess ? (
-                    "Updated"
-                  ) : (
-                    "Update post"
+              <div className="mt-5 flex flex-col  ">
+                <div>
+                  {updatePost && (
+                    <div className="flex flex-col justify-between space-x-2 sm:flex-row">
+                      <button
+                        className={`btn ml-5 w-72 max-w-6xl ${
+                          mutation.isLoading ? "btn-disabled " : "btn-primary "
+                        }`}
+                        onClick={() => handleUpdateToTheSite(updatePost)}
+                        disabled={mutation.isLoading ? true : false}
+                      >
+                        {mutation.isLoading ? (
+                          <ButtonLoader loadingText={"Updating..."} />
+                        ) : mutation.isSuccess ? (
+                          "Updated"
+                        ) : (
+                          "Update post"
+                        )}
+                      </button>
+                      <button
+                        className="btn-primary btn self-start"
+                        onClick={() => {
+                          relevantTermRef.current.scrollIntoView({
+                            behavior: "smooth",
+                          });
+                          clearRelevantProject();
+                        }}
+                      >
+                        Build link for same post
+                      </button>
+                      <button
+                        className="btn-primary btn self-start"
+                        onClick={() => {
+                          targetTitleRef.current.scrollIntoView({
+                            behavior: "smooth",
+                          });
+                          clearProjectState();
+                        }}
+                      >
+                        Start new
+                      </button>
+                    </div>
                   )}
-                </button>
-              )}
+                </div>
+              </div>
             </div>
           </>
         )}
@@ -194,4 +228,4 @@ const ArticleHeading = () => {
   );
 };
 
-export default ArticleHeading;
+export default forwardRef(ArticleHeading);

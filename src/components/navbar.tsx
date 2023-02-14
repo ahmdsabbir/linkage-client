@@ -18,8 +18,11 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="sticky top-0 flex items-center justify-between bg-white p-6">
-        <div className="flex flex-row items-center">
+      <nav
+        className="sticky top-0 z-10 flex items-center
+       justify-between  bg-white p-2 shadow sm:p-3 md:p-4 lg:p-5 xl:p-6"
+      >
+        <div className="flex flex-row items-center gap-3">
           <div className="h-10 w-10 p-2">
             <button onClick={handleSidebar} className="mr-1 ">
               <svg
@@ -39,16 +42,30 @@ const Navbar = () => {
             </button>
           </div>
           <div className="flex h-5 w-[90px] items-center justify-center py-[18px] pl-4 pr-[14px]">
-            <p className="text-sm font-bold text-blue-600">linkages</p>
+            <Link to={"/"} className="text-sm font-bold text-blue-600">
+              <div className="h-auto w-32">
+                <img
+                  src="../assets/img/logo.png"
+                  alt="linkages.io"
+                  className="h-full w-full"
+                />
+              </div>
+            </Link>
           </div>
         </div>
         {auth.token ? (
-          <button
-            onClick={logout}
-            className="btn-primary btn mr-2 font-semibold"
-          >
-            Logout
-          </button>
+          <div className="space-x-3">
+            <span className=" font-medium text-gray-700">
+              Remaining Credit: 05
+            </span>
+
+            <button
+              onClick={logout}
+              className="btn-primary btn mr-2 font-semibold"
+            >
+              Logout
+            </button>
+          </div>
         ) : (
           <Link className="btn-primary btn mr-2 font-semibold" to={"/login"}>
             Log In

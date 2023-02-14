@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import { useAuthState } from "../context/auth-context";
-import { useLogout } from "../utils/log-out-handling";
 
 interface SidebarProps {
   isSidebar: boolean;
@@ -9,7 +8,7 @@ interface SidebarProps {
 
 const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
   const { auth } = useAuthState();
-  const logout = useLogout();
+
   return (
     <aside
       onClick={handleSidebar}
@@ -97,7 +96,7 @@ ${
                     />
                   </svg>
                   <span className="mx-2 text-sm font-medium">
-                    Crate project
+                    Create project
                   </span>
                 </NavLink>
                 <NavLink
@@ -231,7 +230,7 @@ ${
                   <span className="mx-2 text-sm font-medium">Setting</span>
                 </NavLink>
               </nav>
-              <div className="mt-6">
+              {/*  <div className="mt-6">
                 <div className="mt-6 flex items-center justify-between">
                   <a
                     href=" http://127.0.0.1:3000/"
@@ -266,7 +265,7 @@ ${
                     </svg>
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           ) : (
             <p className="text-gray-900">Please login in to see all details</p>

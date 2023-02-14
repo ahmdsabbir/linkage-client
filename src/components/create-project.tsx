@@ -71,6 +71,11 @@ const CreateProject = () => {
     onSuccess: async (successData) => {
       // Invalidate and refetch
       await queryClient.invalidateQueries({ queryKey: ["projects"] });
+      console.log(
+        await queryClient.invalidateQueries({ queryKey: ["projects"] })
+      );
+      console.log(successData);
+
       toast.success("project created successfully");
       reset();
     },
@@ -81,7 +86,7 @@ const CreateProject = () => {
   });
 
   const handleCreateProjectSubmit = async (data) => {
-    mutation.mutate(data);
+    await mutation.mutateAsync(data);
   };
   return (
     <section>
@@ -139,7 +144,7 @@ const CreateProject = () => {
               {mutation.isLoading ? (
                 <ButtonLoader loadingText={"Creating Your Project"} />
               ) : (
-                "Crate Project"
+                "Create Project"
               )}
             </button>
           </div>

@@ -36,10 +36,10 @@ const EditProject = () => {
             placeholder={"Wp App. Password"}
           />
           <Input
-            id="Wp App. Password"
-            label="Wp App. Password"
-            type={"Password"}
-            placeholder={"Wp App. Password"}
+            id="projectCreatedDate"
+            label="Project Created At"
+            type={"text"}
+            placeholder={"Project created at"}
             isDisabled={true}
           />
 

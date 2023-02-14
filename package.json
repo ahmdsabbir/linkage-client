@@ -1,13 +1,12 @@
 {
   "name": "linkages.io",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "AI based interlinking tool",
   "main": "index.js",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint \"src/**/*.{ts,tsx,js,jsx}\" --quiet",
@@ -24,10 +23,12 @@
     "cssnano": "^5.1.14",
     "daisyui": "^2.50.0",
     "react": "^18.2.0",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.1",
+    "tailwindcss-fluid-type": "^2.0.3",
     "zod": "^3.20.2"
   },
   "devDependencies": {

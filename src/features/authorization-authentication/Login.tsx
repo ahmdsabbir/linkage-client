@@ -71,7 +71,7 @@ const Login = () => {
 
   return (
     <section className="bg-white">
-      <div className="container mx-auto flex min-h-[80vh] items-center justify-center px-6">
+      <div className="container mx-auto flex min-h-[80vh] flex-col items-center justify-center space-y-3 px-6">
         <form
           className="w-full max-w-md"
           onSubmit={handleSubmit(handLoginSubmit)}
@@ -82,8 +82,8 @@ const Login = () => {
             alt=""
           /> */}
 
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
-            sign In
+          <h1 className="mt-3 pb-4 text-center font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
+            Login
           </h1>
           <Input
             type={"email"}
@@ -135,17 +135,17 @@ const Login = () => {
           />
 
           <div className="mt-6">
-            <button className="btn-primary btn w-full">Sign in</button>
+            <button className="btn-primary btn w-full">Log in</button>
           </div>
         </form>
-      </div>
-      <div className=" text-center ">
-        <Link
-          to="/register"
-          className="text-sm text-dodger-blue-500 hover:underline"
-        >
-          Don’t have an account yet? Register
-        </Link>
+        <div className=" text-center ">
+          <Link
+            to="/register"
+            className="text-dodger-blue-500 text-sm hover:underline"
+          >
+            Don’t have an account yet? Register
+          </Link>
+        </div>
       </div>
     </section>
   );

@@ -5,12 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import {
-  QueryCache,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -24,14 +19,10 @@ import { useErrorHandling } from "../../utils/error-handling";
 const AllProjects = () => {
   const queryClient = useQueryClient();
   const { auth } = useAuthState();
-  const {
-    state: { projects },
-    dispatch,
-  } = useAppState();
+  const { dispatch } = useAppState();
   const errorFunc = useErrorHandling();
   const navigate = useNavigate();
 
-  const queryCache = new QueryCache();
   const [showModal, setShowModal] = useState(false);
   const [projectId, setProjectId] = useState(null);
 
@@ -49,14 +40,13 @@ const AllProjects = () => {
     return response.data;
   };
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryKey: ["projects"],
     queryFn: getProjects,
     refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    retry: false,
-    // refetchOnReconnect: false,
-    // staleTime: 5 * 60 * 1000,
+    // refetchOnMount: false,
+    retry: 2,
+    staleTime: Infinity,
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
 
     onError: async (error) => {
@@ -67,14 +57,20 @@ const AllProjects = () => {
 
   // start project handler
   const handleStartProject = async (id: { id: number | string }) => {
-    const selectedProject = projects?.find(
-      (project: { id: { id: string | number } }) => project.id == id
-    );
-    await dispatch({
-      type: "selectedProject",
-      payload: selectedProject,
-    });
-    navigate(`/dashboard/single-page`);
+    if (!id) {
+      return;
+    } else {
+      const selectedProject = data?.projects?.find(
+        (project: { id: { id: string | number } }) => project.id == id
+      );
+      if (selectedProject) {
+        await dispatch({
+          type: "selectedProject",
+          payload: selectedProject,
+        });
+        navigate(`/dashboard/basic`);
+      }
+    }
   };
 
   /* const handleEditProject = async (id) => {
@@ -110,12 +106,11 @@ const AllProjects = () => {
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
-      toast.warning(errorMsg);
+      toast.error(errorMsg);
     },
   });
 
   const handleDeleteProject = (id) => {
-    console.log(id);
     if (id) {
       mutation.mutate(id);
       setShowModal(false);
@@ -125,6 +120,7 @@ const AllProjects = () => {
   return (
     <>
       {/* <p className="text-5xl text-gray-800"> All Projects list</p> */}
+
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-10">
         {data?.projects?.map((project) => (
           <SingleProjectCard
@@ -200,9 +196,3 @@ const AllProjects = () => {
   );
 };
 export default AllProjects;
-
-/* function refetchOnWindowFocus(
-  context: QueryFunctionContext<QueryKey, any>
-): unknown {
-  throw new Error("Function not implemented.");
-} */
