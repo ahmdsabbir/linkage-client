@@ -106,38 +106,40 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   return (
     <section ref={relevantTermRef}>
       <div className=" my-10 flex  min-h-80v items-center justify-center px-6">
-        <form
-          className="w-full max-w-md"
-          onSubmit={handleSubmit(handleRelevantSubmit)}
-        >
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
-            Input Your Relevant Term
-          </h1>
-          <Input
-            id={"relevantTerm"}
-            label={"Relevant Term"}
-            infoText={"aka, Target Post"}
-            type={"text"}
-            placeholder={"relevant term"}
-            inputProps={register("relevantTerm")}
-            error={errors.relevantTerm?.message as string}
-          />
+        <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
+          <form
+            className="w-full max-w-md"
+            onSubmit={handleSubmit(handleRelevantSubmit)}
+          >
+            <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
+              Input Your Relevant Term
+            </h1>
+            <Input
+              id={"relevantTerm"}
+              label={"Relevant Term"}
+              infoText={"aka, Target Post"}
+              type={"text"}
+              placeholder={"relevant term"}
+              inputProps={register("relevantTerm")}
+              error={errors.relevantTerm?.message as string}
+            />
 
-          <div className="mt-4">
-            <button
-              className={`btn ${
-                mutation.isLoading ? "btn-disabled " : "btn-primary "
-              }`}
-              disabled={mutation.isLoading ? true : false}
-            >
-              {mutation.isLoading ? (
-                <ButtonLoader loadingText={"Getting Suggestions"} />
-              ) : (
-                "Get Suggestions"
-              )}
-            </button>
-          </div>
-        </form>
+            <div className="mt-4">
+              <button
+                className={`btn ${
+                  mutation.isLoading ? "btn-disabled " : "btn-primary "
+                }`}
+                disabled={mutation.isLoading ? true : false}
+              >
+                {mutation.isLoading ? (
+                  <ButtonLoader loadingText={"Getting Suggestions"} />
+                ) : (
+                  "Get Suggestions"
+                )}
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );

@@ -43,36 +43,38 @@ const TargetTitleUrl = ({ relevantTermRef }) => {
   return (
     <section>
       <div className="mb-10 flex min-h-80v items-center justify-center ">
-        <form
-          className="w-full max-w-md"
-          onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
-        >
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
-            Input Your Target Title and url here
-          </h1>
-          <Input
-            id="target Title"
-            label="Target Title"
-            type={"text"}
-            placeholder={"target Title"}
-            infoText={"aka, Target Post"}
-            tooltipText={"aka, Target Post"}
-            inputProps={register("targetTitle")}
-            error={errors.targetTitle?.message as string}
-          />
-          <Input
-            id="target URL"
-            label="Target URL"
-            type={"text"}
-            placeholder={"target URL"}
-            inputProps={register("targetURL")}
-            error={errors.targetURL?.message as string}
-          />
+        <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
+          <form
+            className="w-full max-w-md"
+            onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
+          >
+            <h1 className="mt-4 mb-2 text-2xl font-semibold   text-gray-700 sm:text-3xl">
+              Input target Title and Url here
+            </h1>
+            <Input
+              id="target Title"
+              label="Target Title"
+              type={"text"}
+              placeholder={"target Title"}
+              infoText={"aka, Target Post"}
+              tooltipText={"aka, Target Post"}
+              inputProps={register("targetTitle")}
+              error={errors.targetTitle?.message as string}
+            />
+            <Input
+              id="target URL"
+              label="Target URL"
+              type={"text"}
+              placeholder={"target URL"}
+              inputProps={register("targetURL")}
+              error={errors.targetURL?.message as string}
+            />
 
-          <div className="mt-4">
-            <button className="btn-primary btn">Next</button>
-          </div>
-        </form>
+            <div className="mt-4">
+              <button className="btn-primary btn">Next</button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
   );
