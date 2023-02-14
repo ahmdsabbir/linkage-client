@@ -118,8 +118,8 @@ const ChosenTitleUrl = () => {
             )}
 
             <p className="mt-3 text-gray-400 text-sm">
-              You can edit the post title as your needs before you hit the
-              generate heading button !
+              Before you hit the 'Generate Heading' button, you can modify your
+              post title according to your requirements!
             </p>
           </div>
           <div>
