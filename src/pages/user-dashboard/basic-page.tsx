@@ -33,10 +33,10 @@ const Basic = () => {
   return (
     <>
       <div
-        className="md:gr id-cols-3 grid
-      grid-cols-1"
+        className="grid grid-cols-1
+      md:grid-cols-3"
       >
-        <div className="col-span-2 grid grid-cols-1">
+        <div className="col-span-2 grid grid-cols-1 ">
           <div className="sticky top-24 z-20 flex items-center justify-center self-center">
             <Progressbar />
           </div>
@@ -64,6 +64,7 @@ const Basic = () => {
             articleHeadingRef={articleHeadingRef}
             paragraphRef={paragraphRef}
             relevantTermRef={relevantTermRef}
+            targetTitleRef={targetTitleRef}
           />
 
           <div className="mt-10 mb-10 text-left">
