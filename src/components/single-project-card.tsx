@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { Link } from "react-router-dom";
 
 interface SingleProjectCardProps {
   id: string | number;
@@ -58,7 +57,7 @@ const SingleProjectCard = ({
         </div>
       </div>
       {/* CTA */}
-      <div className=" mt-4 flex items-center justify-between border-t border-t-gray-200 pt-4 ">
+      <div className=" mt-4 flex items-center justify-between  pt-4 ">
         <button
           onClick={() => handleStartProject(id)}
           className="hover:text-bold inline-flex space-x-1 rounded border border-primary/25 p-1 font-medium text-primary hover:bg-primary/10 "
@@ -81,8 +80,9 @@ const SingleProjectCard = ({
           </span>
           <span> Start</span>
         </button>
-        <Link
-          to={"/dashboard/edit-project"}
+        <button
+          // to={"/dashboard/edit-project"}
+          disabled
           className="hover:text-bold inline-flex space-x-1 rounded border border-warning/25 p-1 font-medium text-warning hover:bg-warning/10"
         >
           <span>
@@ -102,7 +102,7 @@ const SingleProjectCard = ({
             </svg>
           </span>
           <span> Edit</span>
-        </Link>
+        </button>
         <button
           onClick={() => {
             setShowModal(true), setProjectId(id);

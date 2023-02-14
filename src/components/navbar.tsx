@@ -19,8 +19,8 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="sticky top-0 z-10
-       flex items-center justify-between bg-white p-2 sm:p-3 md:p-4 lg:p-5 xl:p-6"
+        className="sticky top-0 z-10 flex items-center
+       justify-between  bg-white p-2 shadow sm:p-3 md:p-4 lg:p-5 xl:p-6"
       >
         <div className="flex flex-row items-center gap-3">
           <div className="h-10 w-10 p-2">
@@ -54,12 +54,18 @@ const Navbar = () => {
           </div>
         </div>
         {auth.token ? (
-          <button
-            onClick={logout}
-            className="btn-primary btn mr-2 font-semibold"
-          >
-            Logout
-          </button>
+          <div className="space-x-3">
+            <span className=" font-medium text-gray-700">
+              Remaining Credit: 05
+            </span>
+
+            <button
+              onClick={logout}
+              className="btn-primary btn mr-2 font-semibold"
+            >
+              Logout
+            </button>
+          </div>
         ) : (
           <Link className="btn-primary btn mr-2 font-semibold" to={"/login"}>
             Log In

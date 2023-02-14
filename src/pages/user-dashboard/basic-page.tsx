@@ -33,7 +33,7 @@ const Basic = () => {
     <>
       <div className="grid grid-cols-1 md:grid-cols-3">
         <div className="col-span-2 grid grid-cols-1">
-          <div className="sticky top-24 self-center">
+          <div className="sticky top-24 z-20 flex items-center justify-center self-center">
             <Progressbar />
           </div>
           <TargetTitleUrl relevantTermRef={relevantTermRef} />
@@ -69,7 +69,7 @@ const Basic = () => {
           </div>
         </div>
         <div>
-          <div className="sticky top-14 ">
+          <div className="sticky top-14 pt-10 ">
             <SelectedProjectDetails />
           </div>
         </div>
