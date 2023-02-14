@@ -47,7 +47,7 @@ const ArticleHeadingCard = ({
           </div>
         </div>
       ) : (
-        <div>
+        <div className="ml-7">
           {heading.generatedParagraph && (
             <ShowGeneratedHeading
               generatedHeading={generatedHeading}
@@ -55,7 +55,7 @@ const ArticleHeadingCard = ({
               margin={"ml-7"}
             />
           )}
-          <div className="ml-7 max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
+          <div className=" max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
             <div className="relative flex items-center justify-between p-6">
               <h3 className=" text-lg ">{heading.text}</h3>
               <button

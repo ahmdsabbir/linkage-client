@@ -28,7 +28,7 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
   };
 
   return (
-    <section ref={suggestionsRef} className="mt-40">
+    <section ref={suggestionsRef} className="pt-40">
       <div className=" my-10 grid h-fit  max-h-fit gap-4 px-6 sm:grid-cols-2">
         <div>
           <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">

@@ -76,7 +76,7 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
 
   return (
     <section ref={anchorFieldRef}>
-      <div className=" mx-auto my-10 flex min-h-80v items-center justify-center px-6">
+      <div className=" mx-auto my-10 flex min-h-80v items-center justify-center px-6 pt-40">
         <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
           <form
             className="w-full max-w-md"

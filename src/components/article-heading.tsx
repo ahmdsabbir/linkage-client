@@ -144,13 +144,15 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
     <>
       <div
         ref={articleHeadingRef}
-        className="order-1 flex min-h-80v flex-grow flex-col sm:order-1 "
+        className="order-1 flex min-h-80v flex-grow flex-col  pt-40 sm:order-1"
       >
-        <h2 className="text-center text-2xl text-gray-700">Article Headings</h2>
-        <p className="text-center text-sm">
+        <h2 className="text-center text-2xl font-medium text-gray-700">
+          Article Headings
+        </h2>
+        <p className="text-center text-sm text-gray-700">
           {"These are the heading <h2> and <h3> of the source title"}
         </p>
-        <p className="text-center text-sm">
+        <p className="text-center text-sm text-gray-700">
           {"Choose one to add the generated content above the heading"}
         </p>
 
@@ -158,8 +160,7 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
           <>{"Getting article heading"}</>
         ) : (
           <>
-            {" "}
-            <div className=" flex items-center justify-start">
+            <div className=" flex flex-col items-center justify-center">
               <div className="mt-5 space-y-3">
                 {checkData?.map((heading, i) => (
                   <ArticleHeadingCard
@@ -170,25 +171,27 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
                   />
                 ))}
               </div>
-            </div>
-            <div className="mt-5 flex items-center justify-start">
-              {updatePost && (
-                <button
-                  className={`btn ml-5 w-72 max-w-6xl ${
-                    mutation.isLoading ? "btn-disabled " : "btn-primary "
-                  }`}
-                  onClick={() => handleUpdateToTheSite(updatePost)}
-                  disabled={mutation.isLoading ? true : false}
-                >
-                  {mutation.isLoading ? (
-                    <ButtonLoader loadingText={"Updating..."} />
-                  ) : mutation.isSuccess ? (
-                    "Updated"
-                  ) : (
-                    "Update post"
+              <div className="mt-5 flex flex-col md:mr-64 ">
+                <div>
+                  {updatePost && (
+                    <button
+                      className={`btn ml-5 w-72 max-w-6xl ${
+                        mutation.isLoading ? "btn-disabled " : "btn-primary "
+                      }`}
+                      onClick={() => handleUpdateToTheSite(updatePost)}
+                      disabled={mutation.isLoading ? true : false}
+                    >
+                      {mutation.isLoading ? (
+                        <ButtonLoader loadingText={"Updating..."} />
+                      ) : mutation.isSuccess ? (
+                        "Updated"
+                      ) : (
+                        "Update post"
+                      )}
+                    </button>
                   )}
-                </button>
-              )}
+                </div>
+              </div>
             </div>
           </>
         )}

@@ -8,24 +8,29 @@ const GeneratedParagraph = ({ paragraphRef, articleHeadingRef }, ref) => {
     dispatch,
   } = useAppState();
   return (
-    <div ref={paragraphRef} className=" max-w-xl    bg-white ">
-      <HeadingOrParagraph
-        sectionName={"Generated Paragraph"}
-        sectionHelperText={`Following Section was Generated. Insert It Wherever You’d like on Your Post`}
-        generateParagraph={
-          generatedParagraph
-            ? generatedParagraph
-            : "Generated Paragraph Will be here"
-        }
-      />
-      <button
-        className="btn-primary btn self-start"
-        onClick={() =>
-          articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
-        }
-      >
-        Next
-      </button>
+    <div
+      ref={paragraphRef}
+      className=" mx-auto flex min-h-80v max-w-xl items-center justify-center bg-white px-6 pt-40 "
+    >
+      <div>
+        <HeadingOrParagraph
+          sectionName={"Generated Paragraph"}
+          sectionHelperText={`Following Section was Generated. Insert It Wherever You’d like on Your Post`}
+          generateParagraph={
+            generatedParagraph
+              ? generatedParagraph
+              : "Generated Paragraph Will be here"
+          }
+        />
+        <button
+          className="btn-primary btn -mt-10 self-start"
+          onClick={() =>
+            articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
+          }
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

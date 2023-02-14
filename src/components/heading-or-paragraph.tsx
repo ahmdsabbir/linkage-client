@@ -33,7 +33,7 @@ const HeadingOrParagraph = ({
               {generatedHeading}
             </p>
           )}
-          {generateParagraph && generateParagraph}
+          {generateParagraph && <code className=""> {generateParagraph}</code>}
         </div>
       </div>
     </div>

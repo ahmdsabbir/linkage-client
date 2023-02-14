@@ -52,12 +52,11 @@ const Basic = () => {
             anchorFieldRef={anchorFieldRef}
             paragraphRef={paragraphRef}
           />
-          {generatedParagraph && (
-            <GeneratedParagraph
-              articleHeadingRef={articleHeadingRef}
-              paragraphRef={paragraphRef}
-            />
-          )}
+
+          <GeneratedParagraph
+            articleHeadingRef={articleHeadingRef}
+            paragraphRef={paragraphRef}
+          />
 
           <div className="mt-10 mb-10 text-left">
             {generatedParagraph ? (
