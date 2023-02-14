@@ -2,10 +2,10 @@ const CenterContent = () => {
   return (
     <div className="container mx-auto px-6 py-16 text-center">
       <div className="mx-auto max-w-lg">
-        <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">
+        <h1 className="font-semibold text-gray-800 text-3xl  lg:text-4xl">
           Try Our Silo App!
         </h1>
-        <p className="mt-6 text-gray-500 ">
+        <p className="mt-6 text-gray-500 text-base">
           Cluster your articles together following silo internal linking to
           build relevancy!
         </p>

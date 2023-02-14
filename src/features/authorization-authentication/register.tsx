@@ -82,21 +82,9 @@ const Register = () => {
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleRegisterSubmit)}
         >
-          <div className="mx-auto flex justify-center">
-            <img
-              className="h-7 w-auto sm:h-8"
-              src="https://merakiui.com/images/logo.svg"
-              alt=""
-            />
-          </div>
-          <div className="mt-6 flex items-center justify-center">
-            <a
-              href="http://localhost:3000/"
-              className="w-1/3 border-b-2 border-blue-500 pb-4 text-center font-medium capitalize text-gray-800 dark:border-blue-400 dark:text-white"
-            >
-              Register
-            </a>
-          </div>
+          <h1 className="mt-3 pb-4 text-center font-semibold capitalize  text-gray-800 text-2xl sm:text-3xl">
+            Register
+          </h1>
 
           <Input
             type={"text"}
@@ -208,7 +196,7 @@ const Register = () => {
             <div className="mt-6 text-center ">
               <Link
                 to={"/login"}
-                className="text-sm text-blue-500 hover:underline dark:text-blue-400"
+                className="text-blue-500 text-sm hover:underline dark:text-blue-400"
               >
                 Already have an account? Log In
               </Link>
