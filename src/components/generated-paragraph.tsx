@@ -33,7 +33,7 @@ const GeneratedParagraph = (
           }
         />
         {generatedParagraph && (
-          <div className=" -mt-6 flex space-x-2">
+          <div className=" -mt-6 flex flex-col space-x-2 sm:flex-row">
             <button
               className="btn-primary btn self-start"
               onClick={() =>

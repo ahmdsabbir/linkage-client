@@ -19,7 +19,10 @@ import { useErrorHandling } from "../utils/error-handling";
 import ArticleHeadingCard from "./article-headings-card";
 import ButtonLoader from "./button-loader";
 
-const ArticleHeading = ({ articleHeadingRef }, ref) => {
+const ArticleHeading = (
+  { articleHeadingRef, targetTitleRef, relevantTermRef },
+  ref
+) => {
   const queryClient = useQueryClient();
   const queryCache = new QueryCache();
   const { auth } = useAuthState();
@@ -34,6 +37,7 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
       generatedParagraph,
     },
     clearProjectState,
+    clearRelevantProject,
     dispatch,
   } = useAppState();
 
@@ -171,24 +175,48 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
                   />
                 ))}
               </div>
-              <div className="mt-5 flex flex-col md:mr-64  ">
+              <div className="mt-5 flex flex-col  ">
                 <div>
                   {updatePost && (
-                    <button
-                      className={`btn ml-5 w-72 max-w-6xl ${
-                        mutation.isLoading ? "btn-disabled " : "btn-primary "
-                      }`}
-                      onClick={() => handleUpdateToTheSite(updatePost)}
-                      disabled={mutation.isLoading ? true : false}
-                    >
-                      {mutation.isLoading ? (
-                        <ButtonLoader loadingText={"Updating..."} />
-                      ) : mutation.isSuccess ? (
-                        "Updated"
-                      ) : (
-                        "Update post"
-                      )}
-                    </button>
+                    <div className="flex flex-col space-x-2 sm:flex-row">
+                      <button
+                        className={`btn ml-5 w-72 max-w-6xl ${
+                          mutation.isLoading ? "btn-disabled " : "btn-primary "
+                        }`}
+                        onClick={() => handleUpdateToTheSite(updatePost)}
+                        disabled={mutation.isLoading ? true : false}
+                      >
+                        {mutation.isLoading ? (
+                          <ButtonLoader loadingText={"Updating..."} />
+                        ) : mutation.isSuccess ? (
+                          "Updated"
+                        ) : (
+                          "Update post"
+                        )}
+                      </button>
+                      <button
+                        className="btn-primary btn self-start"
+                        onClick={() => {
+                          relevantTermRef.current.scrollIntoView({
+                            behavior: "smooth",
+                          });
+                          clearRelevantProject();
+                        }}
+                      >
+                        Get More Suggestions
+                      </button>
+                      <button
+                        className="btn-primary btn self-start"
+                        onClick={() => {
+                          targetTitleRef.current.scrollIntoView({
+                            behavior: "smooth",
+                          });
+                          clearProjectState();
+                        }}
+                      >
+                        Start new
+                      </button>
+                    </div>
                   )}
                 </div>
               </div>
