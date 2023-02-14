@@ -78,10 +78,10 @@ const SelectedProjectDetails = () => {
 
                 {generatedHeading && (
                   <div className="flex flex-col gap-1">
-                    <span className="font-medium text-gray-800">
+                    <span className="font-medium text-gray-500">
                       Generated Heading:
                     </span>
-                    <span className="">{generatedHeading}</span>
+                    <span className="text-accent">{generatedHeading}</span>
                   </div>
                 )}
                 {generatedParagraph && (

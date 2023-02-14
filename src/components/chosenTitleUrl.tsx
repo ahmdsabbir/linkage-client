@@ -96,6 +96,7 @@ const ChosenTitleUrl = () => {
       <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
         Source Title and Url you have chosen
       </h2>
+
       <form onSubmit={handleSubmit(handleGenerateHeadingSubmit)}>
         <div className="space-y-5">
           <div>
