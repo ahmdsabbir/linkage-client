@@ -10,7 +10,9 @@ const GeneratedParagraph = ({ paragraphRef, articleHeadingRef }, ref) => {
   return (
     <div
       ref={paragraphRef}
-      className=" mx-auto flex min-h-80v max-w-xl items-center justify-center bg-white px-6 pt-40 "
+      className={`mx-auto  min-h-80v max-w-xl items-center justify-center bg-white px-6 pt-40 ${
+        !generatedParagraph ? "hidden" : "flex"
+      }`}
     >
       <div>
         <HeadingOrParagraph
@@ -22,14 +24,16 @@ const GeneratedParagraph = ({ paragraphRef, articleHeadingRef }, ref) => {
               : "Generated Paragraph Will be here"
           }
         />
-        <button
-          className="btn-primary btn -mt-10 self-start"
-          onClick={() =>
-            articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
-          }
-        >
-          Next
-        </button>
+        {generatedParagraph && (
+          <button
+            className="btn-primary btn -mt-10 self-start"
+            onClick={() =>
+              articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            Next
+          </button>
+        )}
       </div>
     </div>
   );

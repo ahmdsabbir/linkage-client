@@ -82,7 +82,7 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
             className="w-full max-w-md"
             onSubmit={handleSubmit(handleAnchorSubmit)}
           >
-            <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
+            <h1 className="mt-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
               Input Your Anchor Text
             </h1>
             <Input
@@ -100,7 +100,9 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
                 className={`btn ${
                   mutation.isLoading ? "btn-disabled " : "btn-primary "
                 }`}
-                disabled={mutation.isLoading ? true : false}
+                disabled={
+                  mutation.isLoading ? true : !generatedHeading ? true : false
+                }
               >
                 {mutation.isLoading ? (
                   <ButtonLoader loadingText={"Generating Paragraph..."} />
