@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
+import { useAppState } from "../context/update-post-context";
+
 interface SingleProjectCardProps {
   id: string | number;
   projectName: string;
@@ -22,6 +24,7 @@ const SingleProjectCard = ({
   setShowModal,
   setProjectId,
 }: SingleProjectCardProps) => {
+  const { clearAppState } = useAppState();
   return (
     <div className="mt-4 w-full  max-w-sm rounded-md bg-white p-6 shadow-md">
       <div className="space-y-2">
@@ -59,7 +62,10 @@ const SingleProjectCard = ({
       {/* CTA */}
       <div className=" mt-4 flex items-center justify-between  pt-4 ">
         <button
-          onClick={() => handleStartProject(id)}
+          onClick={() => {
+            handleStartProject(id);
+            clearAppState();
+          }}
           className="hover:text-bold inline-flex space-x-1 rounded border border-primary/25 p-1 font-medium text-primary hover:bg-primary/10 "
         >
           <span>
