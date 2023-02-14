@@ -14,6 +14,7 @@ const SelectedProjectDetails = () => {
   } = useAppState();
 
   const [isCopied, setIsCopied] = useState(false);
+  const [isCopiedparagraph, setIsCopiedparagraph] = useState(false);
 
   return (
     <>
@@ -139,10 +140,10 @@ const SelectedProjectDetails = () => {
 
                       <CopyToClipboard
                         text={generatedParagraph}
-                        onCopy={() => setIsCopied(true)}
+                        onCopy={() => setIsCopiedparagraph(true)}
                       >
                         <button className="absolute right-0 -top-8 rounded  border  p-1  text-gray-200 hover:bg-primary/25">
-                          {isCopied ? (
+                          {isCopiedparagraph ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"

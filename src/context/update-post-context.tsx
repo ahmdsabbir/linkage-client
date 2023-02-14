@@ -87,6 +87,13 @@ const UpdatePostProvider = ({ children }) => {
   };
   const clearProjectState = async () => {
     dispatch({ type: "targetTitleUrl", payload: {} });
+    dispatch({ type: "relevantTerm", payload: "" });
+    dispatch({ type: "aiSuggestions", payload: [] });
+    dispatch({ type: "chosenTitleUrl", payload: {} });
+    dispatch({ type: "generatedHeading", payload: "" });
+    dispatch({ type: "generatedParagraph", payload: "" });
+  };
+  const clearRelevantProject = async () => {
     dispatch({ type: "relevantTerm", payload: {} });
     dispatch({ type: "aiSuggestions", payload: [] });
     dispatch({ type: "chosenTitleUrl", payload: {} });
@@ -107,6 +114,7 @@ const UpdatePostProvider = ({ children }) => {
         dispatch,
         clearAppState,
         clearProjectState,
+        clearRelevantProject,
       }}
     >
       {children}

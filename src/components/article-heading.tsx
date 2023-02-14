@@ -146,13 +146,13 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
         ref={articleHeadingRef}
         className="order-1 flex min-h-80v flex-grow flex-col  pt-40 sm:order-1"
       >
-        <h2 className="text-center text-2xl font-medium text-gray-700">
+        <h2 className="text-center font-medium text-gray-700 text-2xl">
           Article Headings
         </h2>
-        <p className="text-center text-sm text-gray-700">
+        <p className="text-center text-gray-700 text-sm">
           {"These are the heading <h2> and <h3> of the source title"}
         </p>
-        <p className="text-center text-sm text-gray-700">
+        <p className="text-center text-gray-700 text-sm">
           {"Choose one to add the generated content above the heading"}
         </p>
 
@@ -171,7 +171,7 @@ const ArticleHeading = ({ articleHeadingRef }, ref) => {
                   />
                 ))}
               </div>
-              <div className="mt-5 flex flex-col md:mr-64 ">
+              <div className="mt-5 flex flex-col md:mr-64  ">
                 <div>
                   {updatePost && (
                     <button

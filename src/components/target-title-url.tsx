@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
+import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
@@ -18,7 +19,7 @@ const TargetTitleUrlSchema = z.object({
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const TargetTitleUrl = ({ relevantTermRef }) => {
+const TargetTitleUrl = ({ relevantTermRef, targetTitleRef }, ref) => {
   const {
     register,
     handleSubmit,
@@ -42,13 +43,16 @@ const TargetTitleUrl = ({ relevantTermRef }) => {
 
   return (
     <section>
-      <div className="mb-10 flex min-h-80v items-center justify-center ">
+      <div
+        ref={targetTitleRef}
+        className="mb-10 flex min-h-80v items-center justify-center "
+      >
         <div className=" flex w-full max-w-lg items-center  justify-center rounded-md py-6  shadow-lg">
           <form
             className="w-full max-w-md"
             onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
           >
-            <h1 className="mt-4 mb-2 text-2xl font-semibold   text-gray-700 sm:text-3xl">
+            <h1 className="mt-4 mb-2 font-semibold text-gray-700   text-2xl sm:text-3xl">
               Input target Title and Url here
             </h1>
             <Input
@@ -80,4 +84,4 @@ const TargetTitleUrl = ({ relevantTermRef }) => {
   );
 };
 
-export default TargetTitleUrl;
+export default forwardRef(TargetTitleUrl);

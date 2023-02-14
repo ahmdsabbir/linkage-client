@@ -22,7 +22,7 @@ const ArticleHeadingCard = ({
           )}
           <div className=" max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
             <div className="relative flex items-center justify-between p-6">
-              <h2 className=" mr-4 text-lg ">{heading.text}</h2>
+              <h2 className=" mr-4 text-base ">{heading.text}</h2>
               <button
                 className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white"
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call
@@ -47,7 +47,7 @@ const ArticleHeadingCard = ({
           </div>
         </div>
       ) : (
-        <div className="ml-7">
+        <div className="ml-7 ">
           {heading.generatedParagraph && (
             <ShowGeneratedHeading
               generatedHeading={generatedHeading}
@@ -57,7 +57,7 @@ const ArticleHeadingCard = ({
           )}
           <div className=" max-w-xl rounded border border-primary/25 bg-white text-gray-600 hover:bg-primary/5 hover:text-gray-900 ">
             <div className="relative flex items-center justify-between p-6">
-              <h3 className=" text-lg ">{heading.text}</h3>
+              <h3 className=" text-base ">{heading.text}</h3>
               <button
                 className="top-3/2 btn-primary btn absolute -right-5 border-primary/20 bg-white p-2 text-primary hover:text-white"
                 // eslint-disable-next-line @typescript-eslint/no-unsafe-call

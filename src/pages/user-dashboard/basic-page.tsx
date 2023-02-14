@@ -17,6 +17,7 @@ const Basic = () => {
     state: { generatedParagraph, aiSuggestions },
   } = useAppState();
 
+  const targetTitleRef = useRef(null);
   const relevantTermRef = useRef(null);
   const suggestionsRef = useRef(null);
   const anchorFieldRef = useRef(null);
@@ -31,12 +32,18 @@ const Basic = () => {
   }; */
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div
+        className="md:gr id-cols-3 grid
+      grid-cols-1"
+      >
         <div className="col-span-2 grid grid-cols-1">
           <div className="sticky top-24 z-20 flex items-center justify-center self-center">
             <Progressbar />
           </div>
-          <TargetTitleUrl relevantTermRef={relevantTermRef} />
+          <TargetTitleUrl
+            targetTitleRef={targetTitleRef}
+            relevantTermRef={relevantTermRef}
+          />
 
           <RelevantTerm
             suggestionsRef={suggestionsRef}
@@ -56,11 +63,16 @@ const Basic = () => {
           <GeneratedParagraph
             articleHeadingRef={articleHeadingRef}
             paragraphRef={paragraphRef}
+            relevantTermRef={relevantTermRef}
           />
 
           <div className="mt-10 mb-10 text-left">
             {generatedParagraph ? (
-              <ArticleHeading articleHeadingRef={articleHeadingRef} />
+              <ArticleHeading
+                articleHeadingRef={articleHeadingRef}
+                targetTitleRef={targetTitleRef}
+                relevantTermRef={relevantTermRef}
+              />
             ) : (
               <p className="text-gray-700">
                 Paragraph must be generated to go to last step

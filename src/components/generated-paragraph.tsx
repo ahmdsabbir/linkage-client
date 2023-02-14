@@ -1,10 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { forwardRef } from "react";
 import { useAppState } from "../context/update-post-context";
 import HeadingOrParagraph from "./heading-or-paragraph";
 
-const GeneratedParagraph = ({ paragraphRef, articleHeadingRef }, ref) => {
+const GeneratedParagraph = (
+  { paragraphRef, articleHeadingRef, relevantTermRef, targetTitleRef },
+
+  ref
+) => {
   const {
     state: { generatedParagraph },
+    clearRelevantProject,
+    clearProjectState,
     dispatch,
   } = useAppState();
   return (
@@ -25,14 +33,36 @@ const GeneratedParagraph = ({ paragraphRef, articleHeadingRef }, ref) => {
           }
         />
         {generatedParagraph && (
-          <button
-            className="btn-primary btn -mt-10 self-start"
-            onClick={() =>
-              articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            Next
-          </button>
+          <div className=" -mt-6 flex space-x-2">
+            <button
+              className="btn-primary btn self-start"
+              onClick={() =>
+                articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
+              }
+            >
+              Next
+            </button>
+            <button
+              className="btn-primary btn self-start"
+              onClick={() => {
+                relevantTermRef.current.scrollIntoView({ behavior: "smooth" });
+                clearRelevantProject();
+              }}
+            >
+              Get More Suggestions
+            </button>
+            <button
+              className="btn-primary btn self-start"
+              onClick={() => {
+                targetTitleRef.current.scrollIntoView({
+                  behavior: "smooth",
+                });
+                clearProjectState();
+              }}
+            >
+              Start new
+            </button>
+          </div>
         )}
       </div>
     </div>
