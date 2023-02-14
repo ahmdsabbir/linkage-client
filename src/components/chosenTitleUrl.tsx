@@ -116,7 +116,7 @@ const ChosenTitleUrl = () => {
               <p className="text-error"> {errors.title?.message as string}</p>
             )}
 
-            <p className="dark:text-accent-300 mt-3 text-xs text-accent">
+            <p className="mt-3 text-sm text-gray-400">
               You can edit the post title as your needs before you hit the
               generate heading button !
             </p>
