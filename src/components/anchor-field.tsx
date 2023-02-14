@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,9 +15,7 @@ import ButtonLoader from "./button-loader";
 import Input from "./input";
 
 const AnchorTextSchema = z.object({
-  anchorText: z
-    .string()
-    .min(4, "relevant term must be more than 4 characters!"),
+  anchorText: z.string().min(1, "this field cannot be blank"),
 });
 
 const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
@@ -82,15 +81,16 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
             className="w-full max-w-md"
             onSubmit={handleSubmit(handleAnchorSubmit)}
           >
-            <h1 className="mt-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
+            {/*     <h1 className="mt-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
               Input Your Anchor Text
-            </h1>
+            </h1> */}
             <Input
               id={"anchorField"}
               label={"Anchor Text"}
-              infoText={"aka, Anchor Text"}
+              // infoText={"aka, Anchor Text"}
               type={"text"}
-              placeholder={"Anchor Text"}
+              placeholder={"example: lazy turtle"}
+              tooltipText={" <a href='target title'>lazy turtle</a>"}
               inputProps={register("anchorText")}
               error={errors.anchorText?.message as string}
             />

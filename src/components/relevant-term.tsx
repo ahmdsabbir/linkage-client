@@ -111,15 +111,15 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
             className="w-full max-w-md"
             onSubmit={handleSubmit(handleRelevantSubmit)}
           >
-            <h1 className="mt-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
-              Input Your Relevant Term
-            </h1>
             <Input
               id={"relevantTerm"}
               label={"Relevant Term"}
-              infoText={"aka, Target Post"}
+              // infoText={"aka, Target Post"}
               type={"text"}
-              placeholder={"relevant term"}
+              placeholder={"example: wise turtle"}
+              tooltipText={
+                "This is the term that we will base our suggestions on."
+              }
               inputProps={register("relevantTerm")}
               error={errors.relevantTerm?.message as string}
             />

@@ -52,30 +52,31 @@ const TargetTitleUrl = ({ relevantTermRef, targetTitleRef }, ref) => {
             className="w-full max-w-md"
             onSubmit={handleSubmit(handleTargetTitleURLSubmit)}
           >
-            <h1 className="mt-4 mb-2 font-semibold text-gray-700   text-2xl sm:text-3xl">
-              Input target Title and Url here
-            </h1>
             <Input
               id="target Title"
-              label="Target Title"
+              label="Target Post Title"
               type={"text"}
-              placeholder={"target Title"}
-              infoText={"aka, Target Post"}
-              tooltipText={"aka, Target Post"}
+              placeholder={"example: My Awesome Post"}
+              // infoText={"aka, Target Post"}
+              tooltipText={
+                "Insert the title/main topic of the post you’re trying to build links for. Our AI will make predictions based on this title, thus you should change/modify "
+              }
               inputProps={register("targetTitle")}
               error={errors.targetTitle?.message as string}
             />
             <Input
               id="target URL"
-              label="Target URL"
+              label="Target Post URL"
               type={"text"}
-              placeholder={"target URL"}
+              placeholder={"example: https://example.com/my-awesome-post"}
+              tooltipText={
+                "Insert the URL of the post you’re trying to build links for. This URL will "
+              }
               inputProps={register("targetURL")}
               error={errors.targetURL?.message as string}
             />
-
             <div className="mt-4">
-              <button className="btn-primary btn">Next</button>
+              <button className="btn-primary btn">Continue</button>
             </div>
           </form>
         </div>

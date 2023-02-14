@@ -33,14 +33,14 @@ const GeneratedParagraph = (
           }
         />
         {generatedParagraph && (
-          <div className=" -mt-6 flex flex-col space-x-2 sm:flex-row">
+          <div className=" -mt-6 flex flex-col justify-center space-x-2 sm:flex-row">
             <button
               className="btn-primary btn self-start"
               onClick={() =>
                 articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
               }
             >
-              Next
+              Continue
             </button>
             <button
               className="btn-primary btn self-start"
@@ -49,7 +49,7 @@ const GeneratedParagraph = (
                 clearRelevantProject();
               }}
             >
-              Get More Suggestions
+              Build link for same post
             </button>
             <button
               className="btn-primary btn self-start"

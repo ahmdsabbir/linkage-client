@@ -178,7 +178,7 @@ const ArticleHeading = (
               <div className="mt-5 flex flex-col  ">
                 <div>
                   {updatePost && (
-                    <div className="flex flex-col space-x-2 sm:flex-row">
+                    <div className="flex flex-col justify-between space-x-2 sm:flex-row">
                       <button
                         className={`btn ml-5 w-72 max-w-6xl ${
                           mutation.isLoading ? "btn-disabled " : "btn-primary "
@@ -203,7 +203,7 @@ const ArticleHeading = (
                           clearRelevantProject();
                         }}
                       >
-                        Get More Suggestions
+                        Build link for same post
                       </button>
                       <button
                         className="btn-primary btn self-start"

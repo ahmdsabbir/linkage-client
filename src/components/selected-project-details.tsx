@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useAppState } from "../context/update-post-context";
 
@@ -15,6 +15,13 @@ const SelectedProjectDetails = () => {
 
   const [isCopied, setIsCopied] = useState(false);
   const [isCopiedparagraph, setIsCopiedparagraph] = useState(false);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsCopiedparagraph(false);
+      setIsCopied(false);
+    }, 20000);
+  }, []);
 
   return (
     <>
@@ -93,7 +100,7 @@ const SelectedProjectDetails = () => {
                         text={generatedHeading}
                         onCopy={() => setIsCopied(true)}
                       >
-                        <button className="absolute right-0 -top-8 rounded  border  p-1  text-gray-200 hover:bg-primary/25">
+                        <button className="absolute right-0 -top-8 rounded  border  bg-primary/25  p-1 text-gray-200">
                           {isCopied ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
@@ -142,7 +149,7 @@ const SelectedProjectDetails = () => {
                         text={generatedParagraph}
                         onCopy={() => setIsCopiedparagraph(true)}
                       >
-                        <button className="absolute right-0 -top-8 rounded  border  p-1  text-gray-200 hover:bg-primary/25">
+                        <button className="absolute right-0 -top-8 rounded  border  bg-primary/25  p-1 text-gray-200">
                           {isCopiedparagraph ? (
                             <svg
                               xmlns="http://www.w3.org/2000/svg"

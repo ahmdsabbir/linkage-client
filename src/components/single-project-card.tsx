@@ -23,35 +23,35 @@ const SingleProjectCard = ({
   setProjectId,
 }: SingleProjectCardProps) => {
   return (
-    <div className="w-full max-w-sm  rounded-md bg-white p-6 shadow-md ">
+    <div className="mt-4 w-full  max-w-sm rounded-md bg-white p-6 shadow-md">
       <div className="space-y-2">
-        <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">Project Name</span>
-          <span className=" text-lg font-semibold text-gray-600 ">
+        <div className="flex flex-col space-y-0">
+          <span className="text-gray-400 text-xs">Project Name</span>
+          <span className=" font-semibold text-gray-600 text-sm ">
             {projectName}
           </span>
         </div>
-        <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">URL</span>
-          <span className=" text-lg font-semibold text-gray-600 ">
+        <div className="flex flex-col space-y-0">
+          <span className="text-gray-400 text-xs">URL</span>
+          <span className=" font-semibold text-gray-600 text-sm ">
             {projectURL}
           </span>
         </div>
-        <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">WP Username</span>
-          <span className=" text-lg font-semibold text-gray-600 ">
+        <div className="flex flex-col space-y-0">
+          <span className="text-gray-400 text-xs">WP Username</span>
+          <span className=" font-semibold text-gray-600 text-sm ">
             {projectUserName}
           </span>
         </div>
-        <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">WP Application Password</span>
-          <span className=" text-lg font-semibold text-gray-600 ">
+        <div className="flex flex-col space-y-0">
+          <span className="text-sx text-gray-400">WP Application Password</span>
+          <span className=" font-semibold text-gray-600 text-sm ">
             {projectAdminPassword}
           </span>
         </div>
-        <div className="flex flex-col space-y-1">
-          <span className="text-sm text-gray-400">Project Created At</span>
-          <span className=" text-lg font-semibold text-gray-600 ">
+        <div className="flex flex-col space-y-0">
+          <span className="text-gray-400 text-xs">Project Created At</span>
+          <span className=" font-semibold text-gray-600 text-sm ">
             {projectCreatedDate}
           </span>
         </div>

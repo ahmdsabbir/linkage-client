@@ -1,18 +1,62 @@
 const Header = () => {
   return (
     <section className="relative bg-white">
+      <div className="hero min-h-screen ">
+        <div className="hero-content grid grid-cols-1 flex-col gap-4 md:grid-cols-2 lg:flex-row">
+          <img
+            src="https://cdn-icons-png.flaticon.com/512/59/59137.png"
+            className="max-w-sm rounded-lg "
+            alt="wordpress"
+          />
+          <div>
+            <h1 className="font-bold text-gray-800 text-5xl">
+              Just a small step left!
+            </h1>
+            <p className="py-6 text-gray-600">
+              {" "}
+              You will need our plugin to update your post directly from our
+              site. Download the plugin below for a seamless experience!
+            </p>
+            <a
+              className="btn-primary btn"
+              href={
+                "https://drive.google.com/file/d/1b6k106Kv8qEa-NxugaG9Pqzl_AkBZIu6/view"
+              }
+              target="_blank"
+              rel="noreferrer"
+            >
+              Download Plugin
+            </a>
+          </div>
+        </div>
+      </div>
+      {/* <div className="hero min-h-screen bg-base-200">
+        <div className="hero-content text-center">
+          <div className="max-w-md">
+            <h1 className="font-bold text-5xl">Hello there</h1>
+            <p className="py-6">
+              You will need our plugin to update your post directly from our
+              site. Download the plugin below for a seamless experience!
+            </p>
+            <button className="btn-primary btn">Get Started</button>
+          </div>
+        </div>
+      </div> */}
       <div className="container mx-auto px-6 py-16 text-center">
         <div className="mx-auto max-w-lg">
-          <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">
+          <h1 className="font-semibold text-gray-800 text-3xl  lg:text-4xl">
             AI powered interlinking
           </h1>
           <span className="text-gray-500">
             Solutions to all of your interlinking problems in one place
           </span>
-          <p className="mt-6 text-gray-500 "></p>
+          {/* <p className="mt-6 font-bold text-gray-600">
+            You will need our plugin to update your post directly from our site.
+            Download the plugin below for a seamless experience!
+          </p> */}
           <button className="btn-primary btn mt-6">Explore for more</button>
           {/* <p className="mt-3 text-sm text-gray-400 ">No credit card required</p> */}
-          <h1 className="text-center text-5xl font-extrabold lg:text-7xl 2xl:text-8xl">
+          <h1 className="text-center font-extrabold text-5xl lg:text-7xl 2xl:text-8xl">
             <span className="bg-gradient-to-br from-teal-500 via-indigo-500 to-sky-500 bg-clip-text text-transparent ">
               Alpha
             </span>

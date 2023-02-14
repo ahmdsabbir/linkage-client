@@ -93,9 +93,9 @@ const ChosenTitleUrl = () => {
 
   return (
     <div className="mb-6">
-      <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
+      {/*  <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
         Source Title and Url you have chosen
-      </h2>
+      </h2> */}
 
       <form onSubmit={handleSubmit(handleGenerateHeadingSubmit)}>
         <div className="space-y-5">
@@ -104,7 +104,7 @@ const ChosenTitleUrl = () => {
               htmlFor="ChosenTitle"
               className="label flex-col items-baseline"
             >
-              <span className="label-text text-base font-medium text-gray-700">
+              <span className="label-text font-medium text-gray-700 text-base">
                 ChosenTitle
               </span>
             </label>
@@ -117,7 +117,7 @@ const ChosenTitleUrl = () => {
               <p className="text-error"> {errors.title?.message as string}</p>
             )}
 
-            <p className="mt-3 text-sm text-gray-400">
+            <p className="mt-3 text-gray-400 text-sm">
               You can edit the post title as your needs before you hit the
               generate heading button !
             </p>
@@ -127,7 +127,7 @@ const ChosenTitleUrl = () => {
               htmlFor="ChosenURL"
               className="label flex-col items-baseline"
             >
-              <span className="label-text text-base font-medium text-gray-700">
+              <span className="label-text font-medium text-gray-700 text-base">
                 ChosenURL
               </span>
             </label>
