@@ -1,7 +1,7 @@
 {
   "name": "linkages.io",
   "private": true,
-  "version": "0.0.3",
+  "version": "0.0.5",
   "description": "AI based interlinking tool",
   "main": "index.js",
   "scripts": {
