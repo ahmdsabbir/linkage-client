@@ -15,17 +15,17 @@ import Input from "./input";
 const CreateProjectSchema = z.object({
   projectTitle: z
     .string()
-    .min(4, "Please write more than 4 characters")
+    .min(1, "This field cannot be empty")
     .max(255, "Please write less tha 255 characters"),
   domain: z.string().url(),
   wpUsername: z
     .string()
-    .min(4, "Please write more than 4 characters")
+    .min(1, "This field cannot be empty")
     .max(255, "Please write less tha 255 characters"),
   wpAppPassword: z
     .string()
-    .min(4, "Please write more than 4 characters")
-    .max(255, "Please write less tha 255 characters"),
+    .min(24, "Typically wordpress application passwords are of 24 characters ")
+    .max(48, "Please write less than 48 characters"),
 });
 
 const CreateProject = () => {
@@ -95,16 +95,18 @@ const CreateProject = () => {
           className="w-full max-w-md"
           onSubmit={handleSubmit(handleCreateProjectSubmit)}
         >
-          <h1 className="mt-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
+          <h1 className="mt-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
             Create Your project
           </h1>
           <Input
             id="projectTitle"
-            label="Project Title"
+            label="Project Name"
             type={"text"}
             placeholder={"Project Title"}
-            infoText={"aka, Project Title"}
-            tooltipText={"aka, Project Title"}
+            // infoText={"aka, Project Title"}
+            tooltipText={
+              "Name your project, using only alpha numeric characters, without any spaces"
+            }
             inputProps={register("projectTitle")}
             error={errors.projectTitle?.message as string}
           />
@@ -112,24 +114,27 @@ const CreateProject = () => {
             id="domain"
             label="Domain URL"
             type={"text"}
-            placeholder={"Domain URL"}
+            placeholder={"Example: https://example.com"}
+            tooltipText={"Insert the url of your wordpress site."}
             inputProps={register("domain")}
             error={errors.domain?.message as string}
           />
           <Input
             id="wp username"
-            label="WP Username"
+            label="Wordpress Username"
             type={"text"}
-            placeholder={"wp username"}
+            placeholder={"Example: admin"}
+            tooltipText={"Do not insert your 'Application Password Name' "}
             inputProps={register("wpUsername")}
             error={errors.wpUsername?.message as string}
           />
 
           <Input
             id="Wp App. Password"
-            label="Wp App. Password"
+            label="WP Application Password"
             type={"password"}
-            placeholder={"Wp App. Password"}
+            placeholder={"Example: mDAa 2Hic vZV4 KEsQ zHZq zbfz"}
+            tooltipText={"Found under wp-dashboard->Users->Profile"}
             inputProps={register("wpAppPassword")}
             error={errors.wpAppPassword?.message as string}
           />
