@@ -116,7 +116,7 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
               label={"Relevant Topic"}
               // infoText={"aka, Target Post"}
               type={"text"}
-              placeholder={"example: wise turtle"}
+              placeholder={"Example: interlinking"}
               tooltipText={
                 "This is the topic that we will base our suggestions on."
               }

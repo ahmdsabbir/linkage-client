@@ -107,7 +107,7 @@ space-y-1"
             className="label flex-col items-baseline"
           >
             <span className="label-text font-medium text-gray-700 text-base">
-              ChosenTitle
+              Chosen Title
             </span>
           </label>
           <textarea
@@ -154,6 +154,8 @@ space-y-1"
           >
             {mutation.isLoading ? (
               <ButtonLoader loadingText={"Generating Heading..."} />
+            ) : generatedHeading ? (
+              "Re-generate Heading"
             ) : (
               "Generate Heading"
             )}
