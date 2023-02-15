@@ -186,10 +186,16 @@ const ArticleHeading = (
                         : !updatePost
                         ? "btn-disabled"
                         : "btn-primary "
-                    }`}
+                    } `}
                     onClick={() => handleUpdateToTheSite(updatePost)}
                     disabled={
-                      mutation.isLoading ? true : updatePost ? false : true
+                      mutation.isLoading
+                        ? true
+                        : updatePost
+                        ? false
+                        : updateSuccess
+                        ? true
+                        : true
                     }
                   >
                     {mutation.isLoading ? (
@@ -204,7 +210,9 @@ const ArticleHeading = (
                   <>
                     <button
                       className={` btn self-start ${
-                        updateSuccess ? "btn-primary" : "btn-disabled"
+                        updateSuccess
+                          ? "btn-primary inline-flex"
+                          : "btn-disabled hidden"
                       }`}
                       disabled={updateSuccess ? false : true}
                       onClick={() => {
@@ -218,7 +226,9 @@ const ArticleHeading = (
                     </button>
                     <button
                       className={` btn self-start ${
-                        updateSuccess ? "btn-primary" : "btn-disabled"
+                        updateSuccess
+                          ? "btn-primary inline-flex"
+                          : "btn-disabled hidden"
                       }`}
                       disabled={updateSuccess ? false : true}
                       onClick={() => {
