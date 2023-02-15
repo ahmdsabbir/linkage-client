@@ -9,7 +9,6 @@ const Progressbar = () => {
       generatedParagraph,
     },
   } = useAppState();
-  console.log();
 
   return (
     <ul className="steps steps-horizontal  space-x-2 border-b  bg-white p-2 shadow ">

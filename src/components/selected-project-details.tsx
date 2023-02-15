@@ -12,7 +12,6 @@ const SelectedProjectDetails = () => {
       generatedParagraph,
     },
   } = useAppState();
-  console.log(selectedProject);
 
   const [isCopied, setIsCopied] = useState(false);
   const [isCopiedparagraph, setIsCopiedparagraph] = useState(false);

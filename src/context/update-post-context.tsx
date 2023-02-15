@@ -77,7 +77,6 @@ const projectsReducer = (state, action) => {
 const UpdatePostProvider = ({ children }) => {
   // final state management with useReducer hook
   const [state, dispatch] = useReducer(projectsReducer, initialState);
-  console.log(state);
 
   const clearAppState = async () => {
     dispatch({ type: "selectedProject", payload: {} });
