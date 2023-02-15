@@ -12,16 +12,21 @@ const SelectedProjectDetails = () => {
       generatedParagraph,
     },
   } = useAppState();
+  console.log(selectedProject);
 
   const [isCopied, setIsCopied] = useState(false);
   const [isCopiedparagraph, setIsCopiedparagraph] = useState(false);
 
   useEffect(() => {
     setTimeout(() => {
-      setIsCopiedparagraph(false);
-      setIsCopied(false);
-    }, 20000);
-  }, []);
+      if (!isCopied) {
+        setIsCopied(false);
+      }
+      if (!isCopiedparagraph) {
+        setIsCopiedparagraph(false);
+      }
+    }, 2000);
+  }, [isCopied, isCopiedparagraph]);
 
   return (
     <>

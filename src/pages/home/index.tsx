@@ -1,4 +1,3 @@
-import CenterContent from "./center-content";
 import ComingSoon from "./coming-soon";
 import Features from "./features";
 import Header from "./header";
@@ -8,7 +7,7 @@ const Home = () => {
   return (
     <>
       <Header />
-      <CenterContent />
+      {/* <CenterContent /> */}
       <Features />
       <SideImage />
       <ComingSoon />

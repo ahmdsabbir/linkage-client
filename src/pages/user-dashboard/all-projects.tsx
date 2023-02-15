@@ -57,19 +57,17 @@ const AllProjects = () => {
 
   // start project handler
   const handleStartProject = async (id: { id: number | string }) => {
-    if (!id) {
-      return;
-    } else {
-      const selectedProject = data?.projects?.find(
-        (project: { id: { id: string | number } }) => project.id == id
-      );
-      if (selectedProject) {
-        await dispatch({
-          type: "selectedProject",
-          payload: selectedProject,
-        });
-        navigate(`/dashboard/basic`);
-      }
+    const getProject = await data?.projects?.find(
+      (project: { id: { id: string | number } }) => project.id == id
+    );
+
+    if (getProject.id) {
+      console.log(getProject);
+      await dispatch({
+        type: "selectedProject",
+        payload: getProject,
+      });
+      navigate(`/dashboard/basic`);
     }
   };
 
@@ -163,7 +161,7 @@ const AllProjects = () => {
                   </div>
                   <div className="mt-4 text-center md:mt-0 md:ml-6 md:text-left">
                     <p className="font-bold">Delete your project?</p>
-                    <p className="mt-1 text-sm text-gray-700">
+                    <p className="mt-1 text-gray-700 text-sm">
                       You will lose all of your data by deleting your project.
                       This action cannot be undone.
                     </p>
@@ -171,13 +169,13 @@ const AllProjects = () => {
                 </div>
                 <div className="mt-4 text-center md:flex md:justify-end md:text-right">
                   <button
-                    className="block w-full rounded-lg bg-red-200 px-4 py-3 text-sm font-semibold capitalize text-red-700 md:order-2 md:ml-2 md:inline-block md:w-auto md:py-2"
+                    className="block w-full rounded-lg bg-red-200 px-4 py-3 font-semibold capitalize text-red-700 text-sm md:order-2 md:ml-2 md:inline-block md:w-auto md:py-2"
                     onClick={() => handleDeleteProject(projectId)}
                   >
                     Delete Project
                   </button>
                   <button
-                    className="mt-4 block w-full rounded-lg bg-gray-200 px-4 py-3 text-sm font-semibold capitalize md:order-1 md:mt-0
+                    className="mt-4 block w-full rounded-lg bg-gray-200 px-4 py-3 font-semibold capitalize text-sm md:order-1 md:mt-0
           md:inline-block md:w-auto md:py-2"
                     onClick={() => {
                       setShowModal(false);

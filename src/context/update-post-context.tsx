@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { createContext, useContext, useEffect, useReducer } from "react";
 export const UpdatePostContext = createContext();
@@ -75,6 +77,7 @@ const projectsReducer = (state, action) => {
 const UpdatePostProvider = ({ children }) => {
   // final state management with useReducer hook
   const [state, dispatch] = useReducer(projectsReducer, initialState);
+  console.log(state);
 
   const clearAppState = async () => {
     dispatch({ type: "selectedProject", payload: {} });
