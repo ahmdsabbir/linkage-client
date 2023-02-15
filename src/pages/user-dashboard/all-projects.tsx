@@ -62,7 +62,6 @@ const AllProjects = () => {
     );
 
     if (getProject.id) {
-      console.log(getProject);
       await dispatch({
         type: "selectedProject",
         payload: getProject,
