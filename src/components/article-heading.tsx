@@ -131,8 +131,6 @@ const ArticleHeading = (
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
-
-      clearProjectState();
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
@@ -176,24 +174,31 @@ const ArticleHeading = (
                 ))}
               </div>
               <div className="mt-5 flex flex-col  ">
-                <div>
+                <div className="flex flex-col justify-between space-x-2 sm:flex-row">
                   {updatePost && (
-                    <div className="flex flex-col justify-between space-x-2 sm:flex-row">
-                      <button
-                        className={`btn ml-5 w-72 max-w-6xl ${
-                          mutation.isLoading ? "btn-disabled " : "btn-primary "
-                        }`}
-                        onClick={() => handleUpdateToTheSite(updatePost)}
-                        disabled={mutation.isLoading ? true : false}
-                      >
-                        {mutation.isLoading ? (
-                          <ButtonLoader loadingText={"Updating..."} />
-                        ) : mutation.isSuccess ? (
-                          "Updated"
-                        ) : (
-                          "Update post"
-                        )}
-                      </button>
+                    <button
+                      className={`btn ml-5 w-72 max-w-6xl ${
+                        mutation.isLoading
+                          ? "btn-disabled "
+                          : mutation.isSuccess
+                          ? "btn-disabled"
+                          : "btn-primary "
+                      }`}
+                      onClick={() => handleUpdateToTheSite(updatePost)}
+                      disabled={mutation.isLoading ? true : false}
+                    >
+                      {mutation.isLoading ? (
+                        <ButtonLoader loadingText={"Updating..."} />
+                      ) : mutation.isSuccess ? (
+                        "Updated"
+                      ) : (
+                        "Update post"
+                      )}
+                    </button>
+                  )}
+
+                  {mutation.isSuccess && (
+                    <>
                       <button
                         className="btn-primary btn self-start"
                         onClick={() => {
@@ -216,7 +221,7 @@ const ArticleHeading = (
                       >
                         Start new
                       </button>
-                    </div>
+                    </>
                   )}
                 </div>
               </div>

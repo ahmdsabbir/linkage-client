@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -30,7 +32,7 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
   return (
     <section ref={suggestionsRef} className="pt-40">
       <div
-        className={`my-10 grid min-h-80v gap-4 px-6 ${
+        className={`my-10 grid min-h-80v gap-4  px-6 ${
           aiSuggestions.length !== 0 ? " sm:grid-cols-2" : " place-items-center"
         }`}
       >
@@ -63,10 +65,15 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
           )}
         </>
         <div className="flex w-full max-w-lg flex-col">
-          <div className="sticky top-20 ">
+          <div
+            className={`sticky top-20 ${aiSuggestions.length !== 0 && "pt-28"}`}
+          >
             <ChosenTitleUrl />
             {generatedHeading && (
-              <GeneratedHeading anchorFieldRef={anchorFieldRef} />
+              <GeneratedHeading
+                anchorFieldRef={anchorFieldRef}
+                articleHeadingRef={undefined}
+              />
             )}
           </div>
         </div>

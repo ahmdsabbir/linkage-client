@@ -75,7 +75,7 @@ const Basic = () => {
                 relevantTermRef={relevantTermRef}
               />
             ) : (
-              <p className="text-gray-700">
+              <p className="text-center text-gray-700">
                 Paragraph must be generated to go to last step
               </p>
             )}
