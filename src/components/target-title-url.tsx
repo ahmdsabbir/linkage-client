@@ -56,10 +56,10 @@ const TargetTitleUrl = ({ relevantTermRef, targetTitleRef }, ref) => {
               id="target Title"
               label="Target Post Title"
               type={"text"}
-              placeholder={"example: My Awesome Post"}
+              placeholder={"Example: Best interlinking tool for WordPress"}
               // infoText={"aka, Target Post"}
               tooltipText={
-                "Insert the title/main topic of the post you’re trying to build links for. Our AI will make predictions based on this title, thus you should change/modify "
+                "Insert the title/main topic of the post you’re trying to build links for. Our AI will make predictions based on this title, thus you should change/modify"
               }
               inputProps={register("targetTitle")}
               error={errors.targetTitle?.message as string}
@@ -68,7 +68,9 @@ const TargetTitleUrl = ({ relevantTermRef, targetTitleRef }, ref) => {
               id="target URL"
               label="Target Post URL"
               type={"text"}
-              placeholder={"example: https://example.com/my-awesome-post"}
+              placeholder={
+                "Example: https://example.com/best-interlinking-tool"
+              }
               tooltipText={
                 "Insert the URL of the post you’re trying to build links for. This URL will "
               }

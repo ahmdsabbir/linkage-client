@@ -91,7 +91,7 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
               label={"Anchor Text"}
               // infoText={"aka, Anchor Text"}
               type={"text"}
-              placeholder={"example: lazy turtle"}
+              placeholder={"Example: best interlinking tool"}
               tooltipText={" <a href='target title'>lazy turtle</a>"}
               inputProps={register("anchorText")}
               error={errors.anchorText?.message as string}
