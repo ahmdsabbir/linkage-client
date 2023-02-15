@@ -4,7 +4,7 @@ interface LoadingTextProp {
 
 const ButtonLoader = ({ loadingText }: LoadingTextProp) => {
   return (
-    <div className="flex items-center">
+    <div className="flex items-center  text-gray-500">
       {loadingText}
       <div role="status" className="ml-2">
         <svg
