@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { forwardRef } from "react";
@@ -15,12 +17,13 @@ const GeneratedParagraph = (
     clearProjectState,
     dispatch,
   } = useAppState();
+
   return (
     <div
       ref={paragraphRef}
-      className={`mx-auto  min-h-80v max-w-xl items-center justify-center bg-white px-6 pt-40 ${
-        !generatedParagraph ? "hidden" : "flex"
-      }`}
+      className={`invisible  mx-auto flex min-h-80v max-w-xl items-center justify-center bg-white 
+         px-6 pt-40
+      `}
     >
       <div>
         <HeadingOrParagraph

@@ -61,7 +61,9 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
         type: "generatedParagraph",
         payload: para.paragraph,
       });
+      paragraphRef.current.style.visibility = "visible";
       paragraphRef.current.scrollIntoView({ behavior: "smooth" });
+      reset();
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);

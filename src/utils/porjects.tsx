@@ -22,13 +22,8 @@ const loadingBooks = Array.from({ length: 10 }, (v, index) => ({
   ...loadingBook,
 }));
 
-const bookQueryConfig = {
-  staleTime: 1000 * 60 * 60,
-  cacheTime: 1000 * 60 * 60,
-};
-
 const getBookSearchConfig = (
-  client: (arg0: string) => Promise<any>,
+  client: (arg0: string) => Promise<unknown>,
   query: string | number | boolean
 ) => ({
   queryKey: ["bookSearch", { query }],
@@ -39,11 +34,7 @@ const getBookSearchConfig = (
   config: {
     onSuccess(books: unknown) {
       for (const book of books) {
-        queryCache.setQueryData(
-          ["book", { bookId: book.id }],
-          book,
-          bookQueryConfig
-        );
+        queryCache.setQueryData(["book", { bookId: book.id }], book);
         queryClient.invalidateQueries;
       }
     },
@@ -62,7 +53,6 @@ function useBook(bookId: any) {
     queryKey: ["book", { bookId }],
     queryFn: () =>
       client(`books/${bookId}`).then((data: { book: any }) => data.book),
-    ...bookQueryConfig,
   });
   return data ?? loadingBook;
 }

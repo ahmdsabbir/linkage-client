@@ -10,7 +10,7 @@ const GeneratedHeading = ({ anchorFieldRef, articleHeadingRef }, ref) => {
     <div ref={articleHeadingRef}>
       <HeadingOrParagraph
         sectionName={`Generated Heading`}
-        sectionHelperText={`AI Generated Relevant Heading`}
+        // sectionHelperText={`AI Generated Relevant Heading`}
         generatedHeading={
           generatedHeading
             ? generatedHeading

@@ -18,10 +18,10 @@ const SelectedProjectDetails = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (!isCopied) {
+      if (isCopied) {
         setIsCopied(false);
       }
-      if (!isCopiedparagraph) {
+      if (isCopiedparagraph) {
         setIsCopiedparagraph(false);
       }
     }, 2000);

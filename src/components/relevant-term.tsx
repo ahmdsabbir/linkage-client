@@ -113,12 +113,12 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
           >
             <Input
               id={"relevantTerm"}
-              label={"Relevant Term"}
+              label={"Relevant Topic"}
               // infoText={"aka, Target Post"}
               type={"text"}
               placeholder={"example: wise turtle"}
               tooltipText={
-                "This is the term that we will base our suggestions on."
+                "This is the topic that we will base our suggestions on."
               }
               inputProps={register("relevantTerm")}
               error={errors.relevantTerm?.message as string}

@@ -11,15 +11,15 @@ const DashboardDetails = () => {
         />
         <div className="p-6">
           <div>
-            <span className="text-xs font-medium uppercase text-blue-600 dark:text-blue-400">
+            <span className="font-medium uppercase text-blue-600 text-xs dark:text-blue-400">
               Hello,
             </span>
-            <p className="text-gray100 mt-2  block text-xl font-semibold   ">
+            <p className="text-gray100 mt-2  block font-semibold text-xl   ">
               Welcome to the dashboard
             </p>
-            <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            {/* <p className="mt-2 text-sm text-gray-600 dark:text-gray-400">
               Please click the button to see your all projects
-            </p>
+            </p> */}
             <NavLink
               to={"/dashboard/all-projects"}
               className={"btn-primary btn mt-5"}

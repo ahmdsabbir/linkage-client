@@ -75,8 +75,18 @@ const projectsReducer = (state, action) => {
 };
 
 const UpdatePostProvider = ({ children }) => {
+  const getStorageValue = (defaultValue = initialState) => {
+    // getting stored value
+    const saved = localStorage.getItem("projectData");
+    const initial = JSON.parse(saved);
+    return initial || defaultValue;
+  };
   // final state management with useReducer hook
-  const [state, dispatch] = useReducer(projectsReducer, initialState);
+  const [state, dispatch] = useReducer(
+    projectsReducer,
+    initialState,
+    getStorageValue
+  );
 
   const clearAppState = async () => {
     dispatch({ type: "selectedProject", payload: {} });

@@ -29,6 +29,7 @@ const ArticleHeading = (
 
   const [checkData, setCheckData] = useState([]);
   const [updatePost, setUpdatePost] = useState();
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const {
     state: {
       chosenTitleUrl,
@@ -131,8 +132,7 @@ const ArticleHeading = (
         // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
         `${headingData?.msg}.Please go back to make new update to your site.`
       );
-
-      clearProjectState();
+      setUpdateSuccess(true);
     },
     onError: async (error) => {
       const errorMsg = await errorFunc(error);
@@ -176,48 +176,71 @@ const ArticleHeading = (
                 ))}
               </div>
               <div className="mt-5 flex flex-col  ">
-                <div>
-                  {updatePost && (
-                    <div className="flex flex-col justify-between space-x-2 sm:flex-row">
-                      <button
-                        className={`btn ml-5 w-72 max-w-6xl ${
-                          mutation.isLoading ? "btn-disabled " : "btn-primary "
-                        }`}
-                        onClick={() => handleUpdateToTheSite(updatePost)}
-                        disabled={mutation.isLoading ? true : false}
-                      >
-                        {mutation.isLoading ? (
-                          <ButtonLoader loadingText={"Updating..."} />
-                        ) : mutation.isSuccess ? (
-                          "Updated"
-                        ) : (
-                          "Update post"
-                        )}
-                      </button>
-                      <button
-                        className="btn-primary btn self-start"
-                        onClick={() => {
-                          relevantTermRef.current.scrollIntoView({
-                            behavior: "smooth",
-                          });
-                          clearRelevantProject();
-                        }}
-                      >
-                        Build link for same post
-                      </button>
-                      <button
-                        className="btn-primary btn self-start"
-                        onClick={() => {
-                          targetTitleRef.current.scrollIntoView({
-                            behavior: "smooth",
-                          });
-                          clearProjectState();
-                        }}
-                      >
-                        Start new
-                      </button>
-                    </div>
-                  )}
+                <div className="flex flex-col justify-between space-x-2 sm:flex-row">
+                  <button
+                    className={`btn ml-5 w-72 max-w-6xl ${
+                      mutation.isLoading
+                        ? "btn-disabled "
+                        : mutation.isSuccess
+                        ? "btn-disabled"
+                        : !updatePost
+                        ? "btn-disabled"
+                        : "btn-primary "
+                    } `}
+                    onClick={() => handleUpdateToTheSite(updatePost)}
+                    disabled={
+                      mutation.isLoading
+                        ? true
+                        : updatePost
+                        ? false
+                        : updateSuccess
+                        ? true
+                        : true
+                    }
+                  >
+                    {mutation.isLoading ? (
+                      <ButtonLoader loadingText={"Updating..."} />
+                    ) : mutation.isSuccess ? (
+                      "Updated"
+                    ) : (
+                      "Update post"
+                    )}
+                  </button>
+
+                  <>
+                    <button
+                      className={` btn self-start ${
+                        updateSuccess
+                          ? "btn-primary inline-flex"
+                          : "btn-disabled hidden"
+                      }`}
+                      disabled={updateSuccess ? false : true}
+                      onClick={() => {
+                        relevantTermRef.current.scrollIntoView({
+                          behavior: "smooth",
+                        });
+                        clearRelevantProject();
+                      }}
+                    >
+                      Build link for same post
+                    </button>
+                    <button
+                      className={` btn self-start ${
+                        updateSuccess
+                          ? "btn-primary inline-flex"
+                          : "btn-disabled hidden"
+                      }`}
+                      disabled={updateSuccess ? false : true}
+                      onClick={() => {
+                        targetTitleRef.current.scrollIntoView({
+                          behavior: "smooth",
+                        });
+                        clearProjectState();
+                      }}
+                    >
+                      Start new
+                    </button>
+                  </>
                 </div>
               </div>
             </div>

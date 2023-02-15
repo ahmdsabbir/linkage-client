@@ -45,7 +45,7 @@ const Input = ({
           <span
             className={`label-text ${
               tooltipText ? "inline-flex items-center gap-2" : ""
-            }  text-base font-medium text-gray-700`}
+            }  font-medium text-gray-700 text-base`}
           >
             {label}
             {tooltipText && (
@@ -69,7 +69,7 @@ const Input = ({
           </span>
 
           {infoText && (
-            <span className="font-base label-text text-base text-gray-400">
+            <span className="font-base label-text text-gray-400 text-base">
               {infoText}
             </span>
           )}
