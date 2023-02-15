@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import { useAuthState } from "../context/auth-context";
@@ -135,7 +136,7 @@ const CreateProject = () => {
             error={errors.wpAppPassword?.message as string}
           />
 
-          <div className="mt-4">
+          <div className="mt-4 flex flex-col gap-4 md:flex-row">
             <button
               className={`btn ${
                 mutation.isLoading ? "btn-disabled " : "btn-primary "
@@ -148,6 +149,15 @@ const CreateProject = () => {
                 "Create Project"
               )}
             </button>
+
+            {mutation.isSuccess && (
+              <Link
+                to={"/dashboard/all-projects"}
+                className="btn-primary btn text-gray-100"
+              >
+                Go to Projects
+              </Link>
+            )}
           </div>
         </form>
       </div>

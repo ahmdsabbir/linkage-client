@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useState } from "react";
@@ -58,7 +59,7 @@ const Navbar = () => {
             </span>
 
             <button
-              onClick={() => logout}
+              onClick={logout}
               className="btn-primary btn mr-2 font-semibold"
             >
               Logout
