@@ -98,50 +98,47 @@ const ChosenTitleUrl = () => {
       </h2> */}
 
       <form onSubmit={handleSubmit(handleGenerateHeadingSubmit)}>
-        <div className="space-y-5">
-          <div>
-            <label
-              htmlFor="ChosenTitle"
-              className="label flex-col items-baseline"
-            >
-              <span className="label-text font-medium text-gray-700 text-base">
-                ChosenTitle
-              </span>
-            </label>
-            <textarea
-              placeholder="chosen title..."
-              className="  block h-32 w-full rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
-              {...register("title")}
-            />
-            {errors?.title && (
-              <p className="text-error"> {errors.title?.message as string}</p>
-            )}
-
-            <p className="mt-3 text-gray-400 text-sm">
+        <div
+          className="
+space-y-1"
+        >
+          <label
+            htmlFor="ChosenTitle"
+            className="label flex-col items-baseline"
+          >
+            <span className="label-text font-medium text-gray-700 text-base">
+              ChosenTitle
+            </span>
+          </label>
+          <textarea
+            placeholder="chosen title..."
+            className="block  h-20 w-full  rounded-lg border border-gray-200 bg-white px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 "
+            {...register("title")}
+          />
+          {errors?.title && (
+            <p className="text-error"> {errors.title?.message as string}</p>
+          )}
+          {/* <p className=" mt-3  text-gray-400 text-sm">
               Before you hit the 'Generate Heading' button, you can modify your
               post title according to your requirements!
-            </p>
-          </div>
-          <div>
-            <label
-              htmlFor="ChosenURL"
-              className="label flex-col items-baseline"
-            >
-              <span className="label-text font-medium text-gray-700 text-base">
-                ChosenURL
-              </span>
-            </label>
-            <textarea
-              placeholder="chosen title..."
-              className="   disabled: block h-32 w-full rounded-lg border border-gray-200 bg-gray-100 px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
-              disabled
-              {...register("url")}
-            />
-            {errors?.url && (
-              <p className="text-error"> {errors.url?.message as string}</p>
-            )}
-          </div>
+            </p>{" "} */}
+
+          <label htmlFor="ChosenURL" className="label flex-col items-baseline">
+            <span className="label-text font-medium text-gray-700 text-base">
+              Chosen URL
+            </span>
+          </label>
+          <textarea
+            placeholder="chosen title..."
+            className=" disabled:  block h-20 w-full  rounded-lg border border-gray-200 bg-gray-100 px-4 py-2.5 text-gray-700 placeholder-gray-400/70 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
+            disabled
+            {...register("url")}
+          />
+          {errors?.url && (
+            <p className="text-error"> {errors.url?.message as string}</p>
+          )}
         </div>
+
         {/* button */}
         <div className="mt-6">
           <button

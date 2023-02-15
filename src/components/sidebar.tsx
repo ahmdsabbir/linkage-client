@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import logo from "../assets/img/logo.png";
 import { useAuthState } from "../context/auth-context";
 
 interface SidebarProps {
@@ -12,7 +13,7 @@ const Sidebar = ({ isSidebar, handleSidebar }: SidebarProps) => {
   return (
     <aside
       onClick={handleSidebar}
-      className={`fixed inset-0 z-10 transform overflow-hidden bg-primary bg-opacity-25 text-white ease-in-out 
+      className={`fixed inset-0 z-50 transform overflow-hidden bg-primary bg-opacity-25 text-white ease-in-out 
 ${
   isSidebar
     ? " -translate-x-0 opacity-100 transition-opacity duration-500  "
@@ -26,8 +27,8 @@ ${
   `}
       >
         <div className="flex h-screen w-64 flex-col overflow-y-auto border-r bg-white px-5 py-8 rtl:border-r-0 rtl:border-l">
-          <div className="flex items-center justify-between p-4 text-lg font-bold">
-            <p className="text-gray-800">linkage</p>
+          <div className="flex items-center justify-between p-4 font-bold text-lg">
+            <img src={logo} alt="logo" />
             <button className=" font-bold" onClick={handleSidebar}>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -95,7 +96,7 @@ ${
                       d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">
+                  <span className="mx-2 font-medium text-sm">
                     Create project
                   </span>
                 </NavLink>
@@ -121,7 +122,7 @@ ${
                       d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 010 3.75H5.625a1.875 1.875 0 010-3.75z"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">Projects</span>
+                  <span className="mx-2 font-medium text-sm">Projects</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -145,7 +146,7 @@ ${
                       d="M10.125 2.25h-4.5c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125v-9M10.125 2.25h.375a9 9 0 019 9v.375M10.125 2.25A3.375 3.375 0 0113.5 5.625v1.5c0 .621.504 1.125 1.125 1.125h1.5a3.375 3.375 0 013.375 3.375M9 15l2.25 2.25L15 12"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">History</span>
+                  <span className="mx-2 font-medium text-sm">History</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -174,7 +175,7 @@ ${
                       d="M13.5 10.5H21A7.5 7.5 0 0013.5 3v7.5z"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">Reporting</span>
+                  <span className="mx-2 font-medium text-sm">Reporting</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -198,7 +199,7 @@ ${
                       d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">Users</span>
+                  <span className="mx-2 font-medium text-sm">Users</span>
                 </NavLink>
                 <NavLink
                   className={({ isActive }) =>
@@ -227,7 +228,7 @@ ${
                       d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  <span className="mx-2 text-sm font-medium">Setting</span>
+                  <span className="mx-2 font-medium text-sm">Setting</span>
                 </NavLink>
               </nav>
               {/*  <div className="mt-6">

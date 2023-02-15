@@ -37,7 +37,7 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
         <>
           {aiSuggestions.length !== 0 && (
             <div>
-              <h2 className="my-3 text-2xl font-semibold capitalize text-gray-800  sm:text-3xl">
+              <h2 className="my-3 font-semibold capitalize text-gray-800 text-2xl  sm:text-3xl">
                 Suggestions
               </h2>
 
@@ -62,7 +62,7 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
             </div>
           )}
         </>
-        <div className="flex flex-col">
+        <div className="flex w-full max-w-lg flex-col">
           <div className="sticky top-20 ">
             <ChosenTitleUrl />
             {generatedHeading && (

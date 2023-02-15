@@ -16,20 +16,16 @@ const HeadingOrParagraph = ({
         <header>
           <h3
             className={` font-semibold capitalize    ${
-              generatedHeading ? "text-2xl text-gray-700" : "text-2xl"
+              generatedHeading ? "text-gray-700 text-lg" : "text-lg"
             }`}
           >
-            {sectionName ? sectionName : "use a section name"}
+            {sectionName && sectionName}
           </h3>
-          <p className="mb-4">
-            {sectionHelperText
-              ? sectionHelperText
-              : "use a section helper text"}
-          </p>
+          <p className="mb-4">{sectionHelperText && sectionHelperText}</p>
         </header>
         <div className="">
           {generatedHeading && (
-            <p className="py-4 text-2xl  font-medium text-accent">
+            <p className="text-md py-1  font-medium text-accent">
               {generatedHeading}
             </p>
           )}

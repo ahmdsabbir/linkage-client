@@ -20,10 +20,10 @@ const Navbar = () => {
   return (
     <>
       <nav
-        className="sticky top-0 z-10 flex items-center
+        className="sticky top-0 z-50 flex items-center
        justify-between  bg-white p-2 shadow sm:p-3 md:p-4 lg:p-5 xl:p-6"
       >
-        <div className="flex flex-row items-center gap-3">
+        <div className="ga flex flex-row items-center">
           <div className="h-10 w-10 p-2">
             <button onClick={handleSidebar} className="mr-1 ">
               <svg
@@ -42,22 +42,23 @@ const Navbar = () => {
               </svg>
             </button>
           </div>
-          <div className="flex h-5 w-[90px] items-center justify-center py-[18px] pl-4 pr-[14px]">
+          <div className=" ">
             <Link to={"/"} className="font-bold text-blue-600 text-sm">
-              <div className="h-auto w-32">
+              <div className="h-auto w-20 md:w-32">
                 <img src={logo} alt="linkages.io" className="h-full w-full" />
               </div>
             </Link>
           </div>
         </div>
         {auth.token ? (
-          <div className="space-x-3">
-            <span className=" font-medium text-gray-700">
-              Remaining Credit: 05
+          <div className="flex items-center gap-1 ">
+            <span className="flex flex-col items-center justify-center space-x-1 text-center font-normal text-gray-700 text-xs md:flex-row md:text-base">
+              <span>Remaining Credit:</span>
+              <span>05</span>
             </span>
 
             <button
-              onClick={logout}
+              onClick={() => logout}
               className="btn-primary btn mr-2 font-semibold"
             >
               Logout
