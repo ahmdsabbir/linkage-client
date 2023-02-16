@@ -40,7 +40,6 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   } = useForm({
     resolver: zodResolver(RelevantTermSchema),
   });
-  console.log(targetTitleUrlTerm);
 
   const errorFunc = useErrorHandling();
 

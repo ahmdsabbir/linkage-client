@@ -1,7 +1,7 @@
 {
   "name": "linkages.io",
   "private": true,
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "AI based interlinking tool",
   "main": "index.js",
   "scripts": {
@@ -25,7 +25,6 @@
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
-    "react-edit-text": "^5.0.2",
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.8.1",
     "react-toastify": "^9.1.1",
