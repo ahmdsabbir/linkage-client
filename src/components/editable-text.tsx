@@ -21,6 +21,7 @@ interface TextFieldProps {
   enableEdit?: boolean;
   editIcon?: JSX.Element;
   fieldValue: string | undefined;
+  headingHeight: string;
   handleBlur: (e: unknown) => void;
 }
 
@@ -34,7 +35,7 @@ const EditableText = ({
   infoText,
   svgIcon,
   tooltipText,
-
+  headingHeight,
   error,
 
   fieldValue,
@@ -119,7 +120,7 @@ const EditableText = ({
         </span>
 
         <textarea
-          className={`block  min-h-10v w-full rounded  ${
+          className={`block    ${headingHeight} w-full rounded  ${
             isEdit
               ? "bg-primary/5 p-3 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"
               : "disabled  resize-none bg-white py-3 px-0  font-medium text-primary focus:border-0 focus:outline-none"

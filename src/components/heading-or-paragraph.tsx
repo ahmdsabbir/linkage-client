@@ -7,20 +7,20 @@ import EditableText from "./editable-text";
 
 type FormValues = {
   generatedHeading?: string | null;
-  generateParagraph?: string | null;
+  generatedParagraph?: string | null;
 };
 
 interface HeadingOrParagraph {
   sectionName: string;
   sectionHelperText: string;
   generatedHeading?: string;
-  generateParagraph?: string;
+  generatedParagraph?: string;
 }
 const HeadingOrParagraph = ({
   sectionName,
   sectionHelperText,
   generatedHeading,
-  generateParagraph,
+  generatedParagraph,
 }: HeadingOrParagraph) => {
   const { dispatch } = useAppState();
   // console.log(generatedHeading);
@@ -30,10 +30,6 @@ const HeadingOrParagraph = ({
       type: "generatedHeading",
       payload: value,
     }); */
-
-  const handleBlur = async (e) => {
-    await dispatch({ type: "generatedHeading", payload: e.target.value });
-  };
 
   return (
     <div className="my-10 max-w-xl rounded border border-gray-100 bg-white text-gray-500 shadow-md shadow-slate-200">
@@ -53,10 +49,29 @@ const HeadingOrParagraph = ({
             <EditableText
               id={"generatedHeading"}
               fieldValue={generatedHeading}
-              handleBlur={handleBlur}
+              headingHeight={"min-h-10v"}
+              handleBlur={async (e) =>
+                await dispatch({
+                  type: "generatedHeading",
+                  payload: e.target.value,
+                })
+              }
             />
           )}
-          {generateParagraph && <code className=""> {generateParagraph}</code>}
+
+          {generatedParagraph && (
+            <EditableText
+              id={"generatedParagraph"}
+              headingHeight={"min-h-40v"}
+              fieldValue={generatedParagraph}
+              handleBlur={async (e) =>
+                await dispatch({
+                  type: "generatedParagraph",
+                  payload: e.target.value,
+                })
+              }
+            />
+          )}
         </>
       </div>
     </div>
