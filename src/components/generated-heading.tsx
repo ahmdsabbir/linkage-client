@@ -11,11 +11,7 @@ const GeneratedHeading = ({ anchorFieldRef, articleHeadingRef }, ref) => {
       <HeadingOrParagraph
         sectionName={`Generated Heading`}
         // sectionHelperText={`AI Generated Relevant Heading`}
-        generatedHeading={
-          generatedHeading
-            ? generatedHeading
-            : "Your generated paragraph will be here"
-        }
+        generatedHeading={generatedHeading ? generatedHeading : ""}
       />
       {generatedHeading && (
         <button
@@ -32,3 +28,5 @@ const GeneratedHeading = ({ anchorFieldRef, articleHeadingRef }, ref) => {
 };
 
 export default forwardRef(GeneratedHeading);
+
+// taile chosen title and url re o emon koirala

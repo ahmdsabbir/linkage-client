@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-empty-function */
@@ -99,6 +100,10 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   });
 
   const handleRelevantSubmit = async (data) => {
+    if (targetTitleUrlTerm.target_title === undefined) {
+      toast.warning("Target post title is not found");
+      return;
+    }
     await dispatch({ type: "relevantTerm", payload: data });
     mutation.mutate(data);
   };

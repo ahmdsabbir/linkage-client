@@ -69,12 +69,18 @@ const Suggestions = ({ suggestionsRef, anchorFieldRef }, ref) => {
             className={`sticky top-20 ${aiSuggestions.length !== 0 && "pt-28"}`}
           >
             <ChosenTitleUrl />
-            {generatedHeading && (
+
+            <GeneratedHeading
+              anchorFieldRef={anchorFieldRef}
+              articleHeadingRef={undefined}
+            />
+
+            {/* {generatedHeading && (
               <GeneratedHeading
                 anchorFieldRef={anchorFieldRef}
                 articleHeadingRef={undefined}
               />
-            )}
+            )} */}
           </div>
         </div>
       </div>

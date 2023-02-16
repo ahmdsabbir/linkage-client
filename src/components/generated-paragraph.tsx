@@ -29,11 +29,7 @@ const GeneratedParagraph = (
         <HeadingOrParagraph
           sectionName={"Generated Paragraph"}
           sectionHelperText={`Following Section was Generated. Insert It Wherever You’d like on Your Post`}
-          generateParagraph={
-            generatedParagraph
-              ? generatedParagraph
-              : "Generated Paragraph Will be here"
-          }
+          generatedParagraph={generatedParagraph ? generatedParagraph : ""}
         />
         {generatedParagraph && (
           <div className=" -mt-6 flex flex-col justify-center space-x-2 sm:flex-row">
