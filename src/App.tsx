@@ -1,3 +1,4 @@
+import { ErrorBoundary } from "react-error-boundary";
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -9,6 +10,7 @@ import EditProject from "./components/edit-project";
 import ErrorPage from "./components/error-page";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
+import { FullPageErrorFallback } from "./lib/error-fallback-message";
 import History from "./pages/dummy/History";
 import Reporters from "./pages/dummy/reporters";
 import Settings from "./pages/dummy/settings";
@@ -50,7 +52,9 @@ const App = () => {
   return (
     <>
       {/* <TestingCard /> */}
-      <RouterProvider router={router} />
+      <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+        <RouterProvider router={router} />
+      </ErrorBoundary>
     </>
   );
 };
