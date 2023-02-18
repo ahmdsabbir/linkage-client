@@ -15,6 +15,6 @@
     "isolatedModules": true,
     "skipLibCheck": true
   },
-  "include": ["src", "dist", "dist", "dist", "dist"],
+  "include": ["src", "dist", "dist", "dist", "dist", "dist"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
