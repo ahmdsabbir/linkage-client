@@ -17,12 +17,10 @@ export const primaryClient = axios.create({
 
 export const privateClient = axios.create({
   baseURL: baseURL,
-  /*  headers: {
+  headers: {
     "Content-Type": "application/json",
-    Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-  }, */
-
-  // withCredentials: true,
+  },
+  withCredentials: true,
 });
 
 /* export async function authClient(endpoint: string, data: unknown) {

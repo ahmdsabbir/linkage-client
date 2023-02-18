@@ -1,8 +1,13 @@
 import { NavLink } from "react-router-dom";
+import useRefreshToken from "../../hooks/use-refresh-token";
 
 const DashboardDetails = () => {
+  const refresh = useRefreshToken();
   return (
     <div className="grid place-content-center">
+      <button className="btn-primary btn" onClick={() => refresh()}>
+        refresh
+      </button>
       <div className="max-w-2xl overflow-hidden rounded-lg bg-white shadow-md dark:bg-gray-800">
         <img
           className="h-64 w-full object-cover"
