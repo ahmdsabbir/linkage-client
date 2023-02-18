@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { ErrorBoundary } from "react-error-boundary";
 import {
   createBrowserRouter,
@@ -10,7 +11,7 @@ import EditProject from "./components/edit-project";
 import ErrorPage from "./components/error-page";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
-import { FullPageErrorFallback } from "./lib/error-fallback-message";
+import { ErrorMessage } from "./lib/error-fallback-message";
 import History from "./pages/dummy/History";
 import Reporters from "./pages/dummy/reporters";
 import Settings from "./pages/dummy/settings";
@@ -22,6 +23,11 @@ import Basic from "./pages/user-dashboard/basic-page";
 import DashboardDetails from "./pages/user-dashboard/dashboard-details";
 import DashboardLayout from "./pages/user-dashboard/dashboard-layout";
 import RootLayout from "./root-layout";
+
+// error fallback component
+function ErrorFallback({ error }) {
+  return <ErrorMessage error={error} />;
+}
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -52,7 +58,7 @@ const App = () => {
   return (
     <>
       {/* <TestingCard /> */}
-      <ErrorBoundary FallbackComponent={FullPageErrorFallback}>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
         <RouterProvider router={router} />
       </ErrorBoundary>
     </>
