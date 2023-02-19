@@ -16,11 +16,11 @@ export const primaryClient = axios.create({
 });
 
 export const privateClient = axios.create({
-  baseURL: baseURL,
+  baseURL,
   headers: {
     "Content-Type": "application/json",
   },
-  withCredentials: true,
+  // withCredentials: true,
 });
 
 /* export async function authClient(endpoint: string, data: unknown) {

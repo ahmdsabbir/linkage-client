@@ -5,7 +5,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -15,6 +15,7 @@ import { useAuthState } from "../../context/auth-context";
 import { useAppState } from "../../context/update-post-context";
 import { privateClient } from "../../lib/api-config";
 import { useErrorHandling } from "../../utils/error-handling";
+import { useProjects } from "../../utils/projects";
 
 const AllProjects = () => {
   const queryClient = useQueryClient();
@@ -40,20 +41,7 @@ const AllProjects = () => {
     return response.data;
   };
 
-  const { data, isLoading } = useQuery({
-    queryKey: ["projects"],
-    queryFn: getProjects,
-    refetchOnWindowFocus: false,
-    // refetchOnMount: false,
-    retry: 2,
-    staleTime: Infinity,
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
-
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.error(errorMsg);
-    },
-  });
+  const { data, isLoading } = useProjects();
 
   // start project handler
   const handleStartProject = async (id: { id: number | string }) => {

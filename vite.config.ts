@@ -12,6 +12,7 @@ export default defineConfig({
       "/api": {
         target: "http://192.168.101.14:5000",
         changeOrigin: true,
+        // rewrite: (path) => path.replace(/^\/api/, ""),
         configure: (proxy, options) => {
           proxy.on("proxyReq", (proxyReq, req, res) => {
             if (!req.headers.cookie) {
@@ -24,6 +25,20 @@ export default defineConfig({
         secure: false,
       },
     },
+
+    /*   proxy: {
+      "/api": {
+        target: "http://jsonplaceholder.typicode.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+
+      "^/fallback/.*": {
+        target: "http://jsonplaceholder.typicode.com",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/fallback/, ""),
+      },
+    }, */
 
     // proxy: {
     //   // string shorthand: http://localhost:5173/foo -> http://localhost:4567/foo
