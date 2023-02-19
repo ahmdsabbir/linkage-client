@@ -22,7 +22,7 @@ const Navbar = () => {
     <>
       <nav
         className="sticky top-0 z-50 flex items-center
-       justify-between  bg-white p-2 shadow sm:p-3 md:p-4 "
+       justify-between  bg-white p-2 shadow sm:p-3  "
       >
         <div className="ga flex flex-row items-center">
           <div className="h-10 w-10 p-2">
