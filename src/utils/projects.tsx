@@ -64,7 +64,7 @@ function useDeleteProject() {
     return response.data;
   };
 
-  useMutation({
+  return useMutation({
     mutationFn: deleteProject,
     onSuccess: async () => {
       // Invalidate and refetch
