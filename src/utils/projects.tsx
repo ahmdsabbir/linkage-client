@@ -1,3 +1,4 @@
+/* eslint-disable no-unsafe-optional-chaining */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -98,4 +99,69 @@ function useStartProject(data) {
   return handleStartProject;
 }
 
-export { useProjects, useDeleteProject, useStartProject };
+function useRelevantTerm(suggestionsRef, reset) {
+  const errorFunc = useErrorHandling();
+  const {
+    state: { selectedProject, targetTitleUrlTerm },
+    dispatch,
+  } = useAppState();
+  const { auth } = useAuthState();
+
+  // axios post
+  const getSuggestions = async (data): Promise<{ data: unknown }> => {
+    const postData = JSON.stringify({
+      domain: selectedProject.domain,
+      relevant_term: data.relevantTerm,
+      source_title: targetTitleUrlTerm.target_title,
+    });
+
+    const response = await privateClient.post(
+      "api/core/suggestions",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+
+    return response.data;
+  };
+
+  // mutation
+  return useMutation({
+    mutationFn: getSuggestions,
+    onSuccess: async (successData) => {
+      // Invalidate and refetch
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [],
+      });
+      await dispatch({
+        type: "generatedHeading",
+        payload: "",
+      });
+
+      await dispatch({
+        type: "generatedParagraph",
+        payload: "",
+      });
+      await dispatch({
+        type: "aiSuggestions",
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        payload: [...successData?.suggestions],
+      });
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
+      reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.warning(errorMsg);
+    },
+  });
+}
+
+export { useProjects, useDeleteProject, useStartProject, useRelevantTerm };
