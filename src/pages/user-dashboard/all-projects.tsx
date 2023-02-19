@@ -5,17 +5,15 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
+import { useQueryClient } from "@tanstack/react-query";
+import { Key, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import Modal from "../../components/Modal";
 import SingleProjectCard from "../../components/single-project-card";
 import { useAuthState } from "../../context/auth-context";
 import { useAppState } from "../../context/update-post-context";
-import { privateClient } from "../../lib/api-config";
 import { useErrorHandling } from "../../utils/error-handling";
-import { useProjects } from "../../utils/projects";
+import { useDeleteProject, useProjects } from "../../utils/projects";
 
 const AllProjects = () => {
   const queryClient = useQueryClient();
@@ -27,28 +25,13 @@ const AllProjects = () => {
   const [showModal, setShowModal] = useState(false);
   const [projectId, setProjectId] = useState(null);
 
-  const getProjects = async (): Promise<{ data: unknown }> => {
-    const response = await privateClient("api/project", {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-      },
-    });
-    await dispatch({
-      type: "projects",
-      payload: response?.data?.projects,
-    });
-    return response.data;
-  };
-
   const { data, isLoading } = useProjects();
 
   // start project handler
-  const handleStartProject = async (id: { id: number | string }) => {
+  const handleStartProject = async (id) => {
     const getProject = await data?.projects?.find(
-      (project: { id: { id: string | number } }) => project.id == id
+      (project) => project.id == id
     );
-
     if (getProject.id) {
       await dispatch({
         type: "selectedProject",
@@ -70,32 +53,9 @@ const AllProjects = () => {
       );
     }; */
 
-  const deleteProject = async (id: unknown): Promise<{ data: unknown }> => {
-    const response = await privateClient.delete(`api/project/${id}`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-      },
-    });
+  const mutation = useDeleteProject();
 
-    return response.data;
-  };
-
-  const mutation = useMutation({
-    mutationFn: deleteProject,
-    onSuccess: async () => {
-      // Invalidate and refetch
-      await queryClient.invalidateQueries({ queryKey: ["projects"] });
-
-      toast("Project deleted Successfully");
-    },
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.error(errorMsg);
-    },
-  });
-
-  const handleDeleteProject = (id) => {
+  const handleDeleteProject = (id: unknown) => {
     if (id) {
       mutation.mutate(id);
       setShowModal(false);
@@ -107,21 +67,30 @@ const AllProjects = () => {
       {/* <p className="text-5xl text-gray-800"> All Projects list</p> */}
 
       <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-10">
-        {data?.projects?.map((project) => (
-          <SingleProjectCard
-            key={project.id}
-            id={project.id}
-            projectName={project.name}
-            projectURL={project.domain}
-            projectUserName={project.wp_username}
-            projectAdminPassword={project.wp_password}
-            projectCreatedDate={project.date_added}
-            handleStartProject={handleStartProject}
-            // handleEditProject={handleEditProject}
-            setShowModal={setShowModal}
-            setProjectId={setProjectId}
-          />
-        ))}
+        {data?.projects?.map(
+          (project: {
+            id: Key | null | undefined;
+            name: string;
+            domain: string;
+            wp_username: string;
+            wp_password: string;
+            date_added: string;
+          }) => (
+            <SingleProjectCard
+              key={project.id}
+              id={project.id}
+              projectName={project.name}
+              projectURL={project.domain}
+              projectUserName={project.wp_username}
+              projectAdminPassword={project.wp_password}
+              projectCreatedDate={project.date_added}
+              handleStartProject={handleStartProject}
+              // handleEditProject={handleEditProject}
+              setShowModal={setShowModal}
+              setProjectId={setProjectId}
+            />
+          )
+        )}
       </div>
       {showModal ? (
         <Modal>

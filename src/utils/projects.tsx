@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
@@ -47,4 +47,36 @@ function useProjects() {
   });
 }
 
-export { useProjects };
+function useDeleteProject() {
+  const queryClient = useQueryClient();
+  const { auth } = useAuthState();
+  const { dispatch } = useAppState();
+  const errorFunc = useErrorHandling();
+
+  const deleteProject = async (id: unknown): Promise<{ data: unknown }> => {
+    const response = await privateClient.delete(`api/project/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+
+    return response.data;
+  };
+
+  useMutation({
+    mutationFn: deleteProject,
+    onSuccess: async () => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["projects"] });
+
+      toast("Project deleted Successfully");
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+export { useProjects, useDeleteProject };
