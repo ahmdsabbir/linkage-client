@@ -13,7 +13,11 @@ import SingleProjectCard from "../../components/single-project-card";
 import { useAuthState } from "../../context/auth-context";
 import { useAppState } from "../../context/update-post-context";
 import { useErrorHandling } from "../../utils/error-handling";
-import { useDeleteProject, useProjects } from "../../utils/projects";
+import {
+  useDeleteProject,
+  useProjects,
+  useStartProject,
+} from "../../utils/projects";
 
 const AllProjects = () => {
   const queryClient = useQueryClient();
@@ -28,30 +32,7 @@ const AllProjects = () => {
   const { data, isLoading } = useProjects();
 
   // start project handler
-  const handleStartProject = async (id) => {
-    const getProject = await data?.projects?.find(
-      (project) => project.id == id
-    );
-    if (getProject.id) {
-      await dispatch({
-        type: "selectedProject",
-        payload: getProject,
-      });
-      navigate(`/dashboard/basic`);
-    }
-  };
-
-  /* const handleEditProject = async (id) => {
-    const findProject = projects.find((project) => project.id == id);
-    await dispatch({
-      type: "selectedProject",
-      payload: findProject,
-    });
-    
-    navigate(
-      `/dashboard/project-starter/${name.toLowerCase()}/edit-project-details`
-      );
-    }; */
+  const handleStartProject = useStartProject(data);
 
   const mutation = useDeleteProject();
 

@@ -5,6 +5,7 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
@@ -79,4 +80,22 @@ function useDeleteProject() {
   });
 }
 
-export { useProjects, useDeleteProject };
+function useStartProject(data) {
+  const navigate = useNavigate();
+  const { dispatch } = useAppState();
+  const handleStartProject = async (id) => {
+    const getProject = await data?.projects?.find(
+      (project) => project.id == id
+    );
+    if (getProject.id) {
+      await dispatch({
+        type: "selectedProject",
+        payload: getProject,
+      });
+      navigate(`/dashboard/basic`);
+    }
+  };
+  return handleStartProject;
+}
+
+export { useProjects, useDeleteProject, useStartProject };
