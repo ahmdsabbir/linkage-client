@@ -11,6 +11,7 @@ interface SingleProjectCardProps {
   projectCreatedDate: string;
   handleStartProject: (id: string | number) => void;
   setShowModal: (arg0: boolean) => void;
+  setProjectId: string | number | null;
 }
 
 const SingleProjectCard = ({

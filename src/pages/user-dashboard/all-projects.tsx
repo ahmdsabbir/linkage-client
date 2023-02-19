@@ -5,14 +5,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useQueryClient } from "@tanstack/react-query";
 import { Key, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Modal from "../../components/Modal";
 import SingleProjectCard from "../../components/single-project-card";
-import { useAuthState } from "../../context/auth-context";
-import { useAppState } from "../../context/update-post-context";
-import { useErrorHandling } from "../../utils/error-handling";
 import {
   useDeleteProject,
   useProjects,
@@ -20,20 +15,15 @@ import {
 } from "../../utils/projects";
 
 const AllProjects = () => {
-  const queryClient = useQueryClient();
-  const { auth } = useAuthState();
-  const { dispatch } = useAppState();
-  const errorFunc = useErrorHandling();
-  const navigate = useNavigate();
-
   const [showModal, setShowModal] = useState(false);
   const [projectId, setProjectId] = useState(null);
 
+  // get all projects hook
   const { data, isLoading } = useProjects();
 
   // start project handler
   const handleStartProject = useStartProject(data);
-
+  // delete project hook
   const mutation = useDeleteProject();
 
   const handleDeleteProject = (id: unknown) => {
