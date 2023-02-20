@@ -37,6 +37,7 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   } = useForm({
     resolver: zodResolver(RelevantTermSchema),
   });
+  
   // useMutation custom query for relevant term
   const mutation = useRelevantTerm(suggestionsRef, reset);
   // submit relevant term

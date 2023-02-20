@@ -164,4 +164,54 @@ function useRelevantTerm(suggestionsRef, reset) {
   });
 }
 
-export { useProjects, useDeleteProject, useStartProject, useRelevantTerm };
+function useAnchorField(paragraphRef, reset) {
+  const { auth } = useAuthState();
+  const errorFunc = useErrorHandling();
+
+  const {
+    state: { generatedHeading, targetTitleUrlTerm, chosenTitleUrl },
+    dispatch,
+  } = useAppState();
+
+  const getParagraph = async (data): Promise<{ data: unknown }> => {
+    const postData = JSON.stringify({
+      combined_heading: generatedHeading,
+      anchor_text: data.anchorText,
+      source_url: chosenTitleUrl.url,
+    });
+
+    const response = await privateClient.post("api/core/paragraph", postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+
+    return response.data;
+  };
+
+  return useMutation({
+    mutationFn: getParagraph,
+    onSuccess: async (para) => {
+      await dispatch({
+        type: "generatedParagraph",
+        payload: para.paragraph,
+      });
+      paragraphRef.current.style.visibility = "visible";
+      paragraphRef.current.scrollIntoView({ behavior: "smooth" });
+      reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+export {
+  useProjects,
+  useDeleteProject,
+  useStartProject,
+  useRelevantTerm,
+  useAnchorField,
+};
