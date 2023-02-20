@@ -4,7 +4,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { forwardRef, useEffect, useState } from "react";
-import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
 import { useArticleHeading, useUpdateArticleHeading } from "../utils/projects";
 import ArticleHeadingCard from "./article-headings-card";
@@ -14,21 +13,13 @@ const ArticleHeading = (
   { articleHeadingRef, targetTitleRef, relevantTermRef },
   ref
 ) => {
-  const { auth } = useAuthState();
-
   const [checkData, setCheckData] = useState([]);
   const [updatePost, setUpdatePost] = useState();
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const {
-    state: {
-      chosenTitleUrl,
-      selectedProject,
-      generatedHeading,
-      generatedParagraph,
-    },
+    state: { generatedHeading, generatedParagraph },
     clearProjectState,
     clearRelevantProject,
-    dispatch,
   } = useAppState();
 
   const { data, isLoading } = useArticleHeading();

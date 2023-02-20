@@ -31,7 +31,7 @@ const SelectedProjectDetails = () => {
     <>
       {selectedProject ? (
         <div className=" flex  flex-col sm:order-2">
-          <div className="card w-full flex-shrink-0 break-words rounded  border border-t-0 px-6 text-[#123354] ">
+          <div className="card w-full flex-shrink-0  break-words rounded  px-6 text-[#123354] ">
             <div className="card-body gap-4 px-0  md:text-left ">
               <div className="flex flex-col  gap-4 ">
                 {selectedProject?.name && (
