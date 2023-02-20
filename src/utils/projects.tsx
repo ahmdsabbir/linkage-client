@@ -208,10 +208,122 @@ function useAnchorField(paragraphRef, reset) {
   });
 }
 
+function useArticleHeading() {
+  const errorFunc = useErrorHandling();
+  const { auth } = useAuthState();
+  const {
+    state: {
+      chosenTitleUrl,
+      selectedProject,
+      generatedHeading,
+      generatedParagraph,
+    },
+    clearProjectState,
+    clearRelevantProject,
+    dispatch,
+  } = useAppState();
+
+  const getArticleHeadings = async (): Promise<{
+    headings(headings: unknown): unknown;
+    data: unknown;
+  }> => {
+    const postData = JSON.stringify({
+      post_id: chosenTitleUrl.post_id,
+      domain: selectedProject.domain,
+    });
+    const response = await privateClient.post(
+      "api/core/target-headings",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+    return response.data;
+  };
+
+  return useQuery({
+    queryKey: ["articleHeadings"],
+    queryFn: getArticleHeadings,
+    refetchOnWindowFocus: false,
+    refetchOnmount: false,
+    retry: 2,
+    enabled: !!generatedParagraph,
+
+    // refetchOnReconnect: false,
+    // staleTime: 5 * 60 * 1000,
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+function useUpdateArticleHeading(setUpdateSuccess) {
+  const { auth } = useAuthState();
+  const errorFunc = useErrorHandling();
+  const {
+    state: {
+      chosenTitleUrl,
+      selectedProject,
+      generatedHeading,
+      generatedParagraph,
+    },
+    clearProjectState,
+    clearRelevantProject,
+    dispatch,
+  } = useAppState();
+
+  const queryClient = useQueryClient();
+
+  const postFinalData = async (data): Promise<{ data: unknown }> => {
+    const postData = JSON.stringify({
+      domain: selectedProject.domain,
+      post_id: chosenTitleUrl.post_id,
+      combined_heading: generatedHeading,
+      paragraph_content: generatedParagraph,
+      chosen_heading_text: data?.text,
+      chosen_heading_tag: data?.tag,
+      chosen_heading_name: data?.name,
+    });
+    const response = await privateClient.post(
+      "api/core/update-content",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+    return response.data;
+  };
+
+  return useMutation({
+    mutationFn: postFinalData,
+    onSuccess: async (headingData) => {
+      await queryClient.invalidateQueries({ queryKey: ["articleHeadings"] });
+      toast.success(
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        `${headingData?.msg}.Please go back to make new update to your site.`
+      );
+      setUpdateSuccess(true);
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
 export {
   useProjects,
   useDeleteProject,
   useStartProject,
   useRelevantTerm,
   useAnchorField,
+  useArticleHeading,
+  useUpdateArticleHeading,
 };

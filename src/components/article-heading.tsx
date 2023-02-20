@@ -3,19 +3,10 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-import {
-  QueryCache,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
 import { forwardRef, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
-import { privateClient } from "../lib/api-config";
-import { useErrorHandling } from "../utils/error-handling";
+import { useArticleHeading, useUpdateArticleHeading } from "../utils/projects";
 import ArticleHeadingCard from "./article-headings-card";
 import ButtonLoader from "./button-loader";
 
@@ -23,8 +14,6 @@ const ArticleHeading = (
   { articleHeadingRef, targetTitleRef, relevantTermRef },
   ref
 ) => {
-  const queryClient = useQueryClient();
-  const queryCache = new QueryCache();
   const { auth } = useAuthState();
 
   const [checkData, setCheckData] = useState([]);
@@ -42,45 +31,8 @@ const ArticleHeading = (
     dispatch,
   } = useAppState();
 
-  const errorFunc = useErrorHandling();
-  const navigate = useNavigate();
+  const { data, isLoading } = useArticleHeading();
 
-  const getArticleHeadings = async (): Promise<{
-    headings(headings: unknown): unknown;
-    data: unknown;
-  }> => {
-    const postData = JSON.stringify({
-      post_id: chosenTitleUrl.post_id,
-      domain: selectedProject.domain,
-    });
-    const response = await privateClient.post(
-      "api/core/target-headings",
-      postData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-      }
-    );
-    return response.data;
-  };
-
-  const { data, isLoading } = useQuery({
-    queryKey: ["articleHeadings"],
-    queryFn: getArticleHeadings,
-    refetchOnWindowFocus: false,
-    refetchOnmount: false,
-    retry: false,
-    enabled: !!generatedParagraph,
-
-    // refetchOnReconnect: false,
-    // staleTime: 5 * 60 * 1000,
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.error(errorMsg);
-    },
-  });
   useEffect(() => {
     if (data) {
       // eslint-disable-next-line @typescript-eslint/unbound-method
@@ -99,46 +51,8 @@ const ArticleHeading = (
     setUpdatePost(heading);
   };
 
-  //   update to the site
-
-  const postFinalData = async (data): Promise<{ data: unknown }> => {
-    const postData = JSON.stringify({
-      domain: selectedProject.domain,
-      post_id: chosenTitleUrl.post_id,
-      combined_heading: generatedHeading,
-      paragraph_content: generatedParagraph,
-      chosen_heading_text: data?.text,
-      chosen_heading_tag: data?.tag,
-      chosen_heading_name: data?.name,
-    });
-    const response = await privateClient.post(
-      "api/core/update-content",
-      postData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-      }
-    );
-    return response.data;
-  };
-  // mutation
-  const mutation = useMutation({
-    mutationFn: postFinalData,
-    onSuccess: async (headingData) => {
-      await queryClient.invalidateQueries({ queryKey: ["articleHeadings"] });
-      toast.success(
-        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
-        `${headingData?.msg}.Please go back to make new update to your site.`
-      );
-      setUpdateSuccess(true);
-    },
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.error(errorMsg);
-    },
-  });
+  // mutation update to the site
+  const mutation = useUpdateArticleHeading(setUpdateSuccess);
 
   const handleUpdateToTheSite = async (data) => {
     mutation.mutate(data);
@@ -161,7 +75,7 @@ const ArticleHeading = (
         </p>
 
         {isLoading ? (
-          <>{"Getting article heading"}</>
+          <h3 className="text-gray-700 text-lg">{"Getting article heading"}</h3>
         ) : (
           <>
             <div className=" flex flex-col items-center justify-center">
