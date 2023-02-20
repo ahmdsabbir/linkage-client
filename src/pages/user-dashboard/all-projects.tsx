@@ -10,7 +10,7 @@ import Modal from "../../components/Modal";
 import SingleProjectCard from "../../components/single-project-card";
 import {
   useDeleteProject,
-  useEditProject,
+  useEditProjectHandle,
   useProjects,
   useStartProject,
 } from "../../utils/projects";
@@ -25,7 +25,7 @@ const AllProjects = () => {
   // start project handler
   const handleStartProject = useStartProject(data);
   // edit project
-  const handleEditProject = useEditProject(data);
+  const handleEditProject = useEditProjectHandle(data);
   // delete project hook
   const mutation = useDeleteProject();
   const handleDeleteProject = (id: unknown) => {

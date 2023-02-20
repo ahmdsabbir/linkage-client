@@ -99,11 +99,10 @@ function useStartProject(data) {
   return handleStartProject;
 }
 
-function useEditProject(data) {
+function useEditProjectHandle(data) {
   const navigate = useNavigate();
   const { dispatch } = useAppState();
   const handleEditProject = async (id) => {
-    console.log(id);
     const getProject = await data?.projects?.find(
       (project) => project.id == id
     );
@@ -116,6 +115,47 @@ function useEditProject(data) {
     }
   };
   return handleEditProject;
+}
+
+function useEditProject(reset) {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+
+  const { auth } = useAuthState();
+
+  // axios post
+  const getEditedProjectData = async (data): Promise<{ data: unknown }> => {
+    const postData = JSON.stringify({
+      name: data.projectTitle,
+      domain: data.domain,
+      wp_username: data.wpUsername,
+      wp_password: data.wpAppPassword,
+    });
+
+    const response = await privateClient.put("api/core/suggestions", postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+
+    return response.data;
+  };
+
+  return useMutation({
+    mutationFn: getEditedProjectData,
+    onSuccess: async (successData) => {
+      // Invalidate and refetch
+      await queryClient.invalidateQueries({ queryKey: ["projects"] });
+
+      toast.success("project edited successfully");
+      reset();
+    },
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
 }
 
 function useRelevantTerm(suggestionsRef, reset) {
@@ -345,5 +385,6 @@ export {
   useAnchorField,
   useArticleHeading,
   useUpdateArticleHeading,
+  useEditProjectHandle,
   useEditProject,
 };
