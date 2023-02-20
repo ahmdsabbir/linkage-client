@@ -10,6 +10,7 @@ interface SingleProjectCardProps {
   projectAdminPassword: string;
   projectCreatedDate: string;
   handleStartProject: (id: string | number) => void;
+  handleEditProject: (id: string | number) => void;
   setShowModal: (arg0: boolean) => void;
   setProjectId: string | number | null;
 }
@@ -24,6 +25,7 @@ const SingleProjectCard = ({
   handleStartProject,
   setShowModal,
   setProjectId,
+  handleEditProject,
 }: SingleProjectCardProps) => {
   const { clearAppState } = useAppState();
   return (
@@ -88,8 +90,8 @@ const SingleProjectCard = ({
           <span> Start</span>
         </button>
         <button
-          // to={"/dashboard/edit-project"}
-          disabled
+          onClick={() => handleEditProject(id)}
+          // disabled
           className="hover:text-bold inline-flex space-x-1 rounded border border-warning/25 p-1 font-medium text-warning hover:bg-warning/10"
         >
           <span>

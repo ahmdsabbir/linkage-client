@@ -99,6 +99,25 @@ function useStartProject(data) {
   return handleStartProject;
 }
 
+function useEditProject(data) {
+  const navigate = useNavigate();
+  const { dispatch } = useAppState();
+  const handleEditProject = async (id) => {
+    console.log(id);
+    const getProject = await data?.projects?.find(
+      (project) => project.id == id
+    );
+    if (getProject.id) {
+      await dispatch({
+        type: "selectedProject",
+        payload: getProject,
+      });
+      navigate(`/dashboard/edit-project`);
+    }
+  };
+  return handleEditProject;
+}
+
 function useRelevantTerm(suggestionsRef, reset) {
   const errorFunc = useErrorHandling();
   const {
@@ -326,4 +345,5 @@ export {
   useAnchorField,
   useArticleHeading,
   useUpdateArticleHeading,
+  useEditProject,
 };

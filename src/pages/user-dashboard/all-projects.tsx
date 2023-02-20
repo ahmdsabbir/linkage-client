@@ -10,6 +10,7 @@ import Modal from "../../components/Modal";
 import SingleProjectCard from "../../components/single-project-card";
 import {
   useDeleteProject,
+  useEditProject,
   useProjects,
   useStartProject,
 } from "../../utils/projects";
@@ -23,9 +24,10 @@ const AllProjects = () => {
 
   // start project handler
   const handleStartProject = useStartProject(data);
+  // edit project
+  const handleEditProject = useEditProject(data);
   // delete project hook
   const mutation = useDeleteProject();
-
   const handleDeleteProject = (id: unknown) => {
     if (id) {
       mutation.mutate(id);
@@ -56,7 +58,7 @@ const AllProjects = () => {
               projectAdminPassword={project.wp_password}
               projectCreatedDate={project.date_added}
               handleStartProject={handleStartProject}
-              // handleEditProject={handleEditProject}
+              handleEditProject={handleEditProject}
               setShowModal={setShowModal}
               setProjectId={setProjectId}
             />
