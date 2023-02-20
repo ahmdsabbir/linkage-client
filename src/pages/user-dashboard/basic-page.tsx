@@ -35,7 +35,7 @@ const Basic = () => {
     <>
       <Split
         sizes={[75, 25]}
-        minSize={[75, 25]}
+        minSize={[100, 0]}
         maxSize={[Infinity, 500]}
         expandToMin={false}
         gutterSize={10}
@@ -92,7 +92,7 @@ const Basic = () => {
           </div>
         </div>
         <div>
-          <div className="sticky top-14 pt-10 ">
+          <div className="sticky top-14  pt-5">
             <SelectedProjectDetails />
           </div>
         </div>
