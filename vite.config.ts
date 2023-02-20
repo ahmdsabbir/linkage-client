@@ -1,14 +1,16 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+import mkcert from "vite-plugin-mkcert";
 
 export default defineConfig({
-  plugins: [react({ include: "**/*.tsx" })],
+  plugins: [react({ include: "**/*.tsx" }), mkcert()],
   root: "src",
   server: {
     host: true,
     port: 3000,
+    https: true,
 
-    proxy: {
+    /*   proxy: {
       "/api": {
         target: "http://192.168.101.14:5000",
         changeOrigin: true,
@@ -24,7 +26,7 @@ export default defineConfig({
         },
         secure: false,
       },
-    },
+    }, */
 
     /*   proxy: {
       "/api": {
