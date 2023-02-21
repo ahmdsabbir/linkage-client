@@ -13,6 +13,8 @@ import { toast } from "react-toastify";
 import { z } from "zod";
 import Input from "../../components/input";
 import PillarPostCard from "../../components/pillar-post-card";
+import SiloLinkingTable from "../../components/silo-linking-table";
+import SupportPostForm from "../../components/support-post-form";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
 
@@ -151,7 +153,12 @@ const Login = () => {
           </Link>
         </div>
       </div>
-      <PillarPostCard />
+      {/* silo components testing */}
+      <div className="flex  gap-2">
+        <PillarPostCard />
+        <SupportPostForm />
+      </div>
+      <SiloLinkingTable />
     </section>
   );
 };
