@@ -25,8 +25,10 @@
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
+    "react-error-boundary": "^3.1.4",
     "react-hook-form": "^7.43.0",
     "react-router-dom": "^6.8.1",
+    "react-split": "^2.0.14",
     "react-toastify": "^9.1.1",
     "tailwindcss-fluid-type": "^2.0.3",
     "zod": "^3.20.2"

@@ -2,6 +2,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useRef } from "react";
+import Split from "react-split";
 import AnchorField from "../../components/anchor-field";
 import ArticleHeading from "../../components/article-heading";
 import GeneratedParagraph from "../../components/generated-paragraph";
@@ -11,7 +12,6 @@ import SelectedProjectDetails from "../../components/selected-project-details";
 import Suggestions from "../../components/suggestions";
 import TargetTitleUrl from "../../components/target-title-url";
 import { useAppState } from "../../context/update-post-context";
-
 const Basic = () => {
   const {
     state: { generatedParagraph, aiSuggestions },
@@ -23,6 +23,7 @@ const Basic = () => {
   const anchorFieldRef = useRef(null);
   const paragraphRef = useRef(null);
   const articleHeadingRef = useRef(null);
+
   // onclick(() => scrollToSection(relevantTerm))
 
   /*   const scrollToSection = (elementRef) => {
@@ -32,9 +33,18 @@ const Basic = () => {
   }; */
   return (
     <>
-      <div
-        className="grid grid-cols-1
-      md:grid-cols-3"
+      <Split
+        sizes={[75, 25]}
+        minSize={[100, 0]}
+        maxSize={[Infinity, 500]}
+        expandToMin={false}
+        gutterSize={10}
+        gutterAlign="center"
+        snapOffset={30}
+        dragInterval={1}
+        direction="horizontal"
+        cursor="col-resize"
+        className="flex flex-row"
       >
         <div className="col-span-2 grid grid-cols-1 ">
           <div className="sticky top-24 z-20 flex items-center justify-center self-center">
@@ -82,11 +92,11 @@ const Basic = () => {
           </div>
         </div>
         <div>
-          <div className="sticky top-14 pt-10 ">
+          <div className="sticky top-14  pt-5">
             <SelectedProjectDetails />
           </div>
         </div>
-      </div>
+      </Split>
     </>
   );
 };

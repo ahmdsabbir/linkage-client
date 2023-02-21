@@ -2,15 +2,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import { z } from "zod";
-import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
-import { privateClient } from "../lib/api-config";
-import { useErrorHandling } from "../utils/error-handling";
+import { useAnchorField } from "../utils/projects";
 import ButtonLoader from "./button-loader";
 import Input from "./input";
 
@@ -32,44 +28,9 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
   } = useForm({
     resolver: zodResolver(AnchorTextSchema),
   });
-  const { auth } = useAuthState();
-  const errorFunc = useErrorHandling();
-
-  // axios post
-  const getParagraph = async (data): Promise<{ data: unknown }> => {
-    const postData = JSON.stringify({
-      combined_heading: generatedHeading,
-      anchor_text: data.anchorText,
-      source_url: chosenTitleUrl.url,
-    });
-
-    const response = await privateClient.post("api/core/paragraph", postData, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-      },
-    });
-
-    return response.data;
-  };
 
   // mutation
-  const mutation = useMutation({
-    mutationFn: getParagraph,
-    onSuccess: async (para) => {
-      await dispatch({
-        type: "generatedParagraph",
-        payload: para.paragraph,
-      });
-      paragraphRef.current.style.visibility = "visible";
-      paragraphRef.current.scrollIntoView({ behavior: "smooth" });
-      reset();
-    },
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.error(errorMsg);
-    },
-  });
+  const mutation = useAnchorField(paragraphRef, reset);
 
   const handleAnchorSubmit = async (data) => {
     mutation.mutate(data);

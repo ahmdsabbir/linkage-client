@@ -32,9 +32,9 @@ const GeneratedParagraph = (
           generatedParagraph={generatedParagraph ? generatedParagraph : ""}
         />
         {generatedParagraph && (
-          <div className=" -mt-6 flex flex-col justify-center space-x-2 sm:flex-row">
+          <div className=" -mt-6 flex flex-col  justify-center  gap-2 sm:flex-row sm:items-center ">
             <button
-              className="btn-primary btn self-start"
+              className="btn-primary btn "
               onClick={() =>
                 articleHeadingRef.current.scrollIntoView({ behavior: "smooth" })
               }
@@ -42,7 +42,7 @@ const GeneratedParagraph = (
               Continue
             </button>
             <button
-              className="btn-primary btn self-start"
+              className="btn-primary btn  "
               onClick={() => {
                 relevantTermRef.current.scrollIntoView({ behavior: "smooth" });
                 clearRelevantProject();
@@ -51,7 +51,7 @@ const GeneratedParagraph = (
               Build link for same post
             </button>
             <button
-              className="btn-primary btn self-start"
+              className="btn-primary btn "
               onClick={() => {
                 targetTitleRef.current.scrollIntoView({
                   behavior: "smooth",

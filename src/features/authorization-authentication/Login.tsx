@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-floating-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -28,6 +30,7 @@ interface HandLoginSubmitProps {
 const Login = () => {
   const { auth, setAuth } = useAuthState();
   const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,

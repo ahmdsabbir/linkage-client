@@ -7,15 +7,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { forwardRef } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { z } from "zod";
-import { useAuthState } from "../context/auth-context";
 import { useAppState } from "../context/update-post-context";
-import { privateClient } from "../lib/api-config";
-import { useErrorHandling } from "../utils/error-handling";
+import { useRelevantTerm } from "../utils/projects";
 import ButtonLoader from "./button-loader";
 import Input from "./input";
 
@@ -28,10 +25,10 @@ const RelevantTermSchema = z.object({
 // eslint-disable-next-line react/display-name
 const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   const {
-    state: { selectedProject, targetTitleUrlTerm },
+    state: { targetTitleUrlTerm },
     dispatch,
   } = useAppState();
-  const { auth } = useAuthState();
+
   const {
     register,
     handleSubmit,
@@ -40,65 +37,10 @@ const RelevantTerm = ({ relevantTermRef, suggestionsRef }, ref) => {
   } = useForm({
     resolver: zodResolver(RelevantTermSchema),
   });
-
-  const errorFunc = useErrorHandling();
-
-  // axios post
-  const getSuggestions = async (data): Promise<{ data: unknown }> => {
-    const postData = JSON.stringify({
-      domain: selectedProject.domain,
-      relevant_term: data.relevantTerm,
-      source_title: targetTitleUrlTerm.target_title,
-    });
-
-    const response = await privateClient.post(
-      "api/core/suggestions",
-      postData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
-        },
-      }
-    );
-
-    return response.data;
-  };
-
-  // mutation
-  const mutation = useMutation({
-    mutationFn: getSuggestions,
-    onSuccess: async (successData) => {
-      // Invalidate and refetch
-      await dispatch({
-        type: "aiSuggestions",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [],
-      });
-      await dispatch({
-        type: "generatedHeading",
-        payload: "",
-      });
-
-      await dispatch({
-        type: "generatedParagraph",
-        payload: "",
-      });
-      await dispatch({
-        type: "aiSuggestions",
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        payload: [...successData?.suggestions],
-      });
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      suggestionsRef.current.scrollIntoView({ behavior: "smooth" });
-      reset();
-    },
-    onError: async (error) => {
-      const errorMsg = await errorFunc(error);
-      toast.warning(errorMsg);
-    },
-  });
-
+  
+  // useMutation custom query for relevant term
+  const mutation = useRelevantTerm(suggestionsRef, reset);
+  // submit relevant term
   const handleRelevantSubmit = async (data) => {
     if (targetTitleUrlTerm.target_title === undefined) {
       toast.warning("Target post title is not found");

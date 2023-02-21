@@ -1,13 +1,15 @@
-import React from "react";
-import "./spinner.css";
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-const Spinner = ({ customClassName }) => {
+type customClassNameProps = {
+  customClassName?: string;
+};
+const Spinner = ({ customClassName }: customClassNameProps) => {
   return (
     <div
       className={
         customClassName
           ? customClassName
-          : "h-screen w-full grid place-items-center"
+          : "grid h-screen w-full place-items-center"
       }
     >
       <div className="loader">
