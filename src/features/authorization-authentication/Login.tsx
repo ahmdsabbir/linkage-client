@@ -12,6 +12,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { z } from "zod";
 import Input from "../../components/input";
+import PillarPostCard from "../../components/pillar-post-card";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
 
@@ -150,6 +151,7 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <PillarPostCard />
     </section>
   );
 };
