@@ -40,28 +40,34 @@ const AllProjects = () => {
       {/* <p className="text-5xl text-gray-800"> All Projects list</p> */}
 
       <div className="grid grid-cols-1 gap-4 px-6 md:grid-cols-2 md:gap-6 lg:grid-cols-3 lg:gap-8 xl:grid-cols-4 xl:gap-10">
-        {data?.projects?.map(
-          (project: {
-            id: Key | null | undefined;
-            name: string;
-            domain: string;
-            wp_username: string;
-            wp_password: string;
-            date_added: string;
-          }) => (
-            <SingleProjectCard
-              key={project.id}
-              id={project.id}
-              projectName={project.name}
-              projectURL={project.domain}
-              projectUserName={project.wp_username}
-              projectAdminPassword={project.wp_password}
-              projectCreatedDate={project.date_added}
-              handleStartProject={handleStartProject}
-              handleEditProject={handleEditProject}
-              setShowModal={setShowModal}
-              setProjectId={setProjectId}
-            />
+        {data?.projects?.length == 0 ? (
+          <div className="grid max-h-screen place-content-center items-center">
+            <p className="text-center text-lg">No project created yet</p>
+          </div>
+        ) : (
+          data?.projects?.map(
+            (project: {
+              id: Key | null | undefined;
+              name: string;
+              domain: string;
+              wp_username: string;
+              wp_password: string;
+              date_added: string;
+            }) => (
+              <SingleProjectCard
+                key={project.id}
+                id={project.id}
+                projectName={project.name}
+                projectURL={project.domain}
+                projectUserName={project.wp_username}
+                projectAdminPassword={project.wp_password}
+                projectCreatedDate={project.date_added}
+                handleStartProject={handleStartProject}
+                handleEditProject={handleEditProject}
+                setShowModal={setShowModal}
+                setProjectId={setProjectId}
+              />
+            )
           )
         )}
       </div>

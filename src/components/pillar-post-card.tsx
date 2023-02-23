@@ -1,6 +1,6 @@
 const PillarPostCard = () => {
   return (
-    <div className="mt-4 w-full  max-w-sm rounded-md bg-white p-6 shadow-md">
+    <div className="mt-4 w-full max-w-sm  transform rounded-md bg-white p-6 shadow-md shadow-primary/10 transition-all">
       <div className="space-y-2">
         <div className="flex flex-col space-y-0">
           <span className="text-gray-400 text-sm">Pillar Post</span>
