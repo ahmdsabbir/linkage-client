@@ -1,9 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
-import { useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import SiloUpdateTargetPostTableRow from "./silo-update-target-post-table-row";
 
@@ -15,13 +17,29 @@ const SiloTargetPostTable = () => {
       targetPost: "1,2,3",
     },
   });
+  /* 
+  const getFacts = async () => {
+    const res = await fetch("https://jsonplaceholder.typicode.com/posts");
+    return res.json();
+  };
+ */
+  const { data: posts } = useQuery({
+    queryKey: ["todo"],
+    queryFn: () =>
+      axios
+        .get("https://jsonplaceholder.typicode.com/posts")
+        .then((res) => res.data),
+  });
 
+  console.log(posts);
+  /* 
   useEffect(() => {
-    fetch("https://jsonplaceholder.typicode.com/todos/1")
-      .then((response) => response.json())
-      .then((json) => setValue("targetPost", json.userId))
-      .catch((error) => console.log(error));
-  }, [setValue]);
+    posts.map((item) => {
+      setValue("targetPost", item?.id);
+      setValue("sourcePost", item?.title);
+      setValue("sourcePost", item?.body);
+    });
+  }, [posts?.id, posts?.body, setValue, posts?.title, posts]); */
 
   const onSubmit = (data) => {
     console.log(data);
@@ -60,11 +78,14 @@ const SiloTargetPostTable = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white ">
-                    <SiloUpdateTargetPostTableRow
-                      inputPost={register("sourcePost")}
-                      inputUrl={register("sourceUrl")}
-                      inputTarget={register("targetPost")}
-                    />
+                    {posts?.map((item) => (
+                      <SiloUpdateTargetPostTableRow
+                        key={item.id}
+                        inputPost={register("sourcePost")}
+                        inputUrl={register("sourceUrl")}
+                        inputTarget={register("targetPost")}
+                      />
+                    ))}
                   </tbody>
                 </table>
                 <button className="btn-primary btn">Click</button>
