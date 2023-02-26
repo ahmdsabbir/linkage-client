@@ -6,6 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import SiloUpdateTargetPostTableRow from "./silo-update-target-post-table-row";
 
@@ -17,6 +18,8 @@ const SiloTargetPostTable = () => {
       targetPost: "1,2,3",
     },
   });
+  const [oldData, setOldData] = useState([]);
+  const [newData, setNewData] = useState([]);
   /* 
   const getFacts = async () => {
     const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -31,18 +34,21 @@ const SiloTargetPostTable = () => {
         .then((res) => res.data),
   });
 
-  console.log(posts);
-  /* 
-  useEffect(() => {
-    posts.map((item) => {
-      setValue("targetPost", item?.id);
-      setValue("sourcePost", item?.title);
-      setValue("sourcePost", item?.body);
-    });
-  }, [posts?.id, posts?.body, setValue, posts?.title, posts]); */
+  // useEffect(() => {
+  //   setOldData(posts);
+  // }, [oldData, posts]);
 
-  const onSubmit = (data) => {
+  // useEffect(() => {
+  //   posts.map((item) => {
+  //     setValue("targetPost", item?.id);
+  //     setValue("sourcePost", item?.title);
+  //     setValue("sourcePost", item?.body);
+  //   });
+  // }, [posts?.id, posts?.body, setValue, posts?.title, posts]);
+
+  const onSubmit = (data, posts) => {
     console.log(data);
+    setNewData(...posts);
   };
 
   return (
@@ -78,7 +84,7 @@ const SiloTargetPostTable = () => {
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200 bg-white ">
-                    {posts?.map((item) => (
+                    {oldData.slice(0, 11)?.map((item, index) => (
                       <SiloUpdateTargetPostTableRow
                         key={item.id}
                         inputPost={register("sourcePost")}
@@ -101,3 +107,5 @@ const SiloTargetPostTable = () => {
 export default SiloTargetPostTable;
 
 // https://codesandbox.io/s/9ltw0?file=/src/App.js:2314-2318
+// https://stackoverflow.com/questions/69639177/handle-a-custom-component-using-react-hook-forms-and-react-table\
+// https://dev.to/esponges/create-a-reusable-react-table-component-with-typescript-56d4

@@ -15,6 +15,7 @@ import Input from "../../components/input";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
 import SiloProject from "../../pages/user-dashboard/silo-project";
+import ReactTableHookForm from "../../testing/react-table-hook-form";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -154,11 +155,14 @@ const Login = () => {
       {/* silo components testing */}
       <div className="flex  gap-2">
         <SiloProject />
-     
+        <ReactTableHookForm />
       </div>
-     
     </section>
   );
 };
 
 export default Login;
+
+// https://codesandbox.io/s/9ltw0?file=/src/App.js:2314-2318
+// https://stackoverflow.com/questions/69639177/handle-a-custom-component-using-react-hook-forms-and-react-table\
+// https://dev.to/esponges/create-a-reusable-react-table-component-with-typescript-56d4
