@@ -154,6 +154,7 @@ const Login = () => {
       {/* silo components testing */}
       <div className="flex  gap-2">
         <SiloProject />
+        {/* <ReactTableHookForm /> */}
       </div>
     </section>
   );

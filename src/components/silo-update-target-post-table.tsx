@@ -5,14 +5,12 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { useQuery } from "@tanstack/react-query";
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import axios from "axios";
 import { useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import EditableCell from "./editable-cell";
@@ -51,13 +49,6 @@ const defaultData: Person[] = [
   },
 ];
 const SiloTargetPostTable = () => {
-  const { data: posts } = useQuery({
-    queryKey: ["todo"],
-    queryFn: () =>
-      axios
-        .get("https://jsonplaceholder.typicode.com/posts")
-        .then((res) => res.data),
-  });
   const [data, setData] = useState(() => [...defaultData]);
   const columnHelper = createColumnHelper<Person>();
 

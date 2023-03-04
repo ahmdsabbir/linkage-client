@@ -5,9 +5,32 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useState } from "react";
+import { HTMLProps, useEffect, useRef, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import EditableCell from "./editable-cell";
+
+function IndeterminateCheckbox({
+  indeterminate,
+  className = "",
+  ...rest
+}: { indeterminate?: boolean } & HTMLProps<HTMLInputElement>) {
+  const ref = useRef<HTMLInputElement>(null!);
+
+  useEffect(() => {
+    if (typeof indeterminate === "boolean") {
+      ref.current.indeterminate = !rest.checked && indeterminate;
+    }
+  }, [ref, indeterminate]);
+
+  return (
+    <input
+      type="checkbox"
+      ref={ref}
+      className={className + " cursor-pointer"}
+      {...rest}
+    />
+  );
+}
 
 type Person = {
   firstName: string;
@@ -16,6 +39,7 @@ type Person = {
   visits: number;
   status: string;
   progress: number;
+  id: string;
 };
 
 const defaultData: Person[] = [
@@ -26,6 +50,7 @@ const defaultData: Person[] = [
     visits: 100,
     status: "In Relationship",
     progress: 50,
+    id: "tanner",
   },
   {
     firstName: "tandy",
@@ -34,6 +59,7 @@ const defaultData: Person[] = [
     visits: 40,
     status: "Single",
     progress: 80,
+    id: "tandy",
   },
   {
     firstName: "joe",
@@ -42,15 +68,40 @@ const defaultData: Person[] = [
     visits: 20,
     status: "Complicated",
     progress: 10,
+    id: "joe",
   },
 ];
 
 const ReactTableHookForm = () => {
   const [data, setData] = useState(() => [...defaultData]);
-
+  const [rowSelection, setRowSelection] = useState({});
   const columnHelper = createColumnHelper<Person>();
 
   const columns = [
+    columnHelper.accessor("select", {
+      header: ({ table }) => (
+        <IndeterminateCheckbox
+          {...{
+            checked: table.getIsAllRowsSelected(),
+            indeterminate: table.getIsSomeRowsSelected(),
+            onChange: table.getToggleAllRowsSelectedHandler(),
+          }}
+        />
+      ),
+      // cell: (info) => info.getValue(),
+      cell: ({ row }) => (
+        <div className="px-1">
+          <IndeterminateCheckbox
+            {...{
+              checked: row.getIsSelected(),
+              disabled: !row.getCanSelect(),
+              indeterminate: row.getIsSomeSelected(),
+              onChange: row.getToggleSelectedHandler(),
+            }}
+          />
+        </div>
+      ),
+    }),
     columnHelper.accessor("firstName", {
       header: () => (
         <div className="flex items-center gap-x-3">
@@ -106,12 +157,39 @@ const ReactTableHookForm = () => {
 
       footer: (info) => info.column.id,
     }),
+    columnHelper.accessor("action", {
+      /* cell: (original) => (
+        <button
+          className="btn-accent btn"
+          value={original.name}
+          onClick={() => console.log("button data", original)}
+        >
+          Hello
+        </button>
+      ), */
+      cell: ({ cell }) => (
+        <button
+          className="btn-accent btn"
+          // value={cell.row.values.name}
+          onClick={() => console.log("button data", cell.row.original)}
+        >
+          Link
+        </button>
+      ),
+
+      footer: (info) => info.column.id,
+    }),
   ];
 
   const formMethods = useForm({
     defaultValues: {
       people: data,
     },
+    state: {
+      rowSelection,
+    },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     shouldUnregister: false,
   });
 
@@ -123,6 +201,12 @@ const ReactTableHookForm = () => {
   const table = useReactTable({
     data: fields,
     columns,
+    state: {
+      rowSelection,
+    },
+    enableRowSelection: true, //enable row selection for all rows
+    // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
+    onRowSelectionChange: setRowSelection,
     getCoreRowModel: getCoreRowModel(),
   });
 
@@ -139,7 +223,7 @@ const ReactTableHookForm = () => {
               <FormProvider {...formMethods}>
                 <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
                   <table className="min-w-full divide-y divide-gray-200 ">
-                    <thead className="bg-gray-50 font-medium text-gray-700 text-lg">
+                    <thead className="  flex-col bg-gray-50  font-medium text-gray-700 text-lg">
                       {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                           {headerGroup.headers.map((header) => (
@@ -165,7 +249,8 @@ const ReactTableHookForm = () => {
                           {row.getVisibleCells().map((cell) => (
                             <td
                               key={cell.id}
-                              className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
+                              className="  whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
+                              data-title={cell.column.id}
                             >
                               <div className="inline-flex items-center gap-x-3">
                                 <div className="flex items-center gap-x-2">
@@ -182,8 +267,8 @@ const ReactTableHookForm = () => {
                         </tr>
                       ))}
 
-                      <tr>
-                        <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
+                      <tr className="flex items-center justify-center  text-center">
+                        <td className="whitespace-nowrap  px-4 py-4 text-center font-medium text-gray-700 text-sm">
                           <button className="btn-primary btn" type="submit">
                             Submit
                           </button>
