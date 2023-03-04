@@ -1,11 +1,13 @@
-import { useState } from "react";
-
+/* eslint-disable @typescript-eslint/no-misused-promises */
 import {
   createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useState } from "react";
+import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import EditableCell from "./editable-cell";
 
 type Person = {
   firstName: string;
@@ -50,7 +52,8 @@ const ReactTableHookForm = () => {
 
   const columns = [
     columnHelper.accessor("firstName", {
-      cell: (info) => info.getValue(),
+      // cell: (info) => info.getValue(),
+      cell: EditableCell,
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.lastName, {
@@ -78,45 +81,69 @@ const ReactTableHookForm = () => {
     }),
   ];
 
+  const formMethods = useForm({
+    defaultValues: {
+      people: data,
+    },
+    shouldUnregister: false,
+  });
+
+  const { fields, remove } = useFieldArray({
+    control: formMethods.control,
+    name: "people",
+  });
+
   const table = useReactTable({
-    data,
+    data: fields,
     columns,
     getCoreRowModel: getCoreRowModel(),
   });
-  console.log(table);
+
+  const onSubmit = (data) => {
+    console.warn(data);
+  };
 
   return (
     <div className="p-2 text-gray-700">
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
+      <FormProvider {...formMethods}>
+        <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
+          <table>
+            <thead>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <tr key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => (
+                    <th key={header.id}>
+                      {header.isPlaceholder
+                        ? null
+                        : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext()
+                          )}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            <tbody>
+              {table.getRowModel().rows.map((row) => (
+                <tr key={row.id}>
+                  {row.getVisibleCells().map((cell) => (
+                    <td key={cell.id}>
+                      {flexRender(
+                        cell.column.columnDef.cell,
+                        cell.getContext()
                       )}
-                </th>
+                    </td>
+                  ))}
+                </tr>
               ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      <div className="h-4" />
+            </tbody>
+          </table>
+          <button className="btn-primary btn" type="submit">
+            Submit
+          </button>
+        </form>
+      </FormProvider>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const EditableCell = ({
         defaultValue={defaultValue}
         rules={{ required: { value: true, message: "field is required" } }}
         // control={control}
-        render={(props) => <input {...props} />}
+        render={({ field }) => <input {...field} />}
       />
       {errors?.people?.[index]?.firstName?.message}
     </>
