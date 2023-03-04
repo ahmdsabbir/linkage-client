@@ -22,7 +22,7 @@ const SupportPostForm = () => {
   });
 
   return (
-    <div className=" text-gray-700">
+    <div className=" mt-5 text-gray-700">
       <form
         onSubmit={handleSubmit((data) => {
           console.log("Submit data", data);

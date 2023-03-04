@@ -52,31 +52,58 @@ const ReactTableHookForm = () => {
 
   const columns = [
     columnHelper.accessor("firstName", {
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>First Name</span>
+        </div>
+      ),
       // cell: (info) => info.getValue(),
       cell: EditableCell,
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.lastName, {
       id: "lastName",
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>Last Name</span>
+        </div>
+      ),
       cell: (info) => <i>{info.getValue()}</i>,
-      header: () => <span>Last Name</span>,
-      footer: (info) => info.column.id,
     }),
     columnHelper.accessor("age", {
-      header: () => "Age",
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>Age</span>
+        </div>
+      ),
       cell: (info) => info.renderValue(),
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor("visits", {
-      header: () => <span>Visits</span>,
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>Visits</span>
+        </div>
+      ),
+
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor("status", {
-      header: "Status",
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>Status</span>
+        </div>
+      ),
+
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor("progress", {
-      header: "Profile Progress",
+      header: () => (
+        <div className="flex items-center gap-x-3">
+          <span>Profile Progress</span>
+        </div>
+      ),
+
       footer: (info) => info.column.id,
     }),
   ];
@@ -104,47 +131,73 @@ const ReactTableHookForm = () => {
   };
 
   return (
-    <div className="p-2 text-gray-700">
-      <FormProvider {...formMethods}>
-        <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
-          <table>
-            <thead>
-              {table.getHeaderGroups().map((headerGroup) => (
-                <tr key={headerGroup.id}>
-                  {headerGroup.headers.map((header) => (
-                    <th key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </th>
-                  ))}
-                </tr>
-              ))}
-            </thead>
-            <tbody>
-              {table.getRowModel().rows.map((row) => (
-                <tr key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <td key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </td>
-                  ))}
-                </tr>
-              ))}
-            </tbody>
-          </table>
-          <button className="btn-primary btn" type="submit">
-            Submit
-          </button>
-        </form>
-      </FormProvider>
-    </div>
+    <section className="container mx-auto px-4">
+      <div className="mt-6 flex flex-col">
+        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden border border-gray-200  md:rounded-lg">
+              <FormProvider {...formMethods}>
+                <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
+                  <table className="min-w-full divide-y divide-gray-200 ">
+                    <thead className="bg-gray-50 font-medium text-gray-700 text-lg">
+                      {table.getHeaderGroups().map((headerGroup) => (
+                        <tr key={headerGroup.id}>
+                          {headerGroup.headers.map((header) => (
+                            <th
+                              key={header.id}
+                              scope="col"
+                              className="py-3.5 px-4 text-left  rtl:text-right"
+                            >
+                              {header.isPlaceholder
+                                ? null
+                                : flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext()
+                                  )}
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody className="divide-y divide-gray-200 bg-white ">
+                      {table.getRowModel().rows.map((row) => (
+                        <tr key={row.id}>
+                          {row.getVisibleCells().map((cell) => (
+                            <td
+                              key={cell.id}
+                              className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
+                            >
+                              <div className="inline-flex items-center gap-x-3">
+                                <div className="flex items-center gap-x-2">
+                                  <div>
+                                    {flexRender(
+                                      cell.column.columnDef.cell,
+                                      cell.getContext()
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                          ))}
+                        </tr>
+                      ))}
+
+                      <tr>
+                        <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
+                          <button className="btn-primary btn" type="submit">
+                            Submit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </FormProvider>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

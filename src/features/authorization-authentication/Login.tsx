@@ -15,7 +15,6 @@ import Input from "../../components/input";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
 import SiloProject from "../../pages/user-dashboard/silo-project";
-import ReactTableHookForm from "../../testing/react-table-hook-form";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -155,7 +154,6 @@ const Login = () => {
       {/* silo components testing */}
       <div className="flex  gap-2">
         <SiloProject />
-        <ReactTableHookForm />
       </div>
     </section>
   );
