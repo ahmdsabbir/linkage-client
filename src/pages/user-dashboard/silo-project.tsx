@@ -1,7 +1,4 @@
 import PillarPostCard2 from "../../components/pillar-post-card-2";
-import SiloLinkingTable from "../../components/silo-linking-table";
-import SiloTargetPostTable from "../../components/silo-update-target-post-table";
-import SupportPostForm from "../../components/support-post-form";
 
 const SiloProjectLayout = () => {
   return (
@@ -13,14 +10,6 @@ const SiloProjectLayout = () => {
         <PillarPostCard2 />
         {/* <PillarPostCard2 /> */}
       </div>
-
-      {/* add new post url link for interlinking */}
-      <SupportPostForm />
-      {/* update target post id */}
-      <SiloTargetPostTable />
-
-      {/* link to the website */}
-      <SiloLinkingTable />
     </div>
   );
 };

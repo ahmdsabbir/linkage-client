@@ -48,7 +48,7 @@ const defaultData: Person[] = [
     progress: 10,
   },
 ];
-const SiloTargetPostTable = () => {
+const SiloTargetPostFormTable = () => {
   const [data, setData] = useState(() => [...defaultData]);
   const columnHelper = createColumnHelper<Person>();
 
@@ -202,7 +202,7 @@ const SiloTargetPostTable = () => {
   );
 };
 
-export default SiloTargetPostTable;
+export default SiloTargetPostFormTable;
 
 // https://codesandbox.io/s/9ltw0?file=/src/App.js:2314-2318
 // https://stackoverflow.com/questions/69639177/handle-a-custom-component-using-react-hook-forms-and-react-table\
