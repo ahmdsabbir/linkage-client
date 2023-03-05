@@ -14,7 +14,6 @@ import { z } from "zod";
 import Input from "../../components/input";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
-import SiloProjectLayout from "../../pages/user-dashboard/silo-project";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -152,10 +151,6 @@ const Login = () => {
         </div>
       </div>
       {/* silo components testing */}
-      <div className="flex  gap-2">
-        <SiloProjectLayout />
-        {/* <ReactTableHookForm /> */}
-      </div>
     </section>
   );
 };

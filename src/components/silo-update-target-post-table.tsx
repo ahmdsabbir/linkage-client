@@ -136,11 +136,11 @@ const SiloTargetPostTable = () => {
       <div className="mt-6 flex flex-col">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-            <div className="overflow-hidden border border-gray-200  md:rounded-lg">
+            <div className="overflow-hidden border border-primary/20  shadow shadow-primary/5 md:rounded-lg">
               <FormProvider {...formMethods}>
                 <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
-                  <table className="min-w-full divide-y divide-gray-200 ">
-                    <thead className="bg-gray-50 font-medium text-gray-700 text-lg">
+                  <table className="min-w-full divide-y divide-dodger-blue-100  ">
+                    <thead className="bg-primary/10 font-medium text-gray-700 text-lg">
                       {table.getHeaderGroups().map((headerGroup) => (
                         <tr key={headerGroup.id}>
                           {headerGroup.headers.map((header) => (
@@ -160,7 +160,7 @@ const SiloTargetPostTable = () => {
                         </tr>
                       ))}
                     </thead>
-                    <tbody className="divide-y divide-gray-200 bg-white ">
+                    <tbody className="divide-y divide-dodger-blue-100 bg-white ">
                       {table.getRowModel().rows.map((row) => (
                         <tr key={row.id}>
                           {row.getVisibleCells().map((cell) => (

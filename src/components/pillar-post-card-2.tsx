@@ -1,6 +1,6 @@
 const PillarPostCard2 = () => {
   return (
-    <div className="mt-4 flex w-full max-w-lg transform flex-col  justify-between rounded-md bg-white p-6 shadow-md shadow-primary/10 transition-all">
+    <div className="mt-4 flex w-full max-w-lg transform flex-col  justify-between space-y-8 rounded-md bg-white p-6 shadow-md shadow-primary/10 transition-all">
       <div className=" space-y-2">
         {/* pillar post headline */}
         <div className=" flex flex-col space-y-0 rounded bg-accent/5 px-2 py-4">
@@ -82,9 +82,9 @@ const PillarPostCard2 = () => {
           </div>
         </div>
       </div>
-      {/* CTA */}
-      <div className=" mt-4 flex items-center justify-between  ">
-        <button className="hover:text-bold inline-flex space-x-1 rounded border border-primary/25 p-1 font-medium text-primary hover:bg-primary/10 ">
+      {/* CTA --> call to action */}
+      <div className="  flex items-center justify-between  ">
+        <button className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -92,7 +92,7 @@ const PillarPostCard2 = () => {
               viewBox="0 0 24 24"
               strokeWidth="1.5"
               stroke="currentColor"
-              className="h-6 w-6"
+              className="h-4 w-4"
             >
               <path
                 strokeLinecap="round"
@@ -103,7 +103,8 @@ const PillarPostCard2 = () => {
           </span>
           <span> Start</span>
         </button>
-        <button className="hover:text-bold inline-flex items-center space-x-1 rounded border border-warning/25 p-1 font-medium text-warning hover:bg-warning/10">
+
+        <button className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-accent/25 p-1 font-medium text-accent text-sm hover:bg-accent/10">
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -111,16 +112,16 @@ const PillarPostCard2 = () => {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="h-6 w-6"
+              className="h-4 w-4"
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
+                d="M12 4.5v15m7.5-7.5h-15"
               />
             </svg>
           </span>
-          <span> Add Support Content</span>
+          <span> Add Support</span>
         </button>
         {/* <button className="hover:text-bold inline-flex space-x-1 rounded border border-error/25 p-1 font-medium text-error hover:bg-error/10 ">
             <span>
