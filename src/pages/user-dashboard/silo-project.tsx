@@ -1,4 +1,5 @@
 import PillarPostCard from "../../components/pillar-post-card";
+import PillarPostCard2 from "../../components/pillar-post-card-2";
 import SiloLinkingTable from "../../components/silo-linking-table";
 import SiloTargetPostTable from "../../components/silo-update-target-post-table";
 import SupportPostForm from "../../components/support-post-form";
@@ -6,7 +7,11 @@ import SupportPostForm from "../../components/support-post-form";
 const SiloProject = () => {
   return (
     <div>
-      <PillarPostCard />
+      <div className="flex gap-5">
+        <PillarPostCard />
+        <PillarPostCard2 />
+        {/* <PillarPostCard2 /> */}
+      </div>
 
       {/* add new post url link for interlinking */}
       <SupportPostForm />
