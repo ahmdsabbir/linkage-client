@@ -4,7 +4,7 @@ import SiloLinkingTable from "../../components/silo-linking-table";
 import SiloTargetPostTable from "../../components/silo-update-target-post-table";
 import SupportPostForm from "../../components/support-post-form";
 
-const SiloProject = () => {
+const SiloProjectLayout = () => {
   return (
     <div>
       <div className="flex gap-5">
@@ -24,4 +24,4 @@ const SiloProject = () => {
   );
 };
 
-export default SiloProject;
+export default SiloProjectLayout;

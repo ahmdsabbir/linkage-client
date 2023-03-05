@@ -14,6 +14,7 @@ import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
 import { ErrorMessage } from "./lib/error-fallback-message";
 import Home from "./pages/home";
+import SiloProjectLayout from "./pages/user-dashboard/silo-project";
 
 import RootLayout from "./root-layout";
 
@@ -77,6 +78,7 @@ const router = createBrowserRouter(
             </Suspense>
           }
         />
+        {/* basic post router */}
         <Route
           path="basic"
           element={
@@ -85,6 +87,16 @@ const router = createBrowserRouter(
             </Suspense>
           }
         />
+        {/* silo project */}
+        <Route
+          path="silo"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <SiloProjectLayout />
+            </Suspense>
+          }
+        />
+
         <Route
           path="history"
           element={
