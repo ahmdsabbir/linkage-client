@@ -57,7 +57,7 @@ const defaultColumns = [
     cell: ({ cell }) => (
       <div className="flex items-center gap-x-6">
         <button
-          className=" btn-xs btn border-0 py-1 px-2"
+          className=" hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10"
           onClick={(e) => {
             e.preventDefault();
             console.log("button data", cell.row.original);
@@ -70,7 +70,7 @@ const defaultColumns = [
             viewBox="0 0 24 24"
             strokeWidth={1.5}
             stroke="currentColor"
-            className="h-6 w-6"
+            className="h-4 w-4 rotate-[-39deg]"
           >
             <path
               strokeLinecap="round"
