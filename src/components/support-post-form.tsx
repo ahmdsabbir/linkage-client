@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useFieldArray, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 
 const SupportPostForm = () => {
+  // const navigation after submission
+  const navigate = useNavigate();
   const {
     register,
     formState: { errors },
@@ -21,13 +24,14 @@ const SupportPostForm = () => {
     },
   });
 
+  const tableDataHandler = (data) => {
+    console.log("Submit data", data);
+    navigate("/dashboard/silo/add-support-post-table-form");
+  };
+
   return (
     <div className=" mt-5 text-gray-700">
-      <form
-        onSubmit={handleSubmit((data) => {
-          console.log("Submit data", data);
-        })}
-      >
+      <form onSubmit={handleSubmit(tableDataHandler)}>
         {fields.map((field, index) => {
           return (
             <section key={field.id} className=" mb-2 flex items-center gap-2 ">

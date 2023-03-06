@@ -13,6 +13,7 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import EditableCell from "./editable-cell";
 type Person = {
   firstName: string;
@@ -39,6 +40,8 @@ const defaultData: Person[] = [
   },
 ];
 const SiloTargetPostFormTable = () => {
+  const navigate = useNavigate();
+
   const [data, setData] = useState(() => [...defaultData]);
   const columnHelper = createColumnHelper<Person>();
 
@@ -95,6 +98,7 @@ const SiloTargetPostFormTable = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log(data.people.map((item) => item.progress));
+    navigate("/dashboard/silo/add-support-post-linking-table");
   };
 
   return (

@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const PillarPostCard2 = () => {
+  const navigate = useNavigate();
+  const addSupportHandler = () => {
+    navigate("/dashboard/silo/add-support-post-form");
+  };
+  const startLinkingTableHandler = () => {
+    navigate("/dashboard/silo/add-support-post-linking-table");
+  };
   return (
     <div className="mt-4 flex w-full max-w-lg transform flex-col  justify-between space-y-8 rounded-md bg-white p-6 shadow-md shadow-primary/10 transition-all">
       <div className=" space-y-2">
@@ -84,7 +93,10 @@ const PillarPostCard2 = () => {
       </div>
       {/* CTA --> call to action */}
       <div className="  flex items-center justify-between  ">
-        <button className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10">
+        <button
+          className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10"
+          onClick={startLinkingTableHandler}
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +116,10 @@ const PillarPostCard2 = () => {
           <span> Start</span>
         </button>
 
-        <button className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-accent/25 p-1 font-medium text-accent text-sm hover:bg-accent/10">
+        <button
+          className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-accent/25 p-1 font-medium text-accent text-sm hover:bg-accent/10"
+          onClick={addSupportHandler}
+        >
           <span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
