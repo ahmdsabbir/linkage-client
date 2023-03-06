@@ -136,7 +136,14 @@ const Login = () => {
             inputProps={register("password")}
             error={errors.password?.message as string}
           />
-
+          <div className=" flex select-none flex-col items-end justify-between px-1 py-2  ">
+            <Link
+              to={"/reset-password"}
+              className="  cursor-pointer text-primary text-xs  hover:underline"
+            >
+              Forgot password?
+            </Link>
+          </div>
           <div className="mt-6">
             <button className="btn-primary btn w-full">Log in</button>
           </div>
