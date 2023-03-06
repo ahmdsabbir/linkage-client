@@ -1,11 +1,10 @@
-import React from "react";
 import NewPasword from "./new-password";
 
 const ResetPasswordConfirmation = () => {
   return (
     <div className="grid place-content-center p-5">
       <div className="modal-box ">
-        <h3 className="font-bold text-lg text-center">
+        <h3 className="text-center font-bold text-lg">
           Plese Check Your Email
         </h3>
         <p className="py-4">

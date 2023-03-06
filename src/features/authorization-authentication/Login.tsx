@@ -14,6 +14,8 @@ import { z } from "zod";
 import Input from "../../components/input";
 import { useAuthState } from "../../context/auth-context";
 import { primaryClient } from "../../lib/api-config";
+import ResetPassword from "./reset-password/reset-password";
+import ResetPasswordConfirmation from "./reset-password/reset-password-confirmation";
 
 const LoginSchema = z.object({
   email: z.string().email("Please enter a valid email address."),
@@ -157,6 +159,8 @@ const Login = () => {
           </Link>
         </div>
       </div>
+      <ResetPassword />
+      <ResetPasswordConfirmation />
       {/* silo components testing */}
     </section>
   );

@@ -1,11 +1,11 @@
-import React from "react";
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { z } from "zod";
-import useForm from "../../hook/useForm";
-import Form from "../../reusable-component/form/form";
-import { Input } from "../../reusable-component/form/input-field";
+import Input from "../../../components/input";
 
-const newPasswordSchema = z
+const NewPasswordSchema = z
   .object({
     password: z
       .string()
@@ -19,34 +19,45 @@ const newPasswordSchema = z
   });
 
 const NewPassword = () => {
-  const form = useForm({ schema: newPasswordSchema });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setError,
+    formState: { errors, isSubmitting },
+  } = useForm({ resolver: zodResolver(NewPasswordSchema) });
   const navigate = useNavigate();
   const handleSubmitNewPassword = (data) => {
-    navigate("/reset-password/confirmation");
+    console.log(data);
+    // navigate("/reset-password/confirmation");
   };
   return (
-    <div className="grid place-self-center h-screen">
-      <div className="grid place-self-center">
-        <h2 className="text-4xl text-center">Enter Your New Password</h2>
-        <Form form={form} onSubmit={handleSubmitNewPassword}>
+    <div className="grid h-screen place-self-center">
+      <div className="grid place-self-center ">
+        <h2 className="text-center text-gray-700 text-4xl">
+          Enter Your New Password
+        </h2>
+        <form
+          onSubmit={handleSubmit(handleSubmitNewPassword)}
+          className="space-y-2"
+        >
           <Input
-            labele="New pasword"
+            label="New password"
             type="password"
             placeholder="password"
-            {...form.register("password")}
+            inputProps={register("password")}
+            error={errors.password?.message as string}
           />
           <Input
-            labele="Conrim Pasword"
+            label="Confirm Password"
             type="password"
             placeholder="confirm password"
-            {...form.register("confirm")}
+            inputProps={register("confirm")}
           />
           <div className="form-control mt-6">
-            <button className="btn bg-contrast text-accent-dark hover:bg-contrast-dark focus:bg-slate-600 capitalize">
-              Submit
-            </button>
+            <button className="btn-primary btn w-full">Submit</button>
           </div>
-        </Form>
+        </form>
       </div>
     </div>
   );
