@@ -1,4 +1,7 @@
 import PillarPostCard2 from "../../components/pillar-post-card-2";
+import SiloLinkingTable from "../../components/silo-linking-table";
+import SiloProjectAddPostForm from "./silo-project-add-post-form";
+import SiloTargetPostTableFormPage from "./silo-target-post-table-form-page";
 
 const SiloProjectLayout = () => {
   return (
@@ -9,6 +12,12 @@ const SiloProjectLayout = () => {
         <PillarPostCard2 />
         <PillarPostCard2 />
         {/* <PillarPostCard2 /> */}
+      </div>
+      <div>
+        {/* <SiloLinkingTableRow /> */}
+        <SiloProjectAddPostForm />
+        <SiloTargetPostTableFormPage />
+        <SiloLinkingTable />
       </div>
     </div>
   );

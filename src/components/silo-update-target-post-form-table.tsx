@@ -17,34 +17,24 @@ import EditableCell from "./editable-cell";
 type Person = {
   firstName: string;
   lastName: string;
-  age: number;
-  visits: number;
-  status: string;
+
   progress: number;
 };
 const defaultData: Person[] = [
   {
-    firstName: "tanner",
-    lastName: "linsley",
-    age: 24,
-    visits: 100,
-    status: "In Relationship",
+    firstName: "https://example.com/pillar",
+    lastName: "The Pillar Post Title",
     progress: 50,
   },
   {
     firstName: "tandy",
     lastName: "miller",
-    age: 40,
-    visits: 40,
-    status: "Single",
     progress: 80,
   },
   {
     firstName: "joe",
     lastName: "dirte",
-    age: 45,
-    visits: 20,
-    status: "Complicated",
+
     progress: 10,
   },
 ];
@@ -60,7 +50,7 @@ const SiloTargetPostFormTable = () => {
         </div>
       ),
       // cell: (info) => info.getValue(),
-      cell: EditableCell,
+
       footer: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.lastName, {
@@ -72,39 +62,14 @@ const SiloTargetPostFormTable = () => {
       ),
       cell: (info) => <i>{info.getValue()}</i>,
     }),
-    columnHelper.accessor("age", {
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Age</span>
-        </div>
-      ),
-      cell: (info) => info.renderValue(),
-      footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("visits", {
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Visits</span>
-        </div>
-      ),
 
-      footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor("status", {
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Status</span>
-        </div>
-      ),
-
-      footer: (info) => info.column.id,
-    }),
     columnHelper.accessor("progress", {
       header: () => (
         <div className="flex items-center gap-x-3">
           <span>Profile Progress</span>
         </div>
       ),
+      cell: EditableCell,
 
       footer: (info) => info.column.id,
     }),
@@ -127,8 +92,9 @@ const SiloTargetPostFormTable = () => {
     getCoreRowModel: getCoreRowModel(),
   });
 
-  const onSubmit = (data) => {
-    console.warn(data);
+  const onSubmit = async (data) => {
+    console.log(data);
+    console.log(data.people.map((item) => item.progress));
   };
 
   return (

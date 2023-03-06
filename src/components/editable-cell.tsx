@@ -22,11 +22,12 @@ const EditableCell = ({
 
   const { getValues, errors } = useFormContext();
 
-  const defaultValue = getValues()["people"][index].firstName;
+  const defaultValue = getValues()["people"][index].progress;
+
   return (
     <>
       <Controller
-        name={`people[${index}].firstName`}
+        name={`people[${index}].progress`}
         defaultValue={defaultValue}
         rules={{ required: { value: true, message: "field is required" } }}
         // control={control}
@@ -39,7 +40,7 @@ const EditableCell = ({
           />
         )}
       />
-      {errors?.people?.[index]?.firstName?.message}
+      {errors?.people?.[index]?.progress?.message}
     </>
   );
 };
