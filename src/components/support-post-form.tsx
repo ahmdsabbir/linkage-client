@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import { useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { useSiloPostLinks } from "../utils/silo-query";
 
 const SupportPostForm = () => {
   // const navigation after submission
@@ -11,21 +12,23 @@ const SupportPostForm = () => {
     handleSubmit,
     watch,
     control,
+    reset,
   } = useForm({
     defaultValues: {
       url: [{ pillarPost: "" }, { supportPost: "" }],
     },
   });
-  const { fields, append, prepend, remove } = useFieldArray({
+  const { fields, append, remove } = useFieldArray({
     name: "url",
     control,
     rules: {
       required: "Please append at least 1 item",
     },
   });
+  const mutation = useSiloPostLinks(reset);
 
   const tableDataHandler = (data) => {
-    console.log("Submit data", data);
+    mutation.mutate(data);
     // navigate("/dashboard/silo/add-support-post-table-form");
   };
 
@@ -44,7 +47,7 @@ const SupportPostForm = () => {
                   />
                 </div>
               ) : index === 1 ? (
-                <div className="inline-flex flex-col">
+                <div className="inline-flex w-full flex-col">
                   <label htmlFor="pillar post">Support Post</label>
                   <input
                     className={`block w-full rounded  bg-primary/5 py-3 ${"px-5"}  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
@@ -54,7 +57,7 @@ const SupportPostForm = () => {
                   />
                 </div>
               ) : (
-                <div className="inline-flex flex-col">
+                <div className="inline-flex w-full flex-col">
                   <label htmlFor="pillar post">Support Post</label>
                   <span className="flex">
                     <input
