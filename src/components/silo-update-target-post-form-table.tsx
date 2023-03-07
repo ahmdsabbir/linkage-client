@@ -16,23 +16,21 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import EditableCell from "./editable-cell";
 type Person = {
+  id: number;
   firstName: string;
   lastName: string;
-
   progress: number;
 };
 const defaultData: Person[] = [
   {
+    id: 1,
     firstName: "https://example.com/pillar",
     lastName: "The Pillar Post Title",
     progress: 50,
   },
+  { id: 2, firstName: "tandy", lastName: "miller", progress: 80 },
   {
-    firstName: "tandy",
-    lastName: "miller",
-    progress: 80,
-  },
-  {
+    id: 3,
     firstName: "joe",
     lastName: "dirte",
 
@@ -46,6 +44,13 @@ const SiloTargetPostFormTable = () => {
   const columnHelper = createColumnHelper<Person>();
 
   const columns = [
+    columnHelper.accessor("id", {
+      header: () => <span>Id</span>,
+      footer: (props) => props.column.id,
+      // cell: (info) => info.getValue(),
+
+      footer: (info) => info.column.id,
+    }),
     columnHelper.accessor("firstName", {
       header: () => (
         <div className="flex items-center gap-x-3">
@@ -98,7 +103,7 @@ const SiloTargetPostFormTable = () => {
   const onSubmit = async (data) => {
     console.log(data);
     console.log(data.people.map((item) => item.progress));
-    navigate("/dashboard/silo/add-support-post-linking-table");
+    // navigate("/dashboard/silo/add-support-post-linking-table");
   };
 
   return (
