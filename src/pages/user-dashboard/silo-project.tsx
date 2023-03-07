@@ -1,7 +1,11 @@
 import { Link, Outlet } from "react-router-dom";
 import PillarPostCard2 from "../../components/pillar-post-card-2";
+import { useSiloQuery } from "../../utils/silo-query";
 
 const SiloProjectLayout = () => {
+  const { data, isLoading, isFetching } = useSiloQuery();
+  console.log(data);
+  console.table(data.pillars[0]);
   return (
     <div>
       {/* create new silo project */}
@@ -31,11 +35,9 @@ const SiloProjectLayout = () => {
       </div>
       {/* silo project cards */}
       <div className="grid grid-cols-1 justify-center gap-4 px-6 sm:grid-cols-2 md:grid-cols-3 md:gap-6 lg:gap-8 xl:grid-cols-4 xl:gap-10">
-        {/* <PillarPostCard /> */}
-        <PillarPostCard2 />
-        <PillarPostCard2 />
-        <PillarPostCard2 />
-        {/* <PillarPostCard2 /> */}
+        {data.pillars.map((pillar) => (
+          <PillarPostCard2 key={pillar.pillar_id} pillar={pillar} />
+        ))}
       </div>
       <Outlet />
       {/*  <div>

@@ -1,6 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { useNavigate } from "react-router-dom";
 
-const PillarPostCard2 = () => {
+const PillarPostCard2 = ({ pillar }) => {
   const navigate = useNavigate();
   const addSupportHandler = () => {
     navigate("/dashboard/silo/add-support-post-form");
@@ -15,80 +17,42 @@ const PillarPostCard2 = () => {
         <div className=" flex flex-col space-y-0 rounded bg-accent/5 px-2 py-4">
           <span className="font-bold text-gray-700 text-lg">Pillar Post</span>
           <span className=" font-semibold text-gray-600 text-base ">
-            {"5 Best Pillars You Can Buy on Amazon?"}
+            {pillar.pillar_title}
           </span>
         </div>
         {/* support post headline */}
-        <div className="flex flex-col ">
-          {/* support post headline */}
-          <span className="mb-4 font-bold capitalize text-gray-700 text-base">
-            Support Post
-          </span>
-          {/* support post lists */}
-          <div className="space-y-2">
-            <div className="flex items-start gap-2 font-semibold text-gray-500 text-base">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 30 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6 text-accent"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
-              </span>
-              <span> {"Why Is This Pillar So Tall?"}</span>
+        <span className="mb-4 font-bold capitalize text-gray-700 text-base">
+          Support Post
+        </span>
+
+        {/* support post headline */}
+
+        {/* support post lists */}
+
+        <div className="space-y-2">
+          {pillar?.supports.map((support) => (
+            <div key={support.support_id} className="flex flex-col ">
+              <div className="flex items-start gap-2 font-semibold text-gray-500 text-base">
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 30 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="h-6 w-6 text-accent"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                    />
+                  </svg>
+                </span>
+                <span> {support.support_title}</span>
+              </div>
             </div>
-            <div className="flex items-start gap-2 font-semibold text-gray-500 text-base">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 30 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6 text-accent"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
-              </span>
-              <span>
-                {" "}
-                {
-                  "Es va popularitzar l'any 1960 amb el llançament de fulls Letraset que contenien passatges de Lorem Ipsum, i més recentment amb programari"
-                }
-              </span>
-            </div>
-            <div className="flex items-start gap-2 font-semibold text-gray-500 text-base">
-              <span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 30 24"
-                  strokeWidth={1.5}
-                  stroke="currentColor"
-                  className="h-6 w-6 text-accent"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-                  />
-                </svg>
-              </span>
-              <span> {"How Long Does a Pillar Live?"}</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
       {/* CTA --> call to action */}

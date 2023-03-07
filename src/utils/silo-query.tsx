@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
 import { privateClient } from "../lib/api-config";
@@ -51,4 +52,42 @@ function useSiloPostLinks(reset) {
   });
 }
 
-export { useSiloPostLinks };
+function useSiloQuery() {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+
+  const { auth } = useAuthState();
+
+  const getSiloProjects = async (): Promise<{ data: unknown }> => {
+    const project_name = "Review";
+    const data = JSON.stringify({ project_name });
+    const response = await privateClient.post("api/silo/get", data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+    /* await dispatch({
+      type: "projects",
+      payload: response?.data?.projects,
+    }); */
+    return response.data;
+  };
+
+  return useQuery({
+    queryKey: ["silo"],
+    queryFn: getSiloProjects,
+    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    retry: 2,
+    staleTime: Infinity,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+export { useSiloPostLinks, useSiloQuery };
