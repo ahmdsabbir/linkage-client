@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 const PillarPostCard2 = ({ pillar }) => {
   const navigate = useNavigate();
   const addSupportHandler = () => {
-    navigate("/dashboard/silo/add-support-post-form");
+    navigate("/dashboard/silo/add-support-post-table-form");
   };
   const startLinkingTableHandler = () => {
     navigate("/dashboard/silo/add-support-post-linking-table");
@@ -56,7 +56,7 @@ const PillarPostCard2 = ({ pillar }) => {
         </div>
       </div>
       {/* CTA --> call to action */}
-      <div className="  flex items-center justify-between  ">
+      <div className=" flex items-center justify-between ">
         <button
           className="hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10"
           onClick={startLinkingTableHandler}

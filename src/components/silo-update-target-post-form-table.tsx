@@ -13,15 +13,14 @@ import {
 } from "@tanstack/react-table";
 import { useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
 import EditableCell from "./editable-cell";
-type Person = {
+type Pillars = {
   id: number;
   firstName: string;
   lastName: string;
   progress: number;
 };
-const defaultData: Person[] = [
+const defaultData: Pillars[] = [
   {
     id: 1,
     firstName: "https://example.com/pillar",
@@ -37,11 +36,11 @@ const defaultData: Person[] = [
     progress: 10,
   },
 ];
-const SiloTargetPostFormTable = () => {
-  const navigate = useNavigate();
+const SiloTargetPostFormTable = ({ data: pillarData }) => {
+  // const navigate = useNavigate();
 
   const [data, setData] = useState(() => [...defaultData]);
-  const columnHelper = createColumnHelper<Person>();
+  const columnHelper = createColumnHelper<Pillars>();
 
   const columns = [
     columnHelper.accessor("id", {
