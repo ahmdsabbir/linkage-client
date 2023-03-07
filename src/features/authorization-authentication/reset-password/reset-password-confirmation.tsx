@@ -2,9 +2,9 @@ import NewPasword from "./new-password";
 
 const ResetPasswordConfirmation = () => {
   return (
-    <div className="grid place-content-center p-5">
-      <div className="modal-box ">
-        <h3 className="text-center font-bold text-lg">
+    <div className="grid place-content-center p-5 text-gray-700 ">
+      <div className="modal-box shadow-md shadow-primary/10">
+        <h3 className="text-center font-bold text-lg ">
           Plese Check Your Email
         </h3>
         <p className="py-4">
