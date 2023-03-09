@@ -6,107 +6,51 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-misused-promises */
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { useSiloTableFormQuery } from "../utils/silo-query";
-import EditableCell from "./editable-cell";
-type Pillars = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  progress: number;
-};
-const defaultData: Pillars[] = [
-  {
-    id: 1,
-    firstName: "https://example.com/pillar",
-    lastName: "The Pillar Post Title",
-    progress: 50,
-  },
-  { id: 2, firstName: "tandy", lastName: "miller", progress: 80 },
-  {
-    id: 3,
-    firstName: "joe",
-    lastName: "dirte",
 
-    progress: 10,
-  },
-];
-const SiloTargetPostFormTable = () => {
+// const defaultData: Pillars[] = [
+//   {
+//     id: 1,
+//     firstName: "https://example.com/pillar",
+//     lastName: "The Pillar Post Title",
+//     progress: 50,
+//   },
+//   { id: 2, firstName: "tandy", lastName: "miller", progress: 80 },
+//   {
+//     id: 3,
+//     firstName: "joe",
+//     lastName: "dirte",
+
+//     progress: 10,
+//   },
+// ];
+const SiloTargetPostFormTable = ({ columns, data }) => {
   // const navigate = useNavigate();
-  const [mergeData, setMergeData] = useState({});
-  const [myData, setMyData] = useState([]);
 
-  const { data: tableData, isLoading, isFetching } = useSiloTableFormQuery();
-
+  // const [data, setData] = useState(() => [...defaultData]);
+  // const columnHelper = createColumnHelper<Pillars>();
+  // console.log(data);
+  /*  const [state, setState] = useState();
   useEffect(() => {
-    setMergeData(tableData);
-
-    if (
-      Object.keys(mergeData).length === 0 &&
-      mergeData.constructor === Object
-    ) {
-      return;
-    } else {
-      const { pillar, ...supports } = mergeData;
-      // console.log(typeof supports);
-      // setMyData([pillar]);
-      console.log([pillar, ...supports?.supports]);
-      // setMergeData([pillar, ...supports.supports]);
-      // console.log(myData);
-    }
-  }, [mergeData, myData, tableData]);
-  const [data, setData] = useState(() => [...defaultData]);
-  const columnHelper = createColumnHelper<Pillars>();
-
-  const columns = [
-    columnHelper.accessor("id", {
-      header: () => <span>Id</span>,
-      footer: (props) => props.column.id,
-      // cell: (info) => info.getValue(),
-    }),
-    columnHelper.accessor("firstName", {
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>First Name</span>
-        </div>
-      ),
-      // cell: (info) => info.getValue(),
-
-      footer: (info) => info.column.id,
-    }),
-    columnHelper.accessor((row) => row.lastName, {
-      id: "lastName",
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Last Name</span>
-        </div>
-      ),
-      cell: (info) => <i>{info.getValue()}</i>,
-    }),
-
-    columnHelper.accessor("progress", {
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Profile Progress</span>
-        </div>
-      ),
-      cell: EditableCell,
-
-      footer: (info) => info.column.id,
-    }),
-  ];
+    setState(data);
+  }, [data]);
+ */
   const formMethods = useForm({
     defaultValues: {
       people: data,
     },
     shouldUnregister: false,
   });
+  useEffect(() => {
+    if (data) {
+      formMethods.setValue("people", data);
+    }
+  }, [data, formMethods]);
 
   const { fields, remove } = useFieldArray({
     control: formMethods.control,
@@ -121,84 +65,78 @@ const SiloTargetPostFormTable = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    console.log(data.people.map((item) => item.progress));
+    // console.log(data.people.map((item) => item.progress));
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
+  // console.log(fields);
 
   return (
     <section className="container mx-auto px-4">
-      {isLoading || isFetching ? (
-        <h1 className="font-bold text-5xl">Loading...</h1>
-      ) : (
-        <div className="mt-6 flex flex-col">
-          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-              <div className="overflow-hidden border border-primary/20  shadow shadow-primary/5 md:rounded-lg">
-                <FormProvider {...formMethods}>
-                  <form
-                    noValidate
-                    onSubmit={formMethods.handleSubmit(onSubmit)}
-                  >
-                    <table className="min-w-full divide-y divide-dodger-blue-100  ">
-                      <thead className="bg-primary/10 font-medium text-gray-700 text-lg">
-                        {table.getHeaderGroups().map((headerGroup) => (
-                          <tr key={headerGroup.id}>
-                            {headerGroup.headers.map((header) => (
-                              <th
-                                key={header.id}
-                                scope="col"
-                                className="py-3.5 px-4 text-left  rtl:text-right"
-                              >
-                                {header.isPlaceholder
-                                  ? null
-                                  : flexRender(
-                                      header.column.columnDef.header,
-                                      header.getContext()
+      <div className="mt-6 flex flex-col">
+        <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+          <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+            <div className="overflow-hidden border border-primary/20  shadow shadow-primary/5 md:rounded-lg">
+              <FormProvider {...formMethods}>
+                <form noValidate onSubmit={formMethods.handleSubmit(onSubmit)}>
+                  <table className="min-w-full divide-y divide-dodger-blue-100  ">
+                    <thead className="bg-primary/10 font-medium text-gray-700 text-lg">
+                      {table?.getHeaderGroups()?.map((headerGroup) => (
+                        <tr key={headerGroup.id}>
+                          {headerGroup.headers.map((header) => (
+                            <th
+                              key={header.id}
+                              scope="col"
+                              className="py-3.5 px-4 text-left  rtl:text-right"
+                            >
+                              {header.isPlaceholder
+                                ? null
+                                : flexRender(
+                                    header.column.columnDef.header,
+                                    header.getContext()
+                                  )}
+                            </th>
+                          ))}
+                        </tr>
+                      ))}
+                    </thead>
+                    <tbody className="divide-y divide-dodger-blue-100 bg-white ">
+                      {table?.getRowModel().rows?.map((row) => (
+                        <tr key={row.id}>
+                          {row.getVisibleCells().map((cell) => (
+                            <td
+                              key={cell.id}
+                              className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
+                            >
+                              <div className="inline-flex items-center gap-x-3">
+                                <div className="flex items-center gap-x-2">
+                                  <div>
+                                    {flexRender(
+                                      cell.column.columnDef.cell,
+                                      cell.getContext()
                                     )}
-                              </th>
-                            ))}
-                          </tr>
-                        ))}
-                      </thead>
-                      <tbody className="divide-y divide-dodger-blue-100 bg-white ">
-                        {table.getRowModel().rows.map((row) => (
-                          <tr key={row.id}>
-                            {row.getVisibleCells().map((cell) => (
-                              <td
-                                key={cell.id}
-                                className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
-                              >
-                                <div className="inline-flex items-center gap-x-3">
-                                  <div className="flex items-center gap-x-2">
-                                    <div>
-                                      {flexRender(
-                                        cell.column.columnDef.cell,
-                                        cell.getContext()
-                                      )}
-                                    </div>
                                   </div>
                                 </div>
-                              </td>
-                            ))}
-                          </tr>
-                        ))}
-
-                        <tr>
-                          <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
-                            <button className="btn-primary btn" type="submit">
-                              Submit
-                            </button>
-                          </td>
+                              </div>
+                            </td>
+                          ))}
                         </tr>
-                      </tbody>
-                    </table>
-                  </form>
-                </FormProvider>
-              </div>
+                      ))}
+
+                      <tr>
+                        <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
+                          <button className="btn-primary btn" type="submit">
+                            Submit
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </form>
+              </FormProvider>
             </div>
           </div>
         </div>
-      )}
+      </div>
     </section>
   );
 };

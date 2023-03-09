@@ -1,6 +1,5 @@
 import { Link, Outlet } from "react-router-dom";
 import PillarPostCard2 from "../../components/pillar-post-card-2";
-import SiloTargetPostFormTable from "../../components/silo-update-target-post-form-table";
 import { useSiloQuery } from "../../utils/silo-query";
 
 const SiloProjectLayout = () => {
@@ -43,7 +42,7 @@ const SiloProjectLayout = () => {
               <PillarPostCard2 key={pillar.pillar_id} pillar={pillar} />
             ))}
           </div>
-          <SiloTargetPostFormTable data={data} />
+
           <Outlet />
           {/*  <div>
         <SiloLinkingTableRow />
