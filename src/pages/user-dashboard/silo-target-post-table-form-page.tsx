@@ -1,6 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
+
 import SiloTargetPostFormTable from "../../components/silo-update-target-post-form-table";
+import EditableCell from "../../testing/editable-cell";
 import { useSiloTableFormQuery } from "../../utils/silo-query";
 
 type Pillars = {
@@ -10,7 +12,7 @@ type Pillars = {
   support_title?: string;
   pillar_url?: string;
   support_url?: string;
-  progress: number;
+  target_post: number | string;
 };
 const SiloTargetPostTableFormPage = () => {
   const [mergeData, setMergeData] = useState({});
@@ -68,13 +70,14 @@ const SiloTargetPostTableFormPage = () => {
       footer: (props) => props.column.id,
     }),
 
-    columnHelper.accessor("Target Post", {
+    columnHelper.accessor("target_post", {
+      id: "target_post",
       header: () => (
         <div className="flex items-center gap-x-3">
           <span>Target post</span>
         </div>
       ),
-      cell: () => <input className="bg-primary/10" name="data"></input>,
+      cell: <EditableCell />,
 
       footer: (info) => info.column.id,
     }),

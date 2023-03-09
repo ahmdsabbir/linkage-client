@@ -46,6 +46,7 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
     },
     shouldUnregister: false,
   });
+  // set the value of api data
   useEffect(() => {
     if (data) {
       formMethods.setValue("people", data);

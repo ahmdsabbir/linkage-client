@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller } from "react-hook-form";
 const EditableCell = ({
   value: initialValue,
-  row: { index },
-  column: { id, accessor },
+  row,
+  // column: { id, accessor },
   updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   // // We need to keep and update the state of the cell normally
@@ -20,19 +20,21 @@ const EditableCell = ({
   //   updateMyData(index, id, value);
   // };
 
-  const { getValues, errors } = useFormContext();
+  // const { getValues, errors } = useFormContext();
 
-  const defaultValue = getValues()["people"][index].firstName;
+  // const defaultValue = getValues()["people"][index].firstName;
+  console.log(row);
   return (
     <>
       <Controller
-        name={`people[${index}].firstName`}
-        defaultValue={defaultValue}
-        rules={{ required: { value: true, message: "field is required" } }}
+        // name={`people[${index}].firstName`}
+        name={`target url`}
+        defaultValue={"2"}
+        // rules={{ required: { value: true, message: "field is required" } }}
         // control={control}
         render={({ field }) => <input {...field} />}
       />
-      {errors?.people?.[index]?.firstName?.message}
+      {/* {errors?.people?.[index]?.firstName?.message} */}
     </>
   );
 };
