@@ -40,7 +40,8 @@ const AnchorField = ({ anchorFieldRef, paragraphRef }, ref) => {
     const postData = JSON.stringify({
       combined_heading: generatedHeading,
       anchor_text: data.anchorText,
-      source_url: chosenTitleUrl.url,
+      // source_url: chosenTitleUrl.url,
+      target_url: targetTitleUrlTerm.target_url,
     });
 
     const response = await privateClient.post("api/core/paragraph", postData, {
