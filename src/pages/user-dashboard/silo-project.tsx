@@ -5,7 +5,6 @@ import { useSiloQuery } from "../../utils/silo-query";
 
 const SiloProjectLayout = () => {
   const { data, isLoading, isFetching } = useSiloQuery();
-  console.log(data);
 
   return (
     <>

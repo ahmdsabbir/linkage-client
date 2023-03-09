@@ -90,4 +90,43 @@ function useSiloQuery() {
   });
 }
 
-export { useSiloPostLinks, useSiloQuery };
+// table form query
+function useSiloTableFormQuery() {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+
+  const { auth } = useAuthState();
+
+  const getSiloSelectedProjects = async (): Promise<{ data: unknown }> => {
+    const pillar_id = 7;
+    const data = JSON.stringify({ pillar_id });
+    const response = await privateClient.post("api/silo/targets", data, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+    /* await dispatch({
+      type: "projects",
+      payload: response?.data?.projects,
+    }); */
+    return response.data;
+  };
+
+  return useQuery({
+    queryKey: ["pillarTableForm"],
+    queryFn: getSiloSelectedProjects,
+    // refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    retry: 1,
+    staleTime: Infinity,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+export { useSiloPostLinks, useSiloQuery, useSiloTableFormQuery };
