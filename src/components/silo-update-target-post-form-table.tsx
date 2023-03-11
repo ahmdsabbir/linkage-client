@@ -66,7 +66,13 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    // console.log(data.people.map((item) => item.progress));
+    console.log(
+      data.people.map((item, index) => {
+        if (index === 0) {
+          return (item.support_target = {});
+        }
+      })
+    );
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
   // console.log(fields);
@@ -149,3 +155,35 @@ export default SiloTargetPostFormTable;
 // https://dev.to/esponges/create-a-reusable-react-table-component-with-typescript-56d4
 
 // silo/targets/
+
+/* 
+
+==========================================
+post data format testing for sending to the server
+===================================================
+
+  const data = [
+    {pillarId: 10, pillarTarget: 1, pillarSupport : "" },
+    {supportId: 10, supportTarget: "1,2,3"}
+]
+
+
+const newData = data.map((item, index, arr) => {
+  const getIndex =  arr[item.pillarTarget];
+    if(getIndex) {
+        console.log(getIndex)
+   console.log(getIndex.supportId)
+         return {...item , pillarSupport:  getIndex.supportId}
+    }
+
+        else {
+            return item
+        }
+  
+    
+})
+
+
+console.log(newData)
+
+*/

@@ -3,10 +3,9 @@
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 import { Controller, useFormContext } from "react-hook-form";
 const EditableCell = ({
-  value: initialValue,
-  row: { index },
-  column: { id, accessor },
-  updateMyData, // This is a custom function that we supplied to our table instance
+  row: { index, original },
+  // column: { id, accessor },
+  // updateMyData, // This is a custom function that we supplied to our table instance
 }) => {
   // // We need to keep and update the state of the cell normally
   // const [value, setValue] = React.useState(initialValue);
@@ -19,28 +18,53 @@ const EditableCell = ({
   // const onBlur = () => {
   //   updateMyData(index, id, value);
   // };
+  // console.log(index, original);
 
   const { getValues, errors } = useFormContext();
 
-  const defaultValue = getValues()["people"][index].progress;
+  const defaultValue1 =
+    getValues()["people"][0].pillar_targets === null
+      ? (getValues()["people"][0].pillar_targets = "")
+      : (getValues()["people"][0].pillar_targets = "");
+  const defaultValue2 = getValues()["people"][index].support_targets;
+  getValues()["people"][index].support_targets === null
+    ? (getValues()["people"][index].support_targets = "")
+    : (getValues()["people"][index].support_targets = "");
 
   return (
     <>
-      <Controller
-        name={`people[${index}].progress`}
-        defaultValue={defaultValue}
-        rules={{ required: { value: true, message: "field is required" } }}
-        // control={control}
-        render={({ field }) => (
-          <input
-            {...field}
-            className={`block w-full rounded  bg-primary/5 px-5 py-3
-             
-            text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
-          />
-        )}
-      />
-      {errors?.people?.[index]?.progress?.message}
+      {original.pillar_title ? (
+        <Controller
+          name={`people[${0}].pillar_targets`}
+          defaultValue={defaultValue1 ?? ""}
+          // rules={{ required: { value: true, message: "field is required" } }}
+          rules={{ required: { value: true, message: "field is required" } }}
+          // control={control}
+          render={({ field }) => (
+            <input
+              className={`" block  w-full rounded 
+            bg-primary/5
+          p-3  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              {...field}
+            />
+          )}
+        />
+      ) : (
+        <Controller
+          name={`people[${index}].support_targets`}
+          defaultValue={defaultValue2 ?? ""}
+          rules={{ required: { value: true, message: "field is required" } }}
+          // control={control}
+          render={({ field }) => (
+            <input
+              className={`"px-5" } block  w-full rounded bg-primary/5 p-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              {...field}
+            />
+          )}
+        />
+      )}
+
+      {/* {errors?.people?.[index]?.firstName?.message} */}
     </>
   );
 };

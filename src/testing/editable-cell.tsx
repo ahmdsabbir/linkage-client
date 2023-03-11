@@ -38,17 +38,31 @@ const EditableCell = ({
         <Controller
           name={`people[${0}].pillar_targets`}
           defaultValue={defaultValue1 ?? ""}
-          // rules={{ required: { value: true, message: "field is required" } }}
+          rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
-          render={({ field }) => <input {...field} />}
+          render={({ field }) => (
+            <input
+              className={`"px-5" } block  w-full rounded 
+            bg-primary/5
+          py-3  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              {...field}
+            />
+          )}
         />
       ) : (
         <Controller
           name={`people[${index}].support_targets`}
           defaultValue={defaultValue2 ?? ""}
-          // rules={{ required: { value: true, message: "field is required" } }}
+          rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
-          render={({ field }) => <input {...field} />}
+          render={({ field }) => (
+            <input
+              className={`"px-5" } block  w-full rounded 
+          bg-primary/5
+        py-3  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              {...field}
+            />
+          )}
         />
       )}
 

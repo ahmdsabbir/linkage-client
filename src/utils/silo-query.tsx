@@ -59,7 +59,7 @@ function useSiloQuery() {
   const { auth } = useAuthState();
 
   const getSiloProjects = async (): Promise<{ data: unknown }> => {
-    const project_name = "Review";
+    const project_name = "AnikYusuf";
     const data = JSON.stringify({ project_name });
     const response = await privateClient.post("api/silo/get", data, {
       headers: {
@@ -98,7 +98,7 @@ function useSiloTableFormQuery() {
   const { auth } = useAuthState();
 
   const getSiloSelectedProjects = async (): Promise<{ data: unknown }> => {
-    const pillar_id = 7;
+    const pillar_id = 4;
     const data = JSON.stringify({ pillar_id });
     const response = await privateClient.post("api/silo/targets", data, {
       headers: {
