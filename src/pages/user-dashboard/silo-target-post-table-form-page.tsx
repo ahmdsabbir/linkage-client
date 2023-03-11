@@ -39,19 +39,11 @@ const SiloTargetPostTableFormPage = () => {
   const columnHelper = createColumnHelper<Pillars>();
 
   const columns = [
-    /* columnHelper.accessor(`${"pillar_id" ?? "support_id "}`, {
-      header: () => <span>Id</span>,
-      // footer: (props) => props.column.id,
-      // cell: (info) => console.log(info),
-    }), */
     columnHelper.accessor((row) => row.pillar_id ?? row.support_id, {
-      id: (info) => {
-        console.log(info);
-        return `${"row.pillar_id " ?? "row.support_id"}`;
-      },
+      id: `${"row.pillar_id " ?? "row.support_id"}`,
 
-      cell: (info) => info.getValue(),
-      header: () => <span>Id</span>,
+      cell: (info) => info.row.index + 1,
+      header: () => <span>No</span>,
       footer: (props) => props.column.id,
     }),
 
@@ -70,14 +62,15 @@ const SiloTargetPostTableFormPage = () => {
       footer: (props) => props.column.id,
     }),
 
-    columnHelper.accessor("target_post", {
-      id: "target_post",
+    columnHelper.accessor("pillar_targets", {
+      id: "pillar_targets",
       header: () => (
         <div className="flex items-center gap-x-3">
           <span>Target post</span>
         </div>
       ),
-      cell: <EditableCell />,
+      // cell: (prop) => console.log(prop),
+      cell: (prop) => <EditableCell row={prop.row} />,
 
       footer: (info) => info.column.id,
     }),
