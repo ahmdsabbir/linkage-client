@@ -24,27 +24,25 @@ const EditableCell = ({
 
   const defaultValue1 =
     getValues()["people"][0].pillar_targets === null
-      ? (getValues()["people"][0].pillar_targets = "")
-      : (getValues()["people"][0].pillar_targets = "");
+      ? (getValues()["people"][0].pillar_targets = [])
+      : (getValues()["people"][0].pillar_targets = []);
   const defaultValue2 = getValues()["people"][index].support_targets;
   getValues()["people"][index].support_targets === null
-    ? (getValues()["people"][index].support_targets = "")
-    : (getValues()["people"][index].support_targets = "");
+    ? (getValues()["people"][index].support_targets = [])
+    : (getValues()["people"][index].support_targets = []);
 
   return (
     <>
       {original.pillar_title ? (
         <Controller
           name={`people[${0}].pillar_targets`}
-          defaultValue={defaultValue1 ?? ""}
+          // defaultValue={defaultValue1 ?? []}
           // rules={{ required: { value: true, message: "field is required" } }}
-          rules={{ required: { value: true, message: "field is required" } }}
+          // rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
           render={({ field }) => (
             <input
-              className={`" block  w-full rounded 
-            bg-primary/5
-          p-3  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              className={`"block w-full rounded bg-primary/5 p-3  text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
               {...field}
             />
           )}
@@ -53,7 +51,7 @@ const EditableCell = ({
         <Controller
           name={`people[${index}].support_targets`}
           defaultValue={defaultValue2 ?? ""}
-          rules={{ required: { value: true, message: "field is required" } }}
+          // rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
           render={({ field }) => (
             <input

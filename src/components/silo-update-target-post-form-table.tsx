@@ -65,14 +65,66 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    console.log(
-      data.people.map((item, index) => {
-        if (index === 0) {
-          return (item.support_target = {});
+    // splitting the input field strings and convert to  array
+    const newData = await data.people?.map((item) => {
+      if (item.pillar_targets) {
+        return { ...item, pillar_targets: item.pillar_targets.split(",") };
+      } else {
+        return { ...item, support_targets: item.support_targets.split(",") };
+      }
+    });
+
+    // matching the index  with every objects array
+    const crossMatchWith = await newData.map((item, index, arr) => {
+      // run another array method for every array item of pillar_targets
+      if (item.pillar_targets) {
+        console.log(item.pillar_targets);
+        for (const pillarTarget of item.pillar_targets) {
+          console.log(pillarTarget);
+          const getIndexedItem = arr[pillarTarget];
+          // console.log(getIndexedItem);
+          /* return {
+            ...item,
+            support_targets: [
+              ...item.support_targets,
+              getIndexedItem.support_id,
+            ],
+          }; */
         }
-      })
-    );
+      } else if (item.support_targets) {
+        for (const supportTarget of item.support_targets) {
+          const getIndexedItem = arr[supportTarget];
+          // console.log(getIndexedItem);
+          return item.supportTargetId
+            ? {
+                ...item,
+
+                supportTargetId: [
+                  ...item.supportTargetId,
+                  getIndexedItem.support_id,
+                ],
+              }
+            : {
+                ...item,
+                supportTarget: [getIndexedItem.support_id],
+              };
+        }
+      } else {
+        return item;
+      }
+      // return item;
+      /*  if (getIndex) {
+        return {
+          ...item,
+          pillarSupport: [...item.pillarSupport, getIndex.supportId],
+        };
+      } else {
+        return item;
+      } */
+    });
+
+    console.log(crossMatchWith);
+
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
   // console.log(fields);
