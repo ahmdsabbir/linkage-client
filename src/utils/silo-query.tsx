@@ -129,4 +129,60 @@ function useSiloTableFormQuery() {
   });
 }
 
-export { useSiloPostLinks, useSiloQuery, useSiloTableFormQuery };
+//post  table form data query
+function useMutateSiloTableFormQuery() {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+
+  const { auth } = useAuthState();
+
+  const getSiloSelectedProjects = async (data) => {
+    const [pillar, ...rest] = data;
+    const submitData = {
+      pillar: pillar,
+      supports: [...rest],
+    };
+    console.log({ ...submitData });
+    const postData = JSON.stringify({ ...submitData });
+    const response = await privateClient.post(
+      "api/silo/update-targets",
+      postData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+        },
+      }
+    );
+    /* await dispatch({
+      type: "projects",
+      payload: response?.data?.projects,
+    }); */
+    return response.data;
+  };
+
+  return useMutation({
+    mutationFn: getSiloSelectedProjects,
+    // refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    retry: 1,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    onSuccess: async (successData) => {
+      // Invalidate and refetch
+      console.log(successData);
+      toast.success(successData.msg);
+    },
+
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+export {
+  useSiloPostLinks,
+  useSiloQuery,
+  useSiloTableFormQuery,
+  useMutateSiloTableFormQuery,
+};

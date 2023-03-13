@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-table";
 import { useEffect } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import { useMutateSiloTableFormQuery } from "../utils/silo-query";
 
 // const defaultData: Pillars[] = [
 //   {
@@ -30,6 +31,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 //   },
 // ];
 const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
+  const { mutateAsync, isLoading } = useMutateSiloTableFormQuery();
   // const navigate = useNavigate();
 
   // const [data, setData] = useState(() => [...defaultData]);
@@ -71,9 +73,12 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
   const onSubmit = async (data) => {
     // console.log(data);
     // splitting the input field strings and convert to  array
-    console.log(data);
+
+    /* 
+    bug to fix 
+    --> split not found
+    */
     const newData = await data.people?.map((item) => {
-      console.log(item.pillar_targets);
       if (item.pillar_targets) {
         return { ...item, pillar_targets: item.pillar_targets.split(",") };
       } else if (item.support_targets.length > 0) {
@@ -89,9 +94,9 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
 
     // matching the index  with every objects array
 
-    const crossMatchWith = newData.map((item, index, arr) => {
+    const crossMatchWith = await newData.map((item, index, arr) => {
       if (arr[index].pillar_targets) {
-        const checkitem = arr[index].support_targets;
+        const checkitem = arr[index].targets;
         for (const indexItem of arr[index].pillar_targets) {
           checkitem.push(arr[indexItem].support_id);
         }
@@ -103,8 +108,16 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
       }
       return item;
     });
-    console.log(newData);
-    console.log(crossMatchWith);
+    const finalData = crossMatchWith.map((item) => {
+      if (item.pillar_id) {
+        return { id: item.pillar_id, targets: item.targets.toString() };
+      } else {
+        return { id: item.support_id, targets: item.targets.toString() };
+      }
+    });
+    console.log(finalData);
+
+    await mutateAsync(finalData);
 
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
@@ -165,7 +178,7 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
                       <tr>
                         <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
                           <button className="btn-primary btn" type="submit">
-                            Submit
+                            {isLoading ? "Loading..." : "Submit"}
                           </button>
                         </td>
                       </tr>
