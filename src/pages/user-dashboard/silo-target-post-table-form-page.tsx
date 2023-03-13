@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createColumnHelper } from "@tanstack/react-table";
 import { useEffect, useMemo, useState } from "react";
 import EditableCell from "../../components/editable-cell";
@@ -37,6 +41,21 @@ const SiloTargetPostTableFormPage = () => {
       setMyData(newData);
     }
   }, [mergeData, tableData]);
+
+  const updateData = (rowIndex, columnId, value) => {
+    console.log(prev);
+    setMyData((prev) =>
+      prev.map((row, index) => {
+        if (index === rowIndex) {
+          return {
+            ...prev[rowIndex]!,
+            [columnId]: value,
+          };
+        }
+        return row;
+      })
+    );
+  };
 
   const columnHelper = createColumnHelper<Pillars>();
 
@@ -78,7 +97,7 @@ const SiloTargetPostTableFormPage = () => {
         footer: (info) => info.column.id,
       }),
     ],
-    []
+    [columnHelper]
   );
 
   return (
@@ -89,7 +108,11 @@ const SiloTargetPostTableFormPage = () => {
       {isLoading || isFetching ? (
         <h1 className="font-bold text-5xl">Loading...</h1>
       ) : (
-        <SiloTargetPostFormTable columns={columns} data={myData} />
+        <SiloTargetPostFormTable
+          columns={columns}
+          data={myData}
+          updateData={updateData}
+        />
       )}
     </div>
   );

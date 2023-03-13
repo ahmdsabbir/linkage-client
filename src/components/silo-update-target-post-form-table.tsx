@@ -29,7 +29,7 @@ import { FormProvider, useFieldArray, useForm } from "react-hook-form";
 //     progress: 10,
 //   },
 // ];
-const SiloTargetPostFormTable = ({ columns, data }) => {
+const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
   // const navigate = useNavigate();
 
   // const [data, setData] = useState(() => [...defaultData]);
@@ -45,6 +45,10 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
       people: data,
     },
     shouldUnregister: false,
+
+    meta: {
+      updateData: updateData,
+    },
   });
   // set the value of api data
   useEffect(() => {
@@ -65,65 +69,41 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     // splitting the input field strings and convert to  array
+    console.log(data);
     const newData = await data.people?.map((item) => {
+      console.log(item.pillar_targets);
       if (item.pillar_targets) {
         return { ...item, pillar_targets: item.pillar_targets.split(",") };
+      } else if (item.support_targets.length > 0) {
+        return {
+          ...item,
+          support_targets: item.support_targets.split(","),
+          targets: [],
+        };
       } else {
-        return { ...item, support_targets: item.support_targets.split(",") };
+        return;
       }
     });
 
     // matching the index  with every objects array
-    const crossMatchWith = await newData.map((item, index, arr) => {
-      // run another array method for every array item of pillar_targets
-      if (item.pillar_targets) {
-        console.log(item.pillar_targets);
-        for (const pillarTarget of item.pillar_targets) {
-          console.log(pillarTarget);
-          const getIndexedItem = arr[pillarTarget];
-          // console.log(getIndexedItem);
-          /* return {
-            ...item,
-            support_targets: [
-              ...item.support_targets,
-              getIndexedItem.support_id,
-            ],
-          }; */
-        }
-      } else if (item.support_targets) {
-        for (const supportTarget of item.support_targets) {
-          const getIndexedItem = arr[supportTarget];
-          // console.log(getIndexedItem);
-          return item.supportTargetId
-            ? {
-                ...item,
 
-                supportTargetId: [
-                  ...item.supportTargetId,
-                  getIndexedItem.support_id,
-                ],
-              }
-            : {
-                ...item,
-                supportTarget: [getIndexedItem.support_id],
-              };
+    const crossMatchWith = newData.map((item, index, arr) => {
+      if (arr[index].pillar_targets) {
+        const checkitem = arr[index].support_targets;
+        for (const indexItem of arr[index].pillar_targets) {
+          checkitem.push(arr[indexItem].support_id);
         }
       } else {
-        return item;
+        const checkitemsprt = arr[index].targets;
+        for (const indexItem of arr[index].support_targets) {
+          checkitemsprt.push(arr[indexItem].support_id);
+        }
       }
-      // return item;
-      /*  if (getIndex) {
-        return {
-          ...item,
-          pillarSupport: [...item.pillarSupport, getIndex.supportId],
-        };
-      } else {
-        return item;
-      } */
+      return item;
     });
-
+    console.log(newData);
     console.log(crossMatchWith);
 
     // navigate("/dashboard/silo/add-support-post-linking-table");
@@ -240,3 +220,35 @@ const newData = data.map((item, index, arr) => {
 console.log(newData)
 
 */
+
+/* test result of finding id from array */
+/* const data =  [
+  {pillar_id: 4, pillar_targets: ['1','2','3'], pillar_title: 'Roomba Classic', pillar_url: 'https://anikyusuf.com/roomba-classic/', support_targets: []},
+  
+  {support_id: 10, support_targets: ['2','3'], support_title: 'Trash Post', support_url: 'https://anikyusuf.com/trash-post/', targets:[]},
+  
+  {support_id: 11, support_targets: ['1','3'], support_title: 'Why you must buy a roomba', support_url: 'https://anikyusuf.com/why-you-must-buy-a-roomba/', targets:[]},
+  
+  {support_id: 12, support_targets: ['1','2'], support_title: 'gutenberg test', support_url: 'https://anikyusuf.com/gutenberg-test/',  targets:[]}
+  ]
+  
+  const newData = data.map((item, index, arr) => {
+  if(arr[index].pillar_targets){
+    let checkitem =   arr[index].support_targets
+      for(let indexItem of arr[index].pillar_targets) {
+        
+         checkitem.push(arr[indexItem].support_id)
+      }
+  }
+      else {
+          let checkitemsprt = arr[index].targets;
+          for(let indexItem of arr[index].support_targets) {
+         
+          checkitemsprt.push(arr[indexItem].support_id)
+          }
+          
+      }
+      return item;
+  })
+  console.log(newData);
+   */

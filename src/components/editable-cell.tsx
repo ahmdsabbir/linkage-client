@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useForm, useFormContext } from "react-hook-form";
 const EditableCell = ({
   row: { index, original },
   // column: { id, accessor },
@@ -19,7 +19,7 @@ const EditableCell = ({
   //   updateMyData(index, id, value);
   // };
   // console.log(index, original);
-
+  const { control } = useForm();
   const { getValues, errors } = useFormContext();
 
   const defaultValue1 =
@@ -35,8 +35,8 @@ const EditableCell = ({
     <>
       {original.pillar_title ? (
         <Controller
-          name={`people[${0}].pillar_targets`}
-          // defaultValue={defaultValue1 ?? []}
+          name={`people[${index}].pillar_targets`}
+          defaultValue={defaultValue1}
           // rules={{ required: { value: true, message: "field is required" } }}
           // rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
@@ -50,12 +50,12 @@ const EditableCell = ({
       ) : (
         <Controller
           name={`people[${index}].support_targets`}
-          defaultValue={defaultValue2 ?? ""}
+          defaultValue={defaultValue2}
           // rules={{ required: { value: true, message: "field is required" } }}
           // control={control}
           render={({ field }) => (
             <input
-              className={`"px-5" } block  w-full rounded bg-primary/5 p-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
+              className={`"px-5"  block  w-full rounded bg-primary/5 p-3 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40`}
               {...field}
             />
           )}
