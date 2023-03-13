@@ -10,28 +10,29 @@ import {
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import { useMutateSiloTableFormQuery } from "../utils/silo-query";
+import {
+  useMutateSiloTableFormNextQuery,
+  useMutateSiloTableFormQuery,
+} from "../utils/silo-query";
 
-// const defaultData: Pillars[] = [
-//   {
-//     id: 1,
-//     firstName: "https://example.com/pillar",
-//     lastName: "The Pillar Post Title",
-//     progress: 50,
-//   },
-//   { id: 2, firstName: "tandy", lastName: "miller", progress: 80 },
-//   {
-//     id: 3,
-//     firstName: "joe",
-//     lastName: "dirte",
-
-//     progress: 10,
-//   },
-// ];
 const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
-  const { mutateAsync, isLoading } = useMutateSiloTableFormQuery();
+  // set state of pillar content Id and project name
+  const [pillarIdName, setPillarIdName] = useState({
+    pillar_id: "",
+    project_name: "",
+  });
+
+  // submit table data form query
+  const { mutateAsync: nextAsync, isLoading: nextisLoading } =
+    useMutateSiloTableFormNextQuery();
+  const { mutateAsync, isLoading } = useMutateSiloTableFormQuery(
+    nextAsync,
+    pillarIdName,
+    setPillarIdName
+  );
+
   // const navigate = useNavigate();
 
   // const [data, setData] = useState(() => [...defaultData]);
@@ -115,9 +116,13 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
         return { id: item.support_id, targets: item.targets.toString() };
       }
     });
-    console.log(finalData);
-
-    await mutateAsync(finalData);
+    const [pillar, ...rest] = finalData;
+    const submitData = {
+      pillar: pillar,
+      supports: [...rest],
+    };
+    setPillarIdName((prev) => ({ ...prev, pillar_id: pillar.pillar_id }));
+    await mutateAsync(submitData);
 
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };

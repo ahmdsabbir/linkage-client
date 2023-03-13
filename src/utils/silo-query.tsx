@@ -6,6 +6,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { useAuthState } from "../context/auth-context";
+import { useAppState } from "../context/update-post-context";
 import { privateClient } from "../lib/api-config";
 import { useErrorHandling } from "./error-handling";
 
@@ -130,20 +131,25 @@ function useSiloTableFormQuery() {
 }
 
 //post  table form data query
-function useMutateSiloTableFormQuery() {
+function useMutateSiloTableFormQuery(nextAsync, pillarIdName, setPillarIdName) {
+  const {
+    state: {
+      chosenTitleUrl,
+      selectedProject,
+      generatedHeading,
+      generatedParagraph,
+    },
+    clearProjectState,
+    clearRelevantProject,
+    dispatch,
+  } = useAppState();
+  const { auth } = useAuthState();
   const queryClient = useQueryClient();
   const errorFunc = useErrorHandling();
 
-  const { auth } = useAuthState();
-
+  setPillarIdName((prev) => ({ ...prev, project_name: "AnikYusuf" }));
   const getSiloSelectedProjects = async (data) => {
-    const [pillar, ...rest] = data;
-    const submitData = {
-      pillar: pillar,
-      supports: [...rest],
-    };
-    console.log({ ...submitData });
-    const postData = JSON.stringify({ ...submitData });
+    const postData = JSON.stringify({ ...data });
     const response = await privateClient.post(
       "api/silo/update-targets",
       postData,
@@ -169,7 +175,46 @@ function useMutateSiloTableFormQuery() {
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSuccess: async (successData) => {
       // Invalidate and refetch
-      console.log(successData);
+      toast.success(successData.msg);
+      await nextAsync(pillarIdName);
+    },
+
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+// post next req after seMutateSiloTableFormQuery
+
+function useMutateSiloTableFormNextQuery() {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+
+  const getSiloSelectedProjects = async (data) => {
+    const postData = JSON.stringify(data);
+    const response = await privateClient.post("api/silo/build", postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+    /* await dispatch({
+      type: "projects",
+      payload: response?.data?.projects,
+    }); */
+    return response.data;
+  };
+
+  return useMutation({
+    mutationFn: getSiloSelectedProjects,
+    // refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    retry: 1,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    onSuccess: async (successData) => {
+      // Invalidate and refetch
       toast.success(successData.msg);
     },
 
@@ -185,4 +230,5 @@ export {
   useSiloQuery,
   useSiloTableFormQuery,
   useMutateSiloTableFormQuery,
+  useMutateSiloTableFormNextQuery,
 };
