@@ -1,5 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import EditableCell from "../../components/editable-cell";
 
 import SiloTargetPostFormTable from "../../components/silo-update-target-post-form-table";
@@ -40,43 +40,46 @@ const SiloTargetPostTableFormPage = () => {
 
   const columnHelper = createColumnHelper<Pillars>();
 
-  const columns = [
-    columnHelper.accessor((row) => row.pillar_id ?? row.support_id, {
-      id: `${"row.pillar_id " ?? "row.support_id"}`,
+  const columns = useMemo(
+    () => [
+      columnHelper.accessor((row) => row.pillar_id ?? row.support_id, {
+        id: `${"row.pillar_id " ?? "row.support_id"}`,
 
-      cell: (info) => (info.row.index === 0 ? "Pillar" : info.row.index),
-      header: () => <span>No</span>,
-      footer: (props) => props.column.id,
-    }),
+        cell: (info) => (info.row.index === 0 ? "Pillar" : info.row.index),
+        header: () => <span>No</span>,
+        footer: (props) => props.column.id,
+      }),
 
-    columnHelper.accessor((row) => row.pillar_url ?? row.support_url, {
-      id: `${"row.pillar_url" ?? "row.support_url"}`,
+      columnHelper.accessor((row) => row.pillar_url ?? row.support_url, {
+        id: `${"row.pillar_url" ?? "row.support_url"}`,
 
-      cell: (info) => info.getValue(),
-      header: () => <span>Source Url</span>,
-      footer: (props) => props.column.id,
-    }),
-    columnHelper.accessor((row) => row.pillar_title ?? row.support_title, {
-      id: `${"row.pillar_title" ?? "row.support_title"}`,
+        cell: (info) => info.getValue(),
+        header: () => <span>Source Url</span>,
+        footer: (props) => props.column.id,
+      }),
+      columnHelper.accessor((row) => row.pillar_title ?? row.support_title, {
+        id: `${"row.pillar_title" ?? "row.support_title"}`,
 
-      cell: (info) => info.getValue(),
-      header: () => <span>Source Title</span>,
-      footer: (props) => props.column.id,
-    }),
+        cell: (info) => info.getValue(),
+        header: () => <span>Source Title</span>,
+        footer: (props) => props.column.id,
+      }),
 
-    columnHelper.accessor("pillar_targets", {
-      id: "pillar_targets",
-      header: () => (
-        <div className="flex items-center gap-x-3">
-          <span>Target post</span>
-        </div>
-      ),
-      // cell: (prop) => console.log(prop),
-      cell: (prop) => <EditableCell row={prop.row} />,
+      columnHelper.accessor("pillar_targets", {
+        id: "pillar_targets",
+        header: () => (
+          <div className="flex items-center gap-x-3">
+            <span>Target post</span>
+          </div>
+        ),
+        // cell: (prop) => console.log(prop),
+        cell: (prop) => <EditableCell row={prop.row} />,
 
-      footer: (info) => info.column.id,
-    }),
-  ];
+        footer: (info) => info.column.id,
+      }),
+    ],
+    []
+  );
 
   return (
     <div>

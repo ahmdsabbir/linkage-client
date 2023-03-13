@@ -65,6 +65,7 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
   });
 
   const onSubmit = async (data) => {
+    console.log(data);
     // splitting the input field strings and convert to  array
     const newData = await data.people?.map((item) => {
       if (item.pillar_targets) {
