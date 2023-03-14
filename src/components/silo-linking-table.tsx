@@ -2,143 +2,47 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable @typescript-eslint/no-unsafe-return */
-import { useQuery } from "@tanstack/react-query";
 import {
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import axios from "axios";
-import { useState } from "react";
 
-const defaultColumns = [
-  {
-    accessorKey: "id",
-    header: () => <span>Id</span>,
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "name",
-    header: "Name",
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "username",
-    header: "User Name",
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "email",
-    header: "Email",
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "address.city",
-    header: "Address",
-    /* cell: ({ row }) => {
-      return row.original.address.city;
-    }, */
-    // accessorFn: (row) => console.log(row.address.city),
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "phone",
-    header: "Phone",
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "website",
-    header: "Website",
-    footer: (props) => props.column.id,
-  },
-  {
-    accessorKey: "Action",
-    header: "action",
-    cell: ({ cell }) => (
-      <div className="flex items-center gap-x-6">
-        <button
-          className=" hover:text-bold inline-flex items-center  justify-center space-x-1 rounded border border-primary/25 p-1 font-medium text-primary text-sm hover:bg-primary/10"
-          onClick={(e) => {
-            e.preventDefault();
-            console.log("button data", cell.row.original);
-          }}
-        >
-          <p>Link it</p>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth={1.5}
-            stroke="currentColor"
-            className="h-4 w-4 rotate-[-39deg]"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M13.19 8.688a4.5 4.5 0 011.242 7.244l-4.5 4.5a4.5 4.5 0 01-6.364-6.364l1.757-1.757m13.35-.622l1.757-1.757a4.5 4.5 0 00-6.364-6.364l-4.5 4.5a4.5 4.5 0 001.242 7.244"
-            />
-          </svg>
-        </button>
-      </div>
-    ),
-    // footer: (props) => props.column.id,
-  },
-];
-
-const SiloLinkingTable = () => {
-  const [columns] = useState(() => [...defaultColumns]);
-  const {
-    data: posts,
-    isLoading,
-    isFetching,
-  } = useQuery({
-    queryKey: ["todo"],
-    queryFn: () =>
-      axios
-        .get("https://jsonplaceholder.typicode.com/users")
-        .then((res) => res.data),
-
-    staleTime: Infinity,
-  });
-
+const SiloLinkingTable = ({ columns, data }) => {
   const table = useReactTable({
-    data: posts,
     columns,
-
+    data,
     getCoreRowModel: getCoreRowModel(),
   });
 
   return (
     <>
-      {isLoading || isFetching ? (
-        <div className="text-2xl">Loading...</div>
-      ) : (
-        <section className="container mx-auto px-4">
-          <div className="mt-6 flex flex-col">
-            <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
-              <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
-                <div className="overflow-hidden border border-primary/20  shadow shadow-primary/5 md:rounded-lg">
-                  <table className="min-w-full divide-y divide-dodger-blue-100  ">
-                    <thead className="bg-primary/10 font-medium text-gray-700 text-lg">
-                      {table?.getHeaderGroups()?.map((headerGroup) => (
-                        <tr key={headerGroup.id}>
-                          {headerGroup.headers.map((header) => (
-                            <th
-                              key={header.id}
-                              colSpan={header.colSpan}
-                              className="py-3.5 px-4 text-left  rtl:text-right"
-                            >
-                              {header.isPlaceholder
-                                ? null
-                                : flexRender(
-                                    header.column.columnDef.header,
-                                    header.getContext()
-                                  )}
-                            </th>
-                          ))}
-                        </tr>
-                      ))}
-                      {/*  <tr>
+      <section className="container mx-auto px-4">
+        <div className="mt-6 flex flex-col">
+          <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
+              <div className="overflow-hidden border border-primary/20  shadow shadow-primary/5 md:rounded-lg">
+                <table className="min-w-full divide-y divide-dodger-blue-100  ">
+                  <thead className="bg-primary/10 font-medium text-gray-700 text-lg">
+                    {table?.getHeaderGroups()?.map((headerGroup) => (
+                      <tr key={headerGroup.id}>
+                        {headerGroup.headers.map((header) => (
+                          <th
+                            key={header.id}
+                            colSpan={header.colSpan}
+                            className="py-3.5 px-4 text-left  rtl:text-right"
+                          >
+                            {header.isPlaceholder
+                              ? null
+                              : flexRender(
+                                  header.column.columnDef.header,
+                                  header.getContext()
+                                )}
+                          </th>
+                        ))}
+                      </tr>
+                    ))}
+                    {/*  <tr>
                     <th
                       scope="col"
                       className="py-3.5 px-4 text-left  rtl:text-right"
@@ -218,32 +122,31 @@ const SiloLinkingTable = () => {
                       <span className="sr-only">Edit</span>
                     </th>
                   </tr> */}
-                    </thead>
-                    <tbody className="divide-y divide-gray-200 bg-white ">
-                      {/* <SiloLinkingTableRow /> */}
-                      {table?.getRowModel()?.rows?.map((row) => (
-                        <tr key={row.id}>
-                          {row.getVisibleCells().map((cell) => (
-                            <td
-                              key={cell.id}
-                              className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
-                            >
-                              {flexRender(
-                                cell.column.columnDef.cell,
-                                cell.getContext()
-                              )}
-                            </td>
-                          ))}
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200 bg-white ">
+                    {/* <SiloLinkingTableRow /> */}
+                    {table?.getRowModel()?.rows?.map((row) => (
+                      <tr key={row.id}>
+                        {row.getVisibleCells().map((cell) => (
+                          <td
+                            key={cell.id}
+                            className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm"
+                          >
+                            {flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext()
+                            )}
+                          </td>
+                        ))}
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
-        </section>
-      )}
+        </div>
+      </section>
     </>
   );
 };

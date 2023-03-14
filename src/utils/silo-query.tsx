@@ -240,7 +240,7 @@ function useLinkingTableQuery(data) {
   const getSiloLinkingTableData = async () => {
     const data = { pillar_id: 4 };
     const postData = JSON.stringify(data);
-    const response = await privateClient.post("api/silo/test", postData, {
+    const response = await privateClient.post("api/silo/link", postData, {
       headers: {
         "Content-Type": "application/json",
         Authorization: auth.token ? `Bearer ${auth?.token}` : "",

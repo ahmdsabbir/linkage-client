@@ -9,12 +9,12 @@ import {
 } from "react-router-dom";
 
 import ErrorPage from "./components/error-page";
-import SiloLinkingTable from "./components/silo-linking-table";
 import Spinner from "./components/spinner";
 import Login from "./features/authorization-authentication/Login";
 import Register from "./features/authorization-authentication/register";
 import { ErrorMessage } from "./lib/error-fallback-message";
 import Home from "./pages/home";
+import SiloLinkingTablePage from "./pages/user-dashboard/silo-linking-table-page";
 import SiloProjectLayout from "./pages/user-dashboard/silo-project";
 import SiloProjectAddPostForm from "./pages/user-dashboard/silo-project-add-post-form";
 import SiloTargetPostTableFormPage from "./pages/user-dashboard/silo-target-post-table-form-page";
@@ -119,7 +119,7 @@ const router = createBrowserRouter(
             path="add-support-post-linking-table"
             element={
               <Suspense fallback={<Spinner />}>
-                <SiloLinkingTable />
+                <SiloLinkingTablePage />
               </Suspense>
             }
           />

@@ -13,7 +13,6 @@ import {
 } from "../utils/silo-query";
 
 const SiloTargetPostFormTable = ({ columns, data }) => {
-  console.log(data);
   const [myData, setMyData] = useState([]);
   // set state of pillar content Id and project name
   const [pillarIdProjectName, setPillarIdProjectName] = useState({
