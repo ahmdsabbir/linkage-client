@@ -1,10 +1,5 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-misused-promises */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-misused-promises */
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 import {
   flexRender,
   getCoreRowModel,
@@ -12,70 +7,66 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
-import {
-  useMutateSiloTableFormNextQuery,
-  useMutateSiloTableFormQuery,
-} from "../utils/silo-query";
-
-const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
+const SiloTargetPostFormTable = ({ columns, data }) => {
+  const [myData, setMyData] = useState([]);
   // set state of pillar content Id and project name
-  const [pillarIdName, setPillarIdName] = useState({
+  /*  const [pillarIdName, setPillarIdName] = useState({
     pillar_id: "",
     project_name: "",
-  });
-
+  }); */
   // submit table data form query
-  const { mutateAsync: nextAsync, isLoading: nextisLoading } =
-    useMutateSiloTableFormNextQuery();
-  const { mutateAsync, isLoading } = useMutateSiloTableFormQuery(
-    nextAsync,
+  // const { mutateAsync: nextAsync, isLoading: nextisLoading } =
+  //   useMutateSiloTableFormNextQuery();
+  /*   const { mutateAsync, isLoading } = useMutateSiloTableFormQuery(
+    // nextAsync,
     pillarIdName,
     setPillarIdName
-  );
+  ); */
 
   // const navigate = useNavigate();
 
-  // const [data, setData] = useState(() => [...defaultData]);
-  // const columnHelper = createColumnHelper<Pillars>();
   // console.log(data);
-  /*  const [state, setState] = useState();
-  useEffect(() => {
-    setState(data);
-  }, [data]);
- */
   const formMethods = useForm({
     defaultValues: {
-      people: data,
+      people: [data?.pillar, ...data?.supports],
     },
     shouldUnregister: false,
-
-    meta: {
-      updateData: updateData,
-    },
   });
-  // set the value of api data
-  useEffect(() => {
-    if (data) {
-      formMethods.setValue("people", data);
-    }
-  }, [data, formMethods]);
 
   const { fields, remove } = useFieldArray({
     control: formMethods.control,
     name: "people",
   });
 
+  useEffect(() => setMyData(fields), [fields]);
+  console.log(myData);
+
   const table = useReactTable({
-    data: fields,
+    data: myData,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    meta: {
+      updateData: (rowIndex, columnId, value) => {
+        setData((old) =>
+          old.map((row, index) => {
+            if (index === rowIndex) {
+              return {
+                ...old[rowIndex]!,
+                [columnId]: value,
+              };
+            }
+            return row;
+          })
+        );
+      },
+    },
   });
 
   const onSubmit = async (data) => {
-    // console.log(data);
+    console.log(data);
     // splitting the input field strings and convert to  array
 
-    /* 
+    /**  
     bug to fix 
     --> split not found
     */
@@ -121,8 +112,9 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
       pillar: pillar,
       supports: [...rest],
     };
-    setPillarIdName((prev) => ({ ...prev, pillar_id: pillar.pillar_id }));
-    await mutateAsync(submitData);
+    console.log(submitData);
+    // setPillarIdName((prev) => ({ ...prev, pillar_id: pillar.pillar_id }));
+    // await mutateAsync(submitData);
 
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
@@ -130,6 +122,7 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
 
   return (
     <section className="container mx-auto px-4">
+      <div className="font-extrabold text-9xl">testing</div>
       <div className="mt-6 flex flex-col">
         <div className="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="inline-block min-w-full py-2 align-middle md:px-6 lg:px-8">
@@ -183,7 +176,7 @@ const SiloTargetPostFormTable = ({ columns, data, updateData }) => {
                       <tr>
                         <td className="whitespace-nowrap px-4 py-4 font-medium text-gray-700 text-sm">
                           <button className="btn-primary btn" type="submit">
-                            {isLoading ? "Loading..." : "Submit"}
+                            {/* {isLoading ? "Loading..." : "Submit"} */} submit
                           </button>
                         </td>
                       </tr>

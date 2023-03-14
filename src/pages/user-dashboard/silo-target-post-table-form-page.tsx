@@ -3,9 +3,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { createColumnHelper } from "@tanstack/react-table";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo } from "react";
 import EditableCell from "../../components/editable-cell";
-
 import SiloTargetPostFormTable from "../../components/silo-update-target-post-form-table";
 
 import { useSiloTableFormQuery } from "../../utils/silo-query";
@@ -21,28 +20,16 @@ type Pillars = {
   pillar_targets: number | string;
 };
 const SiloTargetPostTableFormPage = () => {
-  const [mergeData, setMergeData] = useState({});
-  const [myData, setMyData] = useState([]);
-
   const { data: tableData, isLoading, isFetching } = useSiloTableFormQuery();
-  useEffect(() => {
-    setMergeData(tableData);
 
-    if (
-      Object.keys(mergeData ?? {}).length === 0 &&
-      (mergeData ?? {}).constructor === Object
-    ) {
-      return;
-    } else {
-      const { pillar, ...rest } = mergeData;
-      const finalData = [...rest.supports];
-      const newData = [pillar, ...finalData];
+  /*   useEffect(() => {
+    const { pillar, supports } = mergeData;
+    const newData = [pillar, ...supports];
 
-      setMyData(newData);
-    }
-  }, [mergeData, tableData]);
+    setMyData(newData);
+  }, [mergeData]); */
 
-  const updateData = (rowIndex, columnId, value) => {
+  /* const updateData = (rowIndex, columnId, value) => {
     console.log(prev);
     setMyData((prev) =>
       prev.map((row, index) => {
@@ -55,7 +42,7 @@ const SiloTargetPostTableFormPage = () => {
         return row;
       })
     );
-  };
+  }; */
 
   const columnHelper = createColumnHelper<Pillars>();
 
@@ -97,7 +84,7 @@ const SiloTargetPostTableFormPage = () => {
         footer: (info) => info.column.id,
       }),
     ],
-    [columnHelper]
+    []
   );
 
   return (
@@ -110,8 +97,8 @@ const SiloTargetPostTableFormPage = () => {
       ) : (
         <SiloTargetPostFormTable
           columns={columns}
-          data={myData}
-          updateData={updateData}
+          data={tableData}
+          // updateData={updateData}
         />
       )}
     </div>

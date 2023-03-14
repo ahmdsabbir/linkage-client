@@ -131,7 +131,7 @@ function useSiloTableFormQuery() {
 }
 
 //post  table form data query
-function useMutateSiloTableFormQuery(nextAsync, pillarIdName, setPillarIdName) {
+function useMutateSiloTableFormQuery(pillarIdName, setPillarIdName) {
   const {
     state: {
       chosenTitleUrl,
@@ -176,7 +176,7 @@ function useMutateSiloTableFormQuery(nextAsync, pillarIdName, setPillarIdName) {
     onSuccess: async (successData) => {
       // Invalidate and refetch
       toast.success(successData.msg);
-      await nextAsync(pillarIdName);
+      // await nextAsync(pillarIdName);
     },
 
     onError: async (error) => {
