@@ -7,25 +7,30 @@ import {
 } from "@tanstack/react-table";
 import { useEffect, useState } from "react";
 import { FormProvider, useFieldArray, useForm } from "react-hook-form";
+import {
+  useMutateSiloTableFormNextQuery,
+  useMutateSiloTableFormQuery,
+} from "../utils/silo-query";
+
 const SiloTargetPostFormTable = ({ columns, data }) => {
+  console.log(data);
   const [myData, setMyData] = useState([]);
   // set state of pillar content Id and project name
-  /*  const [pillarIdName, setPillarIdName] = useState({
+  const [pillarIdProjectName, setPillarIdProjectName] = useState({
     pillar_id: "",
     project_name: "",
-  }); */
+  });
+
   // submit table data form query
-  // const { mutateAsync: nextAsync, isLoading: nextisLoading } =
-  //   useMutateSiloTableFormNextQuery();
-  /*   const { mutateAsync, isLoading } = useMutateSiloTableFormQuery(
-    // nextAsync,
-    pillarIdName,
-    setPillarIdName
-  ); */
+  const { mutateAsync: nextAsync, isLoading: nextisLoading } =
+    useMutateSiloTableFormNextQuery();
+  const { mutateAsync, isLoading } = useMutateSiloTableFormQuery(
+    nextAsync,
+    pillarIdProjectName
+  );
 
   // const navigate = useNavigate();
 
-  // console.log(data);
   const formMethods = useForm({
     defaultValues: {
       people: [data?.pillar, ...data?.supports],
@@ -39,7 +44,6 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
   });
 
   useEffect(() => setMyData(fields), [fields]);
-  console.log(myData);
 
   const table = useReactTable({
     data: myData,
@@ -63,7 +67,6 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
     // splitting the input field strings and convert to  array
 
     /**  
@@ -112,13 +115,15 @@ const SiloTargetPostFormTable = ({ columns, data }) => {
       pillar: pillar,
       supports: [...rest],
     };
-    console.log(submitData);
-    // setPillarIdName((prev) => ({ ...prev, pillar_id: pillar.pillar_id }));
-    // await mutateAsync(submitData);
+    setPillarIdProjectName((prev) => ({
+      ...prev,
+      pillar_id: pillar.id,
+      project_name: "AnikYusuf",
+    }));
+    await mutateAsync(submitData);
 
     // navigate("/dashboard/silo/add-support-post-linking-table");
   };
-  // console.log(fields);
 
   return (
     <section className="container mx-auto px-4">

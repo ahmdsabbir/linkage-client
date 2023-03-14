@@ -131,7 +131,7 @@ function useSiloTableFormQuery() {
 }
 
 //post  table form data query
-function useMutateSiloTableFormQuery(pillarIdName, setPillarIdName) {
+function useMutateSiloTableFormQuery(nextAsync, pillarIdProjectName) {
   const {
     state: {
       chosenTitleUrl,
@@ -147,7 +147,6 @@ function useMutateSiloTableFormQuery(pillarIdName, setPillarIdName) {
   const queryClient = useQueryClient();
   const errorFunc = useErrorHandling();
 
-  setPillarIdName((prev) => ({ ...prev, project_name: "AnikYusuf" }));
   const getSiloSelectedProjects = async (data) => {
     const postData = JSON.stringify({ ...data });
     const response = await privateClient.post(
@@ -176,7 +175,7 @@ function useMutateSiloTableFormQuery(pillarIdName, setPillarIdName) {
     onSuccess: async (successData) => {
       // Invalidate and refetch
       toast.success(successData.msg);
-      // await nextAsync(pillarIdName);
+      await nextAsync(pillarIdProjectName);
     },
 
     onError: async (error) => {
@@ -191,7 +190,7 @@ function useMutateSiloTableFormQuery(pillarIdName, setPillarIdName) {
 function useMutateSiloTableFormNextQuery() {
   const queryClient = useQueryClient();
   const errorFunc = useErrorHandling();
-
+  const { auth } = useAuthState();
   const getSiloSelectedProjects = async (data) => {
     const postData = JSON.stringify(data);
     const response = await privateClient.post("api/silo/build", postData, {
@@ -214,6 +213,53 @@ function useMutateSiloTableFormNextQuery() {
     retry: 1,
     // eslint-disable-next-line @typescript-eslint/no-misused-promises
     onSuccess: async (successData) => {
+      console.log(successData);
+      // Invalidate and refetch
+      toast.success(successData.msg);
+    },
+
+    onError: async (error) => {
+      const errorMsg = await errorFunc(error);
+      toast.error(errorMsg);
+    },
+  });
+}
+
+// final table data for liking the specific table data
+
+/**
+ *
+ * query will get an id as parameter or ID will come from CONTEXT
+ * AXIOS post function get the parameter or ID that came through
+ */
+
+function useLinkingTableQuery(data) {
+  const queryClient = useQueryClient();
+  const errorFunc = useErrorHandling();
+  const { auth } = useAuthState();
+  const getSiloLinkingTableData = async () => {
+    const data = { pillar_id: 4 };
+    const postData = JSON.stringify(data);
+    const response = await privateClient.post("api/silo/test", postData, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: auth.token ? `Bearer ${auth?.token}` : "",
+      },
+    });
+
+    return response.data;
+  };
+
+  return useQuery({
+    queryKey: ["siloLinkingTable"],
+    queryFn: getSiloLinkingTableData,
+    refetchOnWindowFocus: false,
+    // refetchOnMount: false,
+    retry: 2,
+    // staleTime: Infinity,
+    // eslint-disable-next-line @typescript-eslint/no-misused-promises
+    onSuccess: async (successData) => {
+      console.log(successData);
       // Invalidate and refetch
       toast.success(successData.msg);
     },
@@ -231,4 +277,5 @@ export {
   useSiloTableFormQuery,
   useMutateSiloTableFormQuery,
   useMutateSiloTableFormNextQuery,
+  useLinkingTableQuery,
 };

@@ -22,28 +22,6 @@ type Pillars = {
 const SiloTargetPostTableFormPage = () => {
   const { data: tableData, isLoading, isFetching } = useSiloTableFormQuery();
 
-  /*   useEffect(() => {
-    const { pillar, supports } = mergeData;
-    const newData = [pillar, ...supports];
-
-    setMyData(newData);
-  }, [mergeData]); */
-
-  /* const updateData = (rowIndex, columnId, value) => {
-    console.log(prev);
-    setMyData((prev) =>
-      prev.map((row, index) => {
-        if (index === rowIndex) {
-          return {
-            ...prev[rowIndex]!,
-            [columnId]: value,
-          };
-        }
-        return row;
-      })
-    );
-  }; */
-
   const columnHelper = createColumnHelper<Pillars>();
 
   const columns = useMemo(
